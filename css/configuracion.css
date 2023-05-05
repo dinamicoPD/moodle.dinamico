@@ -1,0 +1,45 @@
+@import url(fontello.css);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* VARIABLES */
+
+:root {
+    --colorUno: #1a443f;
+    --colorDos: #436F6A;
+    --colorTres: #000000;
+    --colorCuatro: #ffffff;
+    --coloQuinto: url(../img/fondo.jpg);
+    --coloSexto: rgba(255, 255, 255, 0.9);
+    --coloSiete:#D9A404;
+    --colorocho:#048ABF;
+    --colornueve: #A60A17;
+}
+
+/* botones */
+
+.myButton {
+	background-color:#d9a404;
+	border-radius:28px;
+	border:1px solid #d9a404;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:5px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #a7b5a5;
+}
+.myButton:hover {
+	background-color:#d9c76a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}

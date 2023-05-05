@@ -1,0 +1,80 @@
+@import url(styleMenuFooter.css);
+@import url(configuracion.css);
+
+main{
+    width: 100%;
+    margin: 10vh auto 0vh auto;
+    padding: 5vh;
+    background: var(--coloQuinto);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+.container{
+    width: 100%;
+}
+.container:before{
+    display: none !important;
+}
+.container:after{
+    display: none !important;
+}
+.row:before{
+    display: none !important;
+}
+.row:after{
+    display: none !important;
+}
+main h2,
+form legend{
+    text-align: center;
+    color: var(--coloSiete);
+}
+
+form {
+    width: 50%;
+    min-width: 300px;
+    margin: auto;
+    padding: 10vh 5vh 10vh 5vh;
+    background-color: var(--coloSexto);
+    border-radius: 10px;
+    text-align: center;
+}
+
+main .ingreso{
+    border: 1px solid rgba(0, 5, 71, .25);
+    border-radius: 5px;
+    color: #4D4D47;
+    height: 2.5em;
+}
+
+.inputD,
+.inputI{
+    width: 44.6%;
+    margin: 5px 0px 5px 0px;
+    
+    background-color: var(--coloSexto);
+    border: 1px solid rgba(0, 5, 71, .25);
+    border-radius: 5px;
+    color: #4D4D47;
+    height: 2.5em;
+}
+
+.inputC{
+    width: 90%;
+    margin: 5px 0px 5px 0px;
+    
+    background-color: var(--coloSexto);
+    border: 1px solid rgba(0, 5, 71, .25);
+    border-radius: 5px;
+    color: #4D4D47;
+    height: 2.5em;
+}
+
+.add_button img,
+.remove_button img
+{
+    height: 1em;
+}

@@ -1,0 +1,28 @@
+header{
+    width: 100%;
+}
+
+.contenedor{
+    margin: auto;
+    width: 95%;
+    background-color: #f0f0f0;
+}
+
+.select_main {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.main_select_s {
+    display: none;
+}
+
+.select_content {
+    display: none;
+}
+
+.main_select_s:checked~.select_content {
+    display: block;
+}
