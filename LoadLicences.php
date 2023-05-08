@@ -1,6 +1,7 @@
 <?php
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+require_once('../../config-ext.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,8 +31,8 @@ require_once(__ROOT__.'/config-ext.php');
 						<input type="submit" class="col-xs-12 btn btn-primary btn-load btn-lg" data-loading-text="Ingresando..." value="Ingresar">
 						<?php
 						$old_path = getcwd();
-						#chdir('/var/www/html/moodle/admin/tool/uploadusercli/cli/');
-						chdir('/var/www/html/moodle/auth/db/cli/');
+						#chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
+						chdir('/var/www/html/moodle/moodle/auth/db/cli/');
 						//shell_exec('php sync_users.php');
 						echo getcwd();
 						#$output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --file=PlantillaProfesor.csv');

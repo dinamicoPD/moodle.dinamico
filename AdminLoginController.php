@@ -1,7 +1,9 @@
 <?php
 // Include config file
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+require_once('../../config-ext.php');
+
 
  $username = $password = $form_err = $username_err = $password_err = "";
 

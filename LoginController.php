@@ -1,8 +1,10 @@
 <?php
 // Include config file
 include('SuspendAccount.php');
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+
+require_once('../../config-ext.php');
 
 $licencecode = $form_err = $licenceidfound = $statusfound = $typefound = $codlicence_err = $codgroup_err = $groupcode= "";
 
@@ -270,7 +272,7 @@ if($statusfound == "W"){
             mysqli_stmt_close($stmt);
 
             $old_path = getcwd();
-            chdir('/var/www/html/moodle/admin/tool/uploadusercli/cli/');
+            chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
             $output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaEstudiante'.$IdStudent.'.csv');
             sleep(3);
             unlink("PlantillaEstudiante".$IdStudent.'.csv');

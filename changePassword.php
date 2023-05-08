@@ -54,7 +54,7 @@ require_once(dirname(__FILE__).'/changePasswordController.php');
                     <br><br><br><br><br>
                     <p class="alert alert-warning">Ingresa tu contraseña provisional y cambia tu contraseña</p>
                     <br>
-                    <a href="http://85.187.158.12/dinapage/LoginPasswordChange.php" class="boton"
+                    <a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php" class="boton"
                         style="width: 100%; display: block; text-align: center;">Aqui</a>
 
                 </div>

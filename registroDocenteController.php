@@ -5,8 +5,9 @@
     include('ForcePasswordChange.php');
     include('SuspendAccount.php');
     include('Mailer.php');
-    define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-    require_once(__ROOT__.'/config-ext.php');
+   // define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+    //require_once(__ROOT__.'/config-ext.php');
+	require_once('../../config-ext.php');
 
     $varcloseecho=1;
     require_once('CourseController.php');
@@ -201,7 +202,7 @@
          return;
     }
     $old_path = getcwd();
-    chdir('/var/www/html/moodle/auth/db/cli/');
+    chdir('/var/www/html/moodle/moodle/auth/db/cli/');
     $output=shell_exec('php sync_users.php');
     chdir($old_path); 
 
@@ -291,7 +292,7 @@ try {
     mysqli_stmt_close($stmt);
 
     $old_path = getcwd();
-    chdir('/var/www/html/moodle/admin/tool/uploadusercli/cli/');
+    chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
     $output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaProfesor'.$idTeacher.'.csv');
     sleep(3);
     unlink("PlantillaProfesor".$idTeacher.'.csv');

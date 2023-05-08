@@ -1,8 +1,9 @@
 <?php
     // Initialize the session
     session_start();
-    define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-    require_once(__ROOT__.'/config-ext.php');
+   // define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+// require_once(__ROOT__.'/config-ext.php');
+	require_once('../../config-ext.php');
     $form_err="";
 
     if(!isset($_SESSION["loginStudentSummary"]) || $_SESSION["loginStudentSummary"] != true){

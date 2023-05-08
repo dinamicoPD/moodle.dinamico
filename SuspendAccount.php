@@ -1,6 +1,8 @@
 <?php
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+require_once('../../config-ext.php');
+
 function suspendedAccount($email){
 	        //Query the UserId in moodle
 try{

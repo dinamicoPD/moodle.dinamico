@@ -1,5 +1,6 @@
 <?php
-require_once(dirname(__FILE__).'/GroupSummaryController.php');
+//require_once(dirname(__FILE__).'/GroupSummaryController.php');
+require_once('GroupSummaryController.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">

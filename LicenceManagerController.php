@@ -1,7 +1,10 @@
 <?php
 // Include config file
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+
+require_once('../../config-ext.php');
+
 include('Mailer.php');
 //require(__ROOT__.'/moodle/vendor/autoload.php');
 
@@ -406,7 +409,7 @@ class User{
             }
 
             $old_path = getcwd();
-            chdir('/var/www/html/moodle/admin/tool/uploadusercli/cli/');
+            chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
             $output=shell_exec($commandToExecute);
             unlink($unlinkString);
             chdir($old_path);

@@ -1,6 +1,7 @@
 <?php
-define('__ROOT__',dirname(dirname(dirname(__FILE__))));
-require_once(__ROOT__.'/config-ext.php');
+//define('__ROOT__',dirname(dirname(dirname(__FILE__))));
+//require_once(__ROOT__.'/config-ext.php');
+require_once('../../config-ext.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -119,7 +120,7 @@ class MailDispatcher{
 			    $mail->Body    .= "<b>Curso/Grupo:</b>";
 			    $mail->Body    .= "<b>".$courseName.'/'.$groupName."</b>";
 				$mail->Body    .= '<p>Ingresa tu contraseña provisional y cambia tu contraseña</p>';
-				$mail->Body    .= '<a href="http://85.187.158.12/dinapage/LoginPasswordChange.php">Aqui</a>';            
+				$mail->Body    .= '<a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php">Aqui</a>';            
 			    $mail->send();
 			} catch (Exception $e) {
 			    error_log("El mensaje no se pudo enviar al estudiante. Error de Mailer:" . $mail->ErrorInfo);
@@ -154,7 +155,7 @@ class MailDispatcher{
 			    $mail->Body    .= "<b>Nombre de usuario asignado: </b>".$userName." <br>";
 			    $mail->Body    .= "<b>Su password temporal es: </b>".$tempPassword." <br>";
 				$mail->Body    .= '<p>Ingresa tu contraseña provisional y cambia tu contraseña</p>';
-				$mail->Body    .= '<a href="http://85.187.158.12/dinapage/LoginPasswordChange.php">Aqui</a>'; 
+				$mail->Body    .= '<a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php">Aqui</a>'; 
 			    $mail->send();
 			} catch (Exception $e) {
 			    error_log("El mensaje para reestablecer password no ha sido enviado. Error de Mailer:" . $mail->ErrorInfo);
