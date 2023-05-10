@@ -75,7 +75,7 @@ class MailDispatcher{
                 .'</tbody>
                 </table>';
 				$mail->Body    .= '<p>Ingresa tu contraseña provisional y cambia tu contraseña</p>';
-				$mail->Body    .= '<a href="http://85.187.158.12/dinapage/LoginPasswordChange.php">Aqui</a>';              
+				$mail->Body    .= '<a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php">Aqui</a>';              
 			    
 			    $mail->send();
 			} catch (Exception $e) {
