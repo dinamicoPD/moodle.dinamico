@@ -66,10 +66,11 @@ $(document).ready(function(){
         $('#Email_3').css('visibility', 'hidden');
         $('#veCod').css('visibility', 'visible');
         $('.pestana').css('margin-bottom', '0vh');
-        $('#Email_3').val($('#Email_2').val());
     });
+
     $("#submit-btn").click(function() {
-        $("#submit-btn").val('CORREO ENVIADO');
+        $(this).val('CORREO ENVIADO');
+        $(this).prop('disabled', true); 
     });
     
     $("#select_4").click(function() {  
@@ -152,7 +153,6 @@ function correoUno(){
                   });
 
                 $('#se_3').css('visibility', 'visible');
-                valEmail();
             }else{
                 $('#se_3').css('visibility', 'hidden');
                 $('#correo_diferente').show();
@@ -166,20 +166,50 @@ function correoUno(){
     }
 }
 
-function valEmail(){
-    var text = "";
-    var possible = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.?,;-_¡!¿*%&$/()[]{}|@><";
-
-    for (var i = 0; i < 8; i++){
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-
-    $("#veCod").val(text);
-
-}
-
 function codigos(){
     var cod_1 = $("#cod").val();
+
+    if (cod_1 === ""){
+        $('#respa').text("No ha ingresado el código de verificación, si aun no lo tiene dar clic en enviar codigo").removeClass("alert-success").addClass('alert-danger');
+    }else{
+        var email = $("#Email_1").val();
+        var codVer = $("#cod").val();
+        $.ajax({
+            url:'enviaCode.php',
+            type: 'POST',
+            data:{
+                a:email,
+                cod:codVer,
+                action2:'verCorreo'
+            },
+            success: function(response) {
+                if (response == 'no'){
+                    $('#respa').text("El email no existe en la base de datos").removeClass("alert-success").addClass('alert-danger');
+                } else {
+                    var cod_2 = response;
+
+                    if (cod_1 == cod_2){
+                        swal({
+                            title: "Instrucciones",
+                            text: "El codigo es correcto",
+                            icon: "success",
+                            closeOnClickOutside: false,
+                          });
+                        $('#se_4').css('visibility', 'visible');
+                        $('#respa').css('visibility', 'hidden');
+                        $('#submitCod').prop('disabled', true);
+                        $('#cod').prop('disabled', true);
+                    }else{
+                        $('#se_4').css('visibility', 'hidden');
+                        $('#respa').text("El codigo no corresponde").removeClass("alert-success").addClass('alert-danger');
+                    }
+
+                }
+            },
+        });
+    }
+
+ /*   
     var cod_2 = $("#veCod").val();
 
     if (cod_1 == cod_2){
@@ -195,6 +225,41 @@ function codigos(){
         $('#se_4').css('visibility', 'hidden');
         codigo = 0;
     }
+*/
+}
+
+function enviacodigo(){
+
+    var email = $("#Email_1").val();
+    var text = "";
+    var possible = "1234567890";
+
+    for (var i = 0; i < 8; i++){
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+
+    $.ajax({
+            url:'enviaCode.php',
+            type: 'POST',
+            data:{
+                e:email,
+                r:text,
+                action: 'enviarCodigo'
+            },
+            success: function(response) {
+                // Mostrar la respuesta en el DOM
+                if (response == 'si') {
+                    $('#respa').text('Se envio el codigo a su correo').removeClass("alert-danger").addClass('alert-success');
+                } else if(response == 'no'){
+                    $('#respa').text('El correo que proporciono está en proceso de verificación, revise en la bandeja de entrada de su correo electrónico y transcriba su código').removeClass("alert-success").addClass('alert-danger');
+                } else {
+                    $('#cod').val(response);
+                    $('#cod').prop('disabled', true);
+                    $('#respa').text('Su correo ya se encuentra verificado').removeClass("alert-danger").addClass('alert-success');
+                }
+            },
+        }
+    );
 }
 
 function valName_1(){

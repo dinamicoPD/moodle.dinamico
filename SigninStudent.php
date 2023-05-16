@@ -143,43 +143,22 @@ require_once(dirname(__FILE__).'/SigninStudentController.php');
 						</div>
 						
 						<div class="row">
-							<div class="col"><input class="form-control passClave" type="text" id="cod" onchange="codigos()"></div>			
+							<div class="col input-group mb-3">
+								<input class="btn btn-outline-secondary" type="submit" id="submit-btn" value="Enviar codigo" onclick="enviacodigo()"></input>
+								<input class="form-control passClave" type="text" id="cod">
+							</div>		
 						</div>
-
-						<script>
-
-						function enviacodigo(){
-							var codigo = $("#veCod").val();
-							var email = $("#Email_3").val();
-
-							$.ajax(
-								{
-									url:'enviaCode.php',
-									type: 'POST',
-									data:{
-										c:codigo,
-										e:email
-									},
-								}
-							);
-						}
-
-						</script>
 
 						<!-- formulario envia codigo-->
 							<div class="row">
-								<div class="col-4"><input type="email" id="Email_3" readonly></div>
-							</div>
+								<div class="col alert" id="respa"></div>
+							</div> 
 							<div class="row">
-								<div class="col-4"><input type="text" id="veCod" readonly></div>
-								<div class="col-4"><input id="submit-btn" class="boton" type="submit" value="Enviar Codigo" onclick="enviacodigo()"></div>
+								<div class="col"><input id="submitCod" class="boton" type="submit" value="Verificar codigo" onclick="codigos()"></div>
 							</div>
 						<!-- fin formulario -->
 
-							<div class="row">
-								<div class="col"><p id="respa"></p></div>
-							</div>
-
+						
 					</div>
 				</li>
 				<li>
