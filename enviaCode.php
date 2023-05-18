@@ -108,8 +108,6 @@ if ($result->num_rows > 0) {
         $mail->addEmbeddedImage($ruta_in, 'imagen_in');
         //Recipients
         $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle'); // quien envia
-        
-        $mail->addAddress('dinamico.moodle@gmail.com', 'servicioCliente');     // Add a recipient
         $mail->addAddress($email);        // Name is optional
 
         
@@ -266,7 +264,6 @@ if ($result->num_rows > 0) {
         //Recipients
         $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle'); // quien envia
         
-        $mail->addAddress('dinamico.moodle@gmail.com', 'servicioCliente');     // Add a recipient
         $mail->addAddress($email);        // Name is optional
 
         
