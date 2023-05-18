@@ -45,8 +45,6 @@ class MailDispatcher{
 				
 			    //Recipients
 			    $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle');
-			    
-			    $mail->addAddress('dinamico.moodle@gmail.com', 'servicioCliente');     // Add a recipient
 			    $mail->addAddress($emailRecipient);        // Name is optional
 			    
 			    // Content */
@@ -350,8 +348,6 @@ class MailDispatcher{
 
 			    //Recipients
 			    $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle');
-			    
-			    $mail->addAddress('dinamico.moodle@gmail.com', 'servicioCliente');     // Add a recipient
 			    $mail->addAddress($emailRecipient);        // Name is optional
 			    
 			    // Content */
@@ -568,8 +564,6 @@ class MailDispatcher{
 
 			    //Recipients
 			    $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle');
-			    
-			    $mail->addAddress('dinamico.moodle@gmail.com', 'servicioCliente');     // Add a recipient
 			    $mail->addAddress($emailRecipient);        // Name is optional
 			    
 			  
