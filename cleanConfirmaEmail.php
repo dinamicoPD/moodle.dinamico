@@ -8,6 +8,6 @@ $result = $link->query($sql);
 if ($result === true) {
     echo "Registros eliminados exitosamente.";
 } else {
-    echo "Error al eliminar registros: " . $link->error;
+    echo "Error al eliminar registros: " . $conn->error;
 }
 ?>

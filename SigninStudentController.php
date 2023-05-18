@@ -10,7 +10,7 @@
     include('ForcePasswordChange.php');
    // define('__ROOT__',dirname(dirname(dirname(__FILE__))));
     //require_once(__ROOT__.'/config-ext.php');
-require_once('../../config-ext.php');
+    require_once('../../config-ext.php');
 
     $form_err = "";
     $IdGroupFound=$_SESSION["GrpId"];
@@ -139,7 +139,7 @@ require_once('../../config-ext.php');
         if (mysqli_num_rows($verificar) > 0){
             $form_err = "El Email se encuentra ya registrado";
         return;
-    }
+        }
 
     $resultado = mysqli_query($link, $insertar);
 
@@ -222,10 +222,19 @@ require_once('../../config-ext.php');
     $mailSender = new MailDispatcher(); 
     
     $mailSender->sendEmailToStudent($Email,$userName, $CourseName,$GroupName,$TeacherCompleteName,$unencodedPassword);
-
+ 
     //Force password change
     forcePasswordChange($Email);
 
+    $currentDateTime = date('Y-m-d H:i:s');
+    $sql = "DELETE FROM ConfirmaCodigo WHERE (verificado = 0 AND CodigoFecha < '$currentDateTime') OR (Email = '$Email')";
+    $result = $link->query($sql);
+
+    if ($result === true) {
+        echo "Registros eliminados exitosamente.";
+    } else {
+        echo "Error al eliminar registros: " . $conn->error;
+    }
 
     mysqli_close($link);
     mysqli_close($link2);
