@@ -31,7 +31,7 @@
     $lockbutton = false;
 
     if(!isset($_SESSION["loggedinRegister"]) || $_SESSION["loggedinRegister"] != true){
-    header("location: Login.php");
+    header("location: LoginPRF.php");
     exit;
     }
 

@@ -3,7 +3,7 @@
     // Initialize the session
     session_start();
     if(!isset($_SESSION["loggedinRegisterStudent"]) || $_SESSION["loggedinRegisterStudent"] != true){
-    header("location: Login.php");
+    header("location: LoginSTD.php");
     exit;
     }
     include('Mailer.php');

@@ -12,7 +12,7 @@
     $form_err="";
 
     if(!isset($_SESSION["loginGroupsSummary"]) || $_SESSION["loginGroupsSummary"] != true){
-    header("location: Login.php");
+    header("location: LoginPRF.php");
     exit;
     }
     $idTeacher = $_SESSION["teacherId"];

@@ -7,7 +7,7 @@
     $form_err="";
 
     if(!isset($_SESSION["loginStudentSummary"]) || $_SESSION["loginStudentSummary"] != true){
-    header("location: Login.php");
+    header("location: LoginSTD.php");
     exit;
     }
     $idStudent = $_SESSION["studentId"];
