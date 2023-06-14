@@ -88,7 +88,7 @@
     if($closebutton){
         //cerrar sesion y redireccionar a home.
             session_destroy();
-            header("Location: http://".$_SERVER['HTTP_HOST']);
+            header("Location: http://".$_SERVER['HTTP_HOST']."/moodle");
     }
 
     $rowsCourses=$_SESSION["IdCoursesFound"];

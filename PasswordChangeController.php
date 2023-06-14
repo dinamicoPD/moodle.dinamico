@@ -146,7 +146,7 @@ if($stmt = mysqli_prepare($link, $sql)){
     	//echo "<script>setTimeout(\"location.href = 'http://192.168.0.253/';\",1500);</script>";
     	// Destroy the session.
 		session_destroy();
-    	header( "refresh:2; url=".HOME_ADD);
+    	header( "refresh:2; url=".HOME_ADD."moodle");
     }else{
         $lockbutton = false;
     	echo "Was not possible to execute the query";
