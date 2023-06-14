@@ -18,6 +18,7 @@ require_once(dirname(__FILE__).'/registroDocenteController.php');
     <script src="js/functions.js"></script>
     <link rel="stylesheet" href="css/styleDocente.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway&display=swap" rel="stylesheet">
+    <script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
     <style>
     .modal {
     display:    none;

@@ -26,6 +26,7 @@ require_once(dirname(__FILE__).'/SigninStudentController.php');
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway&display=swap" rel="stylesheet">
     <!--particulas-->
     <link rel="stylesheet" href="css/styleParticulas.css">
+	<script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
 	<style>
 		.modal {
 		display:    none;

@@ -22,6 +22,7 @@ require_once(dirname(__FILE__).'/PasswordChangeController.php');
 <script type="text/javascript" src="./js/AddPassChange.js"></script>
 
 	<title>Dinamico PD | Cambio Contraseña</title>
+	<script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
 </head>
 <style>
 .mostrando{

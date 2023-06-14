@@ -15,6 +15,7 @@ require_once(dirname(__FILE__).'/LoginController.php');
 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<title>Dinamico PD | Log in</title>
+	<script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
 </head>
 <body>
 <!--particulas-->

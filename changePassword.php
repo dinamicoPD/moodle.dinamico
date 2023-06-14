@@ -20,7 +20,7 @@ require_once(dirname(__FILE__).'/changePasswordController.php');
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
 <style>
     a:hover {
         color: #FFFFFF;
@@ -59,7 +59,6 @@ require_once(dirname(__FILE__).'/changePasswordController.php');
 
                 </div>
                 <div class="col">
-                    <?xml version="1.0" encoding="utf-8"?>
                     <!-- Generator: Adobe Illustrator 26.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         x="0px" y="0px" viewBox="0 0 735 1175" style="enable-background:new 0 0 735 1175;"
