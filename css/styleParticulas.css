@@ -40,7 +40,7 @@ body{
 
 canvas{
   display:block;
-  vertical-align:bottom;
+  vertical-align: bottom;
 }
 
 
@@ -88,9 +88,10 @@ canvas{
 #particles-js{
   width: 100%;
   height: 100%;
-  background-color: #D4F8C8;
+  background-color: #E9D7FF;
   background-image: url('');
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
+  /*filter: hue-rotate(170deg);*/
 }

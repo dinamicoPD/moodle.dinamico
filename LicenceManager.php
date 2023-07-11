@@ -75,9 +75,9 @@ session_start();
 						<li><label class="dropdown-item" for="select_22">Estudiantes</label></li>
 					</ul>
 				</li>
-				<!-- <li class="nav-item">
+				<li class="nav-item">
 				  <label class="nav-link" aria-current="page" for="select_3">Parametrizar categorias</label>
-				</li> -->
+				</li>
 				<li class="nav-item">
 				  <a class="nav-link" href="./phpMyAdmin513" target="_blank">phpMyAdmin</a>
 				</li>
