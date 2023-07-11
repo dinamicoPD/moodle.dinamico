@@ -33,7 +33,7 @@
                         <label for="E-mail" class="form-label formLabel">E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
+                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
                             <div id="E-mailFeedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Ingresa una dirección de correo electrónico válida.
                             </div>
@@ -109,7 +109,7 @@
                     <div class="col-sm-6">
                         <label for="nombre-1" class="form-label formLabel">Primer nombre*</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control formInput" id="FirstName" aria-describedby="inputGroupPrepend3 nombre-1Feedback" placeholder="Nombre" required>
+                            <input name="FirstName" type="text" class="form-control formInput" id="FirstName" aria-describedby="inputGroupPrepend3 nombre-1Feedback" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" required>
                             <div id="nombre-1Feedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Por favor ingresa tu nombre.
                             </div>
@@ -118,7 +118,7 @@
                     <div class="col-sm-6">
                         <label for="nombre-2" class="form-label formLabel">Segundo nombre</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control formInput" id="MiddleName" aria-describedby="inputGroupPrepend3 nombre-2Feedback" placeholder="Nombre">
+                            <input name="MiddleName" type="text" class="form-control formInput" id="MiddleName" aria-describedby="inputGroupPrepend3 nombre-2Feedback" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre">
                             <div id="nombre-2Feedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Por favor ingresa tu nombre.
                             </div>
@@ -130,7 +130,7 @@
                     <div class="col-sm-6">
                         <label for="apellido-1" class="form-label formLabel">Primer apellido*</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control formInput" id="LastName" aria-describedby="inputGroupPrepend3 apellido-1Feedback" placeholder="Apellido" required>
+                            <input name="LastName" type="text" class="form-control formInput" id="LastName" aria-describedby="inputGroupPrepend3 apellido-1Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();" required>
                             <div id="apellido-1Feedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Por favor ingresa tu apellido.
                             </div>
@@ -139,7 +139,7 @@
                     <div class="col-sm-6">
                         <label for="apellido-2" class="form-label formLabel">Segundo apellido</label>
                         <div class="input-group has-validation">
-                            <input type="text" class="form-control formInput" id="SecondLastName" aria-describedby="inputGroupPrepend3 apellido-2Feedback" placeholder="Apellido">
+                            <input name="SecondLastName" type="text" class="form-control formInput" id="SecondLastName" aria-describedby="inputGroupPrepend3 apellido-2Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();">
                             <div id="apellido-2Feedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Por favor ingresa tu apellido.
                             </div>
@@ -167,7 +167,7 @@
                                 <label for="Tel" class="form-label formLabel">Teléfono*</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $telefono ?></span>
-                                    <input type="number" class="form-control formInput" id="Tel" aria-describedby="inputGroupPrepend3 TelFeedback" placeholder="Número telefónico" required>
+                                    <input name="Tel" type="number" class="form-control formInput" id="Tel" aria-describedby="inputGroupPrepend3 TelFeedback" placeholder="Número telefónico" required>
                                     <div class="invalid-feedback mal">
                                         <?php echo $alerta ?> Ingresa tu número teléfonico.
                                     </div>
@@ -215,13 +215,9 @@
                                 <label for="departamento" class="form-label formLabel">Departamento*</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $ubicacion ?></span>
-                                    <select class="form-select  formInput" id="departamento_1" aria-describedby="departamentoFeedback" onchange="datosInstituto('#departamento', 1)" required>
+                                    <select name="departamento_1" class="form-select formInput" id="departamento_1" aria-describedby="departamentoFeedback" onchange="datosInstituto('#departamento', 1)" required>
                                         <option selected disabled value="">Seleccionar</option>
-                                        <?php foreach($departamentos as $departamento): ?>
-                                            <option value="<?php echo $departamento['departamentoId']; ?>">
-                                                <?php echo $departamento['departamento']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
+                                        <?php echo $departamentoFull; ?>
                                     </select>
                                     <div id="departamentoFeedback" class="invalid-feedback mal">
                                         <?php echo $alerta ?> Selecciona el departamento.
@@ -232,7 +228,7 @@
                                 <label for="ciudad" class="form-label formLabel">Ciudad*</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $ubicacion ?></span>
-                                    <select class="form-select formInput" id="ciudad_1" aria-describedby="ciudadaFeedback" onchange="datosInstituto('#ciudad', 1)" required>
+                                    <select name="ciudad_1" class="form-select formInput" id="ciudad_1" aria-describedby="ciudadaFeedback" onchange="datosInstituto('#ciudad', 1)" required>
                                         <option selected disabled value="">Seleccionar</option>
                                     </select>
                                     <div id="ciudadFeedback" class="invalid-feedback mal">
@@ -247,7 +243,7 @@
                                 <label for="Instituto" class="form-label formLabel">Institución*</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $instituto ?></span>
-                                    <select class="form-select formInput escuela" id="Instituto_1" aria-describedby="InstitutoFeedback" onchange="datosCursos(1)" required>
+                                    <select name="instituto_1" class="form-select formInput escuela" id="Instituto_1" aria-describedby="InstitutoFeedback" onchange="datosCursos(1)" required>
                                         <option selected disabled value="">Seleccionar</option>
                                     </select>
                                     <div id="InstitutoFeedback" class="invalid-feedback mal">
@@ -259,7 +255,7 @@
                                 <div class="row">
                                     <div class="col-sm-10">
                                         <label for="otro" class="form-label formLabel">&nbsp;</label>
-                                        <input style="visibility: hidden" type="text" class="form-control formInput" id="otro_1" aria-describedby="otroFeedback" oninput="datosCursos(1)" placeholder="Otra:" onkeyup="this.value = this.value.toUpperCase();">
+                                        <input name="otro_1" style="visibility: hidden" type="text" class="form-control formInput" id="otro_1" aria-describedby="otroFeedback" oninput="datosCursos(1)" placeholder="Otra:" onkeyup="this.value = this.value.toUpperCase();">
                                         <div id="otroFeedback" class="invalid-feedback mal">
                                             <?php echo $alerta ?> Por favor ingresa el nombre de la institución.
                                         </div>
@@ -298,14 +294,10 @@
                                 <label for="asesorSelect" class="form-label formLabel">Asesor</label>
                                 <div class="input-group has-validation">
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $iconoasesor ?></span>
-                                    <select class="form-select  formInput" id="asesorSelect" aria-describedby="asesorFeedback" required>
+                                    <select name="asesor" class="form-select  formInput" id="asesorSelect" aria-describedby="asesorFeedback" required>
                                         <option selected disabled value="">Seleccionar</option>
-                                        <option value="1">No tengo</option>
-                                        <?php foreach($asesores as $asesore): ?>
-                                            <option value="<?php echo $asesore['Id_asesor']; ?>">
-                                                <?php echo $asesore['Nombre_asesor']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
+                                        <option value="0">No tengo</option>
+                                        <?php echo $asesoresFull ?>
                                     </select>
                                     <div id="asesorFeedback" class="invalid-feedback mal">
                                         <?php echo $alerta ?> Selecciona el código del asesor.
@@ -324,7 +316,7 @@
                         <p class="txtInstruccion">Selecciona el código de tu asesor de venta del material educativo. </p>
                     </div>
                     <div class="col-sm-5 telImg">
-                        <?php echo $asesor ?>
+                        <?php echo $asesorIco ?>
                     </div>
                 </div>
             </div>
@@ -356,7 +348,7 @@
                                     <label for="colegio" class="form-label formLabel">Institución*</label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $instituto ?></span>
-                                        <select class="form-select  formInput" id="colegio_1" aria-describedby="colegioFeedback" onchange="edicionEdicion('#colegio_',1)" required>
+                                        <select name="colegio_1" class="form-select  formInput" id="colegio_1" aria-describedby="colegioFeedback" onchange="edicionEdicion('#colegio_',1)" required>
                                             <option selected disabled value="">Seleccionar</option>
                                         </select>
                                         <div id="colegioFeedback" class="invalid-feedback mal">
@@ -369,14 +361,10 @@
                                 <div class="col-sm-12">
                                     <label for="edicion" class="form-label formLabel">Edición*</label>
                                     <div class="input-group has-validation">
-                                        <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $edicion ?></span>
-                                        <select class="form-select  formInput" id="edicion_1" aria-describedby="edicionFeedback" onchange="edicionEdicion('#edicion_', 1)" required>
+                                        <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $edicionIco ?></span>
+                                        <select name="edicion_1" class="form-select  formInput" id="edicion_1" aria-describedby="edicionFeedback" onchange="edicionEdicion('#edicion_', 1)" required>
                                             <option selected disabled value="">Seleccionar</option>
-                                            <?php foreach($ediciones as $edicione): ?>
-                                                <option value="<?php echo $edicione['id_categories']; ?>">
-                                                    <?php echo $edicione['name_categories']; ?>
-                                                </option>
-                                            <?php endforeach; ?>
+                                            <?php echo $edicionFull; ?>
                                         </select>
                                         <div id="edicionFeedback" class="invalid-feedback mal">
                                             <?php echo $alerta ?> Selecciona la edición.
@@ -392,7 +380,7 @@
                                     <label for="curso" class="form-label formLabel">Curso*</label>
                                     <div class="input-group has-validation">
                                         <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $curso ?></span>
-                                        <select class="form-select formInput" id="curso_1" aria-describedby="cursoFeedback" required onchange="edicionEdicion('#curso_', 1)">
+                                        <select name="curso_1" class="form-select formInput" id="curso_1" aria-describedby="cursoFeedback" required onchange="edicionEdicion('#curso_', 1)">
                                             <option selected disabled value="">Seleccionar</option>
                                             <option>...</option>
                                         </select>
@@ -406,7 +394,7 @@
                                 <div class="row">
                                     <div class="col-sm-10">
                                         <label for="sigla" class="form-label formLabel">Sigla*</label>
-                                        <input type="number" class="form-control  formInput" id="sigla_1" aria-describedby="siglaFeedback" placeholder="Ej: 801" oninput="edicionSigla(1)">
+                                        <input name="sigla_1" type="number" class="form-control  formInput" id="sigla_1" aria-describedby="siglaFeedback" placeholder="Ej: 801" oninput="edicionSigla(1)">
                                         <div id="siglaFeedback" class="invalid-feedback mal">
                                             <?php echo $alerta ?> Por favor ingresa la sigla del grupo.
                                         </div>

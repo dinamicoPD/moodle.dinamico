@@ -17,5 +17,10 @@ if(mysqli_num_rows($result) > 0) {
     }
 }
 
+$departamentoFull = "";
+foreach($departamentos as $departamento) {
+    $departamentoFull .= '<option value="' . $departamento['departamentoId'] . '">' . $departamento['departamento'] . '</option>';
+}
+
 mysqli_free_result($result);
 ?>

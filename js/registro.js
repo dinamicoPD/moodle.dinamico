@@ -99,24 +99,21 @@ $(document).ready(function() {
 
     $('#formulario').submit(function(e) {
         e.preventDefault(); // Evita que el formulario se envíe de forma convencional
-        // Obtén los valores del formulario
-        var valores = {};
-        var elements = $('[name="enviar"]');
-        elements.each(function() {
-          var nombre = $(this).attr('name');
-          var valor = $(this).val();
-          valores[nombre] = valor;
+        var formValues = {};
+        $('#formulario').find('input, select').each(function(){
+
+            if (this.tagName.toLowerCase() === 'select') {
+                // Para los selects, obtenemos tanto el valor como el texto
+                formValues[this.name] = {
+                    value: $(this).val(),
+                    text: $(this).find('option:selected').text()
+                };
+            }else if (this.type !== 'submit' && this.id !== 'codigoEmail' && this.id !== 'E-mail-2') { // Agrega esta condición para omitir los campos de tipo "submit"
+                formValues[this.name] = $(this).val().trim();
+            }
         });
-        // Realiza la solicitud AJAX al archivo PHP
-        $.ajax({
-          type: 'POST',
-          url: 'inscripcionDocente.php',
-          data: {valores: valores},
-          success: function(response) {
-            // Maneja la respuesta del archivo PHP aquí
-            console.log(response);
-          }
-        });
+        console.log(formValues);
+
       });
 
 });
@@ -459,7 +456,7 @@ function cursosVin(){
     centrarDiv("#cursosVinculados");
 
     if ($("#asesorSelect option:first-child:selected").length !== 0){
-        $("#asesorSelect").val(1);
+        $("#asesorSelect").val(0);
     }
         var selectedValues = $('#add select.escuela').map(function() {
         var id = this.id.slice(-1); // Extrae el último carácter del ID

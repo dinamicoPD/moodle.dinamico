@@ -18,4 +18,10 @@ if(mysqli_num_rows($result) > 0) {
 }
 
 mysqli_free_result($result);
+
+$edicionFull = "";
+foreach($ediciones as $edicion) {
+    $edicionFull .= '<option value="' . $edicion['id_categories'] . '">' . $edicion['name_categories'] . '</option>';
+}
+
 ?>

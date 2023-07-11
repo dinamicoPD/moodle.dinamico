@@ -17,5 +17,10 @@ if(mysqli_num_rows($result) > 0) {
     }
 }
 
+$asesoresFull = "";
+foreach($asesores as $asesor) {
+    $asesoresFull .= '<option value="' . $asesor['Id_asesor'] . '">' . $asesor['Nombre_asesor'] . '</option>';
+}
+
 mysqli_free_result($result);
 ?>
