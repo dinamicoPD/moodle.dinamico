@@ -1,15 +1,81 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['valores'])) {
-        $instituto = $_POST['valores'];
-         if (is_array($instituto)) {
-            $response = implode(",", $instituto);
-            echo $response;
-        } else {
-            echo "El valor de 'valores' no es un array.";
+$dataReceived = json_decode(file_get_contents('php://input'), true);
+if (is_array($dataReceived)) {
+    $count = $dataReceived['count'] ?? 0;
+    $count_2 = $dataReceived['count_2'] ?? 0;
+    $email = $dataReceived['email'] ?? '';
+    $nombre = $dataReceived['FirstName'] ?? '';
+    $nombre .= ',' . ($dataReceived['MiddleName'] ?? '');
+    $nombre .= ',' . ($dataReceived['LastName'] ?? '');
+    $nombre .= ',' . ($dataReceived['SecondLastName'] ?? '');
+    $phone = $dataReceived['Tel'] ?? '';
+    $asesor = $dataReceived['asesor'] ?? '';
+    $asesorData = implode(",", $asesor);
+    $definitivoDel = '';
+
+    for ($i = 0; $i <= $count; $i++) {
+        $valorDepar = "departamento_" . $i;
+        $departamento = $dataReceived[$valorDepar] ?? '';
+        if (!empty($departamento)) {
+            $departamentoData = implode(",", $departamento);
+            $definitivoDel .= $departamentoData . ",";
+            $valorciudad = "ciudad_" . $i;
+            $ciudad = $dataReceived[$valorciudad] ?? '';
+
+            if (!empty($ciudad)) {
+                $ciudadData = implode(",", $ciudad);
+                $definitivoDel .= $ciudadData . ",";
+            }
+
+            $valorinstituto = "instituto_" . $i;
+            $instituto = $dataReceived[$valorinstituto] ?? '';
+            if (!empty($instituto)) {
+                $institutoData = implode(",", $instituto);
+                $definitivoDel .= $institutoData . ",";
+            }
+
+            $valorotro = "otro_" . $i;
+            $otro = $dataReceived[$valorotro] ?? '';
+            if (!empty($otro)){
+                $definitivoDel .= $otro . ",";
+            }else{
+                $definitivoDel .= ",";
+            }
         }
-    } else {
-        echo "No se proporcionó ningún valor para 'valores'.";
     }
+
+    $definitivoDel = substr($definitivoDel, 0, -1);
+
+    $definitivoGrup = '';
+
+    for ($i = 0; $i <= $count_2; $i++) {
+        $valorCurso = "colegio_" . $i;
+        $colegio = $dataReceived[$valorCurso] ?? '';
+        if (!empty($colegio)) {
+            $colegioData = implode(",", $colegio);
+            $definitivoGrup .= $colegioData . ",";
+            $valoredicion = "edicion_" . $i;
+            $edicion = $dataReceived[$valoredicion] ?? '';
+            if (!empty($edicion)) {
+                $edicionData = implode(",", $edicion);
+                $definitivoGrup .= $edicionData . ",";
+            }
+            $valorcurso = "curso_" . $i;
+            $curso = $dataReceived[$valorcurso] ?? '';
+            if (!empty($curso)) {
+                $cursoData = implode(",", $curso);
+                $definitivoGrup .= $cursoData . ",";
+            }
+            $valorsigla = "sigla_" . $i;
+            $sigla = $dataReceived[$valorsigla] ?? '';
+            if (!empty($sigla)) {
+                $definitivoGrup .= $sigla . ",";
+            }
+        }
+    }
+    
+    $definitivoGrup = rtrim($definitivoGrup, ",");
+
+    echo $email . "-" . $nombre . "-" . $phone . "-" . $asesorData . "-" . $definitivoDel . "-" . $definitivoGrup;
 }
-?> 
+?>

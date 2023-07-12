@@ -110,10 +110,20 @@ $(document).ready(function() {
                 };
             }else if (this.type !== 'submit' && this.id !== 'codigoEmail' && this.id !== 'E-mail-2') { // Agrega esta condición para omitir los campos de tipo "submit"
                 formValues[this.name] = $(this).val().trim();
+                formValues['count'] = count;
+                formValues['count_2'] = count_2;
             }
         });
-        console.log(formValues);
-
+       
+        $.ajax({
+            url: 'inscripcionDocente.php',
+            type: 'POST',
+            data: JSON.stringify(formValues),
+            contentType: 'application/json', 
+            success: function(data){
+                console.log(data);
+            }
+        });
       });
 
 });

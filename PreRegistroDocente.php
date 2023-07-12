@@ -33,7 +33,7 @@
                         <label for="E-mail" class="form-label formLabel">E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
+                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" onkeyup="this.value = this.value.toUpperCase();" required>
                             <div id="E-mailFeedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Ingresa una dirección de correo electrónico válida.
                             </div>
@@ -46,7 +46,7 @@
                         <label for="E-mail-2" class="form-label formLabel">Confirmar E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input type="email" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" required>
+                            <input type="email" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" onkeyup="this.value = this.value.toUpperCase();" required>
                             <div class="invalid-feedback mal">
                                 <?php echo $alerta ?> Las direcciones de correo son diferentes.
                             </div>
