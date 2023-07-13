@@ -1,14 +1,16 @@
 <?php
+require_once('../../config-ext.php');
+
 $dataReceived = json_decode(file_get_contents('php://input'), true);
 if (is_array($dataReceived)) {
     $count = $dataReceived['count'] ?? 0;
     $count_2 = $dataReceived['count_2'] ?? 0;
-    $email = $dataReceived['email'] ?? '';
-    $nombre = $dataReceived['FirstName'] ?? '';
-    $nombre .= ',' . ($dataReceived['MiddleName'] ?? '');
-    $nombre .= ',' . ($dataReceived['LastName'] ?? '');
-    $nombre .= ',' . ($dataReceived['SecondLastName'] ?? '');
-    $phone = $dataReceived['Tel'] ?? '';
+    $email = filter_var($dataReceived['email'] ?? '', FILTER_VALIDATE_EMAIL);
+    $nombre = filter_var($dataReceived['FirstName'] ?? '', FILTER_SANITIZE_STRING);
+    $nombre .= ',' . filter_var($dataReceived['MiddleName'] ?? '', FILTER_SANITIZE_STRING);
+    $nombre .= ',' . filter_var($dataReceived['LastName'] ?? '', FILTER_SANITIZE_STRING);
+    $nombre .= ',' . filter_var($dataReceived['SecondLastName'] ?? '', FILTER_SANITIZE_STRING);
+    $phone = filter_var($dataReceived['Tel'] ?? '', FILTER_SANITIZE_STRING);
     $asesor = $dataReceived['asesor'] ?? '';
     $asesorData = implode(",", $asesor);
     $definitivoDel = '';
@@ -39,7 +41,7 @@ if (is_array($dataReceived)) {
             if (!empty($otro)){
                 $definitivoDel .= $otro . ",";
             }else{
-                $definitivoDel .= ",";
+                $definitivoDel .= "no,";
             }
         }
     }
@@ -76,6 +78,15 @@ if (is_array($dataReceived)) {
     
     $definitivoGrup = rtrim($definitivoGrup, ",");
 
-    echo $email . "-" . $nombre . "-" . $phone . "-" . $asesorData . "-" . $definitivoDel . "-" . $definitivoGrup;
+    $sql = "INSERT INTO PreDocentes (email, nombre, telefono, asesor, ubicacion, cursos) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("ssssss", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup);
+     if ($stmt->execute()) {
+        echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
+    } else {
+        echo "Error al guardar tus datos: " . $stmt->error . " Contacta con soporte técnico para recibir ayuda";
+    }
+    $stmt->close();
+    $link->close();
 }
 ?>

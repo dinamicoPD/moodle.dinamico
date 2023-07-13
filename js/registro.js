@@ -3,7 +3,6 @@ var count_2 = 1;
 var resultInsituto;
 
 $(document).ready(function() {
-
     $("#codigo").slideUp();
     $("#datos").slideUp();
     $("#telefono").slideUp();
@@ -96,7 +95,7 @@ $(document).ready(function() {
         }
 
     });
-
+    
     $('#formulario').submit(function(e) {
         e.preventDefault(); // Evita que el formulario se envíe de forma convencional
         var formValues = {};
@@ -121,7 +120,10 @@ $(document).ready(function() {
             data: JSON.stringify(formValues),
             contentType: 'application/json', 
             success: function(data){
-                console.log(data);
+                var msm = "<a href='https://dinamicopd.com/' class='btnCerrar'>Cerrar</a>";
+                $('#respuestaForm').modal('show');
+                $('#msmVerificaEmail').text(data);                   
+                $('#modal-footer').html(msm);
             }
         });
       });
@@ -228,6 +230,8 @@ function codigos(){
                     var cod_2 = response;
                     if (cod_1 == cod_2){
                         // codigo correcto
+                        emailExiste();
+
                         $("#codigoEmail").addClass("is-valid");
                         $("#codigoEmail").removeClass("is-invalid");
                         $("#respa").slideUp();
@@ -245,6 +249,36 @@ function codigos(){
             },
         });
     }
+}
+
+function emailExiste(){
+    var email = $("#E-mail").val();
+    console.log(email);
+    $.ajax({
+        url:'emailExiste.php',
+        type: 'POST',
+        data:{
+            email: email
+        },
+        success: function(response) {
+            var msm = "<a href='https://dinamicopd.com/' class='btnCerrar'>Cerrar</a>";
+            switch(response) {
+                case 'existe':
+                    $('#respuestaForm').modal('show');
+                    $('#msmVerificaEmail').text("El correo que proporcionaste ya está registrado. Si quieres actualizar tus cursos, por favor, haz clic en 'Actualizar'");                   
+                    var msm = "<a href='https://dinamicopd.com/' class='btnNext'>Actualizar</a>" + msm;
+                    $('#modal-footer').html(msm);
+                    break;
+                case 'si':
+                    $('#respuestaForm').modal('show');
+                    $('#msmVerificaEmail').text("Tu dirección de correo electrónico ya está registrada. Por favor, espera un mensaje de confirmación en tu bandeja de entrada para continuar con el proceso de inscripción en la plataforma");                   
+                    $('#modal-footer').html(msm);
+                    break;
+                case 'no':
+                    break;
+            }
+        },
+    });
 }
 
 function centrarDiv(selector){

@@ -33,7 +33,7 @@
                         <label for="E-mail" class="form-label formLabel">E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" onkeyup="this.value = this.value.toUpperCase();" required>
+                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
                             <div id="E-mailFeedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Ingresa una dirección de correo electrónico válida.
                             </div>
@@ -46,7 +46,7 @@
                         <label for="E-mail-2" class="form-label formLabel">Confirmar E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input type="email" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" onkeyup="this.value = this.value.toUpperCase();" required>
+                            <input type="email" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" required>
                             <div class="invalid-feedback mal">
                                 <?php echo $alerta ?> Las direcciones de correo son diferentes.
                             </div>
@@ -425,6 +425,31 @@
     </form>
 </div>
 
+<div class="modal fade" id="respuestaForm" tabindex="-1" data-bs-backdrop="static" aria-labelledby="respuestaFormLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content contenedor_2">
+        <!-- mensaje para enviar -->
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 txtTituloSeccion" id="respuestaFormLabel">VERIFICACIÓN EMAIL</h1>
+      </div>
+      <div class="modal-body formContenedor">
+        <div class="row">
+            <div class="col">
+                <?php echo $textura ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center advertenciaImg"><img src="img/dinamicoadvertenciabebé.svg" alt=""></div>
+        </div>
+        <div class="row">
+            <div class="col text-center txtInstruccion2"><p id="msmVerificaEmail"></p></div>
+        </div>
+      </div>
+      <div class="modal-footer" id="modal-footer"></div>
+        <!-- fin mensaje para enviar -->
+    </div>
+  </div>
+</div>
 
 <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script><script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script>
 <script src="js/code.jquery.com_jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>

@@ -8,6 +8,13 @@
     border: 0.3vw solid #2C2359;
 }
 
+.contenedor_2 {
+    background: rgb(153,73,146);
+    background: linear-gradient(163deg, rgba(153,73,146,1) 0%, rgba(79,73,148,1) 100%);
+    border-radius: 9px;
+    border: 0.3vw solid #2C2359;
+}
+
 .formContenedor{
     background-color: rgba(255, 255, 255, 0.15);
     margin: 0.5vw 1vw;
@@ -132,6 +139,21 @@
     border-radius: 5px;
     font-family: 'poppins-black', sans-serif;
     font-size: 1.1vw;
+}
+
+.btnCerrar{
+    background-color: #F7931E;
+    color: #ffffff;
+    padding: 0.3vw;
+    text-align: center;
+    border: 0.3vw solid #F9A94B;
+    border-radius: 5px;
+    font-family: 'poppins-black', sans-serif;
+    font-size: 1.1vw;
+}
+
+.advertenciaImg img{
+    width: 50%;
 }
 
 .btnSub svg{
