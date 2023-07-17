@@ -266,7 +266,7 @@ function emailExiste(){
                 case 'existe':
                     $('#respuestaForm').modal('show');
                     $('#msmVerificaEmail').text("El correo que proporcionaste ya está registrado. Si quieres actualizar tus cursos, por favor, haz clic en 'Actualizar'");                   
-                    var msm = "<a href='https://dinamicopd.com/' class='btnNext'>Actualizar</a>" + msm;
+                    var msm = "<a href='https://dinamicopd.com/moodle/dinapage/LoginPRF.php' class='btnNext'>Actualizar</a>" + msm;
                     $('#modal-footer').html(msm);
                     break;
                 case 'si':
