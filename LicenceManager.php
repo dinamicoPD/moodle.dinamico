@@ -79,7 +79,7 @@ session_start();
 				  <label class="nav-link" aria-current="page" for="select_3">Parametrizar categorias</label>
 				</li>
 				<li class="nav-item">
-				  <a class="nav-link" href="./phpMyAdmin513" target="_blank">phpMyAdmin</a>
+				  <a class="nav-link" href="./phpMyAdmin-5.2.1" target="_blank">phpMyAdmin</a>
 				</li>
 			  </ul>
 			</div>

@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <label for="otro" class="form-label formLabel">&nbsp;</label>
-                        <input name="otro_'.$count.'" style="visibility: hidden" type="text" class="form-control  formInput" id="otro_'.$count.'" aria-describedby="otroFeedback" oninput=datosCursos('.$count.') placeholder="Otra:">
+                        <input name="otro_'.$count.'" style="visibility: hidden" type="text" class="form-control  formInput" id="otro_'.$count.'" aria-describedby="otroFeedback" oninput=datosCursos('.$count.') onkeyup="this.value = this.value.toUpperCase();" placeholder="Otra:">
                         <div id="otroFeedback" class="invalid-feedback mal">
                         '.$alerta.' Por favor ingresa el nombre de la institución.
                         </div>

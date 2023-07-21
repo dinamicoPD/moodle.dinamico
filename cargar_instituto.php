@@ -33,7 +33,7 @@ foreach($institutos as $instituto):
         <option value=\"".$instituto['colegioId']."\">".$instituto['colegio']."</option>
     ";
 endforeach;
-$institutoSelect .= "<option value='otro'>Otra</option>";
+$institutoSelect .= "<option value='OTRO'>OTRA</option>";
 
 echo $institutoSelect;
 ?>

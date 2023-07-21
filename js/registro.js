@@ -428,7 +428,7 @@ function datosCursos(valor){
     }else{
         $("#Instituto_"+valor).removeClass("is-invalid");
         $("#Instituto_"+valor).addClass("is-valid");
-        if ($("#Instituto_"+valor).val() == 'otro'){
+        if ($("#Instituto_"+valor).val() == 'OTRO'){
             $("#otro_"+valor).css("visibility", "visible");
 
             if ($("#otro_"+valor).val() == ""){
@@ -518,7 +518,7 @@ function cursosVin(){
 
       selectedValues.forEach(function(item) {
 
-        if (item.value == "otro"){
+        if (item.value == "OTRO"){
             var valorOtro_1 = $("#otro_"+item.id).val();
             var valorOtro = valorOtro_1.toUpperCase();
             resultInsituto += "<option value='" + item.value + "'>"+ valorOtro +"</option>";

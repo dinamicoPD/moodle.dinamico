@@ -41,7 +41,7 @@ if (is_array($dataReceived)) {
             if (!empty($otro)){
                 $definitivoDel .= $otro . ",";
             }else{
-                $definitivoDel .= "no,";
+                $definitivoDel .= "NO,";
             }
         }
     }
