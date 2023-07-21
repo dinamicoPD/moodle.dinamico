@@ -20,9 +20,6 @@ if(!$result) {
     $cursos = "";
     $k = 0;
 
-    $PreinscripcionFull .= '<tr id="edit_'.$Preinscripcion["Id_preDocente"].'">';
-    $PreinscripcionFull .= '<td><input name="email_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.htmlspecialchars($Preinscripcion["email"]).'"></td>';
-
     $asesor = htmlspecialchars($Preinscripcion["asesor"]);
     $array_asesor = explode(",", $asesor);
 
@@ -115,32 +112,74 @@ if(!$result) {
         $cursos .= '<br>';
         $conteoInicial = $j;
     }
-       
-    $PreinscripcionFull .= '<td>
-                                <div class="input-group">
-                                    <input name="FirstName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[0].'">
-                                    <input name="MiddleName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[1].'">
-                                    <input name="LastName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[2].'">
-                                    <input name="SecondLastName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[3].'">
-                                </div>
-                            </td>';
-    $PreinscripcionFull .= '<td><input name="Phone_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.htmlspecialchars($Preinscripcion["telefono"]).'"></td>';
-    
-    $PreinscripcionFull .= '<td><select name="asesor_'.$Preinscripcion["Id_preDocente"].'" class="form-select" disabled>';
-    $PreinscripcionFull .=  '<option selected value="'.$array_asesor[0].'">'.$asesoresFull.'</option>';
-    $PreinscripcionFull .= '</select></td>';
-   
-    $PreinscripcionFull .= '<td>'.$colegios.'</td>';
-    $PreinscripcionFull .= '<td>'.$cursos.'</td>';
-    $PreinscripcionFull .= '<td>
-                                <button type="button" class="btn btn-primary" onclick="editProf('.$Preinscripcion["Id_preDocente"].')">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                    </svg>
-                                </button>';
-    $PreinscripcionFull .= '</td>';
-    $PreinscripcionFull .= '</tr>';
+
+    $PreinscripcionFull .= '
+    <thead class="table-light">
+        <tr>
+            <th class="text-center" colspan="3"><hr>REGISTRO N° '.$Preinscripcion["Id_preDocente"].'<hr></th>
+        </tr>
+    </thead>
+    <thead class="table-dark">
+        <tr>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input name="email_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.htmlspecialchars($Preinscripcion["email"]).'"></td>
+            <td>
+                <div class="input-group">
+                    <input name="FirstName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[0].'">
+                    <input name="MiddleName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[1].'">
+                    <input name="LastName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[2].'">
+                    <input name="SecondLastName_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_nombre[3].'">
+                </div>
+            </td>
+            <td>
+                <input name="Phone_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.htmlspecialchars($Preinscripcion["telefono"]).'">
+            </td>
+        </tr>
+    </tbody>
+    <thead class="table-primary">
+        <tr>
+            <th colspan="3">Colegios</th>
+        </tr>
+    </thead>
+    <tbody>
+        <td colspan="3">'.$colegios.'</td>
+    </tbody>
+    <thead class="table-success">
+        <tr>
+            <th colspan="3">Grupos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <td colspan="3">'.$cursos.'</td>
+    </tbody>
+    <thead class="table-warning">
+        <tr>
+            <th colspan="2">Asesor</th>
+            <th>Enviar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <td colspan="2">
+            <select name="asesor_'.$Preinscripcion["Id_preDocente"].'" class="form-select" disabled>
+                <option selected value="'.$array_asesor[0].'">'.$asesoresFull.'</option>
+            </select>
+        </td>
+        <td class="text-center">
+            <button type="button" class="btn btn-primary" onclick="editProf('.$Preinscripcion["Id_preDocente"].')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+            </button>
+        </td>
+    </tbody>
+    ';
 }
  mysqli_free_result($result);
 

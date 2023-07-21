@@ -24,23 +24,10 @@
 </header>
 <div class="container-fluid">
     <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Email</th>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Asesor</th>
-                    <th>Instituto</th>
-                    <th>Curso</th>
-                    <th>Ver</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    echo $PreinscripcionFull;
-                ?>
-            </tbody>
+        <table class="table table-bordered table-striped" >
+            <?php
+                echo $PreinscripcionFull;
+            ?>
         </table>
     </div>
 </div>
