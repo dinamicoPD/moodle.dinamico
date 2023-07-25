@@ -169,7 +169,7 @@
                                     <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $telefono ?></span>
                                     <input name="Tel" type="number" class="form-control formInput" id="Tel" aria-describedby="inputGroupPrepend3 TelFeedback" placeholder="Número telefónico" required>
                                     <div class="invalid-feedback mal">
-                                        <?php echo $alerta ?> Ingresa tu número teléfonico.
+                                        <?php echo $alerta ?> Ingresa tu número telefónico.
                                     </div>
                                 </div>
                             </div>

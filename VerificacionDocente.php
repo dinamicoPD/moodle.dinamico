@@ -24,11 +24,9 @@
 </header>
 <div class="container-fluid">
     <div class="table-responsive">
-        <table class="table table-bordered table-striped" >
-            <?php
-                echo $PreinscripcionFull;
-            ?>
-        </table>
+        <?php
+            echo $PreinscripcionFull;
+        ?>
     </div>
 </div>
 

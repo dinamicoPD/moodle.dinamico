@@ -12,8 +12,23 @@ if (is_array($dataReceived)) {
     $nombre .= ',' . filter_var($dataReceived['SecondLastName'] ?? '', FILTER_SANITIZE_STRING);
     $phone = filter_var($dataReceived['Tel'] ?? '', FILTER_SANITIZE_STRING);
     $asesor = $dataReceived['asesor'] ?? '';
-    $asesorData = implode(",", $asesor);
+    $asesorData = reset($asesor);
     $definitivoDel = '';
+
+    $sqlSearch = "SELECT Id_preDocente FROM PreDocentes WHERE email = ? LIMIT 1";
+    $stmtSearch = $link->prepare($sqlSearch);
+    $stmtSearch->bind_param("s", $email);
+    $stmtSearch->execute();
+    $resultSearch = $stmtSearch->get_result();
+
+    if ($resultSearch->num_rows > 0) {
+        $rowSearch = $resultSearch->fetch_assoc();
+        $idRegistroSearch = $rowSearch['Id_preDocente'];
+    } else {
+        $idRegistroSearch = 0;
+    }
+
+    $esAsesor = 0;
 
     for ($i = 0; $i <= $count; $i++) {
         $valorDepar = "departamento_" . $i;
@@ -33,6 +48,12 @@ if (is_array($dataReceived)) {
             $instituto = $dataReceived[$valorinstituto] ?? '';
             if (!empty($instituto)) {
                 $institutoData = implode(",", $instituto);
+                $institutoArray = explode(",", $institutoData);
+                $primerValorinstituto = $institutoArray[0];
+                if ($primerValorinstituto == 1){
+                    $esAsesor++;
+                }
+
                 $definitivoDel .= $institutoData . ",";
             }
 
@@ -44,6 +65,12 @@ if (is_array($dataReceived)) {
                 $definitivoDel .= "NO,";
             }
         }
+    }
+
+    if ($esAsesor > 0){
+        $esAsesor = 1;
+    }else{
+        $esAsesor = 0;
     }
 
     $definitivoDel = substr($definitivoDel, 0, -1);
@@ -78,15 +105,30 @@ if (is_array($dataReceived)) {
     
     $definitivoGrup = rtrim($definitivoGrup, ",");
 
-    $sql = "INSERT INTO PreDocentes (email, nombre, telefono, asesor, ubicacion, cursos) VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $link->prepare($sql);
-    $stmt->bind_param("ssssss", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup);
-     if ($stmt->execute()) {
-        echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
-    } else {
-        echo "Error al guardar tus datos: " . $stmt->error . " Contacta con soporte técnico para recibir ayuda";
-    }
-    $stmt->close();
-    $link->close();
+    if ($idRegistroSearch == 0){
+        $sql = "INSERT INTO PreDocentes (email, nombre, telefono, asesor, ubicacion, cursos, esAsesor) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $link->prepare($sql);
+        $stmt->bind_param("ssssssi", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $esAsesor);
+        if ($stmt->execute()) {
+            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
+        } else {
+            echo "Error al guardar tus datos: " . $stmt->error . " Contacta con soporte técnico para recibir ayuda";
+        }
+        $stmt->close();
+        $link->close();
+    }else{
+        $estado = 0;
+        $sql_3 = "UPDATE PreDocentes SET email = ?, nombre = ?, telefono = ?, asesor = ?, ubicacion = ?, cursos = ?, confirmado = ?, esAsesor = ? WHERE Id_preDocente = ?";
+        $stmt_3 = $link->prepare($sql_3);
+        $stmt_3->bind_param("ssssssiii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $estado, $esAsesor, $idRegistroSearch);
+        if ($stmt_3->execute()) {
+            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
+        } else {
+            throw new Exception("Error al modificar el registro: " . $stmt_3->error);
+        }
+        // Cerrar la conexión
+        $stmt_3->close();
+        $link->close();
+    } 
 }
 ?>

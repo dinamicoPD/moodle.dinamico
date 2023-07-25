@@ -21,3 +21,33 @@ function verColegio(identificador, consecutivo){
         }
     });
 }
+
+function editProf(registro, cursos){
+    var proceder = true;
+    var contenedor = "#laTabla_" + registro;
+    var inputSelector, selectSelector;
+
+    for (var i = 1; i <= cursos; i++) {
+        inputSelector = contenedor + " input[name='Otro_"+i+"_"+registro+"']";
+        $(inputSelector).each(function() {
+            if ($(this).val() !== "NO") {
+                proceder =  false;
+            }
+        });
+    }
+
+    selectSelector = contenedor + " select[name='asesor_"+registro+"']";
+
+    $(selectSelector).each(function() {
+        if ($(this).val() === "" || $(this).val() === null) {
+            proceder =  false;
+        }
+    });
+    
+    if (proceder == false){
+        alert ("El registro no esta completo");
+    	return false;
+    }
+
+    alert ("verificar OK");
+}

@@ -22,7 +22,13 @@ if ($result->num_rows > 0) {
     $stmt_1->execute();
     $result_1 = $stmt_1->get_result();
     if ($result_1->num_rows > 0) {
-        echo "si";
+        $row = $result_1->fetch_assoc();
+        $confirmado = $row['confirmado'];
+        if($confirmado == 1){
+            echo "no";
+        }else{
+            echo "si";
+        }
     }else{
         echo "no";
     }

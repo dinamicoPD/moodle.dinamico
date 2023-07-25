@@ -297,7 +297,7 @@ function centrarDiv(selector){
 }
 
 function nombreFull(nombreInput) {
-    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚ]/g;
+    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚnÑ]/g;
     var name_1 = $(nombreInput).val();
 
     if (name_1 === null || name_1.trim() === "") {
@@ -488,10 +488,25 @@ function subInstituto(eliminarDiv){
 }
 
 function Asesor(){
-    $("#asesor").slideDown();
-    centrarDiv("#asesor");
+
+    var contador = 0;
+    $("#institucion select").each(function() {
+        if ($(this).find("option:selected").text() === "ASESORES") {
+          contador++;
+        }
+    });
+
+    alert(contador);
+
+    if (contador > 0){
+        cursosVin();
+    }else{
+        $("#asesor").slideDown();
+        centrarDiv("#asesor");
+    }
 
     $('#add').find('select, input').css('pointer-events', 'none');
+    
 }
 
 function cursosVin(){
