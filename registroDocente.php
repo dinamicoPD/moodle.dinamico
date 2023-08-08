@@ -70,23 +70,6 @@ require_once(dirname(__FILE__).'/registroDocenteController.php');
                     <legend>Cursos que dicta</legend>
                     <p style="color: red; font-size: 0.8em;">Seleccione el curso al que dicta acompañado de la sigla del mismo si exite <strong>ejemplo:</strong> Primero A<br>Si dicta en mas cursos agregelos con el singo +</p>
                     <div class="field_wrapper">
-                     <!--  <div><select name="field_name[]" id="curso" required class="inputD">
-                            <option disabled selected>Curso*</option>
-                            <option value="1">Primero</option>
-                            <option value="2">Segundo</option>
-                            <option value="3">Tercero</option>
-                            <option value="4">Cuarto</option>
-                            <option value="5">Quinto</option>
-                            <option value="6">Sexto</option>
-                            <option value="7">Septimo</option>
-                            <option value="8">Octavo</option>
-                            <option value="9">Noveno</option>
-                            <option value="10">Decimo</option>
-                            <option value="11">Once</option>
-                        </select>
-                        <input type="text" placeholder="sigla" name="field_name2[]" minlength="1" pattern="[A-Z] {0,1}" title="se acepta un caracter en mayuscula" class="inputI">
-                        <a href="javascript:void(0);" class="add_button" title="Add field"><img src="img/add-icon.png" /></a>
-                        </div> --> 
                         <?php
                         echo $loadedGroups;
                         ?>
@@ -117,5 +100,5 @@ require_once(dirname(__FILE__).'/registroDocenteController.php');
         </div>
     </footer>
 </body>
-<div class="modal"><!-- Place at bottom of page --></div>
+<div class="modal"></div>
 </html>

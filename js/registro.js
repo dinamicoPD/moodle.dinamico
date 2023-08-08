@@ -297,7 +297,7 @@ function centrarDiv(selector){
 }
 
 function nombreFull(nombreInput) {
-    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚnÑ]/g;
+    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g;
     var name_1 = $(nombreInput).val();
 
     if (name_1 === null || name_1.trim() === "") {
@@ -318,7 +318,7 @@ function nombreFull(nombreInput) {
 }
 
 function validarNombre(){
-    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚ]/g;
+    const err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ]/g;
     var name = $("#FirstName").val() + $("#MiddleName").val() + $("#LastName").val() + $("#SecondLastName").val();
 
     if ($("#FirstName").val() !== "" && $("#LastName").val() !== "") {
@@ -495,8 +495,6 @@ function Asesor(){
           contador++;
         }
     });
-
-    alert(contador);
 
     if (contador > 0){
         cursosVin();

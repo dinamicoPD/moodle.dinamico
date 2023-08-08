@@ -12,7 +12,6 @@
     $varcloseecho=1;
     require_once('CourseController.php');
 
-    //$loadedGroups = "<div><select name=\"field_name[]\" id=\"curso\" required class=\"inputD\"><option disabled selected>Curso*</option><option value=\"1\">Primero</option><option value=\"2\">Segundo</option><option value=\"3\">Tercero</option><option value=\"4\">Cuarto</option><option value=\"5\">Quinto</option><option value=\"6\">Sexto</option><option value=\"7\">Septimo</option><option value=\"8\">Octavo</option><option value=\"9\">Noveno</option><option value=\"10\">Decimo</option><option value=\"11\">Once</option></select><input type=\"text\" placeholder=\"sigla\" name=\"field_name2[]\" class=\"inputI\"><a href=\"javascript:void(0);\" class=\"add_button\" title=\"Add field\"><img src=\"img/add-icon.png\" /></a></div>";
     $optionsHTML="";
     $rowsToBeStored=array();
     if(!empty($rows)){

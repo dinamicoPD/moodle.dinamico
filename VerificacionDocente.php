@@ -62,6 +62,62 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="enviarInscripcion" tabindex="-1" data-bs-backdrop="static" aria-labelledby="InscripcionFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content contenedor_2">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 txtTituloSeccion" id="InscripcionFormLabel">Incripción Docente</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="enviarInscripcion.php" method="post">
+                <div class="modal-body">
+                <fieldset>
+                    <legend>Información personal</legend>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="FirstName" id="floatingFirstName" required>
+                        <label for="floatingFirstName">Primer Nombre*</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="MiddleName" id="floatingMiddleName" >
+                        <label for="floatingMiddleName">Segundo Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="LastName" id="floatingLastName" required>
+                        <label for="floatingLastName">Primer Apellido*</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="SecondLastName" id="floatingSecondLastName">
+                        <label for="floatingSecondLastName">Segundo Apellido*</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="tel" class="form-control" name="Phone" id="floatingPhone">
+                        <label for="floatingPhone">Número de Teléfono</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="City" id="floatingCity" readonly required>
+                        <label for="floatingCity">Ciudad*</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" name="Email" id="floatingEmail" readonly required>
+                        <label for="floatingEmail">Correo electrónico*</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="Perfil" id="floatingPerfil" readonly required>
+                        <label for="floatingPerfil">Perfil*</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Cursos que orienta</legend>
+                    <div class="field_wrapper" id="cursosVinculados"></div>
+                </fieldset>
+                </div>
+                <div class="modal-footer" id="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="js/verColegio.js"></script>
 <script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script><script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script>

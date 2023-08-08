@@ -33,6 +33,48 @@ class MailDispatcher{
         		$ruta_in = 'img/instagram.png';
 
 				$ruta_mano = 'img/manos-60-x-20.png';
+				
+				$foundGroups="";
+     			$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+
+				 $sql = "SELECT CourseName, GroupCode, GroupKey FROM Enrolment WHERE UserId = ?";
+				 $stmt = $link->prepare($sql);
+				 $stmt->bind_param("s", $idTeacher);
+				 
+				 if ($stmt->execute()) {
+					 $result = $stmt->get_result();
+					 $rows = array(); // Array para almacenar los resultados
+					 
+					 while ($row = $result->fetch_assoc()) {
+						 $rutaQR = 'temp/QR'.$row["GroupKey"].'.png';
+						 $nameQR = 'imagenQR'.$row["GroupKey"];
+						 $mail->addEmbeddedImage($rutaQR, $nameQR);
+				 
+						 $rows[] = "
+						 			 <tr>
+										 <th>Curso</th>
+										 <th class='bordeCentro'>Grupo</th>
+										 <th>Clave</th>
+									 </tr>
+									 <tr>
+										 <td>".$row["CourseName"]."</td>
+										 <td class='bordeCentro'>".$row["GroupCode"]."</td>
+										 <td>".$row["GroupKey"]."</td>
+									 </tr>
+									 <tr>
+									 	<th colspan='3'>QR grupo (".$row["CourseName"].")</th>
+									 </tr>
+									 <tr>
+										 <td colspan='3'>
+											 <img class='imgQR' src='cid:".$nameQR."' alt=''><br><br><br>
+										 </td>
+									 </tr>";
+					 }
+					 
+					 $foundGroups = implode("", $rows); // Unir los resultados al final
+				 } else {
+					 error_log("Mailer - No se pudo obtener listado de Grupos del Profesor". $idTeacher);
+				 }
 
 				$mail->addEmbeddedImage($ruta_img, 'imagen_logo');
 				$mail->addEmbeddedImage($ruta_img2, 'imagen_mico');
@@ -87,6 +129,11 @@ class MailDispatcher{
 					width: 200px;
 					padding: 6px;
 				}
+
+				.imgQR {
+					width: 150px;
+					padding: 6px;
+				}
 			
 				.img2 {
 					width: 35px;
@@ -119,22 +166,6 @@ class MailDispatcher{
 				}
 				
 				";
-
-			    $foundGroups="";
-     			$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-			    $sql = "SELECT CourseName, GroupCode, GroupKey FROM Enrolment WHERE UserId = ".$idTeacher." ";
-			    if ($result = $link->query($sql)){
-			            while ($row = $result->fetch_assoc()) {
-			                $foundGroups .= "<tr>";
-			                $foundGroups .='<td>'.$row["CourseName"].'</td>';
-			                $foundGroups .='<td  class="bordeCentro">'.$row["GroupCode"].'</td>' ;
-			                $foundGroups .='<td>'.$row["GroupKey"].'</td>'; 
-			                $foundGroups .="</tr>";
-			             }
-			    }else{
-			             error_log("Mailer - No se pudo obtener listado de Grupos del Profesor". $idTeacher);
-			    }
 
 			    $mail->Subject = 'Cursos Vinculados';
 			    
@@ -188,11 +219,6 @@ class MailDispatcher{
 									<table class="table_2">
 										<tr>
 											<th colspan="3">Cursos disponibles</th>
-										</tr>
-										<tr>
-											<th>Curso</th>
-											<th class="bordeCentro">Grupo</th>
-											<th>Clave</th>
 										</tr>'
 										.$foundGroups.
 									'</table>

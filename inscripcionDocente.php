@@ -29,6 +29,7 @@ if (is_array($dataReceived)) {
     }
 
     $esAsesor = 0;
+    $esSoporte = 0;
 
     for ($i = 0; $i <= $count; $i++) {
         $valorDepar = "departamento_" . $i;
@@ -53,12 +54,15 @@ if (is_array($dataReceived)) {
                 if ($primerValorinstituto == 1){
                     $esAsesor++;
                 }
-
+                if ($primerValorinstituto == 2){
+                    $esSoporte++;
+                }
                 $definitivoDel .= $institutoData . ",";
             }
 
             $valorotro = "otro_" . $i;
             $otro = $dataReceived[$valorotro] ?? '';
+
             if (!empty($otro)){
                 $definitivoDel .= $otro . ",";
             }else{
@@ -71,6 +75,12 @@ if (is_array($dataReceived)) {
         $esAsesor = 1;
     }else{
         $esAsesor = 0;
+    }
+
+    if ($esSoporte > 0){
+        $esSoporte = 1;
+    }else{
+        $esSoporte = 0;
     }
 
     $definitivoDel = substr($definitivoDel, 0, -1);
@@ -106,9 +116,9 @@ if (is_array($dataReceived)) {
     $definitivoGrup = rtrim($definitivoGrup, ",");
 
     if ($idRegistroSearch == 0){
-        $sql = "INSERT INTO PreDocentes (email, nombre, telefono, asesor, ubicacion, cursos, esAsesor) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO PreDocentes (email, nombre, telefono, asesor, ubicacion, cursos, esAsesor, esSoporte) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $link->prepare($sql);
-        $stmt->bind_param("ssssssi", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $esAsesor);
+        $stmt->bind_param("ssssssii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $esAsesor, $esSoporte);
         if ($stmt->execute()) {
             echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
         } else {
@@ -118,9 +128,9 @@ if (is_array($dataReceived)) {
         $link->close();
     }else{
         $estado = 0;
-        $sql_3 = "UPDATE PreDocentes SET email = ?, nombre = ?, telefono = ?, asesor = ?, ubicacion = ?, cursos = ?, confirmado = ?, esAsesor = ? WHERE Id_preDocente = ?";
+        $sql_3 = "UPDATE PreDocentes SET email = ?, nombre = ?, telefono = ?, asesor = ?, ubicacion = ?, cursos = ?, confirmado = ?, esAsesor = ?, esSoporte = ? WHERE Id_preDocente = ?";
         $stmt_3 = $link->prepare($sql_3);
-        $stmt_3->bind_param("ssssssiii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $estado, $esAsesor, $idRegistroSearch);
+        $stmt_3->bind_param("ssssssiiii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $estado, $esAsesor, $esSoporte, $idRegistroSearch);
         if ($stmt_3->execute()) {
             echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
         } else {

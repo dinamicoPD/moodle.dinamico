@@ -32,6 +32,7 @@ try{
 	error_log("SuspendAccount - suspendedAccount - ". $w->getMessage());
 }
 }
+
 function ActivateAccount($email){
 	        //Query the UserId in moodle
 try{
