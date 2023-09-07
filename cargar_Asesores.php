@@ -1,7 +1,7 @@
 <?php
 require_once('../../config-ext.php');
 
-$query = "SELECT Id_asesor, Nombre_asesor FROM Asesor";
+$query = "SELECT UserId, UserName FROM User WHERE Rol = 'Asesor'";
 $result = mysqli_query($link, $query);
 
 if(!$result) {
@@ -19,7 +19,7 @@ if(mysqli_num_rows($result) > 0) {
 
 $asesoresFull = "";
 foreach($asesores as $asesor) {
-    $asesoresFull .= '<option value="' . $asesor['Id_asesor'] . '">' . $asesor['Id_asesor'] . '</option>';
+    $asesoresFull .= '<option value="' . $asesor['UserId'] . '">' . $asesor['UserId'] . '</option>';
 }
 
 mysqli_free_result($result);

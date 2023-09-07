@@ -33,12 +33,12 @@ if(!$result) {
 
     foreach($asesores as $asesor_1) {
         if ($array_asesor[0] == 0){
-            $asesorDefinitivo .= '<option value="' . $asesor_1['Id_asesor'] . '">' . $asesor_1['Nombre_asesor'] . '</option>';
+            $asesorDefinitivo .= '<option value="' . $asesor_1['UserId'] . '">' . $asesor_1['UserName'] . '</option>';
         }else{
-            if ($asesor_1['Id_asesor'] == $array_asesor[0]){
-                $asesorInicio = '<option selected value="' . $asesor_1['Id_asesor'] . '">' . $asesor_1['Nombre_asesor'] . '</option>';
+            if ($asesor_1['UserId'] == $array_asesor[0]){
+                $asesorInicio = '<option selected value="' . $asesor_1['UserId'] . '">' . $asesor_1['UserName'] . '</option>';
             }else{
-                $asesorDefinitivo .= '<option value="' . $asesor_1['Id_asesor'] . '">' . $asesor_1['Nombre_asesor'] . '</option>';
+                $asesorDefinitivo .= '<option value="' . $asesor_1['UserId'] . '">' . $asesor_1['UserName'] . '</option>';
             }
         }   
     }
@@ -122,9 +122,7 @@ if(!$result) {
                 $cursos .= '<select name="Curso_'.$k.'_'.$Preinscripcion["Id_preDocente"].'" class="form-select" disabled>';
                     $cursos .= '<option selected value="'.$array_grupos[$j+4].'">'.$array_grupos[$j+5].'</option>';
                 $cursos .= '</select>';
-                $cursos .= '<select name="Sigla_'.$k.'_'.$Preinscripcion["Id_preDocente"].'" class="form-select" disabled>';
-                    $cursos .= '<option selected value="'.$array_grupos[$j+6].'">'.$array_grupos[$j+6].'</option>';
-                $cursos .= '</select>';
+                $cursos .= '<input name="Sigla_'.$k.'_'.$Preinscripcion["Id_preDocente"].'" class="form-control" value="'.$array_grupos[$j+6].'" disabled>';
             $cursos .= '</div>';
         }
         $cursos .= '<br>';
@@ -171,7 +169,21 @@ if(!$result) {
             </tbody>
             <thead class="table-success">
                 <tr>
-                    <th colspan="3">Grupos</th>
+                    <th>
+                        Grupos
+                    </th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        <label for="addGrup'.$Preinscripcion["Id_preDocente"].'" class="form-label">Agregar grupos:</label>
+                        <div class="input-group">
+                            <button class="btn btn-success" type="button" onclick="cantidadGrupos(\'add\', '.$Preinscripcion["Id_preDocente"].')">+</button>
+                            <button class="btn btn-warning" type="button" onclick="cantidadGrupos(\'sub\', '.$Preinscripcion["Id_preDocente"].')">-</button>
+                            <input id="addGrup'.$Preinscripcion["Id_preDocente"].'" name="addGrup'.$Preinscripcion["Id_preDocente"].'" type="number" class="form-control">
+                            <button class="btn btn-info" type="button" onclick="editGrupos('.$Preinscripcion["Id_preDocente"].')">Agregar</button>
+                        </div>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -185,7 +197,9 @@ if(!$result) {
             </thead>
             <tbody>
                 <td colspan="2">
-                    <div class="input-group">'.$asesorDefinitivo.'</div>
+                    <div class="input-group">
+                        '.$asesorDefinitivo.'
+                    </div>
                 </td>
                 <td class="text-center">
                     <button id="btn_'.$Preinscripcion["Id_preDocente"].'" type="button" class="btn btn-primary" onclick="editProf('.$Preinscripcion["Id_preDocente"].', '.$k.')">

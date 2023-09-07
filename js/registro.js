@@ -3,18 +3,22 @@ var count_2 = 1;
 var resultInsituto;
 
 $(document).ready(function() {
-    $("#codigo").slideUp();
-    $("#datos").slideUp();
-    $("#telefono").slideUp();
-    $("#institucion").slideUp();
-    $("#asesor").slideUp();
-    $("#cursosVinculados").slideUp();
+    $("body").addClass("loading");
 
-    $("#btnCorreo").slideUp();
-    $("#btnName").slideUp();
-    $("#respa").slideUp();
-    $("#btnTel").slideUp();
-    $("#btnInstituto").slideUp();
+    setTimeout(function(){
+        $("#codigo").slideUp();
+        $("#datos").slideUp();
+        $("#telefono").slideUp();
+        $("#institucion").slideUp();
+        $("#asesor").slideUp();
+        $("#cursosVinculados").slideUp();
+
+        $("#btnCorreo").slideUp();
+        $("#btnName").slideUp();
+        $("#respa").slideUp();
+        $("#btnTel").slideUp();
+        $("#btnInstituto").slideUp();
+    }, 50);
    
     $("#E-mail-2").on('paste', function(e){
         e.preventDefault();
@@ -126,6 +130,12 @@ $(document).ready(function() {
                 $('#modal-footer').html(msm);
             }
         });
+      });
+
+      $(window).on('load', function(){
+        setTimeout(function(){
+            $('body').removeClass('loading');
+        }, 1000);
       });
 
 });

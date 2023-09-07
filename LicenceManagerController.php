@@ -11,6 +11,7 @@ include('Mailer.php');
 //use PhpOffice\PhpSpreadsheet\Spreadsheet;
 //use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+
 class User{ 
 
     private $licenceTable = 'Licence';

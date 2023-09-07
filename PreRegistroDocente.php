@@ -16,6 +16,27 @@
     <link rel="stylesheet" href="css/getbootstrap.com_docs_5.3_assets_css_docs.css">
     <link rel="stylesheet" href="css/formInscripcion.css" type="text/css">
     <link rel="stylesheet" href="css/styleParticulas.css">
+    <style>
+    .modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: #E9D7FF 
+                url('img/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+    }
+    body.loading .modal {
+        overflow: hidden;   
+    }
+    body.loading .modal {
+        display: block;
+    }
+</style>
 </head>
 <body>
 <div id="particles-js"></div>
@@ -462,4 +483,5 @@
 <script src="js/app.js"></script>
 
 </body>
+<div class="modal"></div>
 </html>

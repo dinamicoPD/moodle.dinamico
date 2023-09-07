@@ -1,5 +1,6 @@
 <?php
 include("admUserController.php");
+include("verInscripcion.php");
 session_start();
     if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
     header("location: AdminLogin.php");
@@ -79,6 +80,11 @@ session_start();
 				  <label class="nav-link" aria-current="page" for="select_3">Parametrizar categorias</label>
 				</li>
 				<li class="nav-item">
+				  <a class="nav-link position-relative" href="VerificacionDocente.php" target="_blank">Inscripciones
+				  	<span id="totalRegistros" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $totalRegistros ?></span>
+				  </a>
+				</li>
+				<li class="nav-item">
 				  <a class="nav-link" href="./phpMyAdmin-5.2.1" target="_blank">phpMyAdmin</a>
 				</li>
 			  </ul>
@@ -86,6 +92,7 @@ session_start();
 		  </div>
 		</nav>
 </header>
+
 <hr>
     <ul class="select_main">
         <li>

@@ -11,7 +11,7 @@ require 'phpMailer/PHPMailer.php';
 require 'phpMailer/SMTP.php';
 
 class MailDispatcher{
-	public function sendEmaiToTeacher($emailRecipient,$idTeacher,$userName,$password = ""){
+	public function sendEmaiToTeacher($emailRecipient,$idTeacher,$userName,$password = "",$Rol){
 		$mail = new PHPMailer(true);
 
 		try {
@@ -32,7 +32,7 @@ class MailDispatcher{
         		$ruta_yt = 'img/youtube.png';
         		$ruta_in = 'img/instagram.png';
 
-				$ruta_mano = 'img/manos-60-x-20.png';
+				$ruta_mano = 'img/manos.png';
 				
 				$foundGroups="";
      			$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -66,7 +66,7 @@ class MailDispatcher{
 									 </tr>
 									 <tr>
 										 <td colspan='3'>
-											 <img class='imgQR' src='cid:".$nameQR."' alt=''><br><br><br>
+											 <img class='imgQR' src='cid:".$nameQR."' alt=''><br><br>
 										 </td>
 									 </tr>";
 					 }
@@ -102,6 +102,19 @@ class MailDispatcher{
 					margin: auto;
 					border-collapse: collapse;
 					border: none;
+				}
+
+				.table_1a{
+					width: 400px;
+					font-family: Georgia, serif;
+					text-align: left;
+					margin: auto;
+					border-collapse: collapse;
+					border: none;
+				}
+
+				.table_1a th {
+					background-color: #F2F2F2;
 				}
 			
 				.table_2{
@@ -140,12 +153,15 @@ class MailDispatcher{
 				}
 			
 				.txtTitulo{
-					color: #49C025;
+					color: #CE9178;
 					font-weight: bold;
+				}
+				.txtRojo{
+					color: #CE9178;
 				}
 			
 				.txt{
-					color: #CE9178;
+					color: #49C025;
 					font-weight: bold;
 				}
 			
@@ -164,6 +180,9 @@ class MailDispatcher{
 					border-left: 1px solid #F2F2F2;
 					border-right: 1px solid #F2F2F2;
 				}
+                .centrarTXT{
+                    text-align: center;
+                }
 				
 				";
 
@@ -178,9 +197,13 @@ class MailDispatcher{
 				'<body>
 					<table class="table_1">
 						<thead>
-							<tr>
-								<th class="cabeza" colspan="4">REGISTRO DOCENTE</th>
-							</tr>
+							<tr>';
+				if($Rol == "Asesor"){
+					$mail->Body .= '<th class="cabeza" colspan="4">REGISTRO ASESOR CODIGO: '.$idTeacher.'</th>';
+				}else{
+					$mail->Body .= '<th class="cabeza" colspan="4">REGISTRO DOCENTE</th>';
+				}
+				$mail->Body .='</tr>
 						</thead>
 						<tbody>
 							<tr>
@@ -226,12 +249,60 @@ class MailDispatcher{
 							</tr>   
 							<tr>
 								<td colspan="4">
-									<table class="table_1">
-										<tr class="bordeCentro">
-											<th>Ingresa tu contraseña provisional<br>y cambia tu contraseña</th>
-											<th><a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php"><img src="cid:imagen_mano" alt=""><br>Clic aquí</a></th>
-										</tr>
-									</table>
+								<table class="table_1a">
+								<tr class="bordeCentro">
+									<td class="cabeza">Instrucciones pasos a seguir (cambia tu contraseña)</td>
+								</tr>
+								<tr>
+									<th>1. INGRESA AL SIGUIENTE LINK:</th>
+								</tr>
+								<tr>
+									<td>
+										<p class="centrarTXT"><a href="http://dinamicopd.com/moodle/dinapage/LoginPasswordChange.php"><img class="img2" src="cid:imagen_mano" alt=""><br>Clic aquí</a></p>
+									</td>
+								</tr>
+								<tr>
+									<th>2. INGRESAR LOS SIGUIENTES DATOS</th>
+								</tr>
+								<tr>
+									<td>
+										<p class="centrarTXT"><strong>Nombre de usuario / email: </strong><br>'.$userName.'</p>
+										<p class="centrarTXT"><strong>Contraseña: </strong><br>'.$password.'</p>
+										<i class="centrarTXT txtRojo"><strong>Nota: </strong>se aconseja copiar y pegar las credenciales.</i>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										3. DAR CLIC EN INGRESAR
+									</th>
+								</tr>
+								<tr>
+									<th>
+										4. CAMBIAR CONTRASEÑA DEBE TENER LAS SIGUIENTES CONDICIONES
+									</th>
+								</tr>
+								<tr>
+									<td>
+										<ul>
+											<li>La Contraseña tiene que estar compuesta de 8 caracteres.</li>
+											<li>Debe tener una letra en Mayúscula.</li>
+											<li>Debe tener una letra en Minúscula.</li>
+											<li>Debe tener un número.</li>
+											<li>Debe tener un caracter no alfanúmerico.</li>
+										<ul>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<p class="centrarTXT">
+											Listo ya después de cambiar la contraseña, pueden ingresar normalmente a la plataforma ingresando a la pagina principal de Dinámico. <br><a href="http://dinamicopd.com"><img class="img2" src="cid:imagen_mano" alt=""><br>Clic aquí</a>
+										</p>
+										<p class="centrarTXT">
+											le das clic en "DYNAMIC MOODLE" y luego en "iniciar sesión"
+										</p>
+									</th>
+								</tr>
+							</table>
 								<td>
 							</tr>
 							<tr>
@@ -444,8 +515,48 @@ class MailDispatcher{
 						<td colspan="4">
 							<table class="table_1">
 								<tr class="bordeCentro">
-									<th>Ingresa tu contraseña provisional<br>y cambia tu contraseña</th>
-									<th><a href="http://85.187.158.12/moodle/dinapage/LoginPasswordChange.php"><img src="cid:imagen_mano" alt=""><br>Clic aquí</a></th>
+									<th>Instrucciones pasos a seguir (cambia tu contraseña)</th>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>1. INGRESA AL SIGUIENTE LINK:</strong><a href="http://dinamicopd.com/moodle/dinapage/LoginPasswordChange.php"><img src="cid:imagen_mano" alt=""><br>Clic aquí</a></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>2. INGRESAR LOS SIGUIENTES DATOS</strong></p>
+										<p><strong>Nombre de usuario / email: </strong>'.$userName.'</p>
+										<p><strong>Contraseña: </strong>'.$password.'</p>
+										<br><br>
+										<i><strong>Nota: </strong>se aconseja copiar y pegar las credenciales.</i>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>3. DAR CLIC EN INGRESAR</strong></p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p><strong>4. CAMBIAR CONTRASEÑA DEBE TENER LAS SIGUIENTES CONDICIONES</strong></p>
+										<ul>
+											<li>La Contraseña tiene que estar compuesta de 8 caracteres.</li>
+											<li>Debe tener una letra en Mayúscula.</li>
+											<li>Debe tener una letra en Minúscula.</li>
+											<li>Debe tener un número.</li>
+											<li>Debe tener un caracter no alfanúmerico.</li>
+										<ul>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>
+											Listo ya después de cambiar la contraseña, pueden ingresar normalmente a la plataforma ingresando a la pagina principal de Dinámico. <a href="http://dinamicopd.com"><img src="cid:imagen_mano" alt=""><br>Clic aquí</a>
+										</p>
+										<p>
+											le das clic en "DYNAMIC MOODLE" y luego en "iniciar sesión"
+										</p>
+									</td>
 								</tr>
 							</table>
 						</td>

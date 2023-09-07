@@ -23,6 +23,8 @@ $City = trim($_POST["City"]);
 $Colegio = $_POST['Codigo_Colegio'];
 $Curso = $_POST['field_name'];
 $Sigla = $_POST['field_name2'];
+$Asesor = $_POST['Asesor'];
+$registro = $_POST['Registro'];
 $Perfil = trim($_POST["Perfil"]);
 
 // buscar codigo de licencia libre y generar contraseña
@@ -40,14 +42,6 @@ if ($result->num_rows > 0) {
   }
 
 $password = md5($codigoDocente);
-
-// Verificar cursos
-$cursoIds = implode(',', $Curso);
-$verificar_cursos = mysqli_query($link, "SELECT * FROM Course WHERE CourseId IN ($cursoIds)");
-if(mysqli_num_rows($verificar_cursos) != count($Curso)){
-    echo "Algunos de los cursos seleccionados no son válidos, por favor actualice la página";
-    return;
-}
 
 // Verificar email
 $verificar = mysqli_query($link, "SELECT * FROM User WHERE Email = '$Email'");
@@ -90,6 +84,15 @@ if (mysqli_num_rows($verificar_usuario) > 0) {
     }
 }
 
+// actualizar asesor
+
+$sql_asesor = "UPDATE PreDocentes SET asesor = '$Asesor' WHERE Id_preDocente = $registro";
+if (mysqli_query($link, $sql_asesor)) {
+    echo "Registro actualizado exitosamente.";
+} else {
+    echo "Error al actualizar el registro: " . mysqli_error($link);
+}
+
 // Insertar usuario
 $insertar = "INSERT INTO User(FirstName, MiddleName, LastName, SecondLastName, City, Email, UserName, Password, Phone, Rol) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt_user = mysqli_prepare($link, $insertar);
@@ -119,8 +122,7 @@ for ($i=0;$i<count($Curso);$i++){
     $codGrupo = generarPassword($link, $verificar_Colegio);
     buscarCurso($link, $verificar_Cursos);
     $courseNameFound = buscarCurso($link, $verificar_Cursos);
-    $fullnamegroup = str_replace(' ', '', $courseNameFound);
-    $fullnamegroup = $userName.".".$fullnamegroup.".".$verificar_Sigla;
+    $fullnamegroup = $userName.".".$i.".".$verificar_Sigla;
     $fullnamegroup = mb_strtolower($fullnamegroup, 'UTF-8');
 
     $sql_Enrolment = "INSERT INTO Enrolment (UserId,CourseId,CourseName,GroupCode,GroupFullName,GroupKey) VALUES (?,?,?,?,?,?)";
@@ -268,7 +270,7 @@ chdir($old_path);
 
 
 $mailSender = new MailDispatcher(); 
-$mailSender->sendEmaiToTeacher($Email, $idTeacher, $userName, $codigoDocente);
+$mailSender->sendEmaiToTeacher($Email, $idTeacher, $userName, $codigoDocente, $Rol);
 forcePasswordChange($Email);
 ActivateAccount($Email);
 
