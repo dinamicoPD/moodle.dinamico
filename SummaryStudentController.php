@@ -11,6 +11,8 @@
     exit;
     }
     $idStudent = $_SESSION["studentId"];
+    $unencodedPassword = $_SESSION["unencodedPassword"];
+    $laLicencia = $_SESSION["laLicencia"];
     //$idStudent = 30;
     
     //Take the data from the teacher provided.

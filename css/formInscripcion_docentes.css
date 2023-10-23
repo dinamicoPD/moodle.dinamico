@@ -1,0 +1,162 @@
+:root {
+    --morado_1: #E9D7FF;
+    --morado_2: #994992;
+    --morado_3: #4f4994;
+    --morado_4: #2C2359;
+    --blanco_1: #ffffff;
+    --blanco_2: rgba(255, 255, 255, 0.15);
+    --naranja_1: #F7931E;
+    --naranja_2: #F9A94B;
+    --verde_1: #90BD1F;
+    --verde_2: #77932B;
+}
+
+#particles-js{
+    background-color: var(--morado_1);
+}
+
+.contenedor{
+    background: var(--morado_2);
+    background: linear-gradient(163deg, var(--morado_2) 0%, var(--morado_3) 100%);
+    border: 0.3vw solid var(--morado_4);
+}
+
+.contenedor_2{
+    background: var(--morado_2);
+    background: linear-gradient(163deg, var(--morado_2) 0%, var(--morado_3) 100%);
+    border: 0.3vw solid var(--morado_4);
+}
+
+.formContenedor{
+    background-color: var(--blanco_2);
+}
+
+.mal {
+    color: var(--naranja_1);
+}
+
+.formLabel{
+    color: var(--blanco_1);
+}
+
+.formIco{
+    background-color: var(--morado_4);
+}
+
+.formInput{
+    border: 0.15vw solid var(--morado_4);
+}
+
+#mano {
+    animation: rotate-animation 2s infinite;
+}
+
+@keyframes rotate-animation {
+    0% {
+      transform: rotate(0) translate(0, 0);
+    }
+    50% {
+      transform: rotate(28deg) translate(12%, -14%);
+    }
+    100% {
+        transform: rotate(0) translate(0, 0);
+    }
+}
+
+.obligatorio{
+    color: var(--blanco_1);
+    border-left: 0.15vw solid var(--blanco_1);
+}
+
+.txtInstruccion{
+    color: var(--blanco_1);
+    border-left: 0.15vw solid var(--blanco_1);
+}
+
+.txtInstruccion2{
+    color: var(--blanco_1);
+}
+
+.btnNext{
+    background-color: var(--verde_1);
+    color: var(--blanco_1);
+    border: 0.3vw solid var(--verde_2);
+}
+
+.btnSub{
+    background-color: var(--naranja_1);
+    color: var(--blanco_1);
+    border: 0.3vw solid var(--naranja_2);
+}
+
+.btnCerrar{
+    background-color: var(--naranja_1);
+    color: var(--blanco_1);
+    border: 0.3vw solid var(--naranja_2);
+}
+
+.txtTituloSeccion{
+    color:var(--blanco_1);
+    text-shadow: 0.3vw 0vw 0vw var(--morado_4);
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas:    "titulo correo"
+                            "codigo codigo"
+                            "datos datos"
+                            "telefono telefono"
+                            "institucion institucion"
+                            "asesor asesor"
+                            "cursos cursos";
+}
+
+#titulo{
+    grid-area: titulo;
+}
+
+#correo{
+    grid-area: correo;
+}
+
+#codigo{
+    grid-area: codigo;
+}
+
+#datos{
+    grid-area: datos;
+}
+
+#telefono{
+    grid-area: telefono;
+}
+
+#institucion{
+    grid-area: institucion;
+}
+
+#asesor{
+    grid-area: asesor;
+}
+
+#cursosVinculados{
+    grid-area: cursos;
+}
+
+@media (max-width: 600px){
+    .formulario {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: 1fr;
+        grid-template-areas:    "titulo"
+                                "correo"
+                                "codigo"
+                                "datos"
+                                "telefono"
+                                "institucion"
+                                "asesor"
+                                "cursos";
+    }
+}

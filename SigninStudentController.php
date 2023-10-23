@@ -38,6 +38,8 @@
     } 
     mysqli_stmt_close($stmt);
 
+    
+
     if($_SERVER["REQUEST_METHOD"] != "POST"){
     return;
     }

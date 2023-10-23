@@ -6,6 +6,8 @@ require ('phpqrcode/qrlib.php');
 include('Mailer.php');
 
 // crea caréta temporal para codigo qr
+$dominio = "http://172.18.174.49/moodle";
+//$dominio = "https://dinamicopd.com"
 $DIR = 'temp/';
 if(!file_exists($DIR)){
     mkdir($DIR);
@@ -140,8 +142,7 @@ for ($i=0;$i<count($Curso);$i++){
            $tamanio = 10;
            $level = 'M';
            $frameSize = 2;
-           //$contenido = 'https://dinamicopd.com/moodle/dinapage/LoginSTD.php?d1n4m1c0='.$codGrupo;
-           $contenido = 'http://172.18.174.49/moodle/moodle/dinapage/LoginSTD.php?d1n4m1c0='.$codGrupo;
+           $contenido = $dominio.'/moodle/dinapage/LoginSTD.php?d1n4m1c0='.$codGrupo;
 
            QRcode::png($contenido, $filenameQR_2, $level, $tamanio, $frameSize);
         }
@@ -268,6 +269,12 @@ sleep(3);
 unlink("PlantillaProfesor".$idTeacher.'.csv');
 chdir($old_path);
 
+$filenameQR_change = $filenameQR.'change.png';
+$tamanio2 = 10;
+$level2 = 'M';
+$frameSize2 = 2;
+$contenido2 = $dominio.'/moodle/dinapage/LoginPasswordChange.php?3m4il='.$userName.'&cl4v3='.$codigoDocente;
+QRcode::png($contenido2, $filenameQR_change, $level2, $tamanio2, $frameSize2);
 
 $mailSender = new MailDispatcher(); 
 $mailSender->sendEmaiToTeacher($Email, $idTeacher, $userName, $codigoDocente, $Rol);
@@ -301,7 +308,4 @@ foreach ($contenidoDIR as $elemento) {
 echo "Contenido de la carpeta eliminado exitosamente.";
 
 header("location: VerificacionDocente.php");
-
-
-
 ?>

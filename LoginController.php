@@ -6,6 +6,14 @@ include('SuspendAccount.php');
 
 require_once('../../config-ext.php');
 
+if(isset($_GET['d1n4m1c0'])){
+    $variable1 = $_GET['d1n4m1c0'];
+    // Resto de tu código aquí
+} else {
+    // Manejo del caso cuando las variables están vacías
+    $variable1 = "";
+}
+
 $licencecode = $form_err = $licenceidfound = $statusfound = $typefound = $codlicence_err = $codgroup_err = $groupcode= "";
 
 
@@ -23,7 +31,7 @@ $licencecode  = trim($_POST["licencecode"]);
 $groupcode = trim($_POST["groupcode"]);
 // Check if username is empty
 if(empty(trim($licencecode))){
-    $form_err = "Por favor ingrese el Código de la plantilla.";
+    $form_err = "Por favor ingrese el Código de la cartilla.";
     return;
 }
 
@@ -154,6 +162,7 @@ $_SESSION["UserId"] = $useridfound;
 $_SESSION["Type"] = $typeofoperation;
 $_SESSION["GrpFullName"] = $groupnamefound;
 $_SESSION["GrpId"] = $groupidfound;
+$_SESSION["groupcode"] = $groupcode;
 
 if($statusfound == "O"){
     //A licence for a new user has been provided, so let's redirect to Register a new user.

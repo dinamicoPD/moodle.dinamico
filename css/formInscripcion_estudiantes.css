@@ -1,0 +1,22 @@
+:root {
+    --morado_1: #E9D7FF;
+    --morado_2: #994992;
+    --morado_3: #4f4994;
+    --morado_4: #2C2359;
+    --blanco_1: #ffffff;
+    --blanco_2: rgba(255, 255, 255, 0.15);
+    --naranja_1: #F7931E;
+    --naranja_2: #F9A94B;
+    --verde_1: #90BD1F;
+    --verde_2: #77932B;
+}
+
+#particles-js{
+    background-color: var(--morado_1);
+}
+
+.contenedor{
+    background: var(--morado_2);
+    background: linear-gradient(163deg, var(--morado_2) 0%, var(--morado_3) 100%);
+    border: 0.3vw solid var(--morado_4);
+}

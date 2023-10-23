@@ -1,7 +1,10 @@
 function checkStrength(password){
 	//verify the number of characters
+	var proceder = true;
+
 	if(password.length<8){
 		$("#eightchardiv").removeAttr("style");
+		proceder =  false;
 	}else{
 		$("#eightchardiv").css("display","none");
 	}
@@ -10,31 +13,42 @@ function checkStrength(password){
 		$("#numdiv").css("display","none");
 	}else{
 		$("#numdiv").removeAttr("style");
+		proceder =  false;
 	}
 	if(password.match(/([ña-z])/) ){
 		$("#lcasediv").css("display","none");
 	}else{
 		$("#lcasediv").removeAttr("style");
+		proceder =  false;
 	}
 	if(password.match(/([ÑA-Z])/)){
 		$("#ucasediv").css("display","none");
 	}else{
 		$("#ucasediv").removeAttr("style");
+		proceder =  false;
 	}
 	if (password.match(/([^ña-zÑA-Z0-9_])/)){
 		$("#noalfadiv").css("display","none");
 	}else{
 		$("#noalfadiv").removeAttr("style");
+		proceder =  false;
+	}
+
+	if (proceder == false){
+        $('#password1').addClass('is-invalid');
+    }else{
+		$('#password1').removeClass('is-invalid');
 	}
 }
 function passwordsAreEqual(password1,password2){
 if(password1 === password2){
-		$("#passmissmatchdiv").css("display","none");
+		$('#password2').removeClass('is-invalid');
 	}else{
-		$("#passmissmatchdiv").removeAttr("style");
+		$('#password2').addClass('is-invalid');
 	}
 }
 $(document).ready(function(){
+
 	$('#password1').on('input',function(){
 		checkStrength($('#password1').val());
 		passwordsAreEqual($('#password1').val(),$('#password2').val());

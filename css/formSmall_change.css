@@ -1,0 +1,83 @@
+:root {
+    /* COLORES */
+    --verde1: #77932B;
+    --verde2: #C8E084;
+    --verde4: #8AB323;
+    --blanco1: rgba(70, 83, 9, 0.87);
+    --blanco2: #ffffff;
+    --naranja: #F47001;
+    --naranja2: #F7931E;
+    --textura_1: url(../img/formSmall/fondoChange@3x.png);
+
+    --verde3: #4F611C;
+    --amarillo1: #FFE9BC;
+}
+
+#particles-js{
+    background-color: var(--amarillo1);
+}
+
+.contenedor{
+    background-color: var(--verde1);
+    border: 0.3vw solid var(--verde3);
+    background-image: var(--textura_1);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+}
+
+.contenedorFormulario{
+    background-color: var(--blanco1);
+}
+
+#cuerpo{
+    width: auto;
+    height: 31vw;
+    position: absolute;
+    top: 1vw;
+    left: 4.5vw;
+    animation: rotate-animation 2s infinite;
+}
+
+@keyframes rotate-animation {
+    0% {
+      transform: rotate(0);
+      transform-origin: top center;
+    }
+    50% {
+      transform: rotate(-12deg);
+      transform-origin: top center;
+    }
+    100% {
+       transform: rotate(0);
+       transform-origin: top center;
+    }
+  }
+
+.labelRF{
+    color: var(--blanco2);
+}
+
+.spanRF{
+    background-color: var(--naranja);
+    border: 1px solid var(--naranja);
+}
+
+.inputRF{
+    border: 1px solid var(--naranja);
+}
+
+.invalid-feedback{
+    color: var(--naranja2);
+}
+
+.userIngreso p{
+    color: var(--blanco2);
+    border-left: 0.15vw solid var(--blanco2);
+}
+
+.userIngreso input{
+    background-color: var(--verde4);
+    color: var(--blanco2);
+    border: 0.3vw solid var(--verde1);
+}

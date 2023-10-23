@@ -68,6 +68,14 @@ require_once(dirname(__FILE__).'/SummaryStudentController.php');
                                 <td>Email:</td>
                                 <td><?php echo $Email; ?></td>
                             </tr>
+                            <tr>
+                                <td>Cartilla:</td>
+                                <td><?php echo $unencodedPassword; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Contraseña:</td>
+                                <td><?php echo $laLicencia; ?></td>
+                            </tr>
                         </tbody>
                         <thead class="table-light">
                             <th colspan="2">Informacion de Colegio</th>

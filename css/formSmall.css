@@ -1,0 +1,136 @@
+@font-face {
+    font-family: 'HelveticaLTStd-BoldCondensed';
+    src: url(../font/HelveticaLTStd-BoldCond.otf);
+}
+@font-face {
+    font-family: 'HelveticaLTStd-Condensed';
+    src: url(../font/HelveticaLTStd-Cond.otf);
+}
+
+#particles-js {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 1;
+}
+
+html, body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor{
+    width: 70vw;
+    margin: auto;
+    border-radius: 0.5vw;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "Bienvenida formulario";
+    font-family: 'HelveticaLTStd-BoldCondensed', sans-serif;
+}
+
+.Bienvenida{
+    grid-area: Bienvenida;
+    background-size: 100%;
+    background-position: center;
+}
+
+.cuerpoAll{
+    width: 86%;
+    margin: auto;
+    height: 33vw;
+    position: relative;
+}
+
+.formulario{
+    grid-area: formulario;
+}
+
+.spanRF svg{
+    width: 1.5vw;
+}
+
+
+.labelRF{
+    font-size: 1.6vw;
+}
+
+.spanRF{
+    height: 2.5vw !important;
+}
+
+.inputRF, .ojo{
+    height: 2.5vw !important;
+    font-size: 1vw;
+}
+
+.contenedorFormulario{
+    width: 95%;
+    margin: 2.5%;
+    border-radius: 0.5vw;
+    padding: 2.5%;
+}
+
+.contenedorFormulario img{
+    width: 100%;
+}
+
+.userTitle{
+    width: 100%;
+    margin-bottom: 0.6vw;
+}
+
+.userName{
+    width: 100%;
+    margin-bottom: 0.6vw;
+}
+
+.userEmail{
+    width: 100%;
+    margin-bottom: 1.2vw;
+}
+
+.userIngreso{
+    width: 100%;
+}
+
+.invalid-feedback svg{
+    width: 1.5vw;
+}
+
+.invalid-feedback{
+    font-size: 0.8vw;
+}
+
+.no-margenes{
+    margin: 0 !important;
+}
+
+.userIngreso p{
+    display: block;
+    text-align: left;
+    font-size: 0.8vw;
+}
+
+.userIngreso input{
+    border: none;
+    padding: 0.3vw 0.6vw;
+    font-size: 1.2vw;
+    border-radius: 0.1vw;
+    float: right;
+}
+
+.ojo{
+    border-radius: 0 0.1vw 0.1vw 0;
+    background-color: var(--naranja);
+    border: 1px solid var(--naranja);
+}
+
+.ojo svg{
+    color: var(--blanco2);
+}

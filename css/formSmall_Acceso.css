@@ -1,0 +1,110 @@
+:root {
+    /* COLORES */
+    --azul1: #86D5FF;
+    --azul2: #172C7D;
+    --azul3: #B0E1FC;
+    --azul4: #5689C8;
+    --amarillo1: rgba(255, 191, 108, 0.9);
+    --cafe1: #9B532B;
+
+    --verde1: #77932B;
+    --verde2: #C8E084;
+    --verde3: #4F611C;
+    --verde4: #90BD1F;
+
+    --blanco2: #ffffff;
+    --textura_1: url(../img/formSmall/fondoLoginChange.png);
+}
+
+.contenedor{
+    background-color: var(--azul4);
+    background-image: var(--textura_1);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    border: 0.3vw solid var(--azul2);
+}
+
+.contenedorFormulario{
+    background-color: var(--amarillo1);
+    position: relative;
+    z-index: 4;
+}
+
+#particles-js{
+    background-color: var(--azul3);
+}
+
+#escritorio{
+    position: absolute;
+    width: 100%;
+    top: 1vw;
+    z-index: 3;
+}
+
+/* figura del mico */
+#cuerpo{
+    position: absolute;
+    height: 26vw;
+    bottom: -2vw;
+    left: -1.5vw;
+    z-index: 2;
+    clip-path: inset(0 0 9% 0);
+}
+
+#mano{
+    height: 2.5vw;
+    position: absolute;
+    z-index: 1;
+    left: 8vw;
+    bottom: 9vw;
+    animation: rotate-animation 2s infinite;
+}
+
+@keyframes rotate-animation {
+    0% {
+      transform: rotate(0);
+      transform-origin: bottom left;
+    }
+    50% {
+      transform: rotate(-12deg);
+      transform-origin: bottom left;
+    }
+    100% {
+       transform: rotate(0);
+       transform-origin: bottom left;
+    }
+  }
+
+.labelRF{
+    color: var(--cafe1);
+    margin-top: 1vw;
+}
+
+.spanRF{
+    background-color: var(--cafe1);
+    border: 1px solid var(--cafe1);
+}
+
+.inputRF{
+    border: 1px solid var(--cafe1);
+}
+
+.invalid-feedback{
+    color: var(--cafe1);
+}
+
+.userIngreso p{
+    color: var(--cafe1);
+    border-left: 0.15vw solid var(--cafe1);
+}
+
+.userIngreso input{
+    background-color: var(--verde4);
+    color: var(--blanco2);
+    border: 0.3vw solid var(--verde1);
+}
+
+.userTitle{
+    margin-bottom: 1vw;
+}

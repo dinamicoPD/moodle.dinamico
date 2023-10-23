@@ -77,35 +77,46 @@ if ($result->num_rows > 0) {
             echo "si";
             $link->close();
 
-    require 'phpMailer/Exception.php';
-    require 'phpMailer/PHPMailer.php';
-    require 'phpMailer/SMTP.php';
+        require 'phpMailer/Exception.php';
+        require 'phpMailer/PHPMailer.php';
+        require 'phpMailer/SMTP.php';
 
-    $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
 
     try {
         //Server settings
         $mail->SMTPDebug = 0;                      // Enable verbose debug output
         $mail->isSMTP();                                            // Send using SMTP
+        $mail->CharSet 	  = 'UTF-8';
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
         $mail->Username   = MAIL_USER;                     // SMTP username
         $mail->Password   = MAIL_PASSWORD;                               // SMTP password
         $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-        $ruta_img = 'img/logo 2.png';
-        $ruta_img2 = 'img/dinamicoEscritorio.png';
+        
+        $cssJD = '
+        .tabla{width:450px;margin:auto;border-collapse:collapse;border:none;text-align:center;}table *{margin:0;padding:0;box-sizing:border-box;}.SkyBlue{background-color:#81D4E7;}.SkyBlueClaro{background-color:#CEF2F8;}.PaleGreen{background-color:#BDE298;}.PaleGreenClaro{background-color:#E5F1D6;}.Khaki{background-color:#FAD263;}.KhakiClaro{background-color:#FDDE90;}.Moccasin{background-color:#FFEBBA;}.oscuro{background-color:#424242;}.MediumPurple{background-color:#9AAFFE;}.MediumPurpleClaro{background-color:#D1DBFE;}.Blanco{background-color:#ffffff;}.fontBlanco{color:#ffffff;}.fontNegro{color:#424242;}.fontAzul{color:#368A9B;}.fontRojo{color:#F6746D;}.fontPoppins{font-family:"Poppins",sans-serif;}.fontRoboto{font-family:"Roboto",sans-serif;}.fontRobotoMono{font-family:"Roboto Mono",monospace;}.titulo{font-weight:700;padding:9px 0px;font-size:26px;}.span{background-color:#F6746D;}.tabla img{display:block;margin:auto;}.tablax4 td{width:112.5px;}.tablaX8 td{width:56.25px;}.tablaX6 td{width:75px;}.grupoTitulo{margin-top:17px;}.img80{width:80%;}.img100{width:100%;}.img50{width:50%;}.img30{width:30%;}.pestana{border-radius:12px 12px 0 0;font-size:12px;}.periodico{background-color:#EADED4;font-size:12px;padding:9px 6px 9px 6px;}.margenesDP{padding:9px 0px;}.carpetas{font-size:12px;padding:9px 6px 9px 6px;}.servicios{padding:5px;text-decoration:none;cursor:pointer;display:block;}.pantalla{width:100%;padding:10px 34px;}.play{width:35px;height:35px;border-radius:50%;padding:9.5px 0px 0px 2.5px;}.play img{width:15px;height:15px;}.progreso{width:90%;margin:auto;padding:3px 0;}.btnReproducir{width:60%;margin:auto;padding:3px 0;}.footer1{width:95%;margin:auto;font-size:10px;text-align:left;}.footer1 .social{width:15px;}.footer1 .social img{width:10px;}.footer1 .logo{width:49px;}.footer1 .logo img{width:40px;padding-right:5px;border-right:1px solid #ffffff;}.altoMensaje{height:215px;}.inputLicencia{width:90%;margin:auto;border:2px solid #424242;height:30px;border-radius:20px;margin:5px 0;}.bordeRedondeado{border-radius:3px;}.bordeSuperior{border-top:6px solid #ffffff;}.pasos1{padding:6.5px 3px;margin-right:3px;line-height:16px;}
+        ';
 
-        $ruta_fb = 'img/facebook.png';
-        $ruta_yt = 'img/youtube.png';
-        $ruta_in = 'img/instagram.png';
+        $ruta_img = 'img/correos/Recurso_14.png';
 
-        $mail->addEmbeddedImage($ruta_img, 'imagen_logo');
-        $mail->addEmbeddedImage($ruta_img2, 'imagen_mico');
+        $ruta_yt = 'img/correos/youtube.png';
+		$ruta_msm = 'img/correos/email.png';
+        $ruta_wpp = 'img/correos/wpp.png';       		
+        $ruta_in = 'img/correos/instagram.png';
 
-        $mail->addEmbeddedImage($ruta_fb, 'imagen_fb');
-        $mail->addEmbeddedImage($ruta_yt, 'imagen_yt');
-        $mail->addEmbeddedImage($ruta_in, 'imagen_in');
+	    $ruta_logo = 'img/correos/el_logo.png';
+
+        $mail->addEmbeddedImage($ruta_img, 'imagen_img');
+
+		$mail->addEmbeddedImage($ruta_yt, 'imagen_yt');
+		$mail->addEmbeddedImage($ruta_msm, 'imagen_msm');
+		$mail->addEmbeddedImage($ruta_wpp, 'imagen_wpp');
+		$mail->addEmbeddedImage($ruta_in, 'imagen_in');
+
+	    $mail->addEmbeddedImage($ruta_logo, 'imagen_logo');
+
         //Recipients
         $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle'); // quien envia
         $mail->addAddress($email);        // Name is optional
@@ -113,96 +124,54 @@ if ($result->num_rows > 0) {
         
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Codigo de verificacion';
-        //$mail->Body     = "<H1>Codigo de verificacion</H1><br>";
-        //$mail->Body    .= "<b>Codigo: </b>".$codigo." <br>";
-        //$mail->Body    .= '<p>Transcriba este codigo en el formulario</p>';
-
-        $css = "
-        table{
-            width: 400px;
-            font-family: Georgia, serif;
-            text-align: center;
-            margin: auto;
-            border-collapse: collapse;
-            border: none;
-        }
-    
-        thead th{
-            background-color: #1F1F1F;
-            color: #ffffff;
-            padding: 10px;
-        }
-    
-        .img {
-            width: 200px;
-            padding: 6px;
-        }
-    
-        .img2 {
-            width: 35px;
-        }
-    
-        .txtTitulo{
-            color: #49C025;
-            font-weight: bold;
-        }
-    
-        .txt{
-            color: #CE9178;
-            font-weight: bold;
-        }
-    
-        .pie{
-           background-color: #A2A2A2;
-           color: #ffffff;
-        }
-    
-        .pie2{
-            font-size: 10px;
-            background-color: #1F1F1F;
-            color: #8C8C8C;
-        }
-        ";
 
         $mail->Body = '
         <html>
-            <head>
-                <style>'.$css.'</style>
-            </head>
+			<head>
+				<link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Roboto+Mono:wght@300;700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+				<style>'.$cssJD.'</style>
+			</head>
             <body>
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="4">VERIFICA TU CORREO ELECTRÓNICO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="3"><img class="img" src="cid:imagen_mico" alt=""></td>
-                            <td  colspan="3" class="txtTitulo">Su código de<br>verificación es</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="txt">'.$codigo.'</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Su código vence el<br>'.$nueva_fecha.'</td>
-                        </tr>
-                        <tr class="pie">
-                            <td><a href="http://dinamicopd.com/"><img class="img" src="cid:imagen_logo" alt=""></a></td>
-                            <td><a href="https://www.facebook.com/dinamicopd"><img class="img2" src="cid:imagen_fb" alt=""></a></td>
-                            <td><a href="https://www.youtube.com/channel/UCPSLG3t9l1DO1tEu9NjdK8A"><img class="img2" src="cid:imagen_yt" alt=""></a></td>
-                            <td><a href="https://www.instagram.com/dinamicopd/"><img class="img2" src="cid:imagen_in" alt=""></a></td>
-                        </tr>
-                        <tr class="pie2">
-                            <td colspan="4">
-                                <p>
-                                    Cra 2E # 73 - 25<br>
-                                    3123000100 | 3123010101<br>
-                                    dinamicopdadm@gmail.com
-                                </p>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="tabla" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td colspan="2" class="titulo fontPoppins oscuro fontBlanco">Verificación <span class="span">&nbsp;correo electrónico&nbsp;</span></td>
+                    </tr>
+                    <tr class="Moccasin">
+                        <td>
+                            <img class="img80" src="cid:imagen_img" alt="">
+                        </td>
+                        <td class="fontPoppins fontNegro">
+                            <p><strong>Tu código de<br>verificación es:</strong></p>
+                            <p class="inputLicencia Blanco">'.$codigo.'</p>
+                            <p><strong>Tu código de vence el:</strong></p>
+                            <p class="fontPoppins fontRojo">'.$nueva_fecha.'</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="oscuro fontBlanco fontRoboto">
+                            <table class="footer1 margenesDP">
+                                <tr>
+                                    <td class="logo" rowspan="3"><img src="cid:imagen_logo" alt=""></td>
+                                </tr>
+                                <tr>
+                                    <td class="social"><img src="cid:imagen_yt" alt=""></td>
+                                    <td>Dinámico Pedagogía y Diseño</td>
+                                    <td>&nbsp;</td>
+                                    <td class="social"><img src="cid:imagen_wpp" alt=""></td>
+                                    <td>312 300 0100 - 312 301 0101</td>
+                                </tr>
+                                <tr>
+                                    <td class="social"><img src="cid:imagen_msm" alt=""></td>
+                                    <td>dinamicopdadm@gmail.com</td>
+                                    <td>&nbsp;</td>
+                                    <td class="social"><img src="cid:imagen_in" alt=""></td>
+                                    <td>dinamicopd</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
             </body>
         </html>
@@ -242,123 +211,92 @@ if ($result->num_rows > 0) {
         //Server settings
         $mail->SMTPDebug = 0;                      // Enable verbose debug output
         $mail->isSMTP();                                            // Send using SMTP
+        $mail->CharSet 	  = 'UTF-8';
         $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
         $mail->Username   = MAIL_USER;                     // SMTP username
         $mail->Password   = MAIL_PASSWORD;                               // SMTP password
         $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
         $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
-        $ruta_img = 'img/logo 2.png';
-        $ruta_img2 = 'img/dinamicoEscritorio.png';
+        
+        $cssJD = '
+        .tabla{width:450px;margin:auto;border-collapse:collapse;border:none;text-align:center;}table *{margin:0;padding:0;box-sizing:border-box;}.SkyBlue{background-color:#81D4E7;}.SkyBlueClaro{background-color:#CEF2F8;}.PaleGreen{background-color:#BDE298;}.PaleGreenClaro{background-color:#E5F1D6;}.Khaki{background-color:#FAD263;}.KhakiClaro{background-color:#FDDE90;}.Moccasin{background-color:#FFEBBA;}.oscuro{background-color:#424242;}.MediumPurple{background-color:#9AAFFE;}.MediumPurpleClaro{background-color:#D1DBFE;}.Blanco{background-color:#ffffff;}.fontBlanco{color:#ffffff;}.fontNegro{color:#424242;}.fontAzul{color:#368A9B;}.fontRojo{color:#F6746D;}.fontPoppins{font-family:"Poppins",sans-serif;}.fontRoboto{font-family:"Roboto",sans-serif;}.fontRobotoMono{font-family:"Roboto Mono",monospace;}.titulo{font-weight:700;padding:9px 0px;font-size:26px;}.span{background-color:#F6746D;}.tabla img{display:block;margin:auto;}.tablax4 td{width:112.5px;}.tablaX8 td{width:56.25px;}.tablaX6 td{width:75px;}.grupoTitulo{margin-top:17px;}.img80{width:80%;}.img100{width:100%;}.img50{width:50%;}.img30{width:30%;}.pestana{border-radius:12px 12px 0 0;font-size:12px;}.periodico{background-color:#EADED4;font-size:12px;padding:9px 6px 9px 6px;}.margenesDP{padding:9px 0px;}.carpetas{font-size:12px;padding:9px 6px 9px 6px;}.servicios{padding:5px;text-decoration:none;cursor:pointer;display:block;}.pantalla{width:100%;padding:10px 34px;}.play{width:35px;height:35px;border-radius:50%;padding:9.5px 0px 0px 2.5px;}.play img{width:15px;height:15px;}.progreso{width:90%;margin:auto;padding:3px 0;}.btnReproducir{width:60%;margin:auto;padding:3px 0;}.footer1{width:95%;margin:auto;font-size:10px;text-align:left;}.footer1 .social{width:15px;}.footer1 .social img{width:10px;}.footer1 .logo{width:49px;}.footer1 .logo img{width:40px;padding-right:5px;border-right:1px solid #ffffff;}.altoMensaje{height:215px;}.inputLicencia{width:90%;margin:auto;border:2px solid #424242;height:30px;border-radius:20px;margin:5px 0;}.bordeRedondeado{border-radius:3px;}.bordeSuperior{border-top:6px solid #ffffff;}.pasos1{padding:6.5px 3px;margin-right:3px;line-height:16px;}
+        ';
 
-        $ruta_fb = 'img/facebook.png';
-        $ruta_yt = 'img/youtube.png';
-        $ruta_in = 'img/instagram.png';
-
-        $mail->addEmbeddedImage($ruta_img, 'imagen_logo');
-        $mail->addEmbeddedImage($ruta_img2, 'imagen_mico');
-
-        $mail->addEmbeddedImage($ruta_fb, 'imagen_fb');
-        $mail->addEmbeddedImage($ruta_yt, 'imagen_yt');
-        $mail->addEmbeddedImage($ruta_in, 'imagen_in');
         //Recipients
         $mail->setFrom('dinamico.moodle@gmail.com', 'dinamicoMoodle'); // quien envia
         
         $mail->addAddress($email);        // Name is optional
 
+        $ruta_img = 'img/correos/Recurso_14.png';
+
+        $ruta_yt = 'img/correos/youtube.png';
+		$ruta_msm = 'img/correos/email.png';
+        $ruta_wpp = 'img/correos/wpp.png';       		
+        $ruta_in = 'img/correos/instagram.png';
+
+	    $ruta_logo = 'img/correos/el_logo.png';
+
+        $mail->addEmbeddedImage($ruta_img, 'imagen_img');
+
+		$mail->addEmbeddedImage($ruta_yt, 'imagen_yt');
+		$mail->addEmbeddedImage($ruta_msm, 'imagen_msm');
+		$mail->addEmbeddedImage($ruta_wpp, 'imagen_wpp');
+		$mail->addEmbeddedImage($ruta_in, 'imagen_in');
+
+	    $mail->addEmbeddedImage($ruta_logo, 'imagen_logo');
+
         
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Codigo de verificacion';
-        //$mail->Body     = "<H1>Codigo de verificacion</H1><br>";
-        //$mail->Body    .= "<b>Codigo: </b>".$codigo." <br>";
-        //$mail->Body    .= '<p>Transcriba este codigo en el formulario</p>';
-
-        $css = "
-        table{
-            width: 400px;
-            font-family: Georgia, serif;
-            text-align: center;
-            margin: auto;
-            border-collapse: collapse;
-            border: none;
-        }
-    
-        thead th{
-            background-color: #1F1F1F;
-            color: #ffffff;
-            padding: 10px;
-        }
-    
-        .img {
-            width: 200px;
-            padding: 6px;
-        }
-    
-        .img2 {
-            width: 35px;
-        }
-    
-        .txtTitulo{
-            color: #49C025;
-            font-weight: bold;
-        }
-    
-        .txt{
-            color: #CE9178;
-            font-weight: bold;
-        }
-    
-        .pie{
-           background-color: #A2A2A2;
-           color: #ffffff;
-        }
-    
-        .pie2{
-            font-size: 10px;
-            background-color: #1F1F1F;
-            color: #8C8C8C;
-        }
-        ";
 
         $mail->Body = '
         <html>
-            <head>
-                <style>'.$css.'</style>
-            </head>
+			<head>
+				<link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&family=Roboto+Mono:wght@300;700&family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+				<style>'.$cssJD.'</style>
+			</head>
             <body>
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="4">VERIFICA TU CORREO ELECTRÓNICO</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td rowspan="3"><img class="img" src="cid:imagen_mico" alt=""></td>
-                            <td  colspan="3" class="txtTitulo">Su código de<br>verificación es</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="txt">'.$codigo.'</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Su código vence el<br>'.$nueva_fecha.'</td>
-                        </tr>
-                        <tr class="pie">
-                            <td><a href="http://dinamicopd.com/"><img class="img" src="cid:imagen_logo" alt=""></a></td>
-                            <td><a href="https://www.facebook.com/dinamicopd"><img class="img2" src="cid:imagen_fb" alt=""></a></td>
-                            <td><a href="https://www.youtube.com/channel/UCPSLG3t9l1DO1tEu9NjdK8A"><img class="img2" src="cid:imagen_yt" alt=""></a></td>
-                            <td><a href="https://www.instagram.com/dinamicopd/"><img class="img2" src="cid:imagen_in" alt=""></a></td>
-                        </tr>
-                        <tr class="pie2">
-                            <td colspan="4">
-                                <p>
-                                    Cra 2E # 73 - 25<br>
-                                    3123000100 | 3123010101<br>
-                                    dinamicopdadm@gmail.com
-                                </p>
-                            </td>
-                        </tr>
-                    </tbody>
+                <table class="tabla" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td colspan="2" class="titulo fontPoppins oscuro fontBlanco">Verificación <span class="span">&nbsp;correo electrónico&nbsp;</span></td>
+                    </tr>
+                    <tr class="Moccasin">
+                        <td>
+                            <img class="img80" src="cid:imagen_img" alt="">
+                        </td>
+                        <td class="fontPoppins fontNegro">
+                            <p><strong>Tu código de<br>verificación es:</strong></p>
+                            <p class="inputLicencia Blanco">'.$codigo.'</p>
+                            <p><strong>Tu código de vence el:</strong></p>
+                            <p class="fontPoppins fontRojo">'.$nueva_fecha.'</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="oscuro fontBlanco fontRoboto">
+                            <table class="footer1 margenesDP">
+                                <tr>
+                                    <td class="logo" rowspan="3"><img src="cid:imagen_logo" alt=""></td>
+                                </tr>
+                                <tr>
+                                    <td class="social"><img src="cid:imagen_yt" alt=""></td>
+                                    <td>Dinámico Pedagogía y Diseño</td>
+                                    <td>&nbsp;</td>
+                                    <td class="social"><img src="cid:imagen_wpp" alt=""></td>
+                                    <td>312 300 0100 - 312 301 0101</td>
+                                </tr>
+                                <tr>
+                                    <td class="social"><img src="cid:imagen_msm" alt=""></td>
+                                    <td>dinamicopdadm@gmail.com</td>
+                                    <td>&nbsp;</td>
+                                    <td class="social"><img src="cid:imagen_in" alt=""></td>
+                                    <td>dinamicopd</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
             </body>
         </html>

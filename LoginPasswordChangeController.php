@@ -6,6 +6,16 @@ session_start();
 //require_once(__ROOT__.'/config-ext.php');
 require_once('../../config-ext.php');
 
+if(isset($_GET['3m4il']) && isset($_GET['cl4v3'])){
+    $variable1 = $_GET['3m4il'];
+    $variable2 = $_GET['cl4v3'];
+    // Resto de tu código aquí
+} else {
+    // Manejo del caso cuando las variables están vacías
+    $variable1 = "";
+    $variable2 = "";
+}
+
 $username_err = $password_err = $id = $password = $passwordfound= $usernamefound = "";
 
 // Processing form data when form is submitted
@@ -18,12 +28,12 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 // Check if username is empty
 if(empty(trim($username))){
-    $username_err = "Por favor ingrese su E-mail o Nombre de Usuario.";
+    $username_err = "is-invalid";
     return;
 } 
 // Check if password is empty
 if(empty(trim($_POST["password"]))){
-    $password_err = "Por favor ingrese Constraseña.";
+    $password_err = "is-invalid";
     return;
 } else{
     $password = trim($_POST["password"]);
@@ -43,18 +53,18 @@ if($stmt = mysqli_prepare($link, $sql)){
             $stmt->bind_result($id,$usernamefound,$passwordfound);
             $stmt->fetch();
          }else if (mysqli_stmt_num_rows($stmt)>1){
-            $username_err="Problemas de autenticación, contacte al administrador";
+            $username_err="is-invalid";
             return;
          }else{
-            $password_err="Verifique Nombre de Usuario y Contraseña";
+            $password_err="is-invalid";
             return;
          }
     }else{
-        $username_err="Error con la Base de Datos, contacte al administrador";
+        $username_err="is-invalid";
         return;
     }
 }else{
-        $username_err="Error con la Base de Datos, contacte al administrador";
+        $username_err="is-invalid";
         return;
 }
 
@@ -70,7 +80,7 @@ if($passwordfound == md5($password)){
     // Redirect user to ChangePassword
     header("location: PasswordChange.php");
 }else{
-    $password_err="Verifique Nombre de Usuario y Contraseña";
+    $password_err="is-invalid";
 }
 mysqli_stmt_close($stmt);
 mysqli_close($link);

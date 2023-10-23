@@ -1,443 +1,394 @@
 <?php
-require_once(dirname(__FILE__).'/SigninStudentController.php');
+//require_once(dirname(__FILE__).'/SigninStudentController.php');
+require_once('inscripcionColegio.php');
+require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
 ?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Inscripcion | Dinámico Pedagogia y Diseño</title>
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <!--bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/styleFormPass.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | Dinámico Pedagogía y Diseño</title>
+    <link rel="icon" href="img/cara.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/8_0_1_normalize.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap_5_3_0_min.css">
+    <link rel="stylesheet" href="css/getbootstrap.com_docs_5.3_assets_css_docs.css">
+    <link rel="stylesheet" href="css/styleForm.css" type="text/css">
 
-	<script
-      src="https://code.jquery.com/jquery-3.5.1.slim.js"
-      integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM="
-      crossorigin="anonymous"></script>
-	<script src="js/jquery-3.5.1.min.js"></script>
-	<script src="js/functions.js"></script>
+    <!-- https://sweetalert.js.org/guides/ -->
+	<script src="js/sweetAlert/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="css/sweetAlert/sweetalert2.min.css">
 
-	<!-- https://sweetalert.js.org/guides/ -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- 
-    <!--tipografia-->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway&display=swap" rel="stylesheet">
-    <!--particulas-->
-    <link rel="stylesheet" href="css/styleParticulas.css">
-	<script src="//code.jivosite.com/widget/K8kniJJst9" async></script>
-	<style>
-		.modal {
-		display:    none;
-		position:   fixed;
-		z-index:    1000;
-		top:        0;
-		left:       0;
-		height:     100%;
-		width:      100%;
-		background: rgba( 255, 255, 255, .8 ) 
-					url('img/FhHRx.gif') 
-					50% 50% 
-					no-repeat;
-		}
-		body.loading .modal {
-			overflow: hidden;   
-		}
-		body.loading .modal {
-			display: block;
-		}
-	</style>
 </head>
-<body>
-<!--particulas-->
-<div id="particles-js"></div>
-<div class="contenedor">
-    <div class="container">
-		<div class="row">
-			<div class="col-12">
-				<p class="text-center"><strong class="h1">¡Hola Dinamigo!</strong></p>
-				<p class="text-center"><strong class="h2">Inscripción Estudiante</strong></p>
-			</div>
-		</div> <!-- fin encabezado -->
-		<br><br>
-			<div class="cont_pest">		
-			<ul class="select_main">
-				<li>
-					<input type="radio" name="select_main" id="select_1" class="main_select_s" checked>
-					<div class="select_content">
-						<div class="row">
-							<div class="col-12">
-								<p class="text-center"><small class="text-muted h5">Información de Grupo y Curso</small></p><br>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col">
-								<div class="table-responsive">
-								<table class="table text-center">
-									<thead class="table-light">
-									<tr>
-										<th scope="col">Profesor</th>
-										<th scope="col">Nombre del Curso</th>
-										<th scope="col">Grupo</th>
-									</tr>
-									</thead>
-									<tbody>
-									<tr>
-										<td><?php echo $TeacherCompleteName ?></td>
-										<td><?php echo $CourseName ?></td>
-										<td><?php echo $GroupName ?></td>
-									</tr>
-									</tbody>
-								</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="radio" name="select_main" id="select_2" class="main_select_s">
-					<div class="select_content">
-						<div class="row">
-							<div class="col-12">
-								<p class="text-center"><small class="text-muted h5">Ingrese correo electrónico</small></p><br>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<label class="form-label">Correo Electrónico Acudiente <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-											<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-										</svg>
-									</span>
-									<input type="email" required class="form-control" placeholder="Ej. micorreo@micorreo.com" autocomplete="off" id="Email_1" onchange="correoUno()">
-								</div>
-								<span class="obligatorio" id="correo_no">No pertenece a un correo electrónico</span>
-							</div>
-						</div>
-						<div class="row">
-							
-								<div class="col-12">
-									<label class="form-label">Repite Correo Electrónico Acudiente <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-									<div class="input-group mb-2">
-										<span class="input-group-text">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-												<path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-											</svg>
-										</span>
-										<input type="email" required class="form-control" placeholder="Ej. micorreo@micorreo.com" autocomplete="off" id="Email_2" onchange="correoUno()">
-									</div>
-								</div>
-								<span class="obligatorio" id="correo_diferente">Los correos no son iguales</span>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="radio" name="select_main" id="select_3" class="main_select_s">
-					<div class="select_content">
-						<div class="row">
-							<div class="col-12">
-								<p class="text-center"><small class="text-muted h5">Verificación de correo<br>Ingrese el codigo enviado a su correo</small></p><br>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col input-group mb-3">
-								<input class="btn btn-outline-secondary" type="submit" id="submit-btn" value="Enviar codigo" onclick="enviacodigo()"></input>
-								<input class="form-control passClave" type="text" id="cod">
-							</div>		
-						</div>
+<body class="fondoCielo" id="contenedor">
+<form  id="inscripciondocenteForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div class="bg-danger text-white"><?php echo $form_err;?></div>    
+    <section id="piso_1">
+        <div class="titleForm">
+            <img src="img/fomrLarge/tituloSTD.png" alt="">
+        </div>
+        <div class="flechita hover">
+            <img onclick="down1(2);" src="img/fomrLarge/flecha.png" alt="">
+        </div>
+    </section>
+    <section id="piso_2">
+        <img id="zzz" src="img/fomrLarge/zzz.png" alt="">
+        <div class="formStyle">
+            <div class="tituloForm">
+                <h3>RESUMEN DEL REGISTRO</h3>
+                <input type="hidden" name="licenceId" id="licenceId" value="<?php echo $IdLicenceToChange ?>">
+                <input type="hidden" name="idColegio" id="idColegio" value="<?php echo $numero ?>">
+                <input type="hidden" name="IdGroupFound" id="IdGroupFound" value="<?php echo $IdGroupFound ?>">
+            </div>
+            <!---->
+            <label for="nombreDocente" class="form-label">Nombre del docente</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                </span>
+                <input type="text" name="TeacherCompleteName" class="form-control" id="nombreDocente" placeholder=" Nombre del docente" value="<?php echo $TeacherCompleteName ?>" readonly> <!--readonly-->
+            </div>
+            <!---->
+            <div class="columnasX2">
+                <div class="izquierda">
+                    <label for="nombreCurso" class="form-label">Nombre del curso</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.61 35.97"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M16.29,36h-13A3,3,0,0,1,0,32.73c0-1.79,0-3.59,0-5.39a3.46,3.46,0,0,1,0-.56.57.57,0,0,1,.61-.55c.37,0,.53.25.56.59a5.19,5.19,0,0,1,0,.56v5.25a1.9,1.9,0,0,0,2.11,2.14h26a1.88,1.88,0,0,0,2.08-2.09q0-5.43,0-10.86a1.89,1.89,0,0,0-2.12-2.11q-13,0-25.92,0a1.9,1.9,0,0,0-2.13,2.11v2.45c0,.42-.12.77-.62.76S0,24.67,0,24.29c0-1-.07-2,0-3a2.85,2.85,0,0,1,2.1-2.62.82.82,0,0,0,.69-1,15.11,15.11,0,0,1,1.31-7.44,2.24,2.24,0,0,0,.13-1V2.12a5.28,5.28,0,0,1,.07-1A1.2,1.2,0,0,1,5.62,0C6.82,0,8,0,9.2,0a1.2,1.2,0,0,1,1.26,1.29c0,.58,0,1.17,0,1.75,0,.24-.17.71.18.69s.92-.13,1-.72c0-.42,0-.84,0-1.26A1.6,1.6,0,0,1,13.37,0h5.88A1.6,1.6,0,0,1,21,1.71c0,.39,0,.79,0,1.19,0,.16,0,.35.12.46s.59.48.92.39.11-.46.12-.7c0-.56,0-1.12,0-1.68A1.23,1.23,0,0,1,23.5,0h3.36c1,0,1.4.46,1.41,1.43,0,2.57,0,5.14,0,7.71a2.1,2.1,0,0,0,.14,1,14.55,14.55,0,0,1,1.37,7.35,1,1,0,0,0,.83,1.26,2.73,2.73,0,0,1,2,2.7q.06,5.82,0,11.63a3,3,0,0,1-3,2.92Zm0-17.47h4.06c2.52,0,5,0,7.56,0,.47,0,.73-.08.73-.64a26.38,26.38,0,0,0-.19-3.77A12.23,12.23,0,0,0,15.08,3.86,12,12,0,0,0,6,9.5,13.8,13.8,0,0,0,4,17.68c0,.63.17.84.83.84C8.64,18.49,12.44,18.5,16.25,18.5ZM5.54,7.68a12,12,0,0,1,2-1.85C9.18,5,9.49,3.66,9.27,2.05a1.31,1.31,0,0,1,0-.28c0-.43-.2-.57-.6-.56-.82,0-1.63,0-2.45,0-.52,0-.69.2-.68.71,0,1.54,0,3.08,0,4.61Zm21.52,0v-6c0-.33-.18-.46-.49-.46-.91,0-1.82,0-2.73,0-.36,0-.49.18-.49.52,0,.82,0,1.64,0,2.45a.61.61,0,0,0,.28.54A22.06,22.06,0,0,1,27.06,7.67ZM16.32,1.21H14c-1.12,0-1.31.23-1.17,1.32,0,.33.17.45.5.37a13,13,0,0,1,6,0c.14,0,.32.08.38-.07a2,2,0,0,0,0-1.23c-.07-.34-.37-.38-.67-.38Z"/><path class="blanco" d="M16.31,33.59H7.21A2.33,2.33,0,0,1,4.64,31c0-2.52,0-5.05,0-7.57a2.34,2.34,0,0,1,2.61-2.58q9.08,0,18.14,0A2.34,2.34,0,0,1,28,23.5v2.38c0,.42-.13.79-.61.78s-.59-.39-.59-.79c0-.8,0-1.59,0-2.39s-.42-1.38-1.36-1.38q-9.1,0-18.21,0c-.93,0-1.35.43-1.36,1.38V31c0,1,.41,1.4,1.41,1.4H25.39c1,0,1.37-.41,1.38-1.43,0-.77,0-1.54,0-2.31,0-.43.11-.84.63-.82s.57.41.57.82c0,.89,0,1.77,0,2.66a2.27,2.27,0,0,1-2.34,2.28C22.52,33.6,19.42,33.59,16.31,33.59Z"/><path class="blanco" d="M16.34,24h7.41a4.42,4.42,0,0,1,.63,0c.33.05.59.22.59.58a.53.53,0,0,1-.57.58c-.56,0-.65.28-.63.75a9.84,9.84,0,0,1,0,1.33,1.5,1.5,0,0,1-1.42,1.46,1.53,1.53,0,0,1-1.65-1.21,5.37,5.37,0,0,1-.06-1.6c0-.56-.21-.72-.74-.71-3.59,0-7.18,0-10.77,0H8.5c-.43,0-.86-.07-.85-.59s.43-.61.86-.61Z"/><path class="blanco" d="M16.31,15.8H10.85c-1.09,0-1.57-.49-1.58-1.59s0-2.29,0-3.43.5-1.52,1.56-1.52h3.92c.46,0,1,0,1,.61s-.5.58-.94.59c-1.19,0-2.38,0-3.57,0-.53,0-.77.13-.75.71,0,.93,0,1.86,0,2.8,0,.49.19.64.67.64H21.49c.47,0,.67-.14.66-.64,0-1,0-1.92,0-2.87,0-.51-.21-.65-.67-.64-1.17,0-2.33,0-3.5,0a2.59,2.59,0,0,1-.56,0,.57.57,0,0,1-.54-.62.55.55,0,0,1,.56-.53c1.61,0,3.22,0,4.83,0a1.19,1.19,0,0,1,1.06,1.28c0,1.3,0,2.61,0,3.92a1.28,1.28,0,0,1-1.42,1.3Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="CourseName" class="form-control" id="nombreCurso" placeholder=" Nombre del curso" value="<?php echo $CourseName ?>" readonly>
+                    </div>
+                </div>
+                <div class="derecha">
+                    <label for="nombreGrupo" class="form-label">Nombre del grupo</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.4 21.83"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="cls-1" d="M28.66,18.54a9.87,9.87,0,0,1-1.72-.09c-.21-.05-.43-.07-.56.14A5.19,5.19,0,0,1,24,20.3a13.83,13.83,0,0,1-14.23-1c-.06,0-.14-.06-.17-.11-.52-1-1.4-.76-2.25-.7A10.37,10.37,0,0,1,.8,16.79,1.58,1.58,0,0,1,0,15.31a6.54,6.54,0,0,1,3.56-6c.57-.31.63-.48.18-1a3.94,3.94,0,0,1-.36-4.69A4,4,0,0,1,7.82,1.85a4,4,0,0,1,2.94,3.69A3.73,3.73,0,0,1,9.65,8.42c-.35.35-.31.55.14.74a5.34,5.34,0,0,1,1.81,1.35c.31.36.58.43,1,.1a7,7,0,0,1,1.93-1.07c.41-.16.52-.26.1-.61a4.91,4.91,0,0,1-1.69-5.31A5,5,0,0,1,22.3,3.1,5,5,0,0,1,21,8.82c-.56.48-.56.47.13.81a9.07,9.07,0,0,1,1.56.87c.51.39.85.42,1.27-.09a4.34,4.34,0,0,1,1.65-1.22c.52-.22.51-.43.13-.83a3.9,3.9,0,0,1-.39-4.84,4,4,0,1,1,6.38,4.71c-.52.63-.33.76.24,1.08A6.6,6.6,0,0,1,35.4,15.4a1.45,1.45,0,0,1-.7,1.32A10.1,10.1,0,0,1,28.66,18.54ZM17.67,20A12,12,0,0,0,24,18.34a1.1,1.1,0,0,0,.63-1.11,6.92,6.92,0,0,0-13.82.06,1,1,0,0,0,.57,1A12.18,12.18,0,0,0,17.67,20ZM7,16.85a8.61,8.61,0,0,0,1.55-.19A.68.68,0,0,0,9.16,16a8.21,8.21,0,0,1,1.18-3c.52-.83.49-1-.26-1.59a4.9,4.9,0,0,0-5-.91,4.87,4.87,0,0,0-3.28,4.07.87.87,0,0,0,.49,1.07A9.7,9.7,0,0,0,7,16.85Zm21.69,0a9.06,9.06,0,0,0,4.6-1.26.71.71,0,0,0,.43-.71A5.07,5.07,0,0,0,25,11.72a.71.71,0,0,0-.11,1,8.71,8.71,0,0,1,1.18,2.48c.42,1.49.45,1.51,2,1.6C28.28,16.84,28.47,16.83,28.65,16.83Zm-11-8.55A3.32,3.32,0,0,0,21,5.06,3.28,3.28,0,0,0,14.43,5,3.32,3.32,0,0,0,17.67,8.28ZM30.83,5.75a2.21,2.21,0,1,0-4.42-.08A2.23,2.23,0,0,0,28.66,8,2.17,2.17,0,0,0,30.83,5.75Zm-24-2.27A2.17,2.17,0,0,0,4.58,5.67,2.17,2.17,0,0,0,6.73,8,2.24,2.24,0,0,0,9,5.75,2.18,2.18,0,0,0,6.82,3.48Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="GroupName" class="form-control" id="nombreGrupo" placeholder=" Nombre del grupo" value="<?php echo $GroupName ?>" readonly>
+                    </div>
+                </div>
+            </div>
+            <!---->
+            <label for="nombreInstitucion" class="form-label">Institución</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                </span>
+                <input type="text" name="Institution" class="form-control" id="nombreInstitucion" placeholder=" Nombre de la institución" value="<?php echo $nombreColegio; ?>" <?php echo $bloqueo; ?>>
+            </div>
+            <!---->
+            <label for="nombreCiudad" class="form-label">Ciudad</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.85 29.65"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M11.06,0a18.61,18.61,0,0,1,1.83.4,8.08,8.08,0,0,1,5.6,8.48,8,8,0,0,1-.78,2.79Q14.62,18,11.52,24.25a1.17,1.17,0,0,1-2.19,0Q6.24,18,3.16,11.7A8.11,8.11,0,0,1,9.33.07L9.79,0Zm-.65,21.21a.58.58,0,0,0,.08-.12c1.74-3.53,3.52-7,5.19-10.59a5.39,5.39,0,0,0-.91-6.18,5.47,5.47,0,0,0-6-1.76,5.76,5.76,0,0,0-3.55,8.13c1.36,2.8,2.74,5.59,4.11,8.38C9.71,19.77,10.05,20.47,10.41,21.21Z"/><path class="blanco" d="M9.32,29.65c-.49-.06-1-.11-1.48-.18a12.69,12.69,0,0,1-5.67-2,4.72,4.72,0,0,1-2-2.68A3.83,3.83,0,0,1,1.34,21a6.93,6.93,0,0,1,1.91-1.34,1.15,1.15,0,0,1,1.54.48,1.18,1.18,0,0,1-.45,1.56,10.31,10.31,0,0,0-1.43,1,1.5,1.5,0,0,0,0,2.4,6,6,0,0,0,2.5,1.45A15.4,15.4,0,0,0,16,26.29a5.51,5.51,0,0,0,1.85-1.16,1.53,1.53,0,0,0,0-2.52,9.33,9.33,0,0,0-1.35-.95,1.22,1.22,0,0,1-.59-1.25,1.14,1.14,0,0,1,1-.92,1.06,1.06,0,0,1,.56.09,6.28,6.28,0,0,1,2.7,2.24A3.69,3.69,0,0,1,20,26.29a7.86,7.86,0,0,1-3.28,2.25,15.72,15.72,0,0,1-4.84,1.06,1.57,1.57,0,0,0-.3,0Z"/><path class="blanco" d="M12.59,8.12A2.17,2.17,0,1,1,10.44,6,2.17,2.17,0,0,1,12.59,8.12Z"/></g></g></svg>
+                </span>
+                <input type="text" name="City" class="form-control" id="nombreCiudad" placeholder=" Nombre de la Ciudad" value="<?php echo $nombreMunicipio; ?>" <?php echo $bloqueo; ?>>
+            </div>
+            <!---->
+        </div>
+        <div class="flechita hover">
+            <img onclick="down1(3);" src="img/fomrLarge/flecha.png" alt="">
+        </div>
+    </section>
+    <img id="paloma" src="img/fomrLarge/paloma.png" alt="">
+    <section id="piso_3">
+        <div class="formStyle">
+            <!---->
+            <label for="validationEmail" class="form-label">E-mail*</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.64 30.67"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_6" data-name="Capa 6"><path class="blanco" d="M20.31,20.88a7.42,7.42,0,1,1-.57-11.44c0-.11,0-.2.06-.29A1.49,1.49,0,0,1,21.4,8a1.47,1.47,0,0,1,1.32,1.46c0,1.79,0,3.58,0,5.37,0,1.29,0,2.57,0,3.85a2.2,2.2,0,0,0,1.47,2A2.17,2.17,0,0,0,26.63,20a2.44,2.44,0,0,0,.41-.78c1.46-5,.41-9.39-3.39-12.93A11.6,11.6,0,0,0,11.48,3.7a11.73,11.73,0,0,0-8.24,9.35A12.33,12.33,0,0,0,21.58,26a1.49,1.49,0,0,1,2.14.47,1.47,1.47,0,0,1-.58,2,14.51,14.51,0,0,1-4.44,1.78A15.34,15.34,0,1,1,30.36,12.5a14.83,14.83,0,0,1-.56,7.81,4.83,4.83,0,0,1-4.42,3.43,5,5,0,0,1-4.93-2.59ZM10.88,15.4A4.45,4.45,0,1,0,15.36,11,4.45,4.45,0,0,0,10.88,15.4Z"/></g></g></svg>
+                </span>
+                <input type="email" name="Email" class="form-control" id="validationEmail" aria-describedby="validationEmailFeedback" placeholder=" Introduce tu correo electrónico" required value="<?php echo $Email; ?>">
+                <div id="validationEmailFeedback" class="invalid-feedback">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                    Ingresa una dirección de correo electrónico válida.
+                </div>
+            </div>
+            <!---->
+            <label for="validationEmail_2" class="form-label">Confirmar E-mail*</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.64 30.67"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_6" data-name="Capa 6"><path class="blanco" d="M20.31,20.88a7.42,7.42,0,1,1-.57-11.44c0-.11,0-.2.06-.29A1.49,1.49,0,0,1,21.4,8a1.47,1.47,0,0,1,1.32,1.46c0,1.79,0,3.58,0,5.37,0,1.29,0,2.57,0,3.85a2.2,2.2,0,0,0,1.47,2A2.17,2.17,0,0,0,26.63,20a2.44,2.44,0,0,0,.41-.78c1.46-5,.41-9.39-3.39-12.93A11.6,11.6,0,0,0,11.48,3.7a11.73,11.73,0,0,0-8.24,9.35A12.33,12.33,0,0,0,21.58,26a1.49,1.49,0,0,1,2.14.47,1.47,1.47,0,0,1-.58,2,14.51,14.51,0,0,1-4.44,1.78A15.34,15.34,0,1,1,30.36,12.5a14.83,14.83,0,0,1-.56,7.81,4.83,4.83,0,0,1-4.42,3.43,5,5,0,0,1-4.93-2.59ZM10.88,15.4A4.45,4.45,0,1,0,15.36,11,4.45,4.45,0,0,0,10.88,15.4Z"/></g></g></svg>
+                </span>
+                <input type="email" class="form-control" id="validationEmail_2" aria-describedby="validationEmail2Feedback" placeholder=" Introduce nuevamente tu correo electrónico" required value="<?php echo $Email; ?>">
+                <div id="validationEmail2Feedback" class="invalid-feedback">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                    Introduce nuevamente tu correo electrónico
+                </div>
+            </div>
+            <!---->
+            <div class="jr"></div>
+            <!---->
+            <div class="columnasX2">
+                <div class="izquierda">
+                    <div class="obligatorio">
+                        &nbsp;&nbsp;&nbsp;*Campo obligatorio.
+                    </div>
+                </div>
+                <div class="derecha">
+                    <button onclick="down(4);" id="btnCodigo" class="btnNext hover" type="button">Enviar código</button>
+                </div>
+            </div>
+            <!---->
+        </div>
+    </section>
+    <section id="piso_4">
+        <img id="pergamino" src="img/fomrLarge/pergamino.png" alt="">
+        <div class="pergaminoTxt">
+            <p id="Txtpergamino">Introduce el código de verificación que se envió a tu correo electrónico. Si no has recibido este mensaje, recuerda darle un vistazo a la bandeja de spam de tu e-mail.</p>
+            <div class="jr"></div>
+            <div class="columnasX2">
+                <div class="izquierda">
+                    <label for="validationCodigo" class="form-label">Código de verificación*</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.19 32.2"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_8" data-name="Capa 8"><path class="blanco" d="M16.35,0a1.28,1.28,0,0,1,.95,1.15,1.16,1.16,0,0,1-1,1.25c-.69.08-1.38.08-2.06.17a13.19,13.19,0,0,0-6.78,3,13.14,13.14,0,0,0-4.54,7.08A13.32,13.32,0,0,0,5.94,25.21a13,13,0,0,0,8,4.38,13.31,13.31,0,0,0,11.13-3.2,13,13,0,0,0,4.24-6.83,27.11,27.11,0,0,0,.45-3c0-.19,0-.38,0-.56a1.2,1.2,0,0,1,1-1.1,1.22,1.22,0,0,1,1.31.81.84.84,0,0,0,.06.14V17c0,.11,0,.22,0,.34-.1.69-.16,1.39-.31,2.07a15.61,15.61,0,0,1-6,9.42,15.58,15.58,0,0,1-13.14,2.95,15.51,15.51,0,0,1-9.37-5.93A15.66,15.66,0,0,1,.08,14.49,15.58,15.58,0,0,1,4,5.49,15.8,15.8,0,0,1,13.32.25C13.93.14,14.54.08,15.15,0Z"/><path class="blanco" d="M15,19c.11-.15.17-.27.25-.36L29.39,4.56a1.36,1.36,0,0,1,1.23-.49A1.2,1.2,0,0,1,31.35,6a2.18,2.18,0,0,1-.25.28L16,21.34a1.26,1.26,0,0,1-2.11-.05Q11,18.13,8.05,15a1.22,1.22,0,0,1,.1-1.89,1.19,1.19,0,0,1,1.48,0l.29.29c1.62,1.77,3.25,3.53,4.88,5.3Z"/></g></g></svg>
+                        </span>
+                        <input type="number" class="form-control" id="validationCodigo" aria-describedby="validationCodigoFeedback" placeholder=" Código" required>
+                    </div>
+                </div>
+                <div class="derecha">
+                    <div class="row">
+                        <div class="col">
+                            <div class="obligatorio" style="float: right;">
+                            &nbsp;&nbsp;&nbsp;*Campo obligatorio.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="jr"></div>
+                    <div class="row">
+                        <div class="col">
+                            <button onclick="down(5);" id="btnName" class="btnNext hover" type="button">Enviar código</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div id="respa"></div>
+                </div>
+            </div>
+        <!---->
+        </div>
+    </section>
+    <section id="piso_5">
+        <img id="elMicoForm" src="img/fomrLarge/elMicoForm.png" alt="">
+        <img id="elMicoFormMano" src="img/fomrLarge/manoMico.png" alt="">
+        <div class="formStyle">
+            <div class="tituloForm">
+                <h3>Datos del estudiante</h3>
+            </div>
+            <!---->
+            <div class="columnasX2">
+                <div class="izquierda">
+                    <!---->
+                    <label for="validationName" class="form-label">Primer nombre*</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="FirstName" class="form-control" id="validationName" aria-describedby="validationNameFeedback" placeholder=" Primer nombre" value="<?php echo $FirstName; ?>" required>
+                        <div id="validationNameFeedback" class="invalid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                        Por favor ingresa tu primer nombre.
+                        </div>
+                    </div>
+                    <!---->
+                    <label for="validationapellido" class="form-label">Primer apellido*</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="LastName" class="form-control" id="validationapellido" aria-describedby="validationapellidoFeedback" placeholder=" Primer apellido" required value="<?php echo $LastName; ?>">
+                        <div id="validationapellidoFeedback" class="invalid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                        Por favor ingresa tu primer apellido.
+                        </div>
+                    </div>
+                    <!---->
+                </div>
+                <div class="derecha">
+                    <!---->
+                    <label for="validationName2" class="form-label">Segundo nombre</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="MiddleName" class="form-control" id="validationName2" aria-describedby="validationName2Feedback" placeholder=" Segundo nombre" value="<?php echo $MiddleName; ?>">
+                        <div id="validationName2Feedback" class="invalid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                        Por favor ingresa tu segundo nombre.
+                        </div>
+                    </div>
+                    <!---->
+                    <label for="validationapellido2" class="form-label">Segundo apellido</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.64 36.64"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M36.64,22.11c-.17,0-.14.2-.18.31a2.85,2.85,0,0,1-2.32,1.91.66.66,0,0,1-.14,0,.87.87,0,0,0-.32,0H17.35a.85.85,0,0,0-.32,0,.94.94,0,0,1-.78-.83.81.81,0,0,1,.66-.95l.19-.08a.88.88,0,0,1,.32,0H33.68a.87.87,0,0,1,.32,0,1.12,1.12,0,0,0,.79-.92.85.85,0,0,0,0-.35v-18a.85.85,0,0,0,0-.35c-.1-.08,0-.22-.09-.32a.85.85,0,0,0-.77-.54,1,1,0,0,0-.42,0H16a1.19,1.19,0,0,1-.42,0A.9.9,0,0,1,14.68,1a1,1,0,0,1,.64-1s.12,0,.14-.07h.07a.74.74,0,0,0,.39,0H33.61A.75.75,0,0,0,34,0h.21a2.77,2.77,0,0,1,2,1.15,2.28,2.28,0,0,1,.44,1.12v.1s0,.1,0,.13V21.83a.1.1,0,0,0,0,.14Z"/><path class="blanco" d="M25.2,15.29a2.3,2.3,0,0,0-1.11-1.44,4.94,4.94,0,0,0-2.19-.36h-2c-.09,0-.48,0-.54,0l-1.65-1.63a5.7,5.7,0,0,0-4.07-1.76,6.42,6.42,0,0,0-1.24,0,.65.65,0,0,0-.45.15c-.52.43-1.05.84-1.56,1.28a1.49,1.49,0,0,1-2.06.18c-.4-.3-.77-.64-1.17-.94s-.61-.66-1.11-.67a5,5,0,0,0-1.09,0c-.25,0-.51,0-.77.07A5,5,0,0,0,.58,12.72,8.18,8.18,0,0,0,0,14.31v.15a.05.05,0,0,1,0,0,.2.2,0,0,1,0,.07.1.1,0,0,1,0,.09v8.52a.09.09,0,0,1,0,.07.09.09,0,0,1,0,.07v.14c.07.19,0,.4.12.59A3.2,3.2,0,0,0,3.44,26,1.93,1.93,0,0,1,4,25.84c.15.12.09.29.09.43v7.4a3,3,0,0,0,3,3h4.37a3,3,0,0,0,3-3c0-4.3,0-12.18,0-16.25,0-.08,0-.16,0-.23s.21.1.28.17c.49.47.95,1,1.44,1.43a2.93,2.93,0,0,0,1.85.74c.75-.06,1.49,0,2.24,0h1.31l.82,0a2.52,2.52,0,0,0,1-.15,2.69,2.69,0,0,0,.77-.4,2.93,2.93,0,0,0,1-1.42A4.14,4.14,0,0,0,25.2,15.29Zm-1.73,1.88a1.29,1.29,0,0,1-1,.48,15.32,15.32,0,0,1-1.66,0c-.59,0-1.17,0-1.76,0a5.62,5.62,0,0,1-.92,0A1.91,1.91,0,0,1,16.94,17a4.43,4.43,0,0,0-2.17-1.63,1.91,1.91,0,0,0-1.94.92,1.77,1.77,0,0,0-.15.31,3.89,3.89,0,0,0-.12,1.18q0,8,0,16a1,1,0,0,1-1,1h-.22a1.08,1.08,0,0,1-1.08-1.08c0-3.18,0-6.37,0-9.55A2.74,2.74,0,0,0,10.05,23a.94.94,0,0,0-.88-.59.93.93,0,0,0-.71.61,2.7,2.7,0,0,0-.12,1c0,3.22,0,6.44,0,9.66a1.1,1.1,0,0,1-1.08,1.08H7.1a1,1,0,0,1-1-1.05q0-8.4,0-16.8a2.81,2.81,0,0,0-.13-1,.93.93,0,0,0-.77-.62,1,1,0,0,0-.84.62A2.85,2.85,0,0,0,4.16,17c0,1.65,0,3.3,0,5A3.57,3.57,0,0,1,4,23.3,1.17,1.17,0,0,1,3,24.07a1.16,1.16,0,0,1-1-.77A3.62,3.62,0,0,1,1.82,22c0-1.56,0-3.12-.05-4.68a8.5,8.5,0,0,1,.47-3.59,2.89,2.89,0,0,1,2.85-1.85c1.41.2,2.32,1.75,3.73,2A4.15,4.15,0,0,0,12,12.59a3.61,3.61,0,0,1,.79-.55,2.13,2.13,0,0,1,1.09-.14c1.51.16,2.7,1.31,3.75,2.4a3.33,3.33,0,0,0,.91.71,2.5,2.5,0,0,0,1.11.25c1,0,2.19-.27,3.18.21A1.26,1.26,0,0,1,23.47,17.17Z"/><path class="blanco" d="M13.75,4.36a3.23,3.23,0,0,0-.16-1.07A4.44,4.44,0,0,0,11.74.75,5.74,5.74,0,0,0,10,.06s0,0-.06,0H9.82a.12.12,0,0,1-.09,0H9a.15.15,0,0,1-.11,0H8.73l-.08,0a4.45,4.45,0,0,0-3,1.74,4,4,0,0,0-.87,2.35,1.78,1.78,0,0,1,0,.65,2,2,0,0,0,.12.81,4.4,4.4,0,0,0,1.4,2.27A4.42,4.42,0,0,0,9.08,9c.14-.07.3,0,.44-.06s.09.07.13.06a5.38,5.38,0,0,0,1.87-.63,4.52,4.52,0,0,0,2.23-3.65A.59.59,0,0,0,13.75,4.36Zm-1.86.37A2.69,2.69,0,0,1,9.45,7.15a.66.66,0,0,0-.44,0A2.64,2.64,0,0,1,6.89,5.62a2.57,2.57,0,0,1,2-3.69,2.61,2.61,0,0,1,3,2,2.47,2.47,0,0,1,0,.39A.59.59,0,0,1,11.89,4.73Z"/></g></g></svg>
+                        </span>
+                        <input type="text" name="SecondLastName" class="form-control" id="validationapellido2" aria-describedby="validationapellido2Feedback" placeholder=" Segundo apellido" required value="<?php echo $SecondLastName; ?>">
+                        <div id="validationapellido2Feedback" class="invalid-feedback">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                        Por favor ingresa tu segundo apellido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="jr"></div>
+            <!---->
+            <div class="columnasX2">
+                <div class="izquierda">
+                    <div class="obligatorio">
+                        &nbsp;&nbsp;&nbsp;*Campo obligatorio.
+                    </div>
+                </div>
+                <div class="derecha">
+                    <button onclick="down(6);" id="btnName" class="btnNext hover" type="button">Continuar</button>
+                </div>
+            </div>
+            <!---->
+        </div>
+    </section>
+    <section id="piso_6">
+        <img class="cofre" id="cofre1" src="img/fomrLarge/cofre1.png" alt="">
+        <div class="formStyle">
+            <!---->
+            <label for="validationNewPass" class="form-label">Nueva contraseña*</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.91 31.14"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M24.46,7.86a8.94,8.94,0,0,0-3.15-5.75A9.45,9.45,0,0,0,17.53.24,3.8,3.8,0,0,1,16.42,0H14.6a.32.32,0,0,1-.22.12A7.74,7.74,0,0,0,11.45,1,8.74,8.74,0,0,0,8.74,3.14,9,9,0,0,0,7,6.22a9.08,9.08,0,0,0-.37,3.88A8.57,8.57,0,0,0,7.46,13,9,9,0,0,0,10.3,16.3s.11.06.1.13-.08,0-.13.05a16.51,16.51,0,0,0-2.84,1.37,15.92,15.92,0,0,0-3.91,3.41A16.49,16.49,0,0,0,1.71,24,14.72,14.72,0,0,0,.38,27.6,13.67,13.67,0,0,0,0,30.91c0,.15,0,.23.21.23.67,0,1.35,0,2,0,.16,0,.2-.05.2-.2a11.18,11.18,0,0,1,.05-1.15,14.17,14.17,0,0,1,.79-3.33A12.93,12.93,0,0,1,6,22.1a12.47,12.47,0,0,1,1.54-1.37,12.77,12.77,0,0,1,3.5-1.94A14.19,14.19,0,0,1,15.82,18a8.1,8.1,0,0,0,1.4-.14,9,9,0,0,0,7.24-10ZM20.23,13.6a6.48,6.48,0,0,1-4.46,2A6.56,6.56,0,1,1,20,4.16,6.34,6.34,0,0,1,22.12,9,6.32,6.32,0,0,1,20.23,13.6Z"/><path class="blanco" d="M30.91,25.32v-.61a.16.16,0,0,1,0-.13V24.4a.14.14,0,0,0,0-.06c0-.22-.08-.45-.13-.66A6,6,0,0,0,24.52,19a6.74,6.74,0,0,0-1.68.31,5.58,5.58,0,0,0-2.73,1.9.47.47,0,0,1-.41.18H12.77a.65.65,0,0,0-.53.21c-.72.73-1.41,1.49-2.18,2.16a1.75,1.75,0,0,0-.68,1.71.56.56,0,0,0,.15.36c.92.89,1.83,1.78,2.73,2.68a.62.62,0,0,0,.48.18h7a.48.48,0,0,1,.43.21,4.61,4.61,0,0,0,1.33,1.24,6.1,6.1,0,0,0,9.28-3.8c0-.16-.07-.4.17-.5v-.12a.11.11,0,0,1,0-.08v-.16C30.88,25.39,30.87,25.35,30.91,25.32Zm-3.67,2.41a3.59,3.59,0,0,1-4.77.07,5.17,5.17,0,0,1-1.07-1.39.32.32,0,0,0-.33-.19c-.62,0-1.24,0-1.85,0A1.49,1.49,0,0,1,18,25.72a12,12,0,0,0-1.09-1c-.12-.09-.14-.06-.23,0-.44.47-.92.9-1.33,1.4a.3.3,0,0,1-.29.12,1.47,1.47,0,0,0-.21,0,3.61,3.61,0,0,1-1.36,0,3.69,3.69,0,0,1-1.1-1.1,3,3,0,0,1,1.06-1.46,3.82,3.82,0,0,1,1.44-.05H21a.35.35,0,0,0,.38-.21,3.35,3.35,0,0,1,1.75-1.58,3.61,3.61,0,0,1,3.93.38,3.38,3.38,0,0,1,1.35,2.61A3.53,3.53,0,0,1,27.24,27.73Z"/><path class="blanco" d="M26,23.86A1.12,1.12,0,0,1,27.21,25,1.2,1.2,0,0,1,26,26.23,1.17,1.17,0,0,1,24.83,25,1.08,1.08,0,0,1,26,23.86Z"/></g></g></svg>
+                </span>
+                <input type="password" name="validationNewPass" class="form-control" id="validationNewPass" aria-describedby="validationNewPassFeedback" placeholder=" Introduce la nueva contraseña">
+                <div id="validationNewPassFeedback" class="invalid-feedback">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                Ingresa una contraseña valida.
+                </div>
+            </div>
+            <!---->
+            <label for="validationNewPass2" class="form-label">Repite la nueva contraseña*</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.91 31.14"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M24.46,7.86a8.94,8.94,0,0,0-3.15-5.75A9.45,9.45,0,0,0,17.53.24,3.8,3.8,0,0,1,16.42,0H14.6a.32.32,0,0,1-.22.12A7.74,7.74,0,0,0,11.45,1,8.74,8.74,0,0,0,8.74,3.14,9,9,0,0,0,7,6.22a9.08,9.08,0,0,0-.37,3.88A8.57,8.57,0,0,0,7.46,13,9,9,0,0,0,10.3,16.3s.11.06.1.13-.08,0-.13.05a16.51,16.51,0,0,0-2.84,1.37,15.92,15.92,0,0,0-3.91,3.41A16.49,16.49,0,0,0,1.71,24,14.72,14.72,0,0,0,.38,27.6,13.67,13.67,0,0,0,0,30.91c0,.15,0,.23.21.23.67,0,1.35,0,2,0,.16,0,.2-.05.2-.2a11.18,11.18,0,0,1,.05-1.15,14.17,14.17,0,0,1,.79-3.33A12.93,12.93,0,0,1,6,22.1a12.47,12.47,0,0,1,1.54-1.37,12.77,12.77,0,0,1,3.5-1.94A14.19,14.19,0,0,1,15.82,18a8.1,8.1,0,0,0,1.4-.14,9,9,0,0,0,7.24-10ZM20.23,13.6a6.48,6.48,0,0,1-4.46,2A6.56,6.56,0,1,1,20,4.16,6.34,6.34,0,0,1,22.12,9,6.32,6.32,0,0,1,20.23,13.6Z"/><path class="blanco" d="M30.91,25.32v-.61a.16.16,0,0,1,0-.13V24.4a.14.14,0,0,0,0-.06c0-.22-.08-.45-.13-.66A6,6,0,0,0,24.52,19a6.74,6.74,0,0,0-1.68.31,5.58,5.58,0,0,0-2.73,1.9.47.47,0,0,1-.41.18H12.77a.65.65,0,0,0-.53.21c-.72.73-1.41,1.49-2.18,2.16a1.75,1.75,0,0,0-.68,1.71.56.56,0,0,0,.15.36c.92.89,1.83,1.78,2.73,2.68a.62.62,0,0,0,.48.18h7a.48.48,0,0,1,.43.21,4.61,4.61,0,0,0,1.33,1.24,6.1,6.1,0,0,0,9.28-3.8c0-.16-.07-.4.17-.5v-.12a.11.11,0,0,1,0-.08v-.16C30.88,25.39,30.87,25.35,30.91,25.32Zm-3.67,2.41a3.59,3.59,0,0,1-4.77.07,5.17,5.17,0,0,1-1.07-1.39.32.32,0,0,0-.33-.19c-.62,0-1.24,0-1.85,0A1.49,1.49,0,0,1,18,25.72a12,12,0,0,0-1.09-1c-.12-.09-.14-.06-.23,0-.44.47-.92.9-1.33,1.4a.3.3,0,0,1-.29.12,1.47,1.47,0,0,0-.21,0,3.61,3.61,0,0,1-1.36,0,3.69,3.69,0,0,1-1.1-1.1,3,3,0,0,1,1.06-1.46,3.82,3.82,0,0,1,1.44-.05H21a.35.35,0,0,0,.38-.21,3.35,3.35,0,0,1,1.75-1.58,3.61,3.61,0,0,1,3.93.38,3.38,3.38,0,0,1,1.35,2.61A3.53,3.53,0,0,1,27.24,27.73Z"/><path class="blanco" d="M26,23.86A1.12,1.12,0,0,1,27.21,25,1.2,1.2,0,0,1,26,26.23,1.17,1.17,0,0,1,24.83,25,1.08,1.08,0,0,1,26,23.86Z"/></g></g></svg>
+                </span>
+                <input type="password" name="validationNewPass2" class="form-control" id="validationNewPass2" aria-describedby="validationNewPass2Feedback" placeholder=" Introduce nuevamente la contraseña">
+                <div id="validationNewPass2Feedback" class="invalid-feedback">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                Las contraseñas deben coincidir. Inténtalo de nuevo.
+                </div>
+            </div>
+            <!---->
+            <div class="jr"></div>
+            <!---->
+            <div class="obligatorio">
+                &nbsp;&nbsp;&nbsp;La Contraseña tiene que estar compuesta de 8 caracteres.<br>
+                &nbsp;&nbsp;&nbsp;Debe tener una letra en Mayúscula y una en Minúscula.<br>
+                &nbsp;&nbsp;&nbsp;Debe tener un número.<br>
+                &nbsp;&nbsp;&nbsp;Debe tener un caracter no alfanúmerico.
+            </div>
+            <button onclick="down(7);" id="btnName" class="btnNext hover" type="button">Continuar</button>
+            <div class="jr"></div>
+        </div>
+    </section>
+    <section id="piso_7">
+        <img id="telefonoP6" src="img/fomrLarge/telefono.png" alt="">
+        <div class="formStyle">
+            <label for="validationTelefono" class="form-label">Teléfono del acudiente</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.43 36.45"><defs><style>.blanco{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="blanco" d="M25.87,36.45c-.5-.11-1-.2-1.5-.34a10.92,10.92,0,0,1-2.43-1c-1.16-.63-2.32-1.27-3.45-2a48.24,48.24,0,0,1-4.75-3.4c-.83-.68-1.64-1.4-2.42-2.14-.6-.56-1.22-1.12-1.77-1.73-1.14-1.24-2.26-2.49-3.29-3.82a49.62,49.62,0,0,1-3.37-4.91,26.08,26.08,0,0,1-2.49-5,5,5,0,0,1-.32-1.57c0-.06,0-.11-.08-.12v-.17a.2.2,0,0,0,0-.16V10a.19.19,0,0,0,0-.12V8.84c.05-.05,0-.11,0-.17v-.3a.15.15,0,0,0,0-.11V8.09C.14,7.53.26,7,.42,6.41a9.29,9.29,0,0,1,2.42-4A20.14,20.14,0,0,1,5,.37,1.57,1.57,0,0,1,6,0a.92.92,0,0,1,.52,0A2.36,2.36,0,0,1,8.11.82c2.11,2.09,4.2,4.19,6.3,6.3a3.27,3.27,0,0,1,.86,1.63.75.75,0,0,1,0,.42c-.18.15-.08.38-.16.57a2.65,2.65,0,0,1-.58.95c-.92.91-1.83,1.84-2.76,2.74a1.7,1.7,0,0,0-.22,2.21c.46.63.89,1.28,1.34,1.91s.22,1-.39,1.33a.59.59,0,0,1-.76-.17,18.75,18.75,0,0,1-1.62-2.24,2.66,2.66,0,0,1-.51-1.58.75.75,0,0,1,0-.42,3.05,3.05,0,0,1,1-2.18c.88-.84,1.74-1.71,2.58-2.58.26-.27.57-.56.35-1a.79.79,0,0,0-.23-.28L6.88,2A.85.85,0,0,0,5.56,2,19,19,0,0,0,2.88,5,8.33,8.33,0,0,0,1.73,8.11a8.21,8.21,0,0,0,.85,5.06,49.46,49.46,0,0,0,4.77,7.6c.72.95,1.49,1.86,2.3,2.75,1,1.15,2.14,2.26,3.28,3.32a42.49,42.49,0,0,0,4,3.26,47,47,0,0,0,6.5,3.9,7.82,7.82,0,0,0,4.33.78,8.09,8.09,0,0,0,5-2.42c.54-.56,1.1-1.1,1.64-1.65a.69.69,0,0,0,0-1.12L28,23.11a.77.77,0,0,0-1.2,0l-2.58,2.58a3.52,3.52,0,0,1-2.75,1.12,3.71,3.71,0,0,1-1.9-.78,20.67,20.67,0,0,1-2.65-2c-.4-.38-.44-.74-.15-1.09A.87.87,0,0,1,18,22.85c1,.7,1.9,1.42,2.89,2.07a1.54,1.54,0,0,0,1.92-.17c.93-.92,1.83-1.85,2.76-2.75a2.48,2.48,0,0,1,1.58-.81.75.75,0,0,1,.51,0,2.46,2.46,0,0,1,1.69.84c2.09,2.07,4.18,4.14,6.24,6.24A2.37,2.37,0,0,1,36,31.51a7,7,0,0,1-1,1A15.54,15.54,0,0,1,32.24,35,9.16,9.16,0,0,1,28,36.38a.17.17,0,0,1-.1,0H27.8c-.07,0-.13,0-.18,0h-.34a.83.83,0,0,0-.58,0h-.33a.14.14,0,0,0-.11,0h-.11a.14.14,0,0,0-.11,0Z"/></g></g></svg>
+                </span>
+                <input type="number" name="Phone" class="form-control" id="validationTelefono" aria-describedby="validationTelefonoFeedback" placeholder=" Número telefónico" value="<?php echo $Phone; ?>">
+                <div id="validationTelefonoFeedback" class="invalid-feedback">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/></svg>
+                    Ingresa el número teléfonico del acudiente.
+                </div>
+            </div>
+            <!---->
+            <div class="jr"></div>
+            <!---->
+            <div class="row">
+                <div class="col">
+                    <button onclick="down(8);" id="btnName" class="btnNext hover" type="button">Enviar inscripción</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!--<div class="contenedor">
+    <form method="post" class="formulario" id="formulario" action="inscripcionDocente.php">
+        <p><?php echo $nombreColegio; ?></p>
+        <p><?php echo $nombreMunicipio; ?></p>
+    </form>
+</div>-->
 
-						<!-- formulario envia codigo-->
-							<div class="row">
-								<div class="col alert" id="respa"></div>
-							</div> 
-							<div class="row">
-								<div class="col"><input id="submitCod" class="boton" type="submit" value="Verificar codigo" onclick="codigos()"></div>
-							</div>
-						<!-- fin formulario -->
+<script>
+    var contenedor = document.querySelector("#contenedor");
+    var elemento = new Image();
+    elemento.src = "img/fomrLarge/nube.png";
+    elemento.classList.add("rellax");
+    elemento.classList.add("nube");
+    contenedor.appendChild(elemento);
 
-						
-					</div>
-				</li>
-				<li>
-					<input type="radio" name="select_main" id="select_4" class="main_select_s">
-					<div class="select_content">
-						<div class="row">
-							<div class="col-12">
-								<p class="text-center"><small class="text-muted h5">Ingrese su nombre completo</small></p><br>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-6">
-								<label class="form-label">Primer nombre <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-											<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-										</svg>
-									</span>
-									<input type="text" required class="form-control" placeholder="Ej. Maria" autocomplete="off" id="FirstName" onchange="valName_1()">
-								</div>
-								<span class="obligatorio" id="nombre_1">Error de caracteres o espacios</span>
-							</div>
-							<div class="col-6">
-								<label class="form-label">Segundo nombre</label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-											<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-										</svg>
-									</span>
-									<input type="text" class="form-control" placeholder="Ej. Jose" autocomplete="off" id="MiddleName" onchange="valName_2()">
-								</div>
-								<span class="obligatorio" id="nombre_2">Error de caracteres o espacios</span>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-6">
-								<label class="form-label">Primer apellido <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-											<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-										</svg>
-									</span>
-									<input type="text" required class="form-control" placeholder="Ej. Tesla" autocomplete="off" id="LastName" onchange="valName_3()">
-								</div>
-								<span class="obligatorio" id="apellido_1">Error de caracteres o espacios</span>
-							</div>
-							<div class="col-6">
-								<label class="form-label">Segundo apellido</label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-											<path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-										</svg>
-									</span>
-									<input type="text" class="form-control" placeholder="Ej. Bonilla" autocomplete="off" id="SecondLastName" onchange="valName_4()">
-								</div>
-								<span class="obligatorio" id="apellido_2">Error de caracteres o espacios<pan>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="radio" name="select_main" id="select_5" class="main_select_s">
-					<div class="select_content">
-						<div class="row">
-							<div class="col-12">
-								<p class="text-center"><small class="text-muted h5">Ingrese sus datos de contacto</small></p><br>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-12">
-								<label class="form-label">Teléfono Acudiente</label>
-								<div class="input-group mb-2">
-									<span class="input-group-text">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-forward" viewBox="0 0 16 16">
-											<path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zm10.762.135a.5.5 0 0 1 .708 0l2.5 2.5a.5.5 0 0 1 0 .708l-2.5 2.5a.5.5 0 0 1-.708-.708L14.293 4H9.5a.5.5 0 0 1 0-1h4.793l-1.647-1.646a.5.5 0 0 1 0-.708z"/>
-										</svg>
-									</span>
-									<input type="text" class="form-control" placeholder="Ej. 3001234567" autocomplete="off" id="Phone" onchange="valDate()">
-								</div>
-								<span class="obligatorio" id="Err_telefono">Error de caracteres o espacios</span>
-							</div>
-						</div>		
-						<div class="row">
-							<div class="col-6">
-								<label class="form-label">Nombre del Colegio <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-									<div class="input-group mb-2">
-										<span class="input-group-text">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank2" viewBox="0 0 16 16">
-												<path d="M8.277.084a.5.5 0 0 0-.554 0l-7.5 5A.5.5 0 0 0 .5 6h1.875v7H1.5a.5.5 0 0 0 0 1h13a.5.5 0 1 0 0-1h-.875V6H15.5a.5.5 0 0 0 .277-.916l-7.5-5zM12.375 6v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zm-2.5 0v7h-1.25V6h1.25zM8 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2zM.5 15a.5.5 0 0 0 0 1h15a.5.5 0 1 0 0-1H.5z"/>
-											  </svg>
-										</span>
-										<input type="text" class="form-control" placeholder="Ej. Dinamico PD" autocomplete="off" id="Institution" onchange="valDate()">
-									</div>
-									<span class="obligatorio" id="Err_instituto">Error de caracteres o espacios</span>
-							</div>
-							<div class="col-6">
-								<label class="form-label">Ciudad <span class="obligatorio"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16"><path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/></svg></span></label>
-									<div class="input-group mb-2">
-										<span class="input-group-text">
-											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
-												<path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
-												<path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
-											  </svg>
-										</span>
-										<input type="text" class="form-control" placeholder="Ej. Tunja" autocomplete="off" id="City" onchange="valDate()">
-									</div>
-									<span class="obligatorio" id="Err_ciudad">Error de caracteres o espacios</span>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<input type="radio" name="select_main" id="select_6" class="main_select_s">
-					<div class="select_content">
-						<div class="row">
-							<div class="col"><p class="h6 alert alert-danger"><strong>¡ALERTA! </strong>Si está seguro que su información es correcta de clic en enviar si no retroceda y cambiela recuerde que no podrá hacer cambios en un futuro
-							</p></div>
-						</div>
-						<div class="row">
-						<!-- formulario -->
-						<main>
-							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="inscripciondocenteForm">
-								<div class="bg-danger text-white"><?php echo $form_err;?></div>
-								<fieldset>
-								   <br>
-									<legend>Información personal</legend>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Primer Nombre*</span>
-										<input required type="text" placeholder="Primer Nombre*" name="FirstName" value="<?php echo $FirstName; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Segundo Nombre</span>
-										<input type="text" placeholder="Segundo Nombre" name="MiddleName" value="<?php echo $MiddleName; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Primer Apellido*</span>
-										<input required type="text" placeholder="Primer Apellido*" name="LastName" value="<?php echo $LastName; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Segundo Apellido</span>
-										<input type="text" placeholder="Segundo Apellido" name="SecondLastName" value="<?php echo $SecondLastName; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Teléfono Acudiente</span>
-										<input type="tel" placeholder="Teléfono Acudiente" name="Phone" value="<?php echo $Phone; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">E-mail del Acudiente*</span>
-										<input required type="email" placeholder="E-mail del Acudiente*" value="<?php echo $Email; ?>" name="Email" class="form-control form-control-sm" readonly>
-									</div>
-								</fieldset>
-								<br>
-								<fieldset>
-									<legend>Informacion de Colegio</legend>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Nombre del Colegio*</span>
-										<input type="text" required placeholder="Nombre del Colegio*" name="Institution" value="<?php echo $Institution; ?>" class="form-control form-control-sm" readonly>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Ciudad*</span>
-									<input type="text" placeholder="Ciudad*" value="<?php echo $City; ?>" name="City" required class="form-control form-control-sm" readonly>
-									</div>
-								</fieldset>
-								<br>
-								<input class="boton" type="submit" value="Enviar Inscripción">
-            					</form>
-							</main>
-						</div>
-					</div>
-				</li>
-				
-			</ul>
-			<div class="row flechas">
-				<div class="col" style="text-align:start;" id="FlIzq">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-						<path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
-					</svg>
-				</div>
-				<div class="col" style="text-align:end;" id="FlDer">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-						<path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-				  	</svg>
-				</div>
-			</div>
+    var repeticiones = 200;
+    for (var i = 0; i < repeticiones; i++) {
+        var speed = Math.floor(Math.random() * 9) + 1;
+        var sizeNube = speed + 3
+        elemento.style.width = sizeNube + "vw";
+        elemento.setAttribute("data-rellax-speed", speed.toString());
+        var posicionX = Math.floor(Math.random() * 90) + 1;
+        var posicionY = Math.floor(Math.random() * 103) + 1;
+        var elementoCopia = elemento.cloneNode(true);
+        elementoCopia.style.left = posicionX + "%";
+        elementoCopia.style.top = posicionY + "%";
+        contenedor.appendChild(elementoCopia);
+    }
 
-				<div class="pestana">
-					<div class="select">
-						<div class="row">
-							<div class="col" id="se_1"><label id="l1" class="btn_pest" for="select_1">Grupo y Curso</label></div>
-							<div class="col" id="se_2"><label id="l2" class="btn_pest" for="select_2">Correo Electrónico</label></div>
-							<div class="col" id="se_3"><label id="l3"  class="btn_pest" for="select_3">Verificación de Correo</label></div>
-							<div class="col" id="se_4"><label id="l4"  class="btn_pest" for="select_4">Nombre completo</label></div>
-							<div class="col" id="se_5"><label id="l5"  class="btn_pest" for="select_5">Datos personales</label></div>
-							<div class="col" id="se_6"><label id="l6"  class="btn_pest" for="select_6">Formulario</label></div></div>
-						</div>
-					</div>
-				</div>
+var elemento = document.getElementById("pergamino");
+var div = document.getElementById("piso_4");
+var isScrolling = false;
 
-			</div>
-	</div>
-	
-</div>
+window.addEventListener('scroll', function() {
+  if (!isScrolling) {
+    window.requestAnimationFrame(function() {
+      var posicion = window.pageYOffset;
+      var posicionInferior = posicion + window.innerHeight;
+      var posicionDiv = div.offsetTop;
+      var altoDiv = div.offsetHeight;
 
-<div class="footer">
-	<div class="contGridFooter">
-		<div class="griRowC1_3 align-self-center"><a href="http://dinamicopd.com/"  target="_blank"><img class="logoForm" src="img/logo 2.png" alt="logo dinamico pd"></a></div>
-		<div class="griRowC2_3 align-self-center">
-			<table style="text-align: left; margin: auto;">
-				<tr>
-					<td>
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
-							<path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-							<path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-						</svg>
-					</td>
-					<td>Cra 2E # 73 - 25</td>
-				</tr>
-				<tr>
-					<td>
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-phone" viewBox="0 0 16 16">
-							<path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
-							<path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-						</svg>
-					</td>
-					<td>3123000100 | 3123010101</td>
-				</tr>
-				<tr>
-					<td>
-						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-paper" viewBox="0 0 16 16">
-							<path d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2H4Zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6v-2.55Zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v5.417Zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267v2.55Zm13 .566v5.734l-4.778-2.867L15 7.383Zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083l6.965 4.18ZM1 13.116V7.383l4.778 2.867L1 13.117Z"/>
-						</svg>
-					</td>
-					<td>dinamicopdadm@gmail.com</td>
-				</tr>
-			</table>
-		</div>
-		<div class="griRowC3_3 align-self-center">
-			<table style="margin: auto;">
-				<tr>
-					<td>
-						<a class="fb" target="_blank" href="https://www.facebook.com/DinamicoColombia/">
-							<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-								<path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-							</svg>
-						</a>
-					</td>
-					<td>
-						<a class="yt" target="_blank" href="https://www.youtube.com/channel/UCPSLG3t9l1DO1tEu9NjdK8A">
-							<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
-								<path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
-							</svg>
-						</a>
-					</td>
-					<td>
-						<a class="in" target="_blank" href="https://www.instagram.com/dinamicopd/">
-							<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-								<path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-							</svg>
-						</a>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-</div>
-<!-- validar formulario -->
-<script src="js/formularioIns.js"></script>
-<!--bootstrap-->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!--particulas-->
-<script src="js/particles.js"></script>
-<script src="js/lib/stats.js"></script>
-<script src="js/app.js"></script>
-    
+      if (posicionInferior <= (posicionDiv*1.06)) {
+        elemento.style.position = "relative";
+        elemento.style.left = "5.5%";
+      } else {
+        if (posicionInferior >= (posicionDiv*1.06) && posicionInferior <= (posicionDiv + altoDiv)) {
+            elemento.style.bottom = "-4%";
+            elemento.style.left = "5.5%";
+            elemento.style.position = "fixed";
+        } else {
+            elemento.style.position = "absolute";
+            elemento.style.left = "5.5%";
+            elemento.style.bottom = "0%";
+        }
+      }
+
+      isScrolling = false;
+    });
+    isScrolling = true;
+  }
+});
+
+</script>
+
+<script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script><script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script>
+<script src="js/code.jquery.com_jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="js/rellax.min.js"></script>
+
+<script>
+    var rellax = new Rellax('.rellax');
+</script>
+
+<script src="js/registroSTD.js"></script>
 </body>
-<div class="modal"><!-- Place at bottom of page --></div>
 </html>

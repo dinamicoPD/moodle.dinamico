@@ -1,0 +1,452 @@
+@font-face {
+    font-family: 'HelveticaLTStd-Condensed';
+    src: url(../font/HelveticaLTStd-Cond.otf);
+}
+@font-face {
+    font-family: 'Poppins-Black';
+    src: url(../font/Poppins-Black.otf);
+}
+
+body{
+    position: relative;
+    overflow-x: hidden;
+}
+
+.fondoCielo{
+    background: rgb(11,119,153);
+    background: linear-gradient(180deg, rgba(11,119,153,1) 0%, rgba(11,142,184,1) 9%, rgba(83,179,217,1) 50%, rgba(174,209,221,1) 100%);
+    background-repeat: no-repeat;
+}
+
+.nube{
+    z-index: 1;
+    position: absolute;
+}
+
+section{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    z-index: 3;
+}
+
+.titleForm{
+    width: 80%;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.titleForm img{
+    width: 100%;
+}
+
+.ocultar{
+    display: none;
+}
+
+/* FORMULARIO ESTILOS */
+
+#piso_2, #piso_3, #piso_4, #piso_5, #piso_6, #piso_7{
+    border-top-style: solid;
+    border-top-width: 1.5vw;
+    border-top-color: #A43938;
+    outline: 0.5vw solid #ED723D;
+}
+
+.entrepisos{
+    background: linear-gradient(45deg, #F79564 12%, transparent 0, transparent 88%, #F79564 0),
+    linear-gradient(135deg, transparent 37%, #A43938 0, #A43938 63%, transparent 0),
+    linear-gradient(45deg, transparent 37%, #F79564 0, #F79564 63%, transparent 0) #8B2036;
+    background-size: 25px 25px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 30px;
+    border-top: 3px solid #A43938;
+    border-bottom: 3px solid #A43938;
+}
+
+#piso_1{
+    background-image: url("../img/fomrLarge/piso1.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 37.2vw;
+}
+
+#piso_2{
+    background-image: url("../img/fomrLarge/piso2.png");
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100%, 100%;
+    background-position: center, center;
+    height: 51.4vw;
+    padding-top: 5vw;
+    padding-left: 14.7vw;
+}
+
+#zzz{
+    display: block;
+    position: absolute;
+    right: 12%;
+    bottom: 36.4%;
+    width: 16vw;
+    animation: respiracion 3s ease-in-out infinite;
+}
+
+@keyframes respiracion{
+    0% {
+        transform: scaleY(1);
+    }
+    50%{
+        transform: scaleY(1.1);
+    }
+    100%{
+        transform: scaleY(1);
+    }
+}
+
+#paloma{
+    position: absolute;
+    height: 30vw;
+    right: 10%;
+    margin-top: 2vw;
+    z-index: 2;
+    animation: floatAnimation 2s infinite;
+}
+
+@keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+#pergamino{
+    width: 89%;
+    transition: all 1s ease-out;
+    z-index: 5;
+}
+
+#piso_3{
+    background-image: url("../img/fomrLarge/piso3.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 47.8vw;
+    padding-top: 5vw;
+    padding-left: 14.7vw;
+}
+
+#piso_4{
+    background-image: url("../img/fomrLarge/piso4.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 50vw;
+    overflow: hidden;
+}
+
+#piso_5{
+    background-image: url("../img/fomrLarge/piso5.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 50.8vw;
+    padding-top: 5vw;
+    padding-left: 14.7vw;
+}
+
+#elMicoForm{
+    width: 35vw;
+    position: absolute;
+    right: 5vw;
+    bottom: 2vw;
+    z-index: -1;
+}
+
+#elMicoFormMano{
+    position: absolute;
+    width: 5vw;
+    right: 14vw;
+    bottom: 11.6vw;
+    z-index: -2;
+    animation: rotate-animation 2s infinite;
+}
+
+@keyframes rotate-animation {
+    0% {
+      transform: rotate(0);
+      transform-origin: top right;
+    }
+    50% {
+      transform: rotate(12deg);
+      transform-origin: top right;
+    }
+    100% {
+       transform: rotate(0);
+       transform-origin: top right;
+    }
+  }
+
+#telefonoP6{
+    position: absolute;
+    width: 28vw;
+    right: 11%;
+    top: 10%;   
+}
+
+#telefonoP6:hover{
+    animation: vibrar 0.1s 6;
+}
+
+@keyframes vibrar {
+    0% {
+      transform: rotate(0);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+
+#piso_6{
+    background-image: url("../img/fomrLarge/contrasena.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 49vw;
+    padding-top: 5vw;
+    padding-left: 14.7vw;
+}
+
+#piso_6 .formStyle{
+    width: 44vw;
+}
+
+.cofre{
+    position: absolute;
+}
+
+#cofre1{
+    bottom: 10vw;
+    right: 2.1vw;
+    width: 38vw;
+}
+#cofre2{
+    bottom: 10vw;
+    right: 6.7vw;
+    width: 33.5vw;
+}
+#cofre3{
+    bottom: 10vw;
+    right: 10.2vw;
+    width: 29.9vw;
+}
+#cofre4{
+    bottom: 10vw;
+    right: 11.1vw;
+    width: 29.7vw;
+}
+
+#piso_7{
+    background-image: url("../img/fomrLarge/piso6.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 42.5vw;
+    padding-top: 5vw;
+    padding-left: 14.7vw;
+}
+
+/* formulario */
+
+.formStyle *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#piso_2 .formStyle{
+    width: 60.9vw;
+}
+
+.formStyle{
+    padding: 1vw 3.8vw 3.3vw 3.8vw;
+    position: relative;
+}
+
+.formStyle::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(38, 0, 0, 0.57);
+    mix-blend-mode: soft-light;
+    border-radius: 2vw;
+    z-index: -1;
+}
+
+.formStyle h3{
+    font-family: 'Poppins-Black', sans-serif;
+    color: #ffffff;
+    font-size: 3vw;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 1vw;
+}
+
+#piso_2 .formStyle h3::after{
+    content: "RESUMEN DEL REGISTRO";
+}
+
+.formStyle h3::after{
+    color: #2C2359;
+    position: absolute;
+    top: 0%;
+    left: 0.5%;
+    z-index: -1;
+}
+
+.formStyle label, .pergaminoTxt label{
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    color: #ffffff;
+    font-size: 2vw;
+}
+
+.formStyle input, .pergaminoTxt input{
+    height: 3.5vw;
+    font-size: 1.5vw;
+    border: 0.2vw solid #2C2359;
+    color: #9B8EDE;
+}
+
+.formStyle input::placeholder, .pergaminoTxt input::placeholder{
+    color: #9B8EDE;
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    font-size: 1.5vw;
+}
+
+.formStyle span, .pergaminoTxt span{
+    background-color: #2C2359;
+    border: 0.2vw solid #2C2359;
+    height: 3.5vw;
+    padding: 0vw 0.3vw 0vw 0.3vw;
+}
+
+.formStyle span svg, .pergaminoTxt span svg{
+    height: 2vw;
+    width: 2vw;
+}
+
+.columnasX2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "izquierda derecha";
+    grid-column-gap: 2vw;
+}
+
+.izquierda{
+    grid-area: izquierda;
+}
+
+.derecha{
+    grid-area: derecha;
+}
+
+.formStyle .invalid-feedback, .pergaminoTxt .invalid-feedback{
+    color: #F7931E;
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+#piso_4 .invalid-feedback{
+    color: #9F6887 !important;
+}
+
+.obligatorio { 
+    display: block;
+    font-family: 'HelveticaLTStd-BoldCondensed', sans-serif;
+    font-size: 1.2vw;
+    color: #ffffff;
+    border-left: 0.15vw solid #ffffff;
+}
+
+.jr{
+    width: 100%;
+    height: 2vw;
+}
+
+.btnNext{
+    padding: 0.3vw;
+    text-align: center;
+    border-radius: 0.5vw;
+    font-family: 'poppins-black', sans-serif;
+    font-size: 1.6vw;
+    background-color: #90BD1F;
+    color: #ffffff;
+    border: 0.3vw solid #77932B;
+    cursor: pointer;
+    float: right;
+}
+
+#piso_3 .formStyle{
+    width: 44vw;
+}
+
+
+.hover:hover{
+    transform: scale(1.1);
+}
+
+.pergaminoTxt{
+    width: 55%;
+    margin: 13vw auto auto 25vw;
+    font-family: 'Poppins-Black', sans-serif;
+}
+
+.pergaminoTxt p{
+    color: #842A4D;
+    font-weight: bold;
+    font-size: 1.9vw;
+    text-align: center;
+    font-style: italic;
+}
+
+#piso_5 .formStyle{
+    width: 54.5vw;
+}
+
+#piso_5 .formStyle h3::after{
+    content: "Datos del estudiante";
+}
+
+#piso_7 .formStyle{
+    width: 44vw;
+}
+
+.flechita{
+    position: absolute;
+    bottom: 1vw;
+    right: 3vw;
+    width: 4vw;
+}
+
+.flechita img{
+    width: 100%;
+    cursor: pointer;
+}
+
+#respa{
+    color: #9F6887;
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    font-size: 1vw;
+    font-weight: bold;
+    position: relative;
+}
