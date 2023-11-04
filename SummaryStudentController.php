@@ -44,10 +44,7 @@
 
      if ($result = $link->query($sql)) {
             while($row = $result->fetch_assoc()) {
-             $hmtlGroup =$hmtlGroup . '<div class="col-xs-12">
-                            <dt class="col-xs-3 text-left">Curso y Grupo:</dt>
-                            <dd class="col-xs-3 text-left">'.$row["course1"].' '.$row["groupcode"].'</dd>
-                            <dt class="col-xs-3 text-left"></dt></div>'; 
+             $hmtlGroup = $row["course1"].' '.$row["groupcode"]; 
             }
         }else{
                 $form_err="Error de conexión con base de datos, contacte al servicio de administración";

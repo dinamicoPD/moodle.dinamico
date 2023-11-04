@@ -6,6 +6,10 @@
     font-family: 'HelveticaLTStd-Condensed';
     src: url(../font/HelveticaLTStd-Cond.otf);
 }
+@font-face {
+    font-family: 'Poppins-Black';
+    src: url(../font/Poppins-Black.otf);
+}
 
 #particles-js {
     position: fixed;
@@ -53,8 +57,10 @@ html, body {
 
 .spanRF svg{
     width: 1.5vw;
+    height: 1.5vw;
+    display: block;
+    margin: auto;
 }
-
 
 .labelRF{
     font-size: 1.6vw;
@@ -62,6 +68,7 @@ html, body {
 
 .spanRF{
     height: 2.5vw !important;
+    width: 2.5vw !important;
 }
 
 .inputRF, .ojo{
@@ -133,4 +140,12 @@ html, body {
 
 .ojo svg{
     color: var(--blanco2);
+}
+
+.tituloIsa{
+    text-align: center;
+    font-size: 2vw;
+    font-family: 'poppins-black', sans-serif;
+    line-height: 1.2;
+    margin: 0;
 }

@@ -124,10 +124,18 @@ $(document).ready(function() {
             data: JSON.stringify(formValues),
             contentType: 'application/json', 
             success: function(data){
-                var msm = "<a href='https://dinamicopd.com/' class='btnCerrar'>Cerrar</a>";
+                var msm = "<a href='https://dinamicopd.com/' class='btnNext'>Cerrar</a>";
                 $('#respuestaForm').modal('show');
-                $('#msmVerificaEmail').text(data);                   
+                $('#msmVerificaEmail').text(data);
                 $('#modal-footer').html(msm);
+
+                $('#tituloModalIsa').text('REGISTRO DE USUARIO'); 
+                $('.modalIcoIsa').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.71 80.69"><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><ellipse class="ico_isa" cx="39.85" cy="40.34" rx="37.85" ry="38.34"/><polyline class="ico_isa" points="25.09 41.02 36.35 55.37 55.15 25.29"/></g></g></svg>');
+                $('#avisoMonito').html('<img class="avisoMonito" src="img/fomrLarge/avisoMonitoBien@3x.png" alt="">');
+
+                $("#tituloIsa").addClass("tituloIsaOK");
+                $("#modalIcoIsa").addClass("modalIcoIsaOK");
+                
             }
         });
       });
@@ -175,6 +183,7 @@ function comprobarEmail(){
 }
 
 function codigoDiv() {
+    $(".espacio").show();
     $("#codigo").slideDown();
     $("#E-mail").prop("readonly", true);
     $("#E-mail-2").prop("readonly", true);
@@ -248,6 +257,8 @@ function codigos(){
                         $("#datos").slideDown();
 
                         centrarDiv("#datos");
+
+                        $('#codigoEmail').prop('readonly', true);
                         
                     }else{
                         $("#codigoEmail").addClass("is-invalid");
@@ -271,18 +282,33 @@ function emailExiste(){
             email: email
         },
         success: function(response) {
-            var msm = "<a href='https://dinamicopd.com/' class='btnCerrar'>Cerrar</a>";
+            var msm = "<a href='https://dinamicopd.com/' class='btnNext'>Cerrar</a>";
             switch(response) {
                 case 'existe':
                     $('#respuestaForm').modal('show');
-                    $('#msmVerificaEmail').text("El correo que proporcionaste ya está registrado. Si quieres actualizar tus cursos, por favor, haz clic en 'Actualizar'");                   
-                    var msm = "<a href='https://dinamicopd.com/moodle/dinapage/LoginPRF.php' class='btnNext'>Actualizar</a>" + msm;
+                    $('#tituloModalIsa').html('NO SE PUDO<br>ENVIAR EL CÓDIGO'); 
+                    $('#msmVerificaEmail').text("El correo que proporcionaste ya está registrado.");
                     $('#modal-footer').html(msm);
+
+                    $('.modalIcoIsa').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.71 80.69"><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><line class="ico_isa" x1="24.82" y1="25.32" x2="54.88" y2="55.37"/><line class="ico_isa" x1="55.15" y1="25.08" x2="24.56" y2="55.61"/><ellipse class="ico_isa" cx="39.85" cy="40.34" rx="37.85" ry="38.34"/></g></g></svg>');
+                    $('#avisoMonito').html('<img class="avisoMonito" src="img/fomrLarge/avisoMonito@3x.png" alt="">');
+
+                    $("#tituloIsa").addClass("tituloIsaNO");
+                    $("#modalIcoIsa").addClass("modalIcoIsaNO");
+                    
                     break;
                 case 'si':
                     $('#respuestaForm').modal('show');
+                    $('#tituloModalIsa').html('NO SE PUDO<br>ENVIAR EL CÓDIGO'); 
                     $('#msmVerificaEmail').text("Tu dirección de correo electrónico ya está registrada. Por favor, espera un mensaje de confirmación en tu bandeja de entrada para continuar con el proceso de inscripción en la plataforma");                   
                     $('#modal-footer').html(msm);
+
+                    $('.modalIcoIsa').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.71 80.69"><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><line class="ico_isa" x1="24.82" y1="25.32" x2="54.88" y2="55.37"/><line class="ico_isa" x1="55.15" y1="25.08" x2="24.56" y2="55.61"/><ellipse class="ico_isa" cx="39.85" cy="40.34" rx="37.85" ry="38.34"/></g></g></svg>');
+                    $('#avisoMonito').html('<img class="avisoMonito" src="img/fomrLarge/avisoMonito@3x.png" alt="">');
+
+                    $("#tituloIsa").addClass("tituloIsaNO");
+                    $("#modalIcoIsa").addClass("modalIcoIsaNO");
+
                     break;
                 case 'no':
                     break;

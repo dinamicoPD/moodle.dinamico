@@ -14,6 +14,7 @@ require_once("cargar_edicion.php");
 
 $registroId = $_POST['dato'];
 $total = $_POST['total'];
+$colegiosAll = $_POST['colegios'];
 
 mysqli_set_charset($link, "utf8");
 
@@ -43,13 +44,24 @@ $cantidad_grupos_ins = $cantidad_datos_ins / 7;
 $conteoInicial = 0;
 
 $judarofe = 0;
+$cadenaComparativa = "";
+$colegiosInscritos = "";
 
 for ($i = 1; $i <= $cantidad_grupos_ins; $i++){
     $conteo = ($i * 7) - 1;
-    for ($j = $conteoInicial; $j <= $conteo; $j+=7){  
-        $colegiosInscritos .= '
-            <option value="'.$arrayGrupos[$j].'">'.$arrayGrupos[$j+1].'</option>
-        ';
+    for ($j = $conteoInicial; $j <= $conteo; $j+=7){
+        $cadenaComparativa = '<option value="'.$arrayGrupos[$j].'">'.$arrayGrupos[$j+1].'</option>';
+
+        if (strpos($colegiosAll, $cadenaComparativa) !== false) {
+            $colegiosAll = str_replace($cadenaComparativa, "", $colegiosAll);
+        }
+
+        if (strpos($colegiosInscritos, $cadenaComparativa) === false) {
+            $colegiosInscritos .= '
+                <option value="'.$arrayGrupos[$j].'">'.$arrayGrupos[$j+1].'</option>
+            ';
+        }
+
         $matriculados .='
             <div class="input-group" name="fe_'.$i.'">
                 <select class="form-select" id="fender'.$judarofe++.'">
@@ -79,7 +91,7 @@ for ($k = 1; $k <= $total; $k++){
     '<div class="input-group">
         <select class="form-select" id="fender'.$judarofe++.'">
             <option selected disabled value="">Seleccionar</option>
-            '. $colegiosInscritos .'
+            '. $colegiosInscritos . $colegiosAll .'
         </select>
         <select class="form-select" name="ju_'.$k.'" onchange="libro('.$k.')" id="fender'.$judarofe++.'">
             <option selected disabled value="">Seleccionar</option>

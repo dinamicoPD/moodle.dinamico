@@ -183,6 +183,9 @@ if ($result === true) {
   $form_err = "Error al eliminar registros: " . $link->error;
 }
 
+$mailSender = new MailDispatcher(); 
+$mailSender->sendEmailToStudent($Email,$userName,$CourseName,$GroupName,$TeacherCompleteName,$unencodedPassword);
+
 mysqli_close($link);
 mysqli_close($link2);
 session_destroy();

@@ -178,7 +178,7 @@ class MailDispatcher{
 									<br>
 									<p class="fontNegro fontPoppins"><strong>¿Cómo cambiar<br>tu contraseña?</strong></p>
 									<br>
-									<a href="http://dinamicopd.com/moodle/dinapage/LoginPasswordChange.php?3m4il='.$userName.'&cl4v3='.$password.'"><img class="img80" src="cid:imagen_paso1" alt=""></a>
+									<a href="http://172.18.174.49/moodle/moodle/dinapage/LoginPasswordChange.php?3m4il='.urlencode($userName).'&cl4v3='.urlencode($password).'"><img class="img80" src="cid:imagen_paso1" alt=""></a>
 									<br>
 									<p class="fontAzul fontPoppins"><strong>También puedes</strong></p>
 									<p class="fontNegro fontPoppins"><strong>escanear el QR:</strong></p>
@@ -373,7 +373,7 @@ class MailDispatcher{
 		$tamanio2 = 10;
 		$level2 = 'M';
 		$frameSize2 = 2;
-		$contenido2 = $dominio.'/moodle/moodle/dinapage/LoginPasswordChange.php?3m4il='.$userName.'&cl4v3='.$tempPassword;
+		$contenido2 = $dominio.'/moodle/moodle/dinapage/LoginPasswordChange.php?3m4il='.urlencode($userName).'&cl4v3='.urlencode($tempPassword);
 		QRcode::png($contenido2, $filenameQR_change, $level2, $tamanio2, $frameSize2);
 
 		$mail = new PHPMailer(true);

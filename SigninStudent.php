@@ -9,7 +9,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro | Dinámico Pedagogía y Diseño</title>
+    <title>Registro estudiante | Dinámico Pedagogía y Diseño</title>
     <link rel="icon" href="img/cara.png" type="image/x-icon">
     <link rel="stylesheet" href="css/8_0_1_normalize.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap_5_3_0_min.css">
@@ -138,7 +138,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
     <section id="piso_4">
         <img id="pergamino" src="img/fomrLarge/pergamino.png" alt="">
         <div class="pergaminoTxt">
-            <p id="Txtpergamino">Introduce el código de verificación que se envió a tu correo electrónico. Si no has recibido este mensaje, recuerda darle un vistazo a la bandeja de spam de tu e-mail.</p>
+            <p id="Txtpergamino">Introduce el código de verificación que se envió a tu correo electrónico. Si no has recibido este mensaje, recuerda darle un vistazo a la bandeja de spam de <br> tu e-mail.</p>
             <div class="jr"></div>
             <div class="columnasX2">
                 <div class="izquierda">
@@ -317,12 +317,6 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
         </div>
     </section>
 </form>
-<!--<div class="contenedor">
-    <form method="post" class="formulario" id="formulario" action="inscripcionDocente.php">
-        <p><?php echo $nombreColegio; ?></p>
-        <p><?php echo $nombreMunicipio; ?></p>
-    </form>
-</div>-->
 
 <script>
     var contenedor = document.querySelector("#contenedor");

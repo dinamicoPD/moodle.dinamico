@@ -90,7 +90,7 @@ if(!$result) {
                                 </svg>
                             </button>';           
         }else{
-            $colegios .= '<select name="Instituto_'.$JD.'_'.$Preinscripcion["Id_preDocente"].'" class="form-select" disabled>';
+            $colegios .= '<select name="Instituto_'.$JD.'_'.$Preinscripcion["Id_preDocente"].'" class="form-select InstitutoXD_'.$Preinscripcion["Id_preDocente"].'" disabled>';
                 $colegios .= '<option selected value="'.$array_ubicacion[$j+4].'">'.$array_ubicacion[$j+5].'</option>';
             $colegios .= '</select>';
                 $colegios .= '<input class="ocultarCss" name="Otro_'.$JD.'_'.$Preinscripcion["Id_preDocente"].'" type="text" class="form-control" readonly value="'.$array_ubicacion[$j+6].'">';

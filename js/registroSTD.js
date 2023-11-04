@@ -225,7 +225,14 @@ function down(valor){
             icon: 'error',
             title: 'Advertencia',
             text: 'No a completado el formulario correctamente',
+            iconColor: "#912a2d"
           })
+
+          $('.swal2-title').css({
+            'color': '#912a2d',
+            'text-shadow': '-0.2vw 0vw 0vw #61221D'
+          });
+
         return false;
     }else if(valor === 8){
         
@@ -233,7 +240,13 @@ function down(valor){
                 icon: 'success',
                 title: 'Bien',
                 text: 'formulario enviado',
+                iconColor: "#90BD1F"
               })
+
+              $('.swal2-title').css({
+                'color': '#90BD1F',
+                'text-shadow': '-0.2vw 0vw 0vw #77932B'
+              });
 
               $('#inscripciondocenteForm').submit();
 
@@ -265,7 +278,14 @@ function correoExiste(){
                         icon: 'error',
                         title: 'No se pudo enviar el código',
                         text: 'El correo que proporcionaste ya está registrado. Por favor, ponte en contacto con soporte para resolver este problema.',
+                        iconColor: "#912a2d"
                       })
+
+                      $('.swal2-title').css({
+                        'color': '#912a2d',
+                        'text-shadow': '-0.2vw 0vw 0vw #61221D'
+                      });
+
                     break;
                 case 'no existe':
                     codigoDiv();
@@ -359,7 +379,7 @@ function validacionSeccion_1(){
 
     //errores
     var err_form_1 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g;
-    var err_form_2 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d]/g;
+    var err_form_2 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d_.+-]/g;
     var err_form_3 = /([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})/g;
 
     //piso_2

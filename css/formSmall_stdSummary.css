@@ -1,0 +1,126 @@
+.tituloIsa{
+    color: #ffffff;
+    text-shadow: 0.2vw 0vw 0vw #2C2359;
+}
+
+.contenedor{
+    grid-template-columns: 45% 55% !important;
+    background: rgb(11,119,153);
+    background: linear-gradient(180deg, rgba(11,119,153,1) 0%, rgba(11,142,184,1) 9%, rgba(83,179,217,1) 50%, rgba(174,209,221,1) 100%);
+    background-repeat: no-repeat;
+}
+
+#particles-js{
+    background-color: #7FC4D6;
+}
+
+.Bienvenida{
+    position: relative;
+}
+
+#arbolitoIsa{
+    width: 40vw;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.contenedorFormulario{
+    background-color: rgba(0, 0, 0, 0.11);
+}
+
+.btnNext{
+    padding: 0.3vw;
+    text-align: center;
+    border-radius: 0.5vw;
+    font-family: 'poppins-black', sans-serif;
+    font-size: 1.6vw;
+    background-color: #90BD1F;
+    color: #ffffff;
+    border: 0.3vw solid #77932B;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+}
+
+#b1,#b4,#b7,#b10,#b13,#b16,#b19,#b22,#b25,#b28,#b31,#b34,#b37,#b40,#b43{
+    animation: color-animation 1s infinite;
+}
+#b2,#b5,#b8,#b11,#b14,#b17,#b20,#b23,#b26,#b29,#b32,#b35,#b38,#b41{
+    animation: color-animation1 1s infinite;
+}
+#b3,#b6,#b9,#b12,#b15,#b18,#b21,#b24,#b27,#b30,#b33,#b36,#b39,#b42{
+    animation: color-animation2 1s infinite;
+}
+
+@keyframes color-animation {
+    0% {
+        fill: #FFDC4A;
+    }
+    25% {
+        fill: #b9b6a8;
+    }
+    50% {
+        fill: #FFF0B3;
+    }
+    100% {
+        fill: #FFDC4A;
+    }
+  }
+
+@keyframes color-animation1 {
+    0% {
+        fill: #FFF0B3;
+    }
+    25% {
+        fill: #FFDC4A;
+    }
+    50% {
+        fill: #b9b6a8;
+    }
+    100% {
+        fill: #FFF0B3;
+    }
+  }
+
+@keyframes color-animation2 {
+    0% {
+        fill: #b9b6a8;
+    }
+    25% {
+        fill: #FFF0B3;
+    }
+    50% {
+        fill: #FFDC4A;
+    }
+    100% {
+        fill: #b9b6a8;
+    }
+
+  }
+
+.spanRF{
+    background-color: #2C2359;
+    border: 1px solid #2C2359;
+    margin: 0;
+    padding: 0;
+}
+
+.labelRF{
+    color: #ffffff;
+}
+
+#letreritoIsaBella{
+    width: 10vw;
+    position: absolute;
+    bottom: 8.5vw;
+    left: 4.5vw;
+    z-index: -2;
+}
+
+.nube{
+    z-index: -3;
+    position: absolute;
+}

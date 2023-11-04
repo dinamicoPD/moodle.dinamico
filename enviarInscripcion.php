@@ -142,7 +142,7 @@ for ($i=0;$i<count($Curso);$i++){
            $tamanio = 10;
            $level = 'M';
            $frameSize = 2;
-           $contenido = $dominio.'/moodle/dinapage/LoginSTD.php?d1n4m1c0='.$codGrupo;
+           $contenido = $dominio.'/moodle/dinapage/LoginSTD.php?d1n4m1c0='.urlencode($codGrupo);
 
            QRcode::png($contenido, $filenameQR_2, $level, $tamanio, $frameSize);
         }
@@ -273,7 +273,7 @@ $filenameQR_change = $filenameQR.'change.png';
 $tamanio2 = 10;
 $level2 = 'M';
 $frameSize2 = 2;
-$contenido2 = $dominio.'/moodle/dinapage/LoginPasswordChange.php?3m4il='.$userName.'&cl4v3='.$codigoDocente;
+$contenido2 = $dominio.'/moodle/dinapage/LoginPasswordChange.php?3m4il='.urlencode($userName).'&cl4v3='.urlencode($codigoDocente);
 QRcode::png($contenido2, $filenameQR_change, $level2, $tamanio2, $frameSize2);
 
 $mailSender = new MailDispatcher(); 

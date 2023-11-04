@@ -145,6 +145,16 @@ function editGrupos(registro){
 
     var totalGrupos = $('input[name="addGrup'+registro+'"]').val();
 
+    var selects = $('.InstitutoXD_'+registro);
+    var valores = "";
+
+    selects.each(function() {
+        var valor = $(this).val();
+        var textoValor = $(this).find("option:selected").text();
+        valores += '<option value="'+valor+'">'+textoValor+'</option>';
+    });
+    console.log(valores);
+
     if (totalGrupos == "" || totalGrupos == null || totalGrupos == 0){
         alert("Ingrese un valor valido");
     }else{
@@ -153,7 +163,8 @@ function editGrupos(registro){
             url: 'grupo_1.php',
             type: 'POST',
             data: { dato: registro,
-                    total: totalGrupos},
+                    total: totalGrupos,
+                    colegios: valores},
             success: function(response){
 
                 var datos = JSON.parse(response);

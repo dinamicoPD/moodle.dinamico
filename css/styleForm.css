@@ -450,3 +450,30 @@ section{
     font-weight: bold;
     position: relative;
 }
+/* ----------- alert ---------------*/
+.swal2-title{
+    text-align: center;
+    font-size: 3vw;
+    font-family: 'poppins-black', sans-serif;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.swal2-styled{
+    padding: 0vw 0.8vw;
+    text-align: center;
+    border-radius: 0.5vw;
+    font-family: 'poppins-black', sans-serif;
+    font-size: 2.5vw;
+    background-color: #90BD1F !important;
+    color: #ffffff !important;
+    border: 0.3vw solid #77932B !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.swal2-html-container{
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    color: #9B8EDE !important;
+    text-align: center;
+}
