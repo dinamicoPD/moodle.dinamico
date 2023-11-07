@@ -158,6 +158,7 @@ function cofrePass(proceder) {
             "id": "cofre4",
             "src": "img/fomrLarge/cofre4.png"
         });
+        down(7);
     } else {
         if (validationNewPass === "" || $("#validationNewPass").hasClass("is-invalid")) {
             console.log("1");

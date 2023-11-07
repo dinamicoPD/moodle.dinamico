@@ -6,14 +6,22 @@ if (is_array($dataReceived)) {
     $count = $dataReceived['count'] ?? 0;
     $count_2 = $dataReceived['count_2'] ?? 0;
     $email = filter_var($dataReceived['email'] ?? '', FILTER_VALIDATE_EMAIL);
-    $nombre = filter_var($dataReceived['FirstName'] ?? '', FILTER_SANITIZE_STRING);
-    $nombre .= ',' . filter_var($dataReceived['MiddleName'] ?? '', FILTER_SANITIZE_STRING);
-    $nombre .= ',' . filter_var($dataReceived['LastName'] ?? '', FILTER_SANITIZE_STRING);
-    $nombre .= ',' . filter_var($dataReceived['SecondLastName'] ?? '', FILTER_SANITIZE_STRING);
+    $FirstName = filter_var($dataReceived['FirstName'] ?? '', FILTER_SANITIZE_STRING);
+    $MiddleName = filter_var($dataReceived['MiddleName'] ?? '', FILTER_SANITIZE_STRING);
+    $LastName = filter_var($dataReceived['LastName'] ?? '', FILTER_SANITIZE_STRING);
+    $SecondLastName = filter_var($dataReceived['SecondLastName'] ?? '', FILTER_SANITIZE_STRING);
     $phone = filter_var($dataReceived['Tel'] ?? '', FILTER_SANITIZE_STRING);
     $asesor = $dataReceived['asesor'] ?? '';
     $asesorData = reset($asesor);
     $definitivoDel = '';
+
+    $email = strtolower(trim($email));
+    $FirstName = ucfirst(strtolower(trim($FirstName)));
+    $MiddleName = ucfirst(strtolower(trim($MiddleName)));
+    $LastName = ucfirst(strtolower(trim($LastName)));
+    $SecondLastName = ucfirst(strtolower(trim($SecondLastName)));
+
+    $nombre = $FirstName . ',' . $MiddleName . ',' . $LastName . ',' . $SecondLastName;
 
     $sqlSearch = "SELECT Id_preDocente FROM PreDocentes WHERE email = ? LIMIT 1";
     $stmtSearch = $link->prepare($sqlSearch);

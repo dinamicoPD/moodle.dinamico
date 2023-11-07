@@ -61,7 +61,7 @@
                         <label for="E-mail" class="form-label formLabel labelcentrado">E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input name="email" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
+                            <input name="email" autocomplete="off" type="email" class="form-control formInput" id="E-mail" aria-describedby="inputGroupPrepend3 E-mailFeedback" placeholder="Introduce tu correo electrónico" required>
                             <div id="E-mailFeedback" class="invalid-feedback mal">
                                 <?php echo $alerta ?> Ingresa una dirección de correo electrónico válida.
                             </div>
@@ -73,7 +73,7 @@
                         <label for="E-mail-2" class="form-label formLabel labelcentrado">Confirmar E-mail*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $arroba ?></span>
-                            <input type="email" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" required>
+                            <input type="email" autocomplete="off" class="form-control formInput" id="E-mail-2" aria-describedby="inputGroupPrepend3 E-mail-2Feedback" placeholder="Introduce nuevamente tu correo electrónico" required>
                             <div class="invalid-feedback mal">
                                 <?php echo $alerta ?> Las direcciones de correo son diferentes.
                             </div>
@@ -100,7 +100,7 @@
                         <label for="codigoEmail" class="form-label formLabel labelSangria">Código de <br> verificación*</label>
                         <div class="input-group has-validation">
                             <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $check ?></span>
-                            <input type="number" class="form-control formInput" id="codigoEmail" aria-describedby="inputGroupPrepend3 codigoEmailFeedback" placeholder="Código" required>
+                            <input type="number" autocomplete="off" class="form-control formInput" id="codigoEmail" aria-describedby="inputGroupPrepend3 codigoEmailFeedback" placeholder="Código" required>
                             <div class="invalid-feedback mal">
                                 <?php echo $alerta ?> Código incorrecto.
                             </div>
@@ -139,7 +139,7 @@
                         <div class="col-sm-12 margenInput">
                             <label for="nombre-1" class="form-label formLabel">Primer nombre*</label>
                             <div class="input-group has-validation">
-                                <input name="FirstName" type="text" class="form-control formInput" id="FirstName" aria-describedby="inputGroupPrepend3 nombre-1Feedback" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" required>
+                                <input name="FirstName" autocomplete="off" type="text" class="form-control formInput" id="FirstName" aria-describedby="inputGroupPrepend3 nombre-1Feedback" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" required>
                                 <div id="nombre-1Feedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Por favor ingresa tu nombre.
                                 </div>
@@ -150,7 +150,7 @@
                         <div class="col-sm-12 margenInput">
                             <label for="nombre-2" class="form-label formLabel">Segundo nombre</label>
                             <div class="input-group has-validation">
-                                <input name="MiddleName" type="text" class="form-control formInput" id="MiddleName" aria-describedby="inputGroupPrepend3 nombre-2Feedback" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre">
+                                <input name="MiddleName" autocomplete="off" type="text" class="form-control formInput" id="MiddleName" aria-describedby="inputGroupPrepend3 nombre-2Feedback" onkeyup="this.value = this.value.toUpperCase();" placeholder="Nombre">
                                 <div id="nombre-2Feedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Por favor ingresa tu nombre.
                                 </div>
@@ -168,7 +168,7 @@
                         <div class="col-sm-12 margenInput">
                             <label for="apellido-1" class="form-label formLabel">Primer apellido*</label>
                             <div class="input-group has-validation">
-                                <input name="LastName" type="text" class="form-control formInput" id="LastName" aria-describedby="inputGroupPrepend3 apellido-1Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();" required>
+                                <input name="LastName" autocomplete="off" type="text" class="form-control formInput" id="LastName" aria-describedby="inputGroupPrepend3 apellido-1Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();" required>
                                 <div id="apellido-1Feedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Por favor ingresa tu apellido.
                                 </div>
@@ -179,7 +179,7 @@
                         <div class="col-sm-12 margenInput">
                             <label for="apellido-2" class="form-label formLabel">Segundo apellido</label>
                             <div class="input-group has-validation">
-                                <input name="SecondLastName" type="text" class="form-control formInput" id="SecondLastName" aria-describedby="inputGroupPrepend3 apellido-2Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();">
+                                <input name="SecondLastName" autocomplete="off" type="text" class="form-control formInput" id="SecondLastName" aria-describedby="inputGroupPrepend3 apellido-2Feedback" placeholder="Apellido" onkeyup="this.value = this.value.toUpperCase();">
                                 <div id="apellido-2Feedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Por favor ingresa tu apellido.
                                 </div>
@@ -204,7 +204,7 @@
                             <label for="Tel" class="form-label formLabel labelSangria">Número de <br> Teléfono*</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $telefono ?></span>
-                                <input name="Tel" type="number" class="form-control formInput" id="Tel" aria-describedby="inputGroupPrepend3 TelFeedback" placeholder="Número telefónico" required>
+                                <input name="Tel" type="number" autocomplete="off" class="form-control formInput" id="Tel" aria-describedby="inputGroupPrepend3 TelFeedback" placeholder="Número telefónico" required>
                                 <div class="invalid-feedback mal">
                                     <?php echo $alerta ?> Ingresa tu número telefónico.
                                 </div>
@@ -290,7 +290,7 @@
                             <div class="row">
                                 <div class="col margenInput">
                                     <label for="otro" class="form-label formLabel">&nbsp;</label>
-                                    <input name="otro_1" style="visibility: hidden" type="text" class="form-control formInput" id="otro_1" aria-describedby="otroFeedback" oninput="datosCursos(1)" placeholder="Otra:" onkeyup="this.value = this.value.toUpperCase();">
+                                    <input name="otro_1" autocomplete="off" style="visibility: hidden" type="text" class="form-control formInput" id="otro_1" aria-describedby="otroFeedback" oninput="datosCursos(1)" placeholder="Otra:" onkeyup="this.value = this.value.toUpperCase();">
                                     <div id="otroFeedback" class="invalid-feedback mal">
                                         <?php echo $alerta ?> Por favor ingresa el nombre de la institución.
                                     </div>
@@ -436,7 +436,7 @@
                         <div class="row">
                             <div class="col margenInput">
                                 <label for="sigla" class="form-label formLabel">Sigla*</label>
-                                <input name="sigla_1" type="number" class="form-control  formInput" id="sigla_1" aria-describedby="siglaFeedback" placeholder="Ej: 801" oninput="edicionSigla(1)">
+                                <input name="sigla_1" autocomplete="off" type="number" class="form-control  formInput" id="sigla_1" aria-describedby="siglaFeedback" placeholder="Ej: 801" oninput="edicionSigla(1)">
                                 <div id="siglaFeedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Por favor ingresa la sigla del grupo.
                                 </div>

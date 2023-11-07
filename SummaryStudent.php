@@ -1397,7 +1397,7 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Nombre Completo</label>
 							<div class="input-group">
                                 <span class="input-group-text spanRF"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.76 30.69"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><g id="Layer_6" data-name="Layer 6"><path class="cls-1" d="M15.24,17a4.81,4.81,0,1,0-6.8-.16L8.6,17a7.64,7.64,0,0,0-4.28,6.85,1.07,1.07,0,0,0,1.07,1.07H18.55a1.06,1.06,0,0,0,1.07-1v0A7.6,7.6,0,0,0,15.24,17Zm-6-3.47a2.67,2.67,0,1,1,2.67,2.67h0a2.66,2.66,0,0,1-2.66-2.65ZM6.52,22.79a5.51,5.51,0,0,1,10.8,0Z"/><path class="cls-1" d="M34.11,15.56H22.69a1.07,1.07,0,0,1,0-2.14H34.11a1.07,1.07,0,0,1,0,2.14Z"/><path class="cls-1" d="M30.81,20.27H22.73a1.07,1.07,0,0,1,0-2.14h8.08a1.07,1.07,0,0,1,0,2.14Z"/><path class="cls-1" d="M34.71,2.39H25A2.62,2.62,0,0,0,22.42,0H17.35a2.61,2.61,0,0,0-2.6,2.39H5.05A5,5,0,0,0,0,7.44v18.2a5,5,0,0,0,5.05,5.05H34.71a5,5,0,0,0,5-5.05h0V7.44a5,5,0,0,0-5-5.05Zm-18,.25A.62.62,0,0,1,17.35,2h5.07a.62.62,0,0,1,.6.62V4.17a.6.6,0,0,1-.6.6H17.35a.6.6,0,0,1-.61-.6Zm21,23a3,3,0,0,1-3,3H5.05a3,3,0,0,1-3-3V7.44a3,3,0,0,1,3-3h9.7a2.6,2.6,0,0,0,2.6,2.38h5.07A2.61,2.61,0,0,0,25,4.41h9.69a3,3,0,0,1,3,3Z"/></g></g></g></svg></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $FullName; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $FullName; ?>" readonly>
 							</div>
                         </div>
                     </div>
@@ -1408,14 +1408,14 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Nombre de Usuario</label>
 							<div class="input-group">
                                 <span class="input-group-text spanRF"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23.85 30.35"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><g id="_05_user" data-name=" 05 user"><path class="cls-1" d="M11.92,0A8.67,8.67,0,1,0,20.6,8.67,8.67,8.67,0,0,0,11.92,0Zm0,15.18a6.51,6.51,0,1,1,6.51-6.51A6.51,6.51,0,0,1,11.92,15.18Z"/><path class="cls-1" d="M11.92,15.18A11.92,11.92,0,0,0,0,27.1a3.25,3.25,0,0,0,3.25,3.25H13.66a1.09,1.09,0,1,0,0-2.17H3.25A1.08,1.08,0,0,1,2.17,27.1a9.76,9.76,0,1,1,19.51,0,1.08,1.08,0,0,1-1.08,1.08H19.51a1.09,1.09,0,0,0,0,2.17H20.6a3.25,3.25,0,0,0,3.25-3.25A11.93,11.93,0,0,0,11.92,15.18Z"/></g></g></g></svg></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $Username; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $Username; ?>" readonly>
 							</div>
                         </div>
                         <div class="col">
                             <label for="codCartilla" class="form-label labelRF">Teléfono</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $telefono ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $Phone; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $Phone; ?>" readonly>
 							</div>
                         </div>
                     </div>
@@ -1426,7 +1426,7 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Email</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $arroba ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $Email; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $Email; ?>" readonly>
 							</div>
                         </div>
                     </div>
@@ -1437,14 +1437,14 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Cartilla</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $cartilla ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $laLicencia; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $laLicencia; ?>" readonly>
 							</div>
                         </div>
                         <div class="col">
                             <label for="codCartilla" class="form-label labelRF">Contraseña</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $accesoPass ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $unencodedPassword; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $unencodedPassword; ?>" readonly>
 							</div>
                         </div>
                     </div>
@@ -1460,7 +1460,7 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Institución</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $instituto ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $Institution; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $Institution; ?>" readonly>
 							</div>
                         </div>
                     </div>
@@ -1471,7 +1471,7 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Grupo y Curso</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $curso ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $hmtlGroup; ?>">
+								<input type="text" class="form-control inputRF" value="<?php echo $hmtlGroup; ?>" readonly>
 							</div>
                         </div>
                     </div>
