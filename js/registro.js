@@ -486,6 +486,8 @@ function datosCursos(valor){
 
         }else{
             $("#otro_"+valor).css("visibility", "hidden");
+            $("#otro_"+valor).removeClass("is-invalid");
+            $("#otro_"+valor).addClass("is-valid");
             $("#otro_"+valor).val("");
         }
     }

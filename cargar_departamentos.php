@@ -19,8 +19,14 @@ if(mysqli_num_rows($result) > 0) {
 
 $departamentoFull = "";
 foreach($departamentos as $departamento) {
-    $departamentoFull .= '<option value="' . $departamento['departamentoId'] . '">' . $departamento['departamento'] . '</option>';
+    if($departamento['departamentoId'] === '35'){
+        $departamentoPlataforma = '<option value="' . $departamento['departamentoId'] . '">' . $departamento['departamento'] . '</option>';
+    }else{
+        $departamentoFull .= '<option value="' . $departamento['departamentoId'] . '">' . $departamento['departamento'] . '</option>';
+    }
 }
+
+$departamentoFull = $departamentoFull . $departamentoPlataforma;
 
 mysqli_free_result($result);
 ?>

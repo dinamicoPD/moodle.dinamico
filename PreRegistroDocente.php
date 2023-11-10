@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro docente | Dinámico Pedagogia y Diseño</title>
+    <title>Registro docente | Dinámico Pedagog&iacute;a y Diseño</title>
     <link rel="icon" href="img/cara.png" type="image/x-icon">
     <link rel="stylesheet" href="css/8_0_1_normalize.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap_5_3_0_min.css">

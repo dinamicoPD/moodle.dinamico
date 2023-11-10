@@ -6,8 +6,7 @@ require ('phpqrcode/qrlib.php');
 include('Mailer.php');
 
 // crea caréta temporal para codigo qr
-$dominio = "http://172.18.174.49/moodle";
-//$dominio = "https://dinamicopd.com"
+$dominio = "https://dinamicopd.com";
 $DIR = 'temp/';
 if(!file_exists($DIR)){
     mkdir($DIR);

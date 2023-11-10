@@ -56,5 +56,5 @@
     return;
     }
     session_destroy();
-    header("Location: http://".$_SERVER['HTTP_HOST']."/moodle");
+    header("Location: https://dinamicopd.com/moodle");
 ?>
