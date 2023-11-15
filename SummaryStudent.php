@@ -175,7 +175,7 @@ require_once('iconos.php');
                         clip-path:url(#clip-path-2);
                     }
                     .cls-47{
-                        fill:#cf8e81;
+                        fill:#821D2E;
                     }
                     .cls-126,.cls-127,.cls-128,.cls-129,.cls-130,.cls-131,.cls-47,.cls-49,.cls-58,.cls-59,.cls-60,.cls-61,.cls-62,.cls-63,.cls-64,.cls-65,.cls-66,.cls-67,.cls-68,.cls-70,.cls-71,.cls-72,.cls-73,.cls-74,.cls-75,.cls-76,.cls-77,.cls-78,.cls-79,.cls-80,.cls-81,.cls-82,.cls-83,.cls-84{
                         fill-rule:evenodd;
