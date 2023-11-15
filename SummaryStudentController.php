@@ -7,12 +7,14 @@
     $form_err="";
 
     if(!isset($_SESSION["loginStudentSummary"]) || $_SESSION["loginStudentSummary"] != true){
-    header("location: LoginSTD.php");
-    exit;
+        header("location: LoginSTD.php");
+        exit;
     }
+
     $idStudent = $_SESSION["studentId"];
     $unencodedPassword = $_SESSION["unencodedPassword"];
     $laLicencia = $_SESSION["laLicencia"];
+    $hmtlGroup = $_SESSION["grupo"];
     //$idStudent = 30;
     
     //Take the data from the teacher provided.
@@ -35,26 +37,12 @@
                 return;
         }
 
-        $FullName = $FirstName . " " .  $LastName;
-    
-     $sql = "SELECT crs.ShortName as course1, grp.GrpName as group1, grp.EnrolmentKey as enrolmentkey1, enrl.GroupCode as groupcode FROM User usr INNER JOIN Classroom clsrm ON usr.UserId = clsrm.UserId INNER JOIN UserGrp grp ON clsrm.UserGrpId = grp.UserGrpId INNER JOIN Course crs ON grp.CourseId = crs.CourseId INNER JOIN Enrolment enrl ON grp.UserGrpId = enrl.UserGrpId WHERE usr.UserId = ".$idStudent;
+        $FullName = $FirstName . " " .  $MiddleName . " " .  $LastName . " " .  $SecondLastName;
 
-
-    $hmtlGroup = "";
-
-     if ($result = $link->query($sql)) {
-            while($row = $result->fetch_assoc()) {
-             $hmtlGroup = $row["course1"].' '.$row["groupcode"]; 
-            }
-        }else{
-                $form_err="Error de conexión con base de datos, contacte al servicio de administración";
-                return;
+        if($_SERVER["REQUEST_METHOD"] != "POST"){
+            return;
         }
-
-
-    if($_SERVER["REQUEST_METHOD"] != "POST"){
-    return;
-    }
+    
     session_destroy();
     header("Location: https://dinamicopd.com/moodle");
 ?>

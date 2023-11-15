@@ -10,6 +10,15 @@
     font-family: 'Poppins-Black';
     src: url(../font/Poppins-Black.otf);
 }
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url(../font/RobotoMono-Regular.ttf);
+}
+
+.letraClave{
+    font-family:"Roboto Mono",monospace;
+    font-weight: bold;
+}
 
 #particles-js {
     position: fixed;

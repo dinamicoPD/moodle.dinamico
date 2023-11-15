@@ -23,6 +23,9 @@ if (is_array($dataReceived)) {
 
     $nombre = $FirstName . ',' . $MiddleName . ',' . $LastName . ',' . $SecondLastName;
 
+    $sql = "DELETE FROM ConfirmaCodigo WHERE Email = '$email'";
+    $result = $link->query($sql);
+
     $sqlSearch = "SELECT Id_preDocente FROM PreDocentes WHERE email = ? LIMIT 1";
     $stmtSearch = $link->prepare($sqlSearch);
     $stmtSearch->bind_param("s", $email);

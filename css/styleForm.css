@@ -436,11 +436,29 @@ section{
     bottom: 1vw;
     right: 3vw;
     width: 4vw;
+    transition: all 1s ease-out;
+    animation: vibrar2 3s infinite;
 }
 
 .flechita img{
     width: 100%;
     cursor: pointer;
+}
+
+
+@keyframes vibrar2 {
+    0%, 10%, 20%, 30%, 40% {
+      transform: scale(1);
+    }
+    5%, 15%, 25%, 35%, 45% {
+      transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.2);
+    }
 }
 
 #respa{

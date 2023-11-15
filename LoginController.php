@@ -8,7 +8,6 @@ require_once('../../config-ext.php');
 
 if(isset($_GET['d1n4m1c0'])){
     $variable1 = $_GET['d1n4m1c0'];
-    // Resto de tu código aquí
 } else {
     // Manejo del caso cuando las variables están vacías
     $variable1 = "";
@@ -169,7 +168,7 @@ if($statusfound == "O"){
     if($typeofoperation == 1){
         $_SESSION["loggedinRegister"] = true;
         // Redirect user to Register Teacher
-        header("location: registroDocente.php");
+        header("location: PreRegistroDocente.php");
     }else if ($typeofoperation == 2){
         // Redirect user to Register Stundent
         
@@ -186,10 +185,9 @@ if($statusfound == "O"){
 if($statusfound == "W"){
 
     if($typeofoperation == 1){
-        //Redirect Teacher to groups creation form.
-        $_SESSION["teacherId"] = $useridfound;
-        $_SESSION["loginGroupsSummary"] = true;
-        header("location: GroupSummary.php");
+
+        $form_err = "Error al actualizar la licencia, contacte al servicio de administración1";
+                    return;
         //$form_err="Teacher must be redirected to Group creation form";
         //return;
     }
@@ -274,7 +272,7 @@ if($statusfound == "W"){
                 // Bind variables to the prepared statement as parameters
                 mysqli_stmt_bind_param($stmt, "ii", $IdStudent ,$licenceidfound);
                 if(!mysqli_stmt_execute($stmt)){
-                     $form_err = "Error al actualizar la licencia, contacte al servicio de administración";
+                     $form_err = "Error al actualizar la licencia, contacte al servicio de administración2";
                     return;
                 }
             }
@@ -289,21 +287,22 @@ if($statusfound == "W"){
             
             ActivateAccount($Email);
 
-            $_SESSION["loginStudentSummary"] = true;
+            $form_err = "La licencia que estás intentando utilizar ya ha sido utilizada por otra persona. Por favor, ponte en contacto con el servicio de administración para obtener más información o verifica tus credenciales de ingreso.";
+            return;
+
+            /*$_SESSION["loginStudentSummary"] = true;
             $_SESSION["studentId"] = $IdStudent;
-            header("location: SummaryStudent.php");
+            header("location: SummaryStudent.php");*/
     }
 }
 
 if($statusfound == "A"){
     if($typeofoperation == 1){
-        $_SESSION["teacherId"] = $useridfound;
-        $_SESSION["loginGroupsSummary"] = true;
-         header("location: GroupSummary.php");
+        $form_err = "La licencia docente que estás intentando utilizar ya ha sido utilizada por otra persona. Por favor, ponte en contacto con el servicio de administración para obtener más información.";
+                    return;
     }else if ($typeofoperation == 2){
-        $_SESSION["studentId"] =  $useridfound;
-        $_SESSION["loginStudentSummary"] = true;
-         header("location: SummaryStudent.php");
+        $form_err = "La licencia que estás intentando utilizar ya ha sido utilizada por otra persona. Por favor, ponte en contacto con el servicio de administración para obtener más información o verifica tus credenciales de ingreso.";
+            return;
     }
 }
 

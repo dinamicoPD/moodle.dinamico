@@ -252,10 +252,20 @@ function down(valor){
               $('#inscripciondocenteForm').submit();
 
         }else{
-            contenedor.slideDown().removeClass("ocultar");
-            $('html, body').animate({
-                scrollTop: contenedor.offset().top
-            }, 1000);
+            
+            if($("#userNamePD").val() != "" && valor === 6){
+                $("#piso_6").remove();
+                $("#piso_7").slideDown().removeClass("ocultar");
+                $('html, body').animate({
+                    scrollTop: $("#piso_7").offset().top
+                }, 1000);
+            }else{
+                contenedor.slideDown().removeClass("ocultar");
+                $('html, body').animate({
+                    scrollTop: contenedor.offset().top
+                }, 1000);
+            }
+
             if(valor === 4){
                 correoExiste();
             }  
@@ -272,26 +282,38 @@ function correoExiste(){
             email: email
         },
         success: function(response) {
-            switch(response) {
-                case 'existe':
-                    $("#piso_4").slideUp().addClass("ocultar");
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'No se pudo enviar el código',
-                        text: 'El correo que proporcionaste ya está registrado. Por favor, ponte en contacto con soporte para resolver este problema.',
-                        iconColor: "#912a2d"
-                      })
 
-                      $('.swal2-title').css({
-                        'color': '#912a2d',
-                        'text-shadow': '-0.2vw 0vw 0vw #61221D'
-                      });
-
-                    break;
-                case 'no existe':
-                    codigoDiv();
-                    break;
+            if (response === "no existe"){
+                codigoDiv();
+            }else{
+                codigoDiv();
+                var responseArray = response.split(",");
+                for (var i = 0; i < responseArray.length; i++){
+                    switch (i) {
+                        case 0:
+                            $("#validationName").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        case 1:
+                            $("#validationName2").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        case 2:
+                            $("#validationapellido").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        case 3:
+                            $("#validationapellido2").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        case 4:
+                            $("#userNamePD").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        case 5:
+                            $("#validationTelefono").val(responseArray[i]).prop("readonly", true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
+
         },
     });
 }

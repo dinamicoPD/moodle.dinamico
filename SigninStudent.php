@@ -161,7 +161,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
                     <div class="jr"></div>
                     <div class="row">
                         <div class="col">
-                            <button onclick="down(5);" id="btnName" class="btnNext hover" type="button">Enviar código</button>
+                            <button onclick="down(5);" class="btnNext hover" type="button">Continuar</button>
                         </div>
                     </div>
                 </div>
@@ -246,7 +246,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
                     </div>
                 </div>
                 <div class="derecha">
-                    <button onclick="down(6);" id="btnName" class="btnNext hover" type="button">Continuar</button>
+                    <button onclick="down(6);"  class="btnNext hover" type="button">Continuar</button>
                 </div>
             </div>
             <!---->
@@ -288,7 +288,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
                 &nbsp;&nbsp;&nbsp;Debe tener un número.<br>
                 &nbsp;&nbsp;&nbsp;Debe tener un caracter no alfanúmerico.
             </div>
-            <button onclick="newPass();" id="btnName" class="btnNext hover" type="button">Continuar</button>
+            <button onclick="newPass();"  class="btnNext hover" type="button">Continuar</button>
             <div class="jr"></div>
         </div>
     </section>
@@ -306,12 +306,13 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
                     Ingresa el número teléfonico del acudiente.
                 </div>
             </div>
+            <input type="hidden" name="userNameJD" id="userNamePD">
             <!---->
             <div class="jr"></div>
             <!---->
             <div class="row">
                 <div class="col">
-                    <button onclick="down(8);" id="btnName" class="btnNext hover" type="button">Enviar inscripción</button>
+                    <button onclick="down(8);"  class="btnNext hover" type="button">Enviar inscripción</button>
                 </div>
             </div>
         </div>

@@ -14,7 +14,6 @@ require_once('iconos.php');
     <link rel="stylesheet" href="css/getbootstrap.com_docs_5.3_assets_css_docs.css">
     <link rel="stylesheet" href="css/styleParticulas.css">
 	<link rel="stylesheet" href="css/formSmall.css" type="text/css">
-
 	<link rel="stylesheet" href="css/formSmall_stdSummary.css" type="text/css">
 </head>
 <body>
@@ -1437,14 +1436,14 @@ require_once('iconos.php');
                             <label for="codCartilla" class="form-label labelRF">Cartilla</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $cartilla ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $laLicencia; ?>" readonly>
+								<input type="text" class="form-control inputRF letraClave" value="<?php echo $laLicencia; ?>" readonly>
 							</div>
                         </div>
                         <div class="col">
                             <label for="codCartilla" class="form-label labelRF">Contraseña</label>
 							<div class="input-group">
 								<span class="input-group-text spanRF"><?php echo $accesoPass ?></span>
-								<input type="text" class="form-control inputRF" value="<?php echo $unencodedPassword; ?>" readonly>
+								<input type="text" class="form-control inputRF letraClave" value="<?php echo $unencodedPassword; ?>" readonly>
 							</div>
                         </div>
                     </div>

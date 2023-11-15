@@ -12,7 +12,7 @@ $MiddleName = ucfirst(strtolower(trim($_POST["MiddleName"])));
 $LastName = ucfirst(strtolower(trim($_POST["LastName"])));
 $SecondLastName = ucfirst(strtolower(trim($_POST["SecondLastName"])));
 $Phone = trim($_POST["Phone"]);
-$validationNewPass = trim($_POST["validationNewPass"]);
+
 $Email = strtolower(trim($_POST["Email"]));
 $Institution = trim($_POST["Institution"]);
 $City = trim($_POST["City"]);
@@ -40,159 +40,227 @@ $TeacherCompleteName = filter_var($TeacherCompleteName, FILTER_SANITIZE_STRING);
 $CourseName = filter_var($CourseName, FILTER_SANITIZE_STRING);
 $GroupName = filter_var($GroupName, FILTER_SANITIZE_STRING);
 
+$userNamePD = trim($_POST["userNameJD"]);
 
-$userName = 'std.'.$IdLicenceColegio.'.'.iconv('UTF-8','ASCII//TRANSLIT',$FirstName).'.'.iconv('UTF-8','ASCII//TRANSLIT',$LastName);
-$userName = strtolower($userName);
+if(!empty($userNamePD)){
 
-$userName2 = $userName;
+    $sql = "SELECT Code FROM Licence WHERE LicenceId = ?";
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("d",$IdLicenceToChange);
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $stmt->bind_result($laLicencia);
+                    $stmt->fetch();
+                }else if (mysqli_stmt_num_rows($stmt)>1){
+                    $form_err="Problemas con comprobación de licencia, contacte al servicio de administración";
+                    return;
+                }else{
+                    $form_err="No se encontró una licencia valida, contacte al servicio de administración ";
+                    return;
+                }
+            }else{
+                $form_err="Error con la Base de Datos, contacte al administrador";
+                return;
+            }
+        }else{
+                $form_err="Error con la Base de Datos, contacte al administrador";
+                return;
+        }
 
-    $verificar_usuario = mysqli_query($link, "SELECT * FROM User WHERE UserName = '$userName'");
-    $a = 0;
-    while (mysqli_num_rows($verificar_usuario) > 0){
-        $userName2 = $userName;
-        $a = $a + 1;
-        $userName2 .= '.'.$a;
-        $verificar_usuario = mysqli_query($link, "SELECT * FROM User WHERE UserName = '$userName2'");
+        mysqli_stmt_close($stmt);
+        
+    $userName = $userNamePD;
+    $sql = "SELECT UserId FROM User WHERE Email = ?";
+    $stmt = $link->prepare($sql);
+    if (!$stmt) {
+        $form_err = "Error al preparar la consulta";
+        return;
+    }
+    $stmt->bind_param("s", $Email);
+    $stmt->execute();
+    $stmt->bind_result($IdStudent);
+    $stmt->fetch();
+    $unencodedPassword = "";
+    $stmt->close();
+
+    $sql = "INSERT INTO Classroom (UserId, UserGrpId, MdlActive) VALUES (?, ?, 1)";
+    $stmt = $link->prepare($sql);
+    if (!$stmt) {
+        $form_err = "Error al preparar la consulta: " . mysqli_error($link);
+        return;
+    }
+    $stmt->bind_param("ii", $IdStudent, $IdGroupFound);
+    if (!$stmt->execute()) {
+        $form_err = "Error al ejecutar la consulta";
+        return;
+    }
+    $stmt->close();
+    
+}else{
+    $validationNewPass = trim($_POST["validationNewPass"]);
+
+    $userName = 'std.'.$IdLicenceColegio.'.'.iconv('UTF-8','ASCII//TRANSLIT',$FirstName).'.'.iconv('UTF-8','ASCII//TRANSLIT',$LastName);
+    $userName = strtolower($userName);
+
+    $userName2 = $userName;
+
+        $verificar_usuario = mysqli_query($link, "SELECT * FROM User WHERE UserName = '$userName'");
+        $a = 0;
+        while (mysqli_num_rows($verificar_usuario) > 0){
+            $userName2 = $userName;
+            $a = $a + 1;
+            $userName2 .= '.'.$a;
+            $verificar_usuario = mysqli_query($link, "SELECT * FROM User WHERE UserName = '$userName2'");
+        }
+
+    $userName = $userName2;
+
+    $sql = "SELECT Code FROM Licence WHERE LicenceId = ?";
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            $stmt->bind_param("d",$IdLicenceToChange);
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                mysqli_stmt_store_result($stmt);
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $stmt->bind_result($laLicencia);
+                    $stmt->fetch();
+                }else if (mysqli_stmt_num_rows($stmt)>1){
+                    $form_err="Problemas con comprobación de licencia, contacte al servicio de administración";
+                    return;
+                }else{
+                    $form_err="No se encontró una licencia valida, contacte al servicio de administración ";
+                    return;
+                }
+            }else{
+                $form_err="Error con la Base de Datos, contacte al administrador";
+                return;
+            }
+        }else{
+                $form_err="Error con la Base de Datos, contacte al administrador";
+                return;
+        }
+
+        mysqli_stmt_close($stmt);
+
+    $unencodedPassword = $validationNewPass;
+    $password=md5($validationNewPass);
+
+    $rol="Estudiante";
+    $insertar = "INSERT INTO User(FirstName, MiddleName, LastName, SecondLastName, Institution, City, Email, UserName, Password, Rol, Phone) VALUES ('$FirstName', '$MiddleName', '$LastName', '$SecondLastName', '$Institution', '$City', '$Email', '$userName', '$password', '$rol','$Phone')";
+
+    $verificar = mysqli_query($link, "SELECT * FROM User WHERE Email = '$Email'");
+    if (mysqli_num_rows($verificar) > 0){
+        $form_err =  "El Email se encuentra ya registrado";
+        return;
     }
 
-$userName = $userName2;
+    $resultado = mysqli_query($link, $insertar);
 
-$sql = "SELECT Code FROM Licence WHERE LicenceId = ?";
+    if(!$resultado){
+        $form_err =  "Error de conexión, contacte al servicio de administración";
+        return;
+    }
+
+    $IdStudent=mysqli_insert_id($link);
+
+    if($IdStudent==0){
+        $form_err =  "Error al crear cuenta, contacte al servicio de administración";
+        return;
+    }
+
+    //Insertar Enrolment
+
+    $sql = "INSERT INTO Classroom (UserId,UserGrpId,MdlActive) VALUES (?,?,1)";
+
     if($stmt = mysqli_prepare($link, $sql)){
-        // Bind variables to the prepared statement as parameters
-        $stmt->bind_param("d",$IdLicenceToChange);
-        // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
-            mysqli_stmt_store_result($stmt);
-             if(mysqli_stmt_num_rows($stmt) == 1){
-                $stmt->bind_result($laLicencia);
-                $stmt->fetch();
-             }else if (mysqli_stmt_num_rows($stmt)>1){
-                $form_err="Problemas con comprobacion de licencia, contacte al servicio de administración";
-                return;
-             }else{
-                $form_err="No se encontró una licencia valida, contacte al servicio de administración ";
-                return;
-             }
-        }else{
-            $form_err="Error con la Base de Datos, contacte al administrador";
+        $stmt->bind_param("ii",$IdStudent,$IdGroupFound);
+        if(!mysqli_stmt_execute($stmt)){
+            mysqli_stmt_close($stmt);
+            $form_err =  "Error al vincular al curso, contacte al servicio de administración";
             return;
         }
-    }else{
-            $form_err="Error con la Base de Datos, contacte al administrador";
-            return;
     }
 
     mysqli_stmt_close($stmt);
 
-$unencodedPassword = $validationNewPass;
-$password=md5($validationNewPass);
-
-$rol="Estudiante";
-$insertar = "INSERT INTO User(FirstName, MiddleName, LastName, SecondLastName, Institution, City, Email, UserName, Password, Rol, Phone) VALUES ('$FirstName', '$MiddleName', '$LastName', '$SecondLastName', '$Institution', '$City', '$Email', '$userName', '$password', '$rol','$Phone')";
-
-$verificar = mysqli_query($link, "SELECT * FROM User WHERE Email = '$Email'");
-if (mysqli_num_rows($verificar) > 0){
-    $form_err =  "El Email se encuentra ya registrado";
-    return;
 }
 
-$resultado = mysqli_query($link, $insertar);
+    // puede ser acá
 
-if(!$resultado){
-    $form_err =  "Error de conexión, contacte al servicio de administración";
-    return;
-}
+    $old_path = getcwd();
+    chdir('/var/www/html/moodle/moodle/auth/db/cli/');
+    $output=shell_exec('php sync_users.php');
+    chdir($old_path);
 
-$IdStudent=mysqli_insert_id($link);
+    //Enrole student into the Group
+   
+    $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, Institution as institution, City as city, Phone as phone1,Email as email, Address as address, Username as username, crs.ShortName as course1, grp.GrpName as group1, grp.EnrolmentKey as enrolmentkey1,  '1' as Type1, 'student' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Classroom clsrm ON usr.UserId = clsrm.UserId INNER JOIN UserGrp grp ON clsrm.UserGrpId = grp.UserGrpId INNER JOIN Course crs ON grp.CourseId = crs.CourseId WHERE usr.UserId =$IdStudent";
 
-if($IdStudent==0){
-    $form_err =  "Error al crear cuenta, contacte al servicio de administración";
-    return;
-}
-
-$old_path = getcwd();
-chdir('/var/www/html/moodle/moodle/auth/db/cli/');
-$output=shell_exec('php sync_users.php');
-chdir($old_path);
-//Get current enrolment based on group key
-
-//Insertar Enrolment
-
-$sql = "INSERT INTO Classroom (UserId,UserGrpId,MdlActive) VALUES (?,?,1)";
-
-if($stmt = mysqli_prepare($link, $sql)){
-    $stmt->bind_param("ii",$IdStudent,$IdGroupFound);
-    if(!mysqli_stmt_execute($stmt)){
-         mysqli_stmt_close($stmt);
-         $form_err =  "Error al vincular al curso, contacte al servicio de administración";
-         return;
+    $file=fopen("../admin/tool/uploadusercli/cli/PlantillaEstudiante".$IdStudent.".csv","w+");
+    try {
+        if ($result = $link->query($sql)) {
+            $header = true;
+            while ($row = $result->fetch_assoc()) {
+                if($header){
+                    fputcsv($file, array_keys($row));
+                    $header = false;
+                }
+                fputcsv($file,$row);
+            }
+        }
+    }catch(Extepction $e){
+        $form_err =  "Error: ".$e->getMessage();
+        fclose($file);
+        return;
+    }finally {
+        fclose($file);
     }
-}
-
-mysqli_stmt_close($stmt);
-
-//Enrole student into the Group
-$sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, Institution as institution, City as city, Phone as phone1,Email as email, Address as address, Username as username, crs.ShortName as course1, grp.GrpName as group1, grp.EnrolmentKey as enrolmentkey1,  '1' as Type1, 'student' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Classroom clsrm ON usr.UserId = clsrm.UserId INNER JOIN UserGrp grp ON clsrm.UserGrpId = grp.UserGrpId INNER JOIN Course crs ON grp.CourseId = crs.CourseId WHERE usr.UserId =$IdStudent";
-
-$file=fopen("../admin/tool/uploadusercli/cli/PlantillaEstudiante".$IdStudent.".csv","w+");
-try {
-      if ($result = $link->query($sql)) {
-          $header = true;
-          while ($row = $result->fetch_assoc()) {
-              if($header){
-                  fputcsv($file, array_keys($row));
-                  $header = false;
-              }
-              fputcsv($file,$row);
-          }
-      }
-  }catch(Extepction $e){
-      $form_err =  "Error: ".$e->getMessage();
-      fclose($file);
-      return;
-  }finally {
-      fclose($file);
-  }
-//Change the licence status to A and update the UserId
-$sql = "UPDATE Licence SET  UserId = ?, Status = 'A' WHERE LicenceId = ?";
+    //Change the licence status to A and update the UserId
+    $sql = "UPDATE Licence SET  UserId = ?, Status = 'A' WHERE LicenceId = ?";
 
 
-if($stmt = mysqli_prepare($link, $sql)){
-  // Bind variables to the prepared statement as parameters
-  mysqli_stmt_bind_param($stmt, "ii", $IdStudent ,$IdLicenceToChange);
-  if(!mysqli_stmt_execute($stmt)){
-       $form_err =  "Error al actualizar la licencia, contacte al servicio de administración";
-      return;
-  }
-}
-mysqli_stmt_close($stmt);
+    if($stmt = mysqli_prepare($link, $sql)){
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "ii", $IdStudent ,$IdLicenceToChange);
+    if(!mysqli_stmt_execute($stmt)){
+        $form_err =  "Error al actualizar la licencia, contacte al servicio de administración";
+        return;
+    }
+    }
+    mysqli_stmt_close($stmt);
 
-$old_path = getcwd();
-chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
-$output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaEstudiante'.$IdStudent.'.csv');
-sleep(3);
-unlink("PlantillaEstudiante".$IdStudent.'.csv');
-chdir($old_path);
+    $old_path = getcwd();
+    chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
+    $output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaEstudiante'.$IdStudent.'.csv');
+    sleep(3);
+    unlink("PlantillaEstudiante".$IdStudent.'.csv');
+    chdir($old_path);
 
-$sql = "DELETE FROM ConfirmaCodigo WHERE Email = '$Email'";
-$result = $link->query($sql);
-if ($result === true) {
-  $form_err = "Registros eliminados exitosamente.";
-} else {
-  $form_err = "Error al eliminar registros: " . $link->error;
-}
+    $sql = "DELETE FROM ConfirmaCodigo WHERE Email = '$Email'";
+    $result = $link->query($sql);
+    if ($result === true) {
+    $form_err = "Registros eliminados exitosamente.";
+    } else {
+    $form_err = "Error al eliminar registros: " . $link->error;
+    }
 
-$mailSender = new MailDispatcher(); 
-$mailSender->sendEmailToStudent($Email,$userName,$CourseName,$GroupName,$TeacherCompleteName,$unencodedPassword);
+    $mailSender = new MailDispatcher(); 
+    $mailSender->sendEmailToStudent($Email,$userName,$CourseName,$GroupName,$TeacherCompleteName,$unencodedPassword);
 
-mysqli_close($link);
-mysqli_close($link2);
-session_destroy();
-session_start();
-$_SESSION["loginStudentSummary"] = true;
-$_SESSION["studentId"] = $IdStudent;
-$_SESSION["unencodedPassword"] = $unencodedPassword;
-$_SESSION["laLicencia"] = $laLicencia;
-header("location: SummaryStudent.php");
+    mysqli_close($link);
+    mysqli_close($link2);
+    session_destroy();
+    session_start();
+    $_SESSION["loginStudentSummary"] = true;
+    $_SESSION["studentId"] = $IdStudent;
+    $_SESSION["unencodedPassword"] = $unencodedPassword;
+    $_SESSION["laLicencia"] = $laLicencia;
+
+    $_SESSION["grupo"] = $CourseName . " " . $GroupName;
+
+    header("location: SummaryStudent.php");
 ?>

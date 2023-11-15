@@ -5,6 +5,10 @@ var resultInsituto;
 $(document).ready(function() {
     $("body").addClass("loading");
 
+    $("#btnDown").on("click", function() {
+        $("html, body").animate({ scrollTop: $(document).height() }, "slow");
+      });
+
     setTimeout(function(){
         $("#codigo").slideUp();
         $("#datos").slideUp();
@@ -321,14 +325,9 @@ function centrarDiv(selector){
     // Obtén la posición superior de la sección que deseas centrar
     var sectionTop = $(selector).offset().top;
 
-    // Calcula la posición para centrar la sección en el navegador
-    var windowHeight = $(window).height();
-    var sectionHeight = $(selector).height();
-    var offset = Math.max(0, (windowHeight - sectionHeight) / 2);
-
     // Centra la vista del navegador en la sección
     $('html, body').animate({
-        scrollTop: sectionTop - offset
+        scrollTop: sectionTop
     }, 500);
 }
 

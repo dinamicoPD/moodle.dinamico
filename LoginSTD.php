@@ -37,7 +37,7 @@ require_once(dirname(__FILE__).'/LoginController.php');
 							<label for="codCartilla" class="form-label labelRF">Código de la Cartilla</label>
 							<div class="input-group has-validation <?php echo (!empty($codlicence_err)) ? 'has-error' : ''; ?>">
 								<span class="input-group-text spanRF" id="inputGroupCartilla"><?php echo $cartilla ?></span>
-								<input type="text" class="form-control inputRF" name="licencecode" id="licencecode" placeholder="Introduzca el código que viene en la portada de su cartilla" value="<?php echo $licencecode; ?>" autocomplete="off" require>
+								<input type="text" class="form-control inputRF letraClave" name="licencecode" id="licencecode" placeholder="Código que viene en la portada de su cartilla" value="<?php echo $licencecode; ?>" autocomplete="off" require>
 							</div>
 						</div>
 					</div>
@@ -48,7 +48,7 @@ require_once(dirname(__FILE__).'/LoginController.php');
 							<label for="codGrupo" class="form-label labelRF">Código del Grupo</label>
 							<div class="input-group has-validation <?php echo (!empty($codgroup_err)) ? 'has-error' : ''; ?>">
 								<span class="input-group-text spanRF" id="inputGroupGrupo"><?php echo $accesoPass ?></span>
-								<input type="text" class="form-control inputRF" name="groupcode" id="groupcode" placeholder="Introduzca el código del grupo" value="<?php echo $variable1; ?>" autocomplete="off" require>
+								<input type="text" class="form-control inputRF letraClave" name="groupcode" id="groupcode" placeholder="Introduzca el código del grupo" value="<?php echo $variable1; ?>" autocomplete="off" require>
 							</div>
 						</div>
 					</div>

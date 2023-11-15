@@ -14,7 +14,16 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    echo "existe";
+    $row = $result->fetch_assoc();
+    $fields = implode(",", array(
+        $row['FirstName'],
+        $row['MiddleName'],
+        $row['LastName'],
+        $row['SecondLastName'],
+        $row['UserName'],
+        $row['Phone']
+    ));
+    echo $fields;
 } else {
     echo "no existe";
 }
