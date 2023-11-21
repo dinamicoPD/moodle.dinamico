@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url(../font/RobotoMono-Regular.ttf);
+}
+
+.monospaceFont{
+    font-family:"Roboto Mono",monospace;
+}
+
+.popinsFont{
+    font-family: 'poppins-black', sans-serif;
+}
+
+.titulo h2{
+    color: var(--azul2);
+    font-family: 'Poppins_semibold', sans-serif;
+    font-size: 2.5vw;
+    text-align: center;
+}
+
+h1.modal-title{
+    color: var(--azul2);
+    font-family: 'Poppins_semibold', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    padding: 1vw 0;
+}
+
+.titulo hr{
+   width: 40vw;
+   margin: auto;
+   border: none;
+   border-top: 0.3vw solid var(--azul2);
+}
+#p1{
+    padding-top: 15vw;
+}
+
+.botonDP {
+    display: block;
+    border-radius: 6px;
+    padding: 5px 16px;
+    width: 90%;
+    font-family: 'Futura_Heavy_BT', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    margin: auto;
+    color: var(--blanco);
+    cursor: pointer;
+}
+
+.botonDP_1{
+    background-color: var(--cian);
+}
+
+.botonDP_2{
+    background-color: var(--verde);
+}
+
+.botonDP_3{
+    background-color: var(--rojoOscuro);
+}
+
+.botonDP_4{
+    background-color: var(--morado);
+}
+
+.indicador{
+    text-align: center;
+    height: 38px;
+    border: none;
+    background-color: #FFFFFF;
+    border: 1px solid #DEE2E6;
+}
