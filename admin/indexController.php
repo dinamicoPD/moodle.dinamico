@@ -67,6 +67,7 @@ while ($row = $licenciasSQL->fetch_assoc()) {
     $licenciasHTML .= 
     "</td>
         <td class='text-center'>".$row['Title']."</td>
+        <td class='text-center'>".$row['StartDate']."</td>
         <td class='text-center'><button class='botonDP hover botonDP_4' type='button' onclick=\"actualizarCodeVer('".$row['LicenceId']."','".$row['Code']."','".$row['Title']."','".$row['Type']."')\">Actualizar</button></td>
         <td><div class='form-check form-switch'><input value='".$row['LicenceId']."' class='form-check-input codLicence' type='checkbox' role='switch'></div></td>
     </tr>  
@@ -111,6 +112,7 @@ $imprimirHTML = '
                     <th class="text-center" scope="col">Código</th>
                     <th class="text-center" scope="col">Tipo</th>
                     <th class="text-center" scope="col">Titulo</th>
+                    <th class="text-center" scope="col">Fecha inicio</th>
                     <th class="text-center" scope="col">Actualizar</th>
                     <th class="text-center" scope="col">Eliminar</th>
                 </tr>

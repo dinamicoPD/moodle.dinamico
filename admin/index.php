@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,15 +29,15 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarNav">
                 <li class="nav-item" id="m1">
-                    <a class="nav-link menuFont hover" aria-current="page" href="">Licencias</a>
+                    <a class="nav-link menuFont hover" aria-current="page" href="index.php">Licencias</a>
                 </li>
                 <li class="nav-item dropdown" id="m2">
                     <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</label>
                     <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
-                        <li class="dropdown-item hover">Estudiantes</li>
-                        <li class="dropdown-item hover">Docentes</li>
-                        <li class="dropdown-item hover">Asesores</li>
-                        <li class="dropdown-item hover">Soporte</li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="licenciasDocentes.php">Docentes</a></li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="">Asesores</a></li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="">Soporte</a></li>
                     </ul>
                 </li>
                 <li class="nav-item" id="m3">
