@@ -1,7 +1,5 @@
 <?php
-$perfil = "Profesor";
-include("controllerLicenciasDocentes.php");
-
+    include("constructorLicenciasPrf.php");
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +90,7 @@ include("controllerLicenciasDocentes.php");
                 </button>
             </div>
             <div class="col">
-                <button type="button" class="botonDP hover botonDP_3">Eliminar</button>
+                <button type="button" class="botonDP hover botonDP_3" onclick="buscarEliminar()">Eliminar</button>
             </div>
             <div class="col">
                 <div class="input-group mb-3">
@@ -107,7 +105,7 @@ include("controllerLicenciasDocentes.php");
         <div id="registrosTabla">
             <div class="row">
                 <div class="col-md-2">
-                    <select id="cantidad_registros" class="form-select form-select-sm">
+                    <select id="cantidad_registros" class="form-select form-select-sm" onchange="cantidad()">
                         <option value="25">25</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
@@ -116,24 +114,25 @@ include("controllerLicenciasDocentes.php");
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <p><strong>TOTAL REGISTROS: </strong><?php echo $cantidad; ?></p>
+                    <p><strong>TOTAL REGISTROS: </strong><span id="cantidad"><?php echo $cantidad; ?></span></p>
                 </div>
                 <div class="col-md-5">
                     <nav>
                         <ul id="pagination" class="pagination justify-content-end">
                             <li class="page-item">
-                                <button id="inicio" class="page-link">Inicio</button>
+                                <button id="inicio" class="page-link" onclick="inicio()">Inicio</button>
                             </li>
-                            <li class="page-item"><button id="anterior" class="page-link"><</button></li>
+                            <li class="page-item"><button id="anterior" class="page-link" onclick="anterior()"><</button></li>
                             <li class="page-item"><input id="indicador" class="indicador" type="number" value="<?php echo $posicion ?>"></li>
-                            <li class="page-item"><button id="siguiente" class="page-link">></button></li>
-                            <li class="page-item">
-                                <button id="fin" class="page-link" value=""><?php echo $totalDivicion; ?></button>
+                            <li class="page-item"><button id="siguiente" class="page-link" onclick="siguiente()">></button></li>
+                            <li class="page-item" id="fin">
+                                <button id="btnFin" class="page-link" value="<?php echo $totalDivicion; ?>" onclick="fin(<?php echo $totalDivicion; ?>)" ><?php echo $totalDivicion; ?></button>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </div>
+            
             <div class="table-responsive">
                 <div class="accordion accordion-flush" id="accordionFlushExample">
                     <table class="table table-bordered table-striped table-hover">
@@ -141,123 +140,13 @@ include("controllerLicenciasDocentes.php");
                             <tr>
                                 <th class="text-center" scope="col">Id</th>
                                 <th class="text-center" scope="col">Código</th>
-                                <th class="text-center" scope="col">Usuario</th>
+                                <th class="text-center" scope="col">Nombre</th>
                                 <th class="text-center" scope="col">Correo</th>
                                 <th class="text-center" scope="col">Eliminar</th>
                             </tr>
                         </thead>
-                        <tbody id="licenciasBuscadas">
-                            <!--
-                            <tr>
-                                <td>4568</td>
-                                <td>Y7c4kYY$</td>
-                                <td>prf.prueba.docente</td>
-                                <td>pruebadocente@prueba.pd</td>
-                                <td>
-                                    <div class='form-check form-switch'>
-                                        <input value='' class='form-check-input codLicence' type='checkbox' role='switch'>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <strong>Ver más</strong>
-                                        </button>
-                                        </h2>
-                                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                            <div class="accordion-body">
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nombre</th>
-                                                                    <th>Fecha</th>
-                                                                    <th>Titulo</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Juan David Rodriguez Ferrer</td>
-                                                                    <td>2021-01-25 20:52:05</td>
-                                                                    <td>Cargue Profesores 03/03</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Teléfono</th>
-                                                                    <th>Asesor</th>
-                                                                    <th>Código</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>3103013209</td>
-                                                                    <td>asr.asesor.prueba</td>
-                                                                    <td>4566</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <button id="" type="button" class="botonDP hover botonDP_1">Actualizar</button>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button" class="botonDP hover botonDP_3" >Bloquear</button>
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button" class="botonDP hover botonDP_2">Cambiar contraseña</button>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                    </table>
-                                                </div>
-
-                                                <div class="table-responsive">
-                                                    <table class="table table-bordered table-striped table-hover caption-top">
-                                                        <caption><strong>Grupo:</strong> 2017</caption>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Curso</th>
-                                                                    <th>Grupo</th>
-                                                                    <th>Código</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>PRIMERO CUARTA EDICIÓN</td>
-                                                                    <td>101</td>
-                                                                    <td>tWw80lHO%</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Ciudad</th>
-                                                                    <th>Colegio</th>
-                                                                    <th>Docente</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>Tunja</td>
-                                                                    <td>Colegio Pedagogía y diseño</td>
-                                                                    <td>prf.vil.jairo.torres</td>
-                                                                </tr>
-                                                            </tbody>
-                                                    </table>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <button id="" type="button" class="botonDP hover botonDP_1">Agregar grupo</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                             -->
+                        <tbody id='licenciasBuscadas'>
+                            <?php echo $construtorHTML; ?>
                         </tbody>
                     </table>
                 </div>

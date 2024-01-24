@@ -459,7 +459,7 @@
             </div>
             <br>
             <div class="letreroInstruccion centrarInstruccion">
-                <p>Da click en el botón <button class="btnNext" type="button" id="addFullCurso"><?php echo $cruz ?></button>&nbsp;para añadir una nueva institución.</p>
+                <p>Da click en el botón <button class="btnNext" type="button" id="addFullCurso"><?php echo $cruz ?></button>&nbsp;para añadir un nuevo grupo.</p>
             </div>
             <br>
             <div class="row">       

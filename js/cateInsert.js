@@ -56,10 +56,7 @@ $(document).ready(function(){
           });
       }
     })
-
-
-
-  });
+});
 
 function enviacodigo(){
     var categories = $("#categ").val();

@@ -416,8 +416,8 @@ function validacionSeccion_1(){
     var validationEmail = "validationEmail";
     var validationEmail_2 = "validationEmail_2";
 
-    proceder = LetrasEspacio(nombreDocente, 50, 1, 2, err_form_1, proceder);
-    proceder = LetrasEspacio(nombreInstitucion, 50, 5, 1, err_form_1, proceder);
+    proceder = LetrasEspacio(nombreDocente, 60, 1, 2, err_form_1, proceder);
+    proceder = LetrasEspacio(nombreInstitucion, 80, 5, 1, err_form_1, proceder);
     proceder = LetrasEspacio(nombreCiudad, 50, 5, 1, err_form_1, proceder);
 //-------------------------------------------------
     proceder = LetrasEspacio(nombreCurso, 50, 5, 1, err_form_2, proceder);

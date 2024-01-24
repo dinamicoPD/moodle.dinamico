@@ -227,6 +227,7 @@ if ($Rol == "Soporte"){
 }
 
 $file=fopen("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv","w+");
+chmod("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv", 0777);
 fwrite($file, "\xEF\xBB\xBF"); // Agregar BOM para indicar que el archivo está en UTF-8
 
 try {
@@ -277,6 +278,7 @@ QRcode::png($contenido2, $filenameQR_change, $level2, $tamanio2, $frameSize2);
 
 $mailSender = new MailDispatcher(); 
 $mailSender->sendEmaiToTeacher($Email, $idTeacher, $userName, $codigoDocente, $Rol);
+
 forcePasswordChange($Email);
 ActivateAccount($Email);
 

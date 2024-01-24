@@ -19,7 +19,7 @@ $colegiosAll = $_POST['colegios'];
 mysqli_set_charset($link, "utf8");
 
 // Selección de datos de cursos inscritos
-$query = "SELECT cursos FROM PreDocentes WHERE Id_preDocente = $registroId";
+$query = "SELECT cursos FROM PreDocentes WHERE Id_preDocente = ?";
 $stmt = mysqli_prepare($link, $query);
 mysqli_stmt_bind_param($stmt, "i", $registroId);
 mysqli_stmt_execute($stmt);
