@@ -46,6 +46,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 $cantidad++;
 
                 if($cantidad <= $valordePosicion && $cantidad >= $valorInicio){
+                    $guardarCSV = $row['FirstName'] .",". $row['MiddleName'] .",". $row['LastName'] .",". $row['SecondLastName'] .",". $correo .",". $nombreUser .",". $idUser;
                     $construtorHTML .= "
                     <tr>
                         <td>".$idUser."</td>
@@ -95,7 +96,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <th colspan='3'><button type='button' class='botonDP hover botonDP_2'>Agregar grupos</button></th>
+                                                    <th colspan='3'><button type='button' class='botonDP hover botonDP_2' onclick='AgregarGrupo(\"".$guardarCSV."\")'>Agregar grupos</button></th>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -126,7 +127,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>".$nombreColegio."</td>
+                                                        <td>
+                                                            <select class='form-select cole_".$idUser."' aria-label='Default select example' disabled>
+                                                                <option value='".$numero."'>".$nombreColegio."</option>
+                                                            </select>
+                                                        </td>
                                                         <td>".$nombreMunicipio."</td>
                                                         <td>".$nombreDepartamento."</td>
                                                     </tr>
@@ -165,7 +170,11 @@ while ($row = mysqli_fetch_assoc($result)) {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>".$nombreColegio."</td>
+                                        <td>
+                                            <select class='form-select cole_".$idUser."' aria-label='Default select example' disabled>
+                                                <option value='".$numero."'>".$nombreColegio."</option>
+                                            </select>
+                                        </td>
                                         <td>".$nombreMunicipio."</td>
                                         <td>".$nombreDepartamento."</td>
                                     </tr>

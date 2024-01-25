@@ -1,4 +1,6 @@
 <?php
+    include("cargar_departamentos.php");
+    include("cargar_edicion.php");
     include("constructorLicenciasPrf.php");
 ?>
 
@@ -154,6 +156,87 @@
         </div>
     </div>
 </section>
+
+<!-- Modal actualizar grupos-->
+<div class="modal fade" id="ModalGrupo" tabindex="-1" aria-labelledby="ModalGrupoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+            <h1 class="modal-title fs-5" id="SlideModalLabel">Actualizar grupos</h1>
+            <button type="button" class="inicioClose hover" data-bs-dismiss="modal" aria-label="Close">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.65 27.23"><defs><style>.btnClose-1{fill:#f7746d;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="btnClose-1" d="M7.55,13.65C5.4,9.5.52,2.05.58,1.27.58,1,7.76.11,8.39.11S13,7.93,13.32,8.5C13.59,8.09,18.2.06,18.52,0s8.18,1.05,8.13,1.31c-.42,1.36-4.41,7.92-7.14,12,2.15,4.25,6.67,12,6.67,12.69-.06.37-7.24,1.26-7.87,1.26s-4.36-7.66-5-8.76c-.73,1.16-4.87,8.6-5.14,8.6S0,26,0,25.71C.37,24.5,4.56,18,7.55,13.65Z"/></g></g></svg>
+            </button>
+      </div>
+      <div class="modal-body">
+        <div class="datosUsuario">
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="firstnameInput" placeholder="Primer nombre" disabled>
+                <label for="firstnameInput">Primer nombre</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="middlenameInput" placeholder="Segundo nombre" disabled>
+                <label for="middlenameInput">Segundo nombre</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="lastnameInput" placeholder="Primer nombre" disabled>
+                <label for="lastnameInput">Primer apellido</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="alternatenameInput" placeholder="Segundo apellido" disabled>
+                <label for="alternatenameInput">Segundo apellido</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="emailInput" placeholder="Email" disabled>
+                <label for="emailInput">Email</label>
+            </div>
+        
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="usernameInput" placeholder="Usuario" disabled>
+                <label for="usernameInput">Usuario</label>
+            </div>
+
+        </div>
+        
+        <hr>
+        
+        <label for="Institution" class="form-label"><strong>Institución</strong></label>
+        <select class="form-select Institution" id="Institution"></select>
+        
+        <div class="nuevoInstituto">
+            <label for="Departamento" class="form-label"><strong>Departamento</strong></label>
+            <select class="form-select Departamento" id="Departamento"><option disabled selected>Seleccione ...</option><?php echo $departamentoFull; ?></select>
+            
+            <label for="Municipio" class="form-label"><strong>Municipio</strong></label>
+            <select class="form-select Municipio" id="Municipio"><option disabled selected>Seleccione ...</option></select>
+            
+            <label for="Institution" class="form-label"><strong>Institución</strong></label>
+            <select class="form-select" id="Institution"><option disabled selected>Seleccione ...</option></select>
+        </div>
+
+        <label for="Edicion" class="form-label"><strong>Edición</strong></label>
+        <select class="form-select" id="Edicion"><option disabled selected>Seleccione ...</option><?php echo $edicionFull; ?></select>
+        
+        <label for="Curso" class="form-label"><strong>Curso</strong></label>
+        <select class="form-select" id="Curso"><option disabled selected>Seleccione ...</option></select>
+        
+        <label for="Sigla" class="form-label"><strong>Sigla</strong></label>
+        <input type="text" class="form-control" id="Sigla"></input>
+
+      </div>
+
+        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
 <script src="../../../js/menu.js"></script>

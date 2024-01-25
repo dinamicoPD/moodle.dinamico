@@ -73,3 +73,39 @@ function cantidadRegistros(){
         }
     });
 }
+
+function AgregarGrupo(datos) {
+    $('#ModalGrupo').modal('show');
+    const arrayDatos = datos.split(",");
+    $('#firstnameInput').val(arrayDatos[0]);
+    $('#middlenameInput').val(arrayDatos[1]);
+    $('#lastnameInput').val(arrayDatos[2]);
+    $('#alternatenameInput').val(arrayDatos[3]);
+    $('#emailInput').val(arrayDatos[4]);
+    $('#usernameInput').val(arrayDatos[5]);
+
+    const valoresSeleccionados = [];
+    const textosSeleccionados = [];
+
+    $('.cole_' + arrayDatos[6]).each(function () {
+        const valor = $(this).val();
+        const texto = $.trim($(this).text());
+
+        // Verificar si el valor ya está en la lista
+        if (valoresSeleccionados.indexOf(valor) === -1) {
+            valoresSeleccionados.push(valor);
+            textosSeleccionados.push(texto);
+        }
+    });
+
+    let selectHtml = "";
+    for (let i = 0; i < valoresSeleccionados.length; i++) {
+        selectHtml += "<option value='" + valoresSeleccionados[i] + "'>" + textosSeleccionados[i] + "</option>";
+    }
+
+    selectHtml += "<option value='OTRO'>OTRA</option>";
+
+
+    $('.Institution').html(selectHtml);
+
+}
