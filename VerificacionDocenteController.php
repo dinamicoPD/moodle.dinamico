@@ -54,9 +54,7 @@ if(!$result) {
             $asesorDefinitivo = '<select name="asesor_'.$Preinscripcion["Id_preDocente"].'" class="form-select">'.$asesorDefinitivo.'</select><input name="perfil_'.$Preinscripcion["Id_preDocente"].'" class="ocultarCss" value="Profesor">';
         }
     }
-    
-    
-    
+       
 
     $nombre = htmlspecialchars($Preinscripcion["nombre"]);
     $array_nombre = explode(",", $nombre);

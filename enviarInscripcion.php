@@ -260,6 +260,7 @@ if($stmt = mysqli_prepare($link, $sql)){
         return;
     }
 }
+
 mysqli_stmt_close($stmt);
 
 $old_path = getcwd();

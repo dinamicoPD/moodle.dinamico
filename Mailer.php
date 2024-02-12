@@ -1,7 +1,7 @@
 <?php
 //define('__ROOT__',dirname(dirname(dirname(__FILE__))));
 //require_once(__ROOT__.'/config-ext.php');
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -169,7 +169,7 @@ class MailDispatcher{
 							<td colspan="2" class="fontNegro fontPoppins"><p><strong>Cursos disponibles</strong></p></td>
 						</tr>
 						<tr class="PaleGreenClaro fontRoboto">
-							<td colspan="2"><p class="carpetas">Porporciona estas claves o códigos QR a tus estudiantes para que<br>puedan víncularse a los cursos (grupos) correspondientes.</p></td>
+							<td colspan="2"><p class="carpetas">Proporciona estas claves o códigos QR a tus estudiantes para que<br>puedan víncularse a los cursos (grupos) correspondientes.</p></td>
 						</tr>
 						'.$foundGroups.'
 						<tr class="bordeSuperior">

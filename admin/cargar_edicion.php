@@ -9,9 +9,7 @@ if(!$result) {
     die("ERROR: Could not execute $query. " . mysqli_error($link));
 }
 
-// Comprobar si la consulta ha devuelto filas
 if(mysqli_num_rows($result) > 0) {
-    // Almacenar los resultados en la variable $departamentos
     while($row = mysqli_fetch_assoc($result)) {
         $ediciones[] = $row;
     }
@@ -24,4 +22,8 @@ foreach($ediciones as $edicion) {
     $edicionFull .= '<option value="' . $edicion['id_categories'] . '">' . $edicion['name_categories'] . '</option>';
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $edicionFull_1 = '<option selected disabled value="">Seleccionar</option>' . $edicionFull;
+    echo $edicionFull_1;
+}
 ?>
