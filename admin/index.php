@@ -53,7 +53,15 @@
                     <a class="nav-link menuFont hover" aria-current="page" href="">Periódico</a>
                 </li>
                 <li class="nav-item" id="m7">
-                    <a class="nav-link menuFont hover" aria-current="page" href="">Correos</a>
+                    <a class="nav-link menuFont hover" aria-current="page" href="">Códigos email</a>
+                </li>
+                <li class="nav-item dropdown" id="m8">
+                    <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masivos</label>
+                    <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="masivoDocentes.php">Docentes</a></li>
+                        <li class="dropdown-item hover"><a class="menuFont2" href="">Correos</a></li>
+                    </ul>
                 </li>
             </ul>
             <span class="navbar-text">
