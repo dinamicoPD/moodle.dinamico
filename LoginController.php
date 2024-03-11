@@ -299,9 +299,9 @@ if($statusfound == "W"){
 if($statusfound == "A"){
     if($typeofoperation == 1){
         $form_err = "La licencia docente que estás intentando utilizar ya ha sido utilizada por otra persona. Por favor, ponte en contacto con el servicio de administración para obtener más información.";
-                    return;
+            return;
     }else if ($typeofoperation == 2){
-        $form_err = "La licencia que estás intentando utilizar ya ha sido utilizada por otra persona. Por favor, ponte en contacto con el servicio de administración para obtener más información o verifica tus credenciales de ingreso.";
+            header("location: ../login/index.php");
             return;
     }
 }
