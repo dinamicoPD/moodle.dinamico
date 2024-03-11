@@ -22,13 +22,6 @@ $(document).ready(function() {
         $("#btnTel").slideUp();
         $("#btnInstituto").slideUp();
     }, 50);
-   
-    $("#E-mail-2").on('paste', function(e){
-        e.preventDefault();
-    })
-    $("#E-mail").on('paste', function(e){
-        e.preventDefault();
-    })
 
     $('#E-mail').on('input', () => comprobarEmail());
     $('#E-mail-2').on('input', () => comprobarEmail());
