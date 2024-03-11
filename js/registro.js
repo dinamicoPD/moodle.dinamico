@@ -3,7 +3,6 @@ var count_2 = 1;
 var resultInsituto;
 
 $(document).ready(function() {
-    $("body").addClass("loading");
 
     $("#btnDown").on("click", function() {
         $("html, body").animate({ scrollTop: $(document).height() }, "slow");

@@ -16,29 +16,6 @@
     <link rel="stylesheet" href="css/getbootstrap.com_docs_5.3_assets_css_docs.css">
 
     <link rel="stylesheet" href="css/styleFormPRF.css">
-
-    <style>
-        .modal_carga {
-            display:    none;
-            position:   fixed;
-            z-index:    1000;
-            top:        0;
-            left:       0;
-            height:     100%;
-            width:      100%;
-            
-            background: rgba(11,119,153,1)
-                        url('img/FhHRx.gif') 
-                        50% 50% 
-                        no-repeat;
-        }
-        body.loading .modal_carga {
-            overflow: hidden;   
-        }
-        body.loading .modal_carga {
-            display: block;
-        }
-    </style>
 </head>
 <body class="fondoCielo" id="contenedor">
 
@@ -607,5 +584,5 @@ function ubicarElemento(speed, elemento, posicionX, posicionY, contenedor, aumen
 </script>
 
 </body>
-<div class="modal_carga"></div>
+
 </html>
