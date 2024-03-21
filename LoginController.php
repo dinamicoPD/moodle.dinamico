@@ -52,7 +52,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             $form_err="Problemas de verifcación de Licencia, contacte al administrador";
             return;
          }else{
-            $form_err="Verifique el código de Plantilla suministrado";
+            $form_err="Verifique el pin de acceso de su cartilla";
             return;
          }
     }else{
