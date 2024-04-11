@@ -5,7 +5,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $InputMaterial = filter_input(INPUT_POST, 'InputMaterial', FILTER_SANITIZE_STRING);
     $InputEdades = filter_input(INPUT_POST, 'InputEdades', FILTER_SANITIZE_STRING);
     $InputValor = filter_input(INPUT_POST, 'InputValor', FILTER_SANITIZE_NUMBER_INT);
-    $InputMedidas= filter_input(INPUT_POST, 'InputMedidas', FILTER_SANITIZE_NUMBER_INT);
+    $InputMedidas= filter_input(INPUT_POST, 'InputMedidas', FILTER_SANITIZE_STRING);
     $mensaje = "";
     $InputGuias = isset($_POST['InputGuias']) ? 1 : 0;
 
