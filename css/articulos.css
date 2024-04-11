@@ -1,0 +1,24 @@
+.articulos{
+    width: 100%;
+    margin: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.articulos article{
+    padding: 0.5vw;
+    width: 30%;
+    min-width: 300px;
+}
+
+.articulos article:hover{
+    transform: scale(1.03);
+}
+
+.articulos article:active{
+    position: relative;
+    top: 1px;
+}

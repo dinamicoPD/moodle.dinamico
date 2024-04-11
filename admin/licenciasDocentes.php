@@ -33,34 +33,37 @@
           <div class="linea"></div>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navbarNav">
-                <li class="nav-item" id="m1">
-                    <a class="nav-link menuFont hover" aria-current="page" href="index.php">Licencias</a>
-                </li>
-                <li class="nav-item dropdown" id="m2">
+                <li class="nav-item dropdown" id="m1">
                     <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</label>
                     <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
-                        <li class="dropdown-item hover" id="m2a"><a class="menuFont2" href="">Estudiantes</a></li>
-                        <li class="dropdown-item hover" id="m2b"><a class="menuFont2" href="licenciasDocentes.php">Docentes</a></li>
-                        <li class="dropdown-item hover" id="m2c"><a class="menuFont2" href="">Asesores</a></li>
-                        <li class="dropdown-item hover" id="m2d"><a class="menuFont2" href="">Soporte</a></li>
+                        <li id="m1-a" class="dropdown-item hover"><a class="menuFont2" href="index.php">Licencias disponibles</a></li>
+                        <li id="m1-b" class="dropdown-item hover"><a class="menuFont2" href="">Inscripciones Pendientes</a></li>
+                        <li id="m1-c" class="dropdown-item hover"><a class="menuFont2" href="licenciasDocentes.php">Docentes</a></li>
+                        <li id="m1-d" class="dropdown-item hover"><a class="menuFont2" href="">Asesores</a></li>
+                        <li id="m1-e" class="dropdown-item hover"><a class="menuFont2" href="">Soporte</a></li>
+                        <li id="m1-f" class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
                     </ul>
                 </li>
-                <li class="nav-item" id="m3">
+                <li class="nav-item" id="m2">
                     <a class="nav-link menuFont hover" aria-current="page" href="">Categorías</a>
                 </li>
-                <li class="nav-item" id="m4">
-                    <a class="nav-link menuFont hover" aria-current="page" href="">Inscripciones</a>
-                </li>
-                <li class="nav-item" id="m5">
+                <li class="nav-item" id="m3">
                     <a class="nav-link menuFont hover" aria-current="page" href="">QR</a>
                 </li>
-                <li class="nav-item" id="m6">
+                <li class="nav-item" id="m4">
                     <a class="nav-link menuFont hover" aria-current="page" href="">Periódico</a>
                 </li>
-                <li class="nav-item" id="m7">
+                <li class="nav-item" id="m5">
                     <a class="nav-link menuFont hover" aria-current="page" href="">Códigos email</a>
                 </li>
-                <li class="nav-item dropdown" id="m8">
+                <li class="nav-item dropdown" id="m6">
+                    <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catalogo</label>
+                    <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
+                        <li id="m6-a" class="dropdown-item hover"><a class="menuFont2" href="catalogoJuegos.php">Juegos</a></li>
+                        <li id="m6-b" class="dropdown-item hover"><a class="menuFont2" href="">Libros</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown" id="m7">
                     <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Masivos</label>
                     <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
                         <li class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
