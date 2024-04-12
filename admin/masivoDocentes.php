@@ -1,3 +1,6 @@
+<?php
+include("menu.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +21,16 @@
     <link rel="stylesheet" href="../css/sweetAlert/sweetalert2.min.css">
 </head>
 <body>
-    
+<?php echo $menu; ?>
+<script>
+    var posicionMenu = document.getElementById('m7');
+    var posicionSudMenu = document.getElementById('m7-b');
+    posicionMenu.classList.add('menuActivo');
+    posicionSudMenu.classList.add('menuActivo');
+</script>
+
+
+<script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
+<script src="../../../js/menu.js"></script>
 </body>
 </html>
