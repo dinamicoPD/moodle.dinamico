@@ -61,7 +61,8 @@ if ($resultado->num_rows > 0) {
                 $JuegosCatalogo .= "<div class='card-footer'>";
                     $JuegosCatalogo .= "<p class='fs-3 text-center'><strong>Valor: </strong> $ <span class='font-monospace'>" . $preciovalor . "</span></p>";
                 $JuegosCatalogo .= "</div>";
-                $JuegosCatalogo .= '<a href="#" class="btn btn-danger">Eliminar</a>';
+                $JuegosCatalogo .= '<a href="#" class="btn btn-danger">Eliminar</a><br>';
+                $JuegosCatalogo .= '<a href="#" class="btn btn-primary">Actualizar</a>';
             $JuegosCatalogo .= "</div>";
         $JuegosCatalogo .= "</article>";
         

@@ -30,6 +30,15 @@ section{
     z-index: 3;
 }
 
+.inputResumen{
+    display: block;
+    background-color: #ffffff;
+    border: 0.2vw solid #2C2359;
+    color: #9B8EDE;
+    font-family: 'HelveticaLTStd-Condensed', sans-serif;
+    font-size: 1.5vw;
+}
+
 .titleForm{
     width: 80%;
     margin: auto;

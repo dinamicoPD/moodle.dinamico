@@ -4,21 +4,6 @@ $(document).ready(function() {
     $("#piso_6").slideUp().addClass("ocultar");
     $("#piso_7").slideUp().addClass("ocultar");
 
-    $("#nombreDocente").keyup(function() {
-        validacionSeccion_1();
-    });
-    $("#nombreCurso").keyup(function() {
-        validacionSeccion_1();
-    });
-    $("#nombreGrupo").keyup(function() {
-        validacionSeccion_1();
-    });
-    $("#nombreInstitucion").keyup(function() {
-        validacionSeccion_1();
-    });
-    $("#nombreCiudad").keyup(function() {
-        validacionSeccion_1();
-    });
     $("#validationEmail").keyup(function() {
         validacionSeccion_1();
     });
@@ -405,23 +390,9 @@ function validacionSeccion_1(){
     var err_form_2 = /[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s\d_.+-]/g;
     var err_form_3 = /([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9])+\.)+([a-zA-Z0-9]{2,4})/g;
 
-    //piso_2
-    var nombreDocente = "#nombreDocente";
-    var nombreCurso = "#nombreCurso";
-    var nombreGrupo = "#nombreGrupo";
-    var nombreInstitucion = "#nombreInstitucion";
-    var nombreCiudad = "#nombreCiudad";
-
     //piso_3
     var validationEmail = "validationEmail";
     var validationEmail_2 = "validationEmail_2";
-
-    proceder = LetrasEspacio(nombreDocente, 100, 1, 2, err_form_1, proceder);
-    proceder = LetrasEspacio(nombreInstitucion, 200, 5, 1, err_form_1, proceder);
-    proceder = LetrasEspacio(nombreCiudad, 100, 5, 1, err_form_1, proceder);
-//-------------------------------------------------
-    proceder = LetrasEspacio(nombreCurso, 100, 5, 1, err_form_2, proceder);
-    proceder = LetrasEspacio(nombreGrupo, 100, 1, 1, err_form_2, proceder);
 //-------------------------------------------------
     proceder = CorreosValidar(validationEmail, err_form_3, proceder);
     
