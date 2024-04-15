@@ -17,6 +17,7 @@ $result = $link->query($sql);
 // Variables para mantener el seguimiento del departamento actual
 $current_department = "";
 $selectCiudades = "";
+$listadoColegios = "";
 // Iterar sobre los resultados de la consulta
 while($row = $result->fetch_assoc()) {
     $nombre_departamento = $row["departamento"];
@@ -36,8 +37,30 @@ while($row = $result->fetch_assoc()) {
     $selectCiudades .= "<option value=\"$id_ciudad\">$nombre_ciudad</option>";
 }
 
-// Cerrar el último grupo
+
 $selectCiudades .= "</optgroup>";
+
+
+$sql2 = "SELECT c.colegioId, c.colegio, m.municipio, d.departamento 
+        FROM colegios As c
+        JOIN municipio AS m ON c.municipioId = m.municipioId
+        JOIN departamento AS d ON m.departamentoId = d.departamentoId
+        ORDER BY d.departamento, m.municipio, c.colegio";
+$result2 = $link->query($sql2);
+
+$listadoColegios = "<tr><th>Id colegio</th><th>Colegio</th><th>Municipio</th><th>Departamento</th></tr>";
+
+while($row2 = $result2->fetch_assoc()) {
+    $listadoColegios .= "
+    <tr>
+        <td>".$row2["colegioId"]."</td>
+        <td>".$row2["colegio"]."</td>
+        <td>".$row2["departamento"]."</td>
+        <td>".$row2["municipio"]."</td>
+    </tr>
+    ";
+}
+
 
 // Cerrar la conexión a la base de datos
 $link->close();

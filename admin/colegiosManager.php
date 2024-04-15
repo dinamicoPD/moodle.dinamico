@@ -68,6 +68,13 @@ include("colegiosManagerController.php");
         </div>
     </div>
 </section>
+<section>
+    <div class="container p-5">
+        <table class="table table-striped">
+            <?php echo $listadoColegios; ?>
+        </table>
+    </div>
+</section>
 
 <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
 <script src="../../../js/menu.js"></script>
