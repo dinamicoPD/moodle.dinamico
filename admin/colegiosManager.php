@@ -7,7 +7,7 @@ include("colegiosManagerController.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masivo docente | Dinámico pedagogía y diseño</title>
+    <title>Colegios | Dinámico pedagogía y diseño</title>
     <link rel="icon" href="../img/cara.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/bootstrap_5_3_0_min.css">
     <link rel="stylesheet" href="../css/getbootstrap.com_docs_5.3_assets_css_docs.css">
