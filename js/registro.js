@@ -296,7 +296,7 @@ function emailExiste(){
                 case 'si':
                     $('#respuestaForm').modal('show');
                     $('#tituloModalIsa').html('NO SE PUDO<br>ENVIAR EL CÓDIGO'); 
-                    $('#msmVerificaEmail').text("Tu dirección de correo electrónico ya está registrada. Por favor, espera un mensaje de confirmación en tu bandeja de entrada para continuar con el proceso de inscripción en la plataforma");                   
+                    $('#msmVerificaEmail').text("Tu dirección de correo electrónico ya está registrada. Por favor, espera un mensaje de confirmación en tu bandeja de entrada para continuar con el proceso de inscripción en la plataforma, si no recibe el correo por favor comunicarse a la linea de soporte 3144705547");                   
                     $('#modal-footer').html(msm);
 
                     $('.modalIcoIsa').html('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.71 80.69"><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><line class="ico_isa" x1="24.82" y1="25.32" x2="54.88" y2="55.37"/><line class="ico_isa" x1="55.15" y1="25.08" x2="24.56" y2="55.61"/><ellipse class="ico_isa" cx="39.85" cy="40.34" rx="37.85" ry="38.34"/></g></g></svg>');
