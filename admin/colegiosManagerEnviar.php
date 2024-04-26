@@ -17,6 +17,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         
                 if (mysqli_stmt_execute($stmt)) {
                     // datos insertados
+                    if(isset($_FILES['inputImg']) && $_FILES['inputImg']['error'] === UPLOAD_ERR_OK){
+                        $nuevoID = mysqli_insert_id($link);
+                        $uploadDir = 'diplomas/img/colegios/';
+                        if(!file_exists($uploadDir)){
+                            mkdir($uploadDir, 0777, true);
+                        }
+                        $uploadFile = $uploadDir . $nuevoID . "." . pathinfo($_FILES['inputImg']['name'], PATHINFO_EXTENSION);
+                        move_uploaded_file($_FILES['inputImg']['tmp_name'], $uploadFile);
+                        chmod($uploadFile, 0777);
+                    }
                     header("Location: colegiosManager.php");
                 } else {
                     $mensaje = "Error al insertar los datos" . mysqli_error($link);

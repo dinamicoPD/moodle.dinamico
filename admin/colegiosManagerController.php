@@ -48,14 +48,26 @@ $sql2 = "SELECT c.colegioId, c.colegio, m.municipioId, m.municipio, d.departamen
         ORDER BY d.departamento, m.municipio, c.colegio";
 $result2 = $link->query($sql2);
 
-$listadoColegios = "<tr><th>Colegio</th><th>Municipio</th><th>Departamento</th></tr>";
+$listadoColegios = "<tr><th>Colegio</th><th>Municipio</th><th>Departamento</th><th>Logo</th><th>Actualizar</th></tr>";
 
 while($row2 = $result2->fetch_assoc()) {
+
+    $uploadDir = 'diplomas/img/colegios/';
+    $uploadFile = $uploadDir . $row2["colegioId"] . ".png";
+
+    if (file_exists($uploadFile)) {
+        $verLogo = "<img src='diplomas/img/colegios/".$row2["colegioId"].".png' alt=''>";
+    }else{
+        $verLogo = "";
+    }
+
     $listadoColegios .= "
     <tr>
         <td>[".$row2["colegioId"]."] ".$row2["colegio"]."</td>
         <td>[".$row2["municipioId"]."] ".$row2["municipio"]."</td>
         <td>[".$row2["departamentoId"]."] ".$row2["departamento"]."</td>
+        <td class='imagenLogo table-secondary'>".$verLogo."</td>
+        <td><button type='button' class='btn btnPlataforma' onclick='Actualizar(\"".$row2["colegioId"]."\", \"".$row2["colegio"]."\")'>Actualizar</button></td>
     </tr>
     ";
 }

@@ -50,6 +50,7 @@ $menu ='
                         <li id="m7-a" class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
                         <li id="m7-b" class="dropdown-item hover"><a class="menuFont2" href="masivoDocentes.php">Docentes</a></li>
                         <li id="m7-c" class="dropdown-item hover"><a class="menuFont2" href="">Correos</a></li>
+                        <li id="m7-d" class="dropdown-item hover"><a class="menuFont2" href="diplomas.php">Diplomas</a></li>
                     </ul>
                 </li>
             </ul>

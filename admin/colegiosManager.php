@@ -16,6 +16,9 @@ include("colegiosManagerController.php");
     <link rel="stylesheet" href="../../../css/config.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="styleManager.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     
     <!-- https://sweetalert.js.org/guides/ -->
     <script src="../js/sweetAlert/sweetalert.min.js"></script>
@@ -35,13 +38,11 @@ include("colegiosManagerController.php");
         <h2>Colegios</h2>
         <hr>
         <br>
-        <br>
-        <br>
     </div>
     <div class="container popinsFont">
         <div class="row">
             <div class="col shadow-lg p-2">
-                <form action="colegiosManagerEnviar.php" method="post" class="p-3">
+                <form action="colegiosManagerEnviar.php" method="post" class="p-3" enctype="multipart/form-data">
                     <?php echo $variable1 ?>
                     <div class="mb-3">
                         <label for="inputDepartamento">Municipio</label>
@@ -61,6 +62,10 @@ include("colegiosManagerController.php");
                         <select id="listadoColegios" class="form-select" multiple aria-label="Multiple select example" aria-describedby="listadoColegiosHelp" disabled></select>
                         <div id="listadoColegiosHelp" class="form-text alert alert-warning">Verifica si la institución ya este registrada</div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-check-label" for="inputImg">Adjunte logo</label>
+                        <input name="inputImg" class="form-control" type="file" id="inputImg" aria-describedby="inputImg" aria-label="Upload" accept=".png">
+                    </div>
                     <hr>
                     <button style="float:right" type="submit" class="btn btnPlataforma">Enviar</button>
                 </form>
@@ -70,11 +75,46 @@ include("colegiosManagerController.php");
 </section>
 <section>
     <div class="container p-5">
-        <table class="table table-striped">
+        <table class="table table-striped align-middle">
             <?php echo $listadoColegios; ?>
         </table>
     </div>
 </section>
+
+<div class="modal fade" id="colegioModal" tabindex="-1" aria-labelledby="colegioModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="colegioModalLabel">Actualizar colegio</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formularioColegio" action="colegiosManagerActualizar.php" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-check-label" for="Colegio">Colegio</label>
+                        <input name="Colegio" class="form-control" type="text" id="Colegio" required>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div id="imagenLogo" style="background:#f4f4f4; text-align: center;"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-check-label" for="inputImglogo">Adjunte logo</label>
+                        <input name="inputImglogo" class="form-control" type="file" id="inputImglogo" aria-describedby="inputImglogo" aria-label="Upload" accept=".png">
+                    </div>
+                    <input id="idColegio" type="hidden" name="idColegio">
+                    <input id="Colegioborrar" type="hidden" name="Colegioborrar" value="0">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="borrarColegio()">Borrar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
 <script src="../../../js/menu.js"></script>
