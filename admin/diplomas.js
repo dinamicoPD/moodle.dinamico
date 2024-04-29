@@ -84,17 +84,42 @@ $(document).ready(function() {
     });
     
     function descargarDiplomas(i, totalDivs) {
-        if (i <= totalDivs) {
-            var objetivo = document.querySelector('#diploma_' + i);
-            html2canvas(objetivo, { pixelRatio: 3 }).then(function(canvas) {
-                let enlace = document.createElement('a');
-                enlace.download = 'diploma_'+i+'.png';
-                enlace.href = canvas.toDataURL();
-                enlace.click();
-                descargarDiplomas(i + 1, totalDivs);
+        var zip = new JSZip();
+        var promises = [];
+    
+        function canvasToBase64(canvas) {
+            return new Promise((resolve) => {
+                canvas.toBlob((blob) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(blob);
+                });
             });
         }
+    
+        for (let j = i; j <= totalDivs; j++) {
+            var objetivo = document.querySelector('#diploma_' + j);
+            var promise = html2canvas(objetivo, { pixelRatio: 3 }).then(function(canvas) {
+                return canvasToBase64(canvas).then((base64Data) => {
+                    zip.file('diploma_' + j + '.png', base64Data, { base64: true });
+                });
+            });
+            promises.push(promise);
+        }
+    
+        Promise.all(promises)
+        .then(function() {
+            zip.generateAsync({ type: 'blob' })
+            .then(function(content) {
+                saveAs(content, 'diplomas.zip');
+            });
+            console.log('Todos los diplomas han sido descargados en un archivo .zip');
+        })
+        .catch(function(error) {
+            console.error('Error al descargar los diplomas:', error);
+        });
     }
+
 });
 
 function verColegios(){
@@ -132,3 +157,4 @@ function vistaPrevia(){
 
     $('#diploma_vistaprevia').html(htmlDiploma);
 }
+

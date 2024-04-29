@@ -26,7 +26,8 @@ include("diplomasController.php")
     <link rel="stylesheet" href="../css/sweetAlert/sweetalert2.min.css">
 
     <script src="html2canvas.js.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver"></script>
 </head>
 <style>
 
