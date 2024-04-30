@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 $gruposFull = $_POST['gruposFull'];
 $registro = $_POST['registro'];
 

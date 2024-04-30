@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
+    header("location: AdminLogin.php");
+    exit;
+    }
 include("menu.php");
 if(isset($_GET['mensaje'])){
     $variable1 = $_GET['mensaje'];

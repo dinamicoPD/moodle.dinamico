@@ -1,5 +1,5 @@
 <?php
-include_once(__DIR__ . "/../../config-ext.php");
+include_once("/var/www/html/moodle/config-ext.php");
 // Comprobar si el dato ha sido enviado y es válido
 if(!isset($_POST['dato']) || empty($_POST['dato'])) {
     die("ERROR: Invalid data provided.");

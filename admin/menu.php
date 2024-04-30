@@ -14,7 +14,7 @@ $menu ='
                     <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuarios</label>
                     <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
                         <li id="m1-a" class="dropdown-item hover"><a class="menuFont2" href="index.php">Licencias disponibles</a></li>
-                        <li id="m1-b" class="dropdown-item hover"><a class="menuFont2" href="">Inscripciones Pendientes</a></li>
+                        <li id="m1-b" class="dropdown-item hover"><a class="menuFont2" href="VerificacionDocente.php">Inscripciones Pendientes</a></li>
                         <li id="m1-c" class="dropdown-item hover"><a class="menuFont2" href="licenciasDocentes.php">Docentes</a></li>
                         <li id="m1-d" class="dropdown-item hover"><a class="menuFont2" href="">Asesores</a></li>
                         <li id="m1-e" class="dropdown-item hover"><a class="menuFont2" href="">Soporte</a></li>

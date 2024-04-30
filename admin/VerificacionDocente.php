@@ -1,11 +1,14 @@
 <?php
     require_once('VerificacionDocenteController.php');
     include("verInscripcion.php");
+    include("menu.php");
+
     session_start();
     if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
     header("location: AdminLogin.php");
     exit;
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -13,12 +16,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestor Usuarios | Verificación Docente</title>
-    <link rel="icon" href="img/cara.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/admiGestor.css">
-    <link rel="stylesheet" href="css/8_0_1_normalize.css" type="text/css">
-    <link rel="stylesheet" href="css/bootstrap_5_3_0_min.css">
-    <link rel="stylesheet" href="css/getbootstrap.com_docs_5.3_assets_css_docs.css">
+    <title>Manager | Dinámico pedagogía y diseño</title>
+    <link rel="icon" href="../img/cara.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/bootstrap_5_3_0_min.css">
+    <link rel="stylesheet" href="../css/getbootstrap.com_docs_5.3_assets_css_docs.css">
+    <script src="../js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="../../../css/menu.css">
+    <link rel="stylesheet" href="../../../css/config.css">
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="styleManager.css">
+    <!-- https://sweetalert.js.org/guides/ -->
+    <script src="../js/sweetAlert/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="../css/sweetAlert/sweetalert2.min.css">
+    <!--
+    <link rel="stylesheet" href="../css/admiGestor.css">
+    <link rel="stylesheet" href="../css/8_0_1_normalize.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap_5_3_0_min.css">
+    <link rel="stylesheet" href="../css/getbootstrap.com_docs_5.3_assets_css_docs.css">
+    -->
 </head>
 <body>
 <style>
@@ -26,38 +41,30 @@
     display: none;
 }
 </style>
-<header>
-		<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
-		  <div class="container-fluid">
-			<a class="navbar-brand" href="cleanConfirmaEmail.php" target="_blank"><img src="img/logo 2.png" alt=""></a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-			  <ul class="navbar-nav">
-				<li class="nav-item">
-				  <a class="nav-link active" href="LicenceManager.php">Gestor licencias</a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link position-relative" href="VerificacionDocente.php" target="_blank">Inscripciones
-				  	<span id="totalRegistros" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $totalRegistros ?></span>
-				  </a>
-				</li>
-				<li class="nav-item">
-				  <a class="nav-link" href="./phpMyAdmin-5.2.1" target="_blank">phpMyAdmin</a>
-				</li>
-			  </ul>
-			</div>
-		  </div>
-		</nav>
-</header>
-<div class="container-fluid">
-    <div class="table-responsive">
-        <?php
-            echo $PreinscripcionFull;
-        ?>
+
+<?php echo $menu; ?>
+<script>
+    var posicionMenu = document.getElementById('m1');
+    var posicionSudMenu = document.getElementById('m1-b');
+    posicionMenu.classList.add('menuActivo');
+    posicionSudMenu.classList.add('menuActivo');
+</script>
+<section id="p1">
+    <div class="titulo">
+        <h2>Inscripción pendientes</h2>
+        <hr>
     </div>
-</div>
+    <br><br>
+    <div class="container popinsFont">
+        <div class="container-fluid">
+            <div class="table-responsive">
+                <?php
+                    echo $PreinscripcionFull;
+                ?>
+            </div>
+        </div>
+    </div>
+</section>   
 
 <div class="modal fade" id="InstitutoNuevoForm" tabindex="-1" data-bs-backdrop="static" aria-labelledby="respuestaFormLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -98,7 +105,7 @@
                 <h1 class="modal-title fs-5 txtTituloSeccion" id="InscripcionFormLabel">Incripción Docente</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="enviarInscripcion.php" method="post">
+            <form action="../enviarInscripcion.php" method="post">
                 <div class="modal-body">
                 <fieldset>
                     <legend>Información personal</legend>
@@ -173,7 +180,8 @@
 </div>
 
 <script src="js/verColegio.js"></script>
-<script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script><script src="js/cdn.jsdelivr.net_npm_bootstrap@5.3.0_dist_js_bootstrap.bundle.min.js"></script>
-<script src="js/code.jquery.com_jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+<script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
+<script src="../../../js/menu.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 // Validar datos recibidos
 $id_registro = $_POST['id_registro'] ?? '';
 $ciudadId = $_POST['ciudadId'] ?? '';

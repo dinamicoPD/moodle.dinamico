@@ -1,6 +1,6 @@
 <?php
-include_once(__DIR__ . "/../../config-ext.php");
-require_once('cargar_Asesores.php');
+include_once("/var/www/html/moodle/config-ext.php");
+require_once('../cargar_Asesores.php');
 
 mysqli_set_charset($link, "utf8");
 $query = "SELECT * FROM PreDocentes";

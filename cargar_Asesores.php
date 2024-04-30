@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 
 $query = "SELECT UserId, UserName FROM User WHERE Rol = 'Asesor'";
 $result = mysqli_query($link, $query);

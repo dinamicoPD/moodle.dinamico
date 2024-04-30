@@ -1,6 +1,11 @@
 <?php
 include("menu.php");
-include("diplomasController.php")
+include("diplomasController.php");
+session_start();
+if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
+header("location: AdminLogin.php");
+exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

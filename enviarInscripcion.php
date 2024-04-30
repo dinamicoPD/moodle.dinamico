@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 include('ForcePasswordChange.php');
 include('SuspendAccount.php');
 require ('phpqrcode/qrlib.php');
@@ -309,5 +309,5 @@ foreach ($contenidoDIR as $elemento) {
 
 echo "Contenido de la carpeta eliminado exitosamente.";
 
-header("location: VerificacionDocente.php");
+header("location: admin/VerificacionDocente.php");
 ?>

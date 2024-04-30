@@ -2,6 +2,11 @@
     include("cargar_edicion.php");
     include("constructorLicenciasPrf.php");
     include("menu.php");
+    session_start();
+    if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
+    header("location: AdminLogin.php");
+    exit;
+    }
 ?>
 
 <!DOCTYPE html>

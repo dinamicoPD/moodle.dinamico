@@ -6,7 +6,7 @@ function verColegio(identificador, consecutivo){
     var otroSeleccionado = $('input[name="'+otroName+'"]').val();
 
     $.ajax({
-        url: 'cargar_instituto.php',
+        url: '../cargar_instituto.php',
         type: 'POST',
         data: {datoId: valorSeleccionado},
         success: function(data) {
@@ -160,7 +160,7 @@ function editGrupos(registro){
     }else{
 
         $.ajax({
-            url: 'grupo_1.php',
+            url: '../grupo_1.php',
             type: 'POST',
             data: { dato: registro,
                     total: totalGrupos,
@@ -186,7 +186,7 @@ function delGrupos(registro){
 function libro(registro){
     var datoId = $('select[name="ju_'+registro+'"]').val();
     $.ajax({
-        url: 'cargar_curso.php',
+        url: '../cargar_curso.php',
         type: 'POST',
         data: {datoId: datoId},
         success: function(data) {
@@ -226,7 +226,7 @@ function madafaca(registro, cantidad){
     var gruposFull = gruposSelect.join(',');
 
     $.ajax({
-        url: 'arreglarGrupo.php',
+        url: '../arreglarGrupo.php',
         type: 'POST',
         data: { gruposFull: gruposFull,
                 registro: registro},

@@ -3,8 +3,8 @@ include("admUserController.php");
 include("verInscripcion.php");
 session_start();
     if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
-    header("location: AdminLogin.php");
-    exit;
+		header("location: AdminLogin.php");
+		exit;
     }
 ?>
 <!DOCTYPE html>

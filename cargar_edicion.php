@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 
 // departamento
 $query = "SELECT id_categories, name_categories	FROM categories";

@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 
 // Comprobar si el dato ha sido enviado y es válido
 if(!isset($_POST['datoId']) || empty($_POST['datoId'])) {

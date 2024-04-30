@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 $categoriaId = $_POST['datoId'];
 
 $query = "  SELECT parametrizacion.CourseId, Course.FullName FROM parametrizacion
