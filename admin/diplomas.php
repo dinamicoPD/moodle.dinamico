@@ -129,6 +129,10 @@ exit;
         font-size: 1.5vw;
     }
 
+    .creditos span{
+        font-size: 1.3vw;
+    }
+
     .mencion p{
         text-align: center;
         font-family: 'AncientMedium';
