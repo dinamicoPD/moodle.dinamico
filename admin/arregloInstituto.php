@@ -1,73 +1,140 @@
 <?php
-require_once('/var/www/html/moodle/config-ext.php');
-// Validar datos recibidos
-$id_registro = $_POST['id_registro'] ?? '';
-$ciudadId = $_POST['ciudadId'] ?? '';
-$defOtro = $_POST['defOtro'] ?? '';
-$newName = $_POST['newName'] ?? '';
-$Instituto_ID = $_POST['instituto_1'] ?? '';
- if ($Instituto_ID == "" || $Instituto_ID == "OTRO") {
-    // Verificar si el colegio ya existe
-    $sql_check = "SELECT colegioId FROM colegios WHERE colegio = ? AND municipioId = ?";
-    $stmt_check = $link->prepare($sql_check);
-    $stmt_check->bind_param("ss", $defOtro, $ciudadId);
-    $stmt_check->execute();
-    $stmt_check->store_result();
-     if ($stmt_check->num_rows > 0) {
-        // El colegio ya existe, obtener el colegioId existente
-        $stmt_check->bind_result($colegioId);
-        $stmt_check->fetch();
-        addColegio($link, $colegioId, $defOtro, $newName, $id_registro);
-    } else {
-        // Agregar nuevo colegio si no existe
-        $sql_insert = "INSERT INTO colegios (colegio, municipioId) VALUES (?, ?)";
-        $stmt_insert = $link->prepare($sql_insert);
-        $stmt_insert->bind_param("ss", $defOtro, $ciudadId);
-         if ($stmt_insert->execute()) {
-            $colegioId = $stmt_insert->insert_id;
-            addColegio($link, $colegioId, $defOtro, $newName, $id_registro);
-            // Actualizar registros de docente
-        } else {
-            echo "Error al guardar tus datos: " . $stmt_insert->error . " Contacta con soporte técnico para recibir ayuda";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once('/var/www/html/moodle/config-ext.php');
+    $instituto_1 = $_POST['instituto_1'] ?? '';
+    $defOtro = $_POST['defOtro'] ?? '';
+    $newName = $_POST['newName'] ?? '';
+    $ciudadId = $_POST['ciudadId'] ?? '';
+    $consecutivo = $_POST['consecutivo'] ?? '';
+    $id_registro = $_POST['id_registro'] ?? '';
+    $errorMensaje = "";
+    
+    if(isset($link)){
+        if($instituto_1 === "" || $instituto_1 === "OTRO"){
+            if($defOtro === ""){
+                $errorMensaje .= "Ingrese nombre del colegio";
+                echo $errorMensaje;
+                exit();
+            }else{
+                $instituto_1 = nuevoColegio($link, $defOtro, $ciudadId);
+            }
         }
-         $stmt_insert->close();
+
+        $ubicacionArray = generarUbicacionNueva($link, $instituto_1);
+        $grupos = generarGrupos($link, $ubicacionArray, $newName, $id_registro);
+        $ubicacionAll = generarUbicacion($link, $ubicacionArray, $consecutivo, $id_registro);
+
+        actualizarRegistro($link, $ubicacionAll, $grupos, $id_registro);
     }
-     $stmt_check->close();
-} else {
-    // Actualizar registros de docente
-    $sql_1 = "SELECT colegio FROM colegios WHERE colegioId = ?";
-    $stmt_1 = $link->prepare($sql_1);
-    $stmt_1->bind_param("s", $Instituto_ID);
-    $stmt_1->execute();
-    $stmt_1->bind_result($colegio);
-    $stmt_1->fetch();
-    $stmt_1->close();
-    addColegio($link, $Instituto_ID, $colegio, $newName, $id_registro);
 }
 
- function addColegio($link, $institutoId, $institutoName, $Name, $id_registro){
-    $sql_2 = "SELECT ubicacion, cursos FROM PreDocentes WHERE Id_preDocente = ?";
-    $stmt_2 = $link->prepare($sql_2);
-    $stmt_2->bind_param("s", $id_registro);
-    $stmt_2->execute();
-    $stmt_2->bind_result($ubicacion, $cursos);
-    $stmt_2->fetch();
-    $stmt_2->close();
-    $cadenaUbicacion_1 = "OTRO,OTRA,".$Name;
-    $cadenaUbicacion_2 = $institutoId.",".$institutoName.",NO";
-    $newUbicacion = str_replace($cadenaUbicacion_1, $cadenaUbicacion_2, $ubicacion);
-    $cadenaCursos_1 = "OTRO,".$Name;
-    $cadenaCursos_2 = $institutoId.",".$institutoName;
-    $newCursos = str_replace($cadenaCursos_1, $cadenaCursos_2, $cursos);
-
-    modificarRegistro($link, $newUbicacion, $newCursos, $id_registro);
+function nuevoColegio($link, $defOtro, $ciudadId){
+    $sql_insert = "INSERT INTO colegios (colegio, municipioId) VALUES (?, ?)";
+    $stmt_insert = $link->prepare($sql_insert);
+    $stmt_insert->bind_param("ss", $defOtro, $ciudadId);
+        if ($stmt_insert->execute()) {
+            $colegioId = $stmt_insert->insert_id;
+            return $colegioId;
+        }
 }
 
-function modificarRegistro($link, $newUbicacion, $newCursos, $id_registro){
+function generarUbicacionNueva($link, $instituto_1){
+    $sql_1 = 'SELECT d.departamentoId, d.departamento, m.municipioId, m.municipio, c.colegioId, c.colegio FROM colegios c INNER JOIN municipio m ON c.municipioId = m.municipioId INNER JOIN departamento d ON m.departamentoId = d.departamentoId WHERE c.colegioId = ?';
+    $stmt = $link->prepare($sql_1);
+    $stmt->bind_param("s", $instituto_1);
+    $stmt->execute();
+    $stmt->store_result();
+    
+    $stmt->bind_result($departamentoId, $departamento, $municipioId, $municipio, $colegioId, $colegio);
+    
+    if ($stmt->num_rows > 0) {
+        $stmt->fetch();
+        $ubicacion = array( "departamentoId" => $departamentoId,
+                            "departamento" => $departamento,
+                            "municipioId" => $municipioId,
+                            "municipio" => $municipio,
+                            "colegioId" => $colegioId,
+                            "colegio" => $colegio,
+                            "estado" => "NO" );
+        $stmt->close();
+        return $ubicacion;
+    }
+}
 
+function generarGrupos($link, $ubicacion, $newName, $id_registro){
+    $sql = "SELECT cursos FROM PreDocentes WHERE Id_preDocente = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("s", $id_registro);
+    $stmt->execute();
+    $stmt->bind_result($cursos);
+    $stmt->fetch();
+    $stmt->close();
+
+    $cursosArray = explode(',', $cursos);
+    $total = count($cursosArray);
+
+    for($i=0; $i<$total; $i++){
+        if ($cursosArray[$i] === $newName){
+            $cursosArray[$i-1] = $ubicacion["colegioId"];
+            $cursosArray[$i] = $ubicacion["colegio"];
+        }
+    }
+
+    $cursos = implode(',', $cursosArray);
+    // crear nuevo grupo 
+    return $cursos;
+}
+
+function generarUbicacion($link, $ubicacionArray, $consecutivo, $id_registro){
+    $sql = "SELECT ubicacion FROM PreDocentes WHERE Id_preDocente = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param("s", $id_registro);
+    $stmt->execute();
+    $stmt->bind_result($ubicacionBD);
+    $stmt->fetch();
+    $stmt->close();
+
+    $ubicacion = explode(',', $ubicacionBD);
+
+    $valorMax = ((intval($consecutivo) * 7))-1;
+    $valorMin = $valorMax - 6;
+    $a = 0;
+
+    for($i=$valorMin; $i <= $valorMax; $i++){
+        $a++;
+        switch ($a) {
+            case 1:
+                $ubicacion[$i] = $ubicacionArray["departamentoId"];
+                break;
+            case 2:
+                $ubicacion[$i] = $ubicacionArray["departamento"];
+                break;
+            case 3:
+                $ubicacion[$i] = $ubicacionArray["municipioId"];
+                break;
+            case 4:
+                $ubicacion[$i] = $ubicacionArray["municipio"];
+                break;
+            case 5:
+                $ubicacion[$i] = $ubicacionArray["colegioId"];
+                break;
+            case 6:
+                $ubicacion[$i] = $ubicacionArray["colegio"];
+                break;
+            case 7:
+                $ubicacion[$i] = "NO";
+                break;
+        }
+    }
+
+    $ubicacionNueva = implode(',', $ubicacion);
+    return $ubicacionNueva;
+}
+
+function actualizarRegistro($link, $ubicacion, $grupos, $id_registro){
     $sql_3 = "UPDATE PreDocentes SET ubicacion = ?, cursos = ? WHERE Id_preDocente = ?";
     $stmt = $link->prepare($sql_3);
-    $stmt->bind_param("ssi", $newUbicacion, $newCursos, $id_registro);
+    $stmt->bind_param("ssi", $ubicacion, $grupos, $id_registro);
      if ($stmt->execute()) {
         header("Location: VerificacionDocente.php");
         exit;
@@ -77,6 +144,5 @@ function modificarRegistro($link, $newUbicacion, $newCursos, $id_registro){
      // Cerrar la conexión
     $stmt->close();
     $link->close();
-
 }
 ?>

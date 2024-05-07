@@ -1,23 +1,43 @@
 function verColegio(identificador, consecutivo){
     var municipioName = "Municipio_" + consecutivo + "_" + identificador;
     var valorSeleccionado = $('select[name="'+municipioName+'"]').val();
-    var txtSeleccionado = $('select[name="'+municipioName+'"]').text();
     var otroName = "Otro_" + consecutivo + "_" + identificador;
     var otroSeleccionado = $('input[name="'+otroName+'"]').val();
+    
+    if (otroSeleccionado === "NO"){
+        var instituloVal = $('select[name="Instituto_'+consecutivo+'_'+identificador+'"]').text();
+        
+        $('#InstitutoNuevoForm').modal('show');
+        $('#defOtro').val("");
+        $('#inputDepartamento').val(valorSeleccionado);
+        $('#identificador').val(identificador);
+        $('#consecutivo').val(consecutivo);
+        $('#newName').val(instituloVal);
+        verColegios();
+    }else{
+        $('#InstitutoNuevoForm').modal('show');
+        $('#defOtro').val(otroSeleccionado);
+        $('#inputDepartamento').val(valorSeleccionado);
+        $('#identificador').val(identificador);
+        $('#consecutivo').val(consecutivo);
+        $('#newName').val(otroSeleccionado);
+        verColegios();
+    }
+}
 
+function verColegios(){
+    seleccion = $("#inputDepartamento").val();
     $.ajax({
-        url: '../cargar_instituto.php',
+        url: 'cargar_colegio.php',
         type: 'POST',
-        data: {datoId: valorSeleccionado},
+        data: {
+            datoId: seleccion
+        },
         success: function(data) {
-            $('#InstitutoNuevoForm').modal('show');
-            $('#instituto_1').html(data);
-            $('#labelColegio').text("COLEGIOS EN: " + txtSeleccionado);
-            $('#defOtro').val(otroSeleccionado);
-            $('#newName').val(otroSeleccionado);
-            $('#identificador').val(identificador);
-            $('#ciudadId').val(valorSeleccionado);
-            $('#consecutivo').val(consecutivo);
+            var textoHTML = data;
+            var textoModificado = textoHTML.replace(/Seleccionar/g, "Instituciones registrados");
+
+            $("#listadoColegios").html(textoModificado);
         }
     });
 }

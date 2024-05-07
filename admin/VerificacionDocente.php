@@ -51,7 +51,7 @@
 </script>
 <section id="p1">
     <div class="titulo">
-        <h2>Inscripción pendientes</h2>
+        <h2>Inscripción pendiente</h2>
         <hr>
     </div>
     <br><br>
@@ -76,18 +76,26 @@
             <form action="arregloInstituto.php" method="post">
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input name="defOtro" id="defOtro" type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();">
+                        <input name="defOtro" id="defOtro" type="text" class="form-control" onkeyup="this.value = this.value.toUpperCase();"> <!-- necesario -->
                         <label for="defOtro">Colegio Ingresado</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inputDepartamento">Municipio</label>
+                        <select name="ciudadId" id="inputDepartamento" class="form-select" aria-describedby="InputDepartamentoHelp" onchange="verColegios()">
+                            <option value="" selected disabled>Seleccione ...</option>
+                            <?php echo $selectCiudades ?>
+                        </select required>
+                        <div id="InputDepartamentoHelp" class="form-text">Seleccione municipio</div>
                     </div>
                     <div class="alert alert-light" role="alert">
                         <p>Si el colegio ya está registrado, por favor selecciónelo de la lista a continuación. Si no aparece o si considera que es necesario, puede modificar su nombre</p>
                     </div>
-                    <div class="form-floating mb-3">
-                        <select name="instituto_1" class="form-select" id="instituto_1"></select>
-                        <label for="instituto_1" id="labelColegio">Colegios</label>
+                    <div class="mb-3">
+                        <select id="listadoColegios" name="instituto_1" class="form-select" aria-describedby="listadoColegiosHelp"></select>
+                        <div id="listadoColegiosHelp" class="form-text alert alert-warning">Verifica si la institución ya este registrada</div>
                     </div>
+                    <hr>
                     <input name="id_registro" type="hidden" id="identificador">
-                    <input name="ciudadId" type="hidden" id="ciudadId">
                     <input name="consecutivo" type="hidden" id="consecutivo">
                     <input name="newName" type="hidden" id="newName">
                 </div>
@@ -166,7 +174,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content contenedor_2">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 txtTituloSeccion" id="respuestaFormLabel">MODICAR GRUPOS</h1>
+                <h1 class="modal-title fs-5 txtTituloSeccion" id="respuestaFormLabel">MODIFICAR GRUPOS</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="" method="post">
