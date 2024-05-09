@@ -20,16 +20,6 @@ function inicio(){
     cantidadRegistros();
 }
 
-function buscarEliminar(){
-    var idSelect_array = [];
-    $(".codLicence:checked").each(function(){
-        idSelect_array.push($(this).val());
-    });
-
-    var idSelect = idSelect_array.join(', ');
-    console.log (idSelect);
-}
-
 function anterior(){
     valorIndicador = $('#indicador').val();
     valorIndicador = parseInt(valorIndicador) - parseInt(1);

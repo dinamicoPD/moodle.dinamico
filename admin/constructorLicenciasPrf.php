@@ -53,14 +53,9 @@ while ($row = mysqli_fetch_assoc($result)) {
                         <td>".$codigoLicencia."</td>
                         <td>".$nombreCompleto."</td>
                         <td>".$correo."</td>
-                        <td>
-                            <div class='form-check form-switch'>
-                                <input value='".$idUser."' class='form-check-input codLicence' type='checkbox' role='switch'>
-                            </div>
-                        </td>
                     </tr>
                     <tr>
-                        <td colspan='5'>
+                        <td colspan='4'>
                             <div class='accordion-item'>
                                 <h2 class='accordion-header'>
                                     <button class='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#flush-collapseOne_".$idUser."' aria-expanded='false' aria-controls='flush-collapseOne'>
@@ -86,10 +81,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <button id='' type='button' class='botonDP hover botonDP_1'>Actualizar</button>
+                                                        <button id='' type='button' class='botonDP hover botonDP_1'>Cambiar licencia</button>
                                                     </td>
                                                     <td>
-                                                        <button type='button' class='botonDP hover botonDP_3'>Bloquear</button>
+                                                        <button type='button' class='botonDP hover botonDP_3'>Reenviar correo</button>
                                                     </td>
                                                     <td>
                                                         <button type='button' class='botonDP hover botonDP_2'>Cambiar contraseña</button>

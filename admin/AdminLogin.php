@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="../../../css/config.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="styleManager.css">
-
 </head>
 <body>
 <header style="background-color: #444444;">
