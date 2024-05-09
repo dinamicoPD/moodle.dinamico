@@ -181,6 +181,42 @@
     </div>
 </div>
 
+
+<!-- MODAL -->
+<div class="modal fade" id="actualizarRegistro" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="actualizarRegistroLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Actualizar licencia</h1>
+        <button type="button" class="inicioClose hover" data-bs-dismiss="modal" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26.65 27.23"><defs><style>.btnClose-1{fill:#f7746d;}</style></defs><g id="Capa_2" data-name="Capa 2"><g id="Capa_1-2" data-name="Capa 1"><path class="btnClose-1" d="M7.55,13.65C5.4,9.5.52,2.05.58,1.27.58,1,7.76.11,8.39.11S13,7.93,13.32,8.5C13.59,8.09,18.2.06,18.52,0s8.18,1.05,8.13,1.31c-.42,1.36-4.41,7.92-7.14,12,2.15,4.25,6.67,12,6.67,12.69-.06.37-7.24,1.26-7.87,1.26s-4.36-7.66-5-8.76c-.73,1.16-4.87,8.6-5.14,8.6S0,26,0,25.71C.37,24.5,4.56,18,7.55,13.65Z"/></g></g></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+            <select class="form-select" id="inputRol">
+                <option value="P" selected>Profesor</option>
+            </select>
+            <label for="inputRol">Rol:</label>
+        </div>
+        <br>
+        <input id="inputIdLicencia" type="hidden" name="LicenceId">
+        <input id="inputTitulo" type="hidden" name="inputTitulo">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="button" id="button-generar">Generar</button>
+            <div class="form-floating">
+                <input type="text" class="form-control monospaceFont" id="inputCodigo" placeholder="Licencia:">
+                <label for="inputCodigo">Licencia:</label>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="actualizarCode" type="button" class="botonDP hover botonDP_4">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
 <script src="../../../js/menu.js"></script>
 <script src="licenciasDocentes.js"></script> 

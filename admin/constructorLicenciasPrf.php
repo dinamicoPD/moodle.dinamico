@@ -26,6 +26,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $curso = $row['CourseName'];
     $grupo = $row['GroupCode'];
     $codigoGrupo = $row['GroupKey'];
+    $LicenceId = $row['LicenceId'];
+    $Title = $row['Title'];
 
     $parts = explode('_', $codigoGrupo);
     $numero = $parts[1];
@@ -81,10 +83,10 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <button id='' type='button' class='botonDP hover botonDP_1'>Cambiar licencia</button>
+                                                        <button id='' type='button' class='botonDP hover botonDP_1' onclick='actualizarCodeVer(\"".$codigoLicencia."\", \"".$LicenceId."\", \"".$Title."\")'>Cambiar licencia</button>
                                                     </td>
                                                     <td>
-                                                        <button type='button' class='botonDP hover botonDP_3'>Reenviar correo</button>
+                                                        <button type='button' class='botonDP hover botonDP_3' onclick='reenviarCorreo(\"".$idUser."\",\"".$correo."\", \"".$nombreUser."\")'>Reenviar correo</button>
                                                     </td>
                                                     <td>
                                                         <button type='button' class='botonDP hover botonDP_2'>Cambiar contraseña</button>

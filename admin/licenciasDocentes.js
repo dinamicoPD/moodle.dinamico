@@ -273,3 +273,67 @@ function cargarNivel(i){
         }
     });
 }
+
+function actualizarCodeVer(codigo, LicenceId, Title){
+    
+    $('#actualizarRegistro').modal('show');
+    $('#inputCodigo').val(codigo);
+    $('#inputIdLicencia').val(LicenceId);
+    $('#inputTitulo').val(Title);
+}
+
+$("#button-generar").click(function(){
+
+    generar = 1;
+
+    $.ajax({
+        url: 'generarCodigo.php',
+        type: 'POST',
+        data: {
+            generar: generar
+        },
+        success: function(data) {
+            $('#inputCodigo').val(data);
+        }
+    });
+});
+
+$("#actualizarCode").click(function() {
+    Type = $('#inputRol').val();
+    Code = $('#inputCodigo').val();
+    Title = $('#inputTitulo').val();
+    LicenceId = $('#inputIdLicencia').val();
+
+    $.ajax({
+        url: 'actualizarLicencia.php',
+        type: 'POST',
+        data: {
+            Type: Type,
+            Code: Code,
+            Title: Title,
+            LicenceId: LicenceId
+        },
+        success: function(data) {
+            if (data === "on"){
+                location.reload();
+            } else {
+                alert("El registro no fue actualizado");
+            }
+        }
+    });
+});
+
+function reenviarCorreo(idUser, correo, nombreUser){
+    $.ajax({
+        url: 'reenviarGrupos.php',
+        type: 'POST',
+        data: {
+            idUser: idUser,
+            correo: correo,
+            nombreUser: nombreUser
+        },
+        success: function(data){
+            alert(data);
+        }
+    });
+}

@@ -1,8 +1,8 @@
 <?php
 $perfil = "Profesor";
-include("../../../config-ext.php");
+include("/var/www/html/moodle/config-ext.php");
 
-$query =    "SELECT User.*, Licence.Code, Enrolment.CourseName, Enrolment.GroupCode, Enrolment.GroupKey, Enrolment.EnrolmentId, PreDocentes.asesor
+$query =    "SELECT User.*, Licence.Code, Licence.LicenceId, Licence.Title, Enrolment.CourseName, Enrolment.GroupCode, Enrolment.GroupKey, Enrolment.EnrolmentId, PreDocentes.asesor
             FROM User
             LEFT JOIN Licence ON User.UserId = Licence.UserId
             LEFT JOIN Enrolment ON User.UserId = Enrolment.UserId
