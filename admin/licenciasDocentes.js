@@ -1,5 +1,9 @@
 let selectHtml;
 
+$("#exportarExcel").click(function(e) {
+    // exportar docentes
+});
+
 function searchTerm(){
     $('#indicador').val(1);
     cantidadRegistros();
@@ -324,16 +328,48 @@ $("#actualizarCode").click(function() {
 });
 
 function reenviarCorreo(idUser, correo, nombreUser){
-    $.ajax({
-        url: 'reenviarGrupos.php',
-        type: 'POST',
-        data: {
-            idUser: idUser,
-            correo: correo,
-            nombreUser: nombreUser
-        },
-        success: function(data){
-            alert(data);
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Estás a punto de enviar un mensaje al docente con información sobre los cursos. ¡Recuerda que esta acción no se puede revertir!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#82D5E8',
+        cancelButtonColor: '#F7746D',
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'reenviarGrupos.php',
+                type: 'POST',
+                data: {
+                    idUser: idUser,
+                    correo: correo,
+                    nombreUser: nombreUser
+                },
+                success: function(data){
+                    alert(data);
+                }
+            });
+        }
+    });
+}
+
+function cambiarpassword(idUser, codigoLicencia, correo, nombreUser){
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Estás a punto de restablecer la contraseña. ¡Recuerda que esta acción no se puede revertir!",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#82D5E8',
+        cancelButtonColor: '#F7746D',
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            rutaPassPass = "../changePassword.php?luu57Sp=" + nombreUser;
+            window.open(rutaPassPass, "_blank");
         }
     });
 }

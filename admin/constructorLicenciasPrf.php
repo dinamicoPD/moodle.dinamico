@@ -89,7 +89,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                         <button type='button' class='botonDP hover botonDP_3' onclick='reenviarCorreo(\"".$idUser."\",\"".$correo."\", \"".$nombreUser."\")'>Reenviar correo</button>
                                                     </td>
                                                     <td>
-                                                        <button type='button' class='botonDP hover botonDP_2'>Cambiar contraseña</button>
+                                                        <button type='button' class='botonDP hover botonDP_2' onclick='cambiarpassword(\"".$idUser."\",\"".$codigoLicencia."\",\"".$correo."\",\"".$nombreUser."\")'>Cambiar contraseña</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
