@@ -16,9 +16,7 @@ $filtro = isset($_GET['filtro']) ? $_GET['filtro'] : "";
 $rol = isset($_GET['rol']) ? $_GET['rol'] : "";
 
 if ($filtro != "") {
-    $sql = "SELECT Code FROM Licence WHERE UserId IS NULL AND (Code LIKE ? OR Type LIKE ? OR Title LIKE ?)";
-    $stmt = $link->prepare($sql);
-    $stmt->bind_param("sss", $filtro, $filtro, $filtro);
+    $sql = "SELECT * FROM Licence WHERE UserId IS NULL AND (Code LIKE '%$filtro%' OR Type LIKE '%$filtro%' OR Title LIKE '%$filtro%')";
 } elseif ($rol == "1") {
     $sql = "SELECT Code FROM Licence WHERE UserId IS NULL";
 } elseif ($rol == "2") {
