@@ -46,6 +46,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $idTeacher = insertarUsuario($link, $FirstName, $MiddleName, $LastName, $SecondLastName, $City, $Email, $userName, $Phone, $Perfil, $Licence["codigo"]);
         crearGrupos($link, $Codigo_Colegio, $Curso, $Sigla, $userName, $idTeacher);
         agregarAsesor($link, $idTeacher, $Asesor);
+        insripcionAlcursoCSV($link, $idTeacher, $Perfil);
+        actualizarLicencia($link, $idTeacher, $Licence["id"]);
     }else{
         echo "docente ya registrado";
     }
@@ -53,6 +55,61 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 }else{
     header("location: admin/VerificacionDocente.php");
     exit;
+}
+
+function actualizarLicencia($link, $idTeacher, $IdLicenceToChange){
+    //Cambiar el estado de la licencia a A y actualizar el ID de usuario
+    $sql = "UPDATE Licence SET  UserId = ?, Status = 'A' WHERE LicenceId = ?";
+
+    if($stmt = mysqli_prepare($link, $sql)){
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt, "ii", $idTeacher ,$IdLicenceToChange);
+        if(!mysqli_stmt_execute($stmt)){
+            return;
+        }
+    }
+
+    mysqli_stmt_close($stmt);
+    return;
+}
+//-----------------------------------//
+function insripcionAlcursoCSV($link, $idTeacher, $Rol){
+    if ($Rol == "Soporte"){
+        $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'editingteacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";
+    }else{
+        $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'teacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";
+    }
+
+    $file=fopen("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv","w+");
+    chmod("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv", 0777);
+    fwrite($file, "\xEF\xBB\xBF"); // Agregar BOM para indicar que el archivo está en UTF-8
+
+    try {
+        if ($result = $link->query($sql)) {
+            $header = true;
+            while ($row = $result->fetch_assoc()) {
+                if($header){
+                    fputcsv($file, array_keys($row));
+                    $header = false;
+                }
+                fputcsv($file,$row);
+            }
+        }
+
+    }catch(Extepction $e){
+        fclose($file);
+    }finally {
+        fclose($file);
+    }
+
+    $old_path = getcwd();
+    chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
+    $output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaProfesor'.$idTeacher.'.csv');
+    sleep(3);
+    unlink("PlantillaProfesor".$idTeacher.'.csv');
+    chdir($old_path);
+
+    return;
 }
 //-----------------------------------//
 function agregarAsesor($link, $idTeacher, $Asesor){
@@ -457,7 +514,7 @@ function buscarCurso($link, $verificar_Cursos) { //------
      if (isset($cache[$verificar_Cursos])) { //------
         return $cache[$verificar_Cursos]; //------
     } //------
-     $query = "SELECT FullName FROM Course WHERE CourseId = ?"; //------
+    $query = "SELECT FullName FROM Course WHERE CourseId = ?"; //------
     $stmt = $link->prepare($query); //------
     $stmt->bind_param("i", $verificar_Cursos); //------
     $stmt->execute(); //------
@@ -519,56 +576,61 @@ function passwordExists($link, $codGrupo) { //------
     } //------
 } //------
 
-//Crear el CSV con los valores provistos.
-if ($Rol == "Soporte"){
-    $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'editingteacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";
-}else{
-    $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'teacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";
-}
+//Crear el CSV con los valores provistos. //------
 
-$file=fopen("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv","w+");
-chmod("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv", 0777);
-fwrite($file, "\xEF\xBB\xBF"); // Agregar BOM para indicar que el archivo está en UTF-8
+if ($Rol == "Soporte"){ //------
 
-try {
-    if ($result = $link->query($sql)) {
-            $header = true;
-            while ($row = $result->fetch_assoc()) {
-                 if($header){
-                        fputcsv($file, array_keys($row));
-                        $header = false;
-                    }
-                    fputcsv($file,$row);
-            }
-        }
+    $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'editingteacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher"; //------
 
-    }catch(Extepction $e){
-         $form_err = "Error: ".$e->getMessage();
-         fclose($file);
-         $lockbutton = false;
-        return;
-    }finally {
-        fclose($file);
-    }
-//Cambiar el estado de la licencia a A y actualizar el ID de usuario
-$sql = "UPDATE Licence SET  UserId = ?, Status = 'A' WHERE LicenceId = ?";
+}else{ //------
 
-if($stmt = mysqli_prepare($link, $sql)){
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "ii", $idTeacher ,$IdLicenceToChange);
-    if(!mysqli_stmt_execute($stmt)){
-        return;
-    }
-}
+    $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'teacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher"; //------
+} //------
 
-mysqli_stmt_close($stmt);
+$file=fopen("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv","w+"); //------
+chmod("../admin/tool/uploadusercli/cli/PlantillaProfesor".$idTeacher.".csv", 0777); //------
+fwrite($file, "\xEF\xBB\xBF"); // Agregar BOM para indicar que el archivo está en UTF-8 //------
 
-$old_path = getcwd();
-chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/');
-$output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaProfesor'.$idTeacher.'.csv');
-sleep(3);
-unlink("PlantillaProfesor".$idTeacher.'.csv');
-chdir($old_path);
+try { //------
+    if ($result = $link->query($sql)) { //------
+            $header = true; //------
+            while ($row = $result->fetch_assoc()) { //------
+                 if($header){ //------
+                        fputcsv($file, array_keys($row)); //------
+                        $header = false; //------
+                    } //------
+                    fputcsv($file,$row); //------
+            } //------
+        } //------
+
+    }catch(Extepction $e){ //------
+         $form_err = "Error: ".$e->getMessage(); //------
+         fclose($file); //------
+         $lockbutton = false; //------
+        return; //------
+    }finally { //------
+        fclose($file); //------
+    } //------
+
+//Cambiar el estado de la licencia a A y actualizar el ID de usuario //------
+$sql = "UPDATE Licence SET  UserId = ?, Status = 'A' WHERE LicenceId = ?"; //------
+
+if($stmt = mysqli_prepare($link, $sql)){ //------
+    // Bind variables to the prepared statement as parameters //------
+    mysqli_stmt_bind_param($stmt, "ii", $idTeacher ,$IdLicenceToChange); //------
+    if(!mysqli_stmt_execute($stmt)){ //------
+        return; //------
+    } //------
+} //------
+
+mysqli_stmt_close($stmt); //------
+
+$old_path = getcwd(); //------
+chdir('/var/www/html/moodle/moodle/admin/tool/uploadusercli/cli/'); //------
+$output=shell_exec('php uploadusercli.php --mode=update --updatemode=missingonly --forcepasswordchange=all --file=PlantillaProfesor'.$idTeacher.'.csv'); //------
+sleep(3); //------
+unlink("PlantillaProfesor".$idTeacher.'.csv'); //------
+chdir($old_path); //------
 
 $filenameQR_change = $filenameQR.'change.png';
 $tamanio2 = 10;
