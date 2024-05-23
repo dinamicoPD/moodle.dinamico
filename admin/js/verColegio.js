@@ -45,7 +45,7 @@ function verColegios(){
 function editProf(registro, cursos){
     var proceder = true;
     var contenedor = "#laTabla_" + registro;
-    var inputSelector, selectSelector;
+    var inputSelector;
 
     for (var i = 1; i <= cursos; i++) {
         inputSelector = contenedor + " input[name='Otro_"+i+"_"+registro+"']";
@@ -55,15 +55,6 @@ function editProf(registro, cursos){
             }
         });
     }
-    /*
-    selectSelector = contenedor + " select[name='asesor_"+registro+"']";
-
-    $(selectSelector).each(function() {
-        if ($(this).val() === "" || $(this).val() === null) {
-            proceder =  false;
-        }
-    });
-    */
     if (proceder == false){
         alert ("El registro no esta completo");
     	return false;
