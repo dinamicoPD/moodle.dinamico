@@ -82,6 +82,17 @@ $(document).ready(function() {
             alert("Debe generarlos antes de descargar dando clic en ver");
         }
     });
+
+    $("#aumentar").click(function() {
+        var fontSize = parseInt($(".creditos p").css("font-size"));
+        $(".creditos p").css("font-size", fontSize + 2);
+    });
+
+    $("#disminuir").click(function() {
+        var fontSize = parseInt($(".creditos p").css("font-size"));
+        $(".creditos p").css("font-size", fontSize - 2);
+    });
+
     
     function descargarDiplomas(i, totalDivs) {
         var zip = new JSZip();

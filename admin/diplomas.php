@@ -298,10 +298,14 @@ exit;
         </div>
         <br>
         <div class="container">
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btnPlataforma" onclick="vistaPrevia()">ver</button>
+            <div class="row">
+                <div class="col">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="button" class="btnPlataforma" onclick="vistaPrevia()">ver</button>
+                    </div>
+                </div>
             </div>
-        </div>    
+        </div>
     </section>
     <br>
     <hr>
@@ -325,6 +329,18 @@ exit;
                 <button type="button" class="btn btn-primary" id="descargar-contenido">descargar</button>
             </div>
             <br>
+        </div>
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tamaño de Letra (Colegio)</span>
+                        <button type="button" id="aumentar" class="form-control">+</button>
+                        <button type="button" id="disminuir" class="form-control">-</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="csvContent"></div>
         <div id="csvContent_copia"></div>
