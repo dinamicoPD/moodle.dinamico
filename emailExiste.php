@@ -7,14 +7,19 @@ if(isset($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 }
 
 require_once('../../config-ext.php');
-$sql = "SELECT * FROM User WHERE Email = ?";
+$sql = "SELECT u.FirstName, u.MiddleName, u.LastName, u.SecondLastName, u.Phone, a.id_usuario
+FROM User u
+LEFT JOIN asesores a ON u.UserId = a.id_docente
+WHERE u.Email = ?";
 $stmt = $link->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    echo "existe";
+    while ($row = $result->fetch_assoc()){
+        echo $row['FirstName'].",".$row['MiddleName'].",".$row['LastName'].",".$row['SecondLastName'].",".$row['Phone'].",".$row['id_usuario'];
+    }
 } else {
     $sql_1 = "SELECT * FROM PreDocentes WHERE email = ?";
     $stmt_1 = $link->prepare($sql_1);
