@@ -49,7 +49,7 @@ if($stmt = mysqli_prepare($link, $sql)){
             $stmt->bind_result($licenceidfound,$useridfound,$typefound,$statusfound);
             $stmt->fetch();
          }else if (mysqli_stmt_num_rows($stmt)>1){
-            $form_err="Problemas de verifcación de Licencia, contacte al administrador";
+            $form_err="Problemas de verificación de Licencia, contacte al administrador";
             return;
          }else{
             $form_err="Verifique el pin de acceso de su cartilla";
@@ -102,7 +102,7 @@ if(($typeofoperation == 2 && $statusfound == "O") || ($typeofoperation == 2 && $
                 $stmt->bind_result($groupidfound,$groupnamefound);
                 $stmt->fetch();
              }else if (mysqli_stmt_num_rows($stmt)>1){
-                $form_err="Problemas de verifcación de Grupo, contacte al administrador";
+                $form_err="Problemas de verificación de Grupo, contacte al administrador";
                 return;
              }else{
                 $form_err="Verifique el código de Grupo suministrado";
@@ -132,7 +132,7 @@ if(($typeofoperation == 2 && $statusfound == "O") || ($typeofoperation == 2 && $
                 $stmt->bind_result($groupidfound,$groupnamefound);
                 $stmt->fetch();
              }else if (mysqli_stmt_num_rows($stmt)>1){
-                $form_err="Problemas de verifcación de Grupo, contacte al administrador";
+                $form_err="Problemas de verificación de Grupo, contacte al administrador";
                 return;
              }else{
                 $form_err="Verifique el código de Grupo suministrado";
@@ -222,7 +222,7 @@ if($statusfound == "W"){
                if(!mysqli_stmt_execute($stmt)){
                     mysqli_stmt_close($stmt);
                     error_log("al intentar Borrar al estudiante : ".$IdStudent ." de la tabla Classroom");
-                    $form_err = "Error al eliminar la vinculaciòn a grupos anteriores";
+                    $form_err = "Error al eliminar la vinculación a grupos anteriores";
                     return;
                }
             }
