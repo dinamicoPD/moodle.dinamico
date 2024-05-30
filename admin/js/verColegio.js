@@ -248,3 +248,37 @@ function madafaca(registro, cantidad){
         }
     });
 }
+
+function enviarMensaje(registro, cursos){
+    var FirstName = $('input[name="FirstName_'+registro+'"]').val();
+    var MiddleName = $('input[name="MiddleName_'+registro+'"]').val();
+    var LastName = $('input[name="LastName_'+registro+'"]').val();
+    var SecondLastName = $('input[name="SecondLastName_'+registro+'"]').val();
+    var nombre = [FirstName, MiddleName, LastName, SecondLastName].filter(Boolean).join(' ');
+    var Phone = $('input[name="Phone_'+registro+'"]').val();
+    var Email = $('input[name="email_'+registro+'"]').val();
+    var asesorID = $('select[name="asesor_'+registro+'"] option:selected').val();
+    
+    var constCursosArr = [cursos, nombre, Phone, Email, asesorID];
+    
+    for (var i = 1; i <= cursos; i++){
+        var Codigo_Colegio_txt = $('select[name="Colegio_'+i+'_'+registro+'"] option:selected').text();
+        var Codigo_Edicion_txt = $('select[name="Edicion_'+i+'_'+registro+'"] option:selected').text();
+        var Codigo_Curso_txt = $('select[name="Curso_'+i+'_'+registro+'"] option:selected').text();
+        var Codigo_Sigla = $('input[name="Sigla_'+i+'_'+registro+'"]').val();
+        constCursosArr.push(Codigo_Colegio_txt, Codigo_Edicion_txt, Codigo_Curso_txt, Codigo_Sigla);
+    }
+    
+    var constCursos = constCursosArr.join(',');
+
+    $.ajax({
+        url: 'enviarMensajeInscripcion.php',
+        type: 'POST',
+        data: {
+            constCursos: constCursos
+        },
+        success: function(response){
+            console.log(response);
+        }
+    });
+}
