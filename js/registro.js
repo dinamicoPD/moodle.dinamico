@@ -21,6 +21,7 @@ $(document).ready(function() {
         $("#respa").slideUp();
         $("#btnTel").slideUp();
         $("#btnInstituto").slideUp();
+        $("#asesorTXT").slideUp();
     }, 50);
 
     $('#E-mail').on('input', () => comprobarEmail());
@@ -32,6 +33,8 @@ $(document).ready(function() {
     $('#SecondLastName').on('input', () => nombreFull('#SecondLastName'));
 
     $('#Tel').on('input', () => comprobarTel());
+
+    $('#asesorTXT').on('input', () => comprobarAsesor());
 
     $('#addInstituto').click(function() {
 
@@ -309,11 +312,51 @@ function emailExiste(){
 
                     comprobarTel();
                     var valorAsesor = parseInt(cadenaDatosUser[5]);
-                    $("#asesorSelect").val(valorAsesor);
-                    break;
+                    console.log(valorAsesor);
+                    if (valorAsesor > 0){
+                        $("#asesorSelect").val(valorAsesor);
+                        break;
+                    }else{
+                        $("#asesorSelect").val("");
+                        break;
+                    }
             }
         },
     });
+}
+
+$('#asesorSelect').change(function() {
+    valorSeleccionado = $(this).val();
+    if(valorSeleccionado === "0"){
+        $("#asesorTXT").slideDown();
+        $("#asesorTXT").addClass("is-invalid");
+        $("#cursosVinculados").slideUp();
+        $('#btnCursosVin').css('pointer-events', 'all');
+    }else{
+        $("#asesorTXT").slideUp();
+        $("#asesorTXT").removeClass("is-invalid");
+        $("#asesorTXT").addClass("is-valid");
+        $("#asesorTXT").val("");
+    }
+});
+
+function comprobarAsesor(){
+    var asesor = $("#asesorTXT").val();
+    if(asesor === ""){
+        $("#asesorTXT").removeClass("is-valid");
+        $("#asesorTXT").addClass("is-invalid");
+        $("#cursosVinculados").slideUp();
+        $('#btnCursosVin').css('pointer-events', 'all');
+    }else{
+        const err_form_2 = /(["\\<*>/^'0-9+-])/g;
+        if(err_form_2.test(asesor) !== false){
+            $("#asesorTXT").removeClass("is-valid");
+            $("#asesorTXT").addClass("is-invalid");
+        }else{
+            $("#asesorTXT").removeClass("is-invalid");
+            $("#asesorTXT").addClass("is-valid");
+        }
+    }
 }
 
 function centrarDiv(selector){
@@ -540,44 +583,54 @@ function Asesor(){
 }
 
 function cursosVin(){
-    $('#btnCursosVin').css('pointer-events', 'none');
-    $("#cursosVinculados").slideDown();
-    centrarDiv("#cursosVinculados");
+var proceder = true;
 
-    if ($("#asesorSelect option:first-child:selected").length !== 0){
-        $("#asesorSelect").val(0);
+if($("#asesorSelect").val() === "0" || $("#asesorSelect").val() === ""|| $("#asesorSelect").val() === null){
+    if($("#asesorTXT").val() === ""){
+        proceder = false;
     }
-        var selectedValues = $('#add select.escuela').map(function() {
-        var id = this.id.slice(-1); // Extrae el último carácter del ID
-        var value = $(this).val();
-        var text = $(this).find('option:selected').text(); // Obtiene el texto del option seleccionado
-        return {
-          id: id,
-          value: value,
-          text: text
-        };
-      }).get();
-      
-      resultInsituto = "";
-      resultInsituto += "<option selected disabled value=''>Seleccionar</option>";
+}
 
-      selectedValues.forEach(function(item) {
+    if(proceder){
+        $('#btnCursosVin').css('pointer-events', 'none');
+        $("#cursosVinculados").slideDown();
+        centrarDiv("#cursosVinculados");
 
-        if (item.value == "OTRO"){
-            var valorOtro_1 = $("#otro_"+item.id).val();
-            var valorOtro = valorOtro_1.toUpperCase();
-            resultInsituto += "<option value='" + item.value + "'>"+ valorOtro +"</option>";
-        }else{
-            resultInsituto += "<option value='" + item.value + "'>"+ item.text +"</option>";
+        if ($("#asesorSelect option:first-child:selected").length !== 0){
+            $("#asesorSelect").val(0);
         }
+            var selectedValues = $('#add select.escuela').map(function() {
+                var id = this.id.slice(-1); // Extrae el último carácter del ID
+                var value = $(this).val();
+                var text = $(this).find('option:selected').text(); // Obtiene el texto del option seleccionado
+                return {
+                id: id,
+                value: value,
+                text: text
+                };
+            }).get();
+        
+        resultInsituto = "";
+        resultInsituto += "<option selected disabled value=''>Seleccionar</option>";
 
-      });
+        selectedValues.forEach(function(item) {
 
-      $('#colegio_1').html(resultInsituto);
+            if (item.value == "OTRO"){
+                var valorOtro_1 = $("#otro_"+item.id).val();
+                var valorOtro = valorOtro_1.toUpperCase();
+                resultInsituto += "<option value='" + item.value + "'>"+ valorOtro +"</option>";
+            }else{
+                resultInsituto += "<option value='" + item.value + "'>"+ item.text +"</option>";
+            }
 
-      // borrar todo
+        });
 
-      $('#cursosAdd').find('select, input').removeClass("is-valid").addClass("is-invalid").val("");
+        $('#colegio_1').html(resultInsituto);
+
+        // borrar todo
+
+        $('#cursosAdd').find('select, input').removeClass("is-valid").addClass("is-invalid").val("");
+    }
 }
 
 function edicionEdicion(input, valorEd){

@@ -312,9 +312,10 @@
                                 <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $iconoasesor ?></span>
                                 <select name="asesor" class="form-select  formInput" id="asesorSelect" aria-describedby="asesorFeedback" required>
                                     <option selected disabled value="">Seleccionar</option>
-                                    <option value="0">No tengo</option>
+                                    <option value="0">No se el código</option>
                                     <?php echo $asesoresFull ?>
                                 </select>
+                                <input type="text" name="asesorTXT" id="asesorTXT" class="form-control formInput" placeholder="Escriba nombre asesor">
                                 <div id="asesorFeedback" class="invalid-feedback mal">
                                     <?php echo $alerta ?> Selecciona el código del asesor.
                                 </div>

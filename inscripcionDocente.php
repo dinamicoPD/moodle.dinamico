@@ -12,7 +12,15 @@ if (is_array($dataReceived)) {
     $SecondLastName = filter_var($dataReceived['SecondLastName'] ?? '', FILTER_SANITIZE_STRING);
     $phone = filter_var($dataReceived['Tel'] ?? '', FILTER_SANITIZE_STRING);
     $asesor = $dataReceived['asesor'] ?? '';
-    $asesorData = reset($asesor);
+
+    $asesorData_0 = reset($asesor);
+
+    if($asesorData_0 === 0 || $asesorData_0 === "0"){
+        $asesorData = $dataReceived['asesorTXT'];
+    }else{
+        $asesorData = $asesorData_0;
+    }
+
     $definitivoDel = '';
 
     $email = strtolower(trim($email));
@@ -131,7 +139,7 @@ if (is_array($dataReceived)) {
         $stmt = $link->prepare($sql);
         $stmt->bind_param("ssssssii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $esAsesor, $esSoporte);
         if ($stmt->execute()) {
-            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
+            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.", si no recibe el correo por favor comunicarse a la linea de soporte 3144705547";
         } else {
             echo "Error al guardar tus datos: " . $stmt->error . " Contacta con soporte técnico para recibir ayuda";
         }
@@ -143,7 +151,7 @@ if (is_array($dataReceived)) {
         $stmt_3 = $link->prepare($sql_3);
         $stmt_3->bind_param("ssssssiiii", $email, $nombre, $phone, $asesorData, $definitivoDel, $definitivoGrup, $estado, $esAsesor, $esSoporte, $idRegistroSearch);
         if ($stmt_3->execute()) {
-            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.".";
+            echo "Ya hemos registrado tu cuenta. Nuestro equipo está en proceso de verificar tu inscripción. Pronto recibirás una confirmación de acceso a la plataforma en el correo electrónico que nos diste: ".$email.", si no recibe el correo por favor comunicarse a la linea de soporte 3144705547";
         } else {
             throw new Exception("Error al modificar el registro: " . $stmt_3->error);
         }

@@ -33,8 +33,13 @@ if(!$result) {
 
     $asesorInicio = '<option selected disabled value="">Seleccionar</option>';
     $asesorDefinitivo = '';
+    $procederAsesor = true;
 
     foreach($asesores as $asesor_1) {
+        if(!is_numeric($array_asesor[0]) && $procederAsesor && $array_asesor[0] != ""){
+            $asesorDefinitivo .= '<option selected value="">' . $array_asesor[0] . ' (No registrado)</option>';
+            $procederAsesor = false;
+        }
         if ($array_asesor[0] == 0){
             $asesorDefinitivo .= '<option value="' . $asesor_1['UserId'] . '">' . $asesor_1['UserName'] . '</option>';
         }else{

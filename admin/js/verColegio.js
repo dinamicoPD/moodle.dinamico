@@ -55,6 +55,12 @@ function editProf(registro, cursos){
             }
         });
     }
+
+    var asesor = $('select[name="asesor_'+registro+'"] option:selected').val();
+    if(asesor === null || asesor === ""){
+        proceder = false;
+    }
+
     if (proceder == false){
         alert ("El registro no esta completo");
     	return false;
