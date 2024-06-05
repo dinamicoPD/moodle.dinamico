@@ -2,6 +2,9 @@ let selectHtml;
 
 $("#exportarExcel").click(function(e) {
     // exportar docentes
+    e.preventDefault();
+    var ruta = 'exportarDocentes.php';
+    window.open(ruta, '_blank');
 });
 
 function searchTerm(){

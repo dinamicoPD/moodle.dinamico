@@ -16,6 +16,5 @@ mysqli_stmt_execute($stmt);
 $resultProfe = mysqli_stmt_get_result($stmt);
 
 mysqli_stmt_close($stmt);
-mysqli_close($link);
 
 ?>
