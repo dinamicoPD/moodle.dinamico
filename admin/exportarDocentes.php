@@ -6,7 +6,7 @@ if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
     exit;
 }
 
-//header("Content-Type: application/vnd.ms-excel; charset=iso-8859-1");
+header("Content-Type: application/vnd.ms-excel; charset=iso-8859-1");
 
 include("colegios.php");
 include("controllerLicenciasPrf.php");
@@ -82,7 +82,7 @@ while ($row = mysqli_fetch_assoc($resultProfe)) {
 
 $construtorHTML = "<table border='1'>".$construtorHTML."</table>";
 
-//header("content-Disposition: attachment; filename=datos-licenciasDocentes.xls");
+header("content-Disposition: attachment; filename=datos-licenciasDocentes.xls");
 
 function asesorName($link, $asesor){
 
