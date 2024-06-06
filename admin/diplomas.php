@@ -160,7 +160,7 @@ exit;
     }
 
     .medalla img{
-        width: 17vw;
+        width: 15vw;
         display: block;
         margin: auto;
     }
@@ -214,45 +214,7 @@ exit;
     posicionMenu.classList.add('menuActivo');
     posicionSudMenu.classList.add('menuActivo');
 </script>
-    <section id="p1">
-        <div class="titulo">
-            <h2>Diplomas - agregar nuevo tema</h2>
-            <hr>
-        </div>
-        <div class="container popinsFont">
-            <form action="diplomasTema.php" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="InputTitulo" class="form-label">Nombre del evento</label>
-                    <input type="text" class="form-control" name="InputTitulo" id="InputTitulo" aria-describedby="InputTituloHelp" required>
-                    <div id="InputTituloHelp" class="form-text">Ingresa el nombre del evento</div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-check-label" for="inputImgTitulo">Adjunte titulo del evento con formato .png</label>
-                    <input name="inputImgTitulo" class="form-control" type="file" id="inputImgTitulo" aria-describedby="inputImgTitulo" aria-label="Upload" accept=".png" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-check-label" for="inputImgFondo">Adjunte fondo con formato .png</label>
-                    <input name="inputImgFondo" class="form-control" type="file" id="inputImgFondo" aria-describedby="inputImgFondo" aria-label="Upload" accept=".png" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-check-label" for="inputImgMedalla1">medalla puesto 1 con formato .png</label>
-                    <input name="inputImgMedalla1" class="form-control" type="file" id="inputImgMedalla1" aria-describedby="inputImgMedalla1" aria-label="Upload" accept=".png" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-check-label" for="inputImgMedalla2">medalla puesto 2 con formato .png</label>
-                    <input name="inputImgMedalla2" class="form-control" type="file" id="inputImgMedalla2" aria-describedby="inputImgMedalla2" aria-label="Upload" accept=".png" required>
-                </div>
-                <div class="mb-3">
-                    <label class="form-check-label" for="inputImgMedalla3">medalla puesto 3 con formato .png</label>
-                    <input name="inputImgMedalla3" class="form-control" type="file" id="inputImgMedalla3" aria-describedby="inputImgMedalla3" aria-label="Upload" accept=".png" required>
-                </div>
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btnPlataforma">enviar</button>
-                </div>
-            </form>
-        </div>
-    </section>
-    <section>
+<section id="p1">
         <br><br>
         <div class="titulo">
             <h2>Diplomas - seleccione tema</h2>
@@ -265,6 +227,57 @@ exit;
                 </div>
             </div>
         </div>
+        <div class="accordion container" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <div class="titulo">
+                        <p>Diplomas - agregar nuevo tema</p>
+                        <hr>
+                    </div>
+                </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <div class="container popinsFont">
+                            <form action="diplomasTema.php" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="InputTitulo" class="form-label">Nombre del evento</label>
+                                    <input type="text" class="form-control" name="InputTitulo" id="InputTitulo" aria-describedby="InputTituloHelp" required>
+                                    <div id="InputTituloHelp" class="form-text">Ingresa el nombre del evento</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label" for="inputImgTitulo">Adjunte titulo del evento con formato .png</label>
+                                    <input name="inputImgTitulo" class="form-control" type="file" id="inputImgTitulo" aria-describedby="inputImgTitulo" aria-label="Upload" accept=".png" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label" for="inputImgFondo">Adjunte fondo con formato .png</label>
+                                    <input name="inputImgFondo" class="form-control" type="file" id="inputImgFondo" aria-describedby="inputImgFondo" aria-label="Upload" accept=".png" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label" for="inputImgMedalla1">medalla puesto 1 con formato .png</label>
+                                    <input name="inputImgMedalla1" class="form-control" type="file" id="inputImgMedalla1" aria-describedby="inputImgMedalla1" aria-label="Upload" accept=".png" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label" for="inputImgMedalla2">medalla puesto 2 con formato .png</label>
+                                    <input name="inputImgMedalla2" class="form-control" type="file" id="inputImgMedalla2" aria-describedby="inputImgMedalla2" aria-label="Upload" accept=".png" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-check-label" for="inputImgMedalla3">medalla puesto 3 con formato .png</label>
+                                    <input name="inputImgMedalla3" class="form-control" type="file" id="inputImgMedalla3" aria-describedby="inputImgMedalla3" aria-label="Upload" accept=".png" required>
+                                </div>
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <button type="submit" class="btnPlataforma">Agregar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
     </section>
     <section>
         <div class="titulo">
@@ -326,7 +339,13 @@ exit;
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btnPlataforma" id="mostrar-contenido">ver</button>
-                <button type="button" class="btn btn-primary" id="descargar-contenido">descargar</button>
+            </div>
+            <br>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <p>Descargar diplomas:</p>
+            </div>
+            <div id="btnDeDescagas" class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <!--<button type="button" class="btn btn-primary" id="descargar-contenido">descargar</button>-->
             </div>
             <br>
         </div>
