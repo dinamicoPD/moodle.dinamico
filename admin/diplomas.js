@@ -5,6 +5,15 @@ $(document).ready(function() {
         var ruta = 'diplomas/img/temas/'+evento+'/';
         var colegioName = $('#listadoColegios option:selected').text();
         var colegioId = $('#listadoColegios option:selected').val();
+        var festivalDia = $('#fechaFestivalDia option:selected').val();
+        var festivalMes = $('#fechaFestivalMes option:selected').val();
+        const fechaActual = new Date();
+        const añoActual = fechaActual.getFullYear();
+        var festivalCiudad = $('#inputDepartamento option:selected').text();
+
+        ubicacion = $("#inputDepartamento option:selected").val();
+        ArrayUbicacion = ubicacion.split(",");
+        festivalDepartamento = ArrayUbicacion[1];
 
         var nuevoTexto = evento.replace(/_/g, " ");
 
@@ -73,7 +82,7 @@ $(document).ready(function() {
                     }
 
                     //fila.append(datos[0] + datos[1] + datos[2]);
-                    fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>Del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div></div>');
+                    fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption></figure></div>');
 
                     $('#csvContent').append(fila);
                 });
@@ -173,7 +182,10 @@ function descargarDiplomas(i, totalDivs) {
 }
 
 function verColegios(){
-    seleccion = $("#inputDepartamento").val();
+    ubicacion = $("#inputDepartamento").val();
+    ArrayUbicacion = ubicacion.split(",");
+    seleccion = ArrayUbicacion[0];
+
     $.ajax({
         url: 'cargar_colegio.php',
         type: 'POST',
@@ -201,9 +213,19 @@ function vistaPrevia(){
     var colegioName = $('#listadoColegios option:selected').text();
     var colegioId = $('#listadoColegios option:selected').val();
 
+    var festivalDia = $('#fechaFestivalDia option:selected').val();
+        var festivalMes = $('#fechaFestivalMes option:selected').val();
+        const fechaActual = new Date();
+        const añoActual = fechaActual.getFullYear();
+        var festivalCiudad = $('#inputDepartamento option:selected').text();
+
+        ubicacion = $("#inputDepartamento option:selected").val();
+        ArrayUbicacion = ubicacion.split(",");
+        festivalDepartamento = ArrayUbicacion[1];
+
     var nuevoTexto = evento.replace(/_/g, " ");
 
-    var htmlDiploma ='<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br> <span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>Lorem Ipsum Dolor Sit</p></div><div class="puesto"><p>Del grado 101, por ocupar el PRIMER PUESTO <br> en la actividad '+nuevoTexto+' del nivel A</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla"><img src="'+ruta+'Medalla1.png" alt=""></div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div></div>';
+    var htmlDiploma ='<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br> <span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>Lorem Ipsum Dolor Sit</p></div><div class="puesto"><p>del grado 101, por ocupar el PRIMER PUESTO <br> en la actividad '+nuevoTexto+' del nivel A</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla"><img src="'+ruta+'Medalla1.png" alt=""></div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption></figure></div>';
 
     $('#diploma_vistaprevia').html(htmlDiploma);
 }

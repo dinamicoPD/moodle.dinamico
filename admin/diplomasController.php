@@ -26,7 +26,7 @@ while($row = $result->fetch_assoc()) {
     }
     
     // Imprimir la opción de la ciudad
-    $selectCiudades .= "<option value=\"$id_ciudad\">$nombre_ciudad</option>";
+    $selectCiudades .= "<option value=\"".$id_ciudad.",".$nombre_departamento."\">".$nombre_ciudad."</option>";
 }
 
 

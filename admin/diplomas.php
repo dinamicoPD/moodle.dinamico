@@ -67,6 +67,7 @@ exit;
         width: 100vw;
         height: 77.273vw;
         padding: 3.5vw 3.5vw 2.6vw 3.4vw;
+        position: relative;
     }
 
     .diploma{
@@ -205,6 +206,17 @@ exit;
     .losdiplomas img{
         width: 50%;
     }
+
+    .fechaMsm{
+        position: absolute;
+        bottom: 3vw;
+        right: 4vw;
+    }
+
+    .fechaMsm *{
+        font-size: 1vw;
+        font-family: 'News706BTBold';
+    }
 </style>
 <body>
 <?php echo $menu; ?>
@@ -301,6 +313,74 @@ exit;
                     <div class="col" id="imagenLogo"></div>
                 </div>
             <hr>
+        </div>
+    </section>
+    <section>
+        <div class="titulo">
+            <h2>Diplomas - fecha</h2>
+            <hr>
+        </div>
+        <br>
+        <div class="container popinsFont">
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <select id="fechaFestivalDia" class="form-select" aria-describedby="fechaFestivalDiaHelp">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                        </select>
+                        <div id="fechaFestivalDiaHelp" class="form-text">Seleccione dia del festival</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-3">
+                        <select id="fechaFestivalMes" class="form-select" aria-describedby="fechaFestivalMesHelp">
+                            <option value="enero">Enero</option>
+                            <option value="febrero">Febrero</option>
+                            <option value="marzo">Marzo</option>
+                            <option value="abril">Abril</option>
+                            <option value="mayo">Mayo</option>
+                            <option value="junio">Junio</option>
+                            <option value="julio">Julio</option>
+                            <option value="agosto">Agosto</option>
+                            <option value="septiembre">Septiembre</option>
+                            <option value="octubre">Octubre</option>
+                            <option value="noviembre">Noviembre</option>
+                            <option value="diciembre">Diciembre</option>
+                        </select>
+                        <div id="fechaFestivalMesHelp" class="form-text">Seleccione Mes del festival</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section>
