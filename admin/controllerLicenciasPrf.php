@@ -1,5 +1,4 @@
 <?php
-$perfil = "Profesor";
 include("/var/www/html/moodle/config-ext.php");
 
 $query =    "SELECT User.*, Licence.Code, Licence.LicenceId, Licence.Title, Enrolment.CourseName, Enrolment.GroupCode, Enrolment.GroupKey, Enrolment.EnrolmentId, asesores.id_usuario

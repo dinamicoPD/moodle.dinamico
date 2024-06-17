@@ -1,7 +1,9 @@
 <?php
 include("colegios.php");
-$perfil = "Profesor";
+$perfil = "Asesor";
 include("controllerLicenciasPrf.php");
+include("/var/www/html/moodle/config-ext.php");
+
 
 $cantidad_registros = isset($_POST['cantidad_registros']) ? $_POST['cantidad_registros'] : 25;
 $posicion = isset($_POST['posicion']) ? $_POST['posicion'] : 1;
@@ -73,14 +75,12 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                 <tr>
                                                     <th>Usuario</th>
                                                     <th>Teléfono</th>
-                                                    <th>Asesor</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
                                                     <td>".$nombreUser."</td>
                                                     <td>".$telefono."</td>
-                                                    <td>".$asesor."</td>
                                                 </tr>
                                                 <tr>
                                                     <td>
@@ -89,13 +89,15 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                     <td>
                                                         <button type='button' class='botonDP hover botonDP_3' onclick='reenviarCorreo(\"".$idUser."\",\"".$correo."\", \"".$nombreUser."\")'>Reenviar correo</button>
                                                     </td>
+                                                </tr>
+                                                <tr>
                                                     <td>
                                                         <button type='button' class='botonDP hover botonDP_2' onclick='cambiarpassword(\"".$idUser."\",\"".$codigoLicencia."\",\"".$correo."\",\"".$nombreUser."\")'>Cambiar contraseña</button>
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <th colspan='3'><button type='button' class='botonDP hover botonDP_2' onclick='AgregarGrupo(\"".$guardarCSV."\")'>Agregar grupos</button></th>
-                                                </tr>
+                                                    <td colspan='3'>
+                                                        <button type='button' class='botonDP hover botonDP_2' onclick='AgregarGrupo(\"".$guardarCSV."\")'>Agregar grupos</button>
+                                                    </td>
+                                                </tr>   
                                             </tbody>
                                         </table>
                                     </div>

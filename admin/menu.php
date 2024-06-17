@@ -16,7 +16,7 @@ $menu ='
                         <li id="m1-a" class="dropdown-item hover"><a class="menuFont2" href="index.php">Licencias disponibles</a></li>
                         <li id="m1-b" class="dropdown-item hover"><a class="menuFont2" href="VerificacionDocente.php">Inscripciones Pendientes</a></li>
                         <li id="m1-c" class="dropdown-item hover"><a class="menuFont2" href="licenciasDocentes.php">Docentes</a></li>
-                        <li id="m1-d" class="dropdown-item hover"><a class="menuFont2" href="">Asesores</a></li>
+                        <li id="m1-d" class="dropdown-item hover"><a class="menuFont2" href="licenciasAsesores.php">Asesores</a></li>
                         <li id="m1-e" class="dropdown-item hover"><a class="menuFont2" href="">Soporte</a></li>
                         <li id="m1-f" class="dropdown-item hover"><a class="menuFont2" href="">Estudiantes</a></li>
                     </ul>
