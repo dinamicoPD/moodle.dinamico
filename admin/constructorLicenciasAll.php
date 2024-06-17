@@ -1,6 +1,5 @@
 <?php
 include("colegios.php");
-$perfil = "Asesor";
 include("controllerLicenciasPrf.php");
 include("/var/www/html/moodle/config-ext.php");
 

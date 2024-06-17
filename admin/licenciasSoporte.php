@@ -1,6 +1,6 @@
 <?php
     include("cargar_edicion.php");
-    $perfil = "Asesor";
+    $perfil = "Soporte";
     include("constructorLicenciasAll.php");
     include("menu.php");
     session_start();
@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Licencias asesores | Dinámico pedagogía y diseño</title>
+    <title>Licencias soporte | Dinámico pedagogía y diseño</title>
     <link rel="icon" href="../img/cara.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/bootstrap_5_3_0_min.css">
     <link rel="stylesheet" href="../css/getbootstrap.com_docs_5.3_assets_css_docs.css">
@@ -33,7 +33,7 @@
 <?php echo $menu; ?>
 <script>
     var posicionMenu = document.getElementById('m1');
-    var posicionMenu2 = document.getElementById('m1-d');
+    var posicionMenu2 = document.getElementById('m1-e');
     posicionMenu.classList.add('menuActivo');
     posicionMenu2.classList.add('menuActivo');
 </script>
@@ -148,7 +148,7 @@
 <div class="modal fade" id="ModalGrupo" tabindex="-1" aria-labelledby="ModalGrupoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="actualizarGruposDocente.php" method="post">
+            <form action="actualizarGruposSoporte.php" method="post">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="SlideModalLabel">Actualizar grupos</h1>
                     <button type="button" class="inicioClose hover" data-bs-dismiss="modal" aria-label="Close">

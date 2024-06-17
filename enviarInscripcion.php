@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $City = filter_var(trim($_POST["City"]), FILTER_SANITIZE_STRING);
     $Email = filter_var(trim($_POST["Email"]), FILTER_SANITIZE_EMAIL);
     $Perfil = filter_var(trim($_POST["Perfil"]), FILTER_SANITIZE_STRING);
-    $Asesor = filter_var(trim($_POST['Asesor']), FILTER_SANITIZE_NUMBER_INT);
+    $Asesor = !empty($_POST["Asesor"]) ? filter_var(trim($_POST['Asesor']), FILTER_SANITIZE_NUMBER_INT) : "";
     
     $Codigo_Colegio = [];
     if(isset($_POST['Codigo_Colegio']) && is_array($_POST['Codigo_Colegio'])){
@@ -47,7 +47,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         $Licence = buscarLicencia($link); //  $Licence["id"] //  $Licence["codigo"]
         $userName = generarNombreDeUsurario($link, $FirstName, $LastName, $Perfil);
         $idTeacher = insertarUsuario($link, $FirstName, $MiddleName, $LastName, $SecondLastName, $City, $Email, $userName, $Phone, $Perfil, $Licence["codigo"]);
-        agregarAsesor($link, $idTeacher, $Asesor);
+        if($Asesor != ""){
+            agregarAsesor($link, $idTeacher, $Asesor);
+        }
         actualizarLicencia($link, $idTeacher, $Licence["id"]);
 
         crearGrupos($link, $Codigo_Colegio, $Curso, $Sigla, $userName, $idTeacher);
@@ -133,7 +135,7 @@ function actualizarLicencia($link, $idTeacher, $IdLicenceToChange){
 }
 //-----------------------------------//
 function insripcionAlcursoCSV($link, $idTeacher, $Rol){
-    if ($Rol == "Soporte"){
+    if ($Rol === "Soporte"){
         $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'editingteacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";
     }else{
         $sql = "SELECT FirstName as firstname, MiddleName as middlename, LastName as lastname, SecondLastName as alternatename, 'N/A' as 'Institution', City as city, Phone as phone1,Email as email, Address as address, Username as username, enr.CourseName as course1, enr.GroupFullName as group1, enr.GroupKey as enrolmentkey1,  '1' as Type1, 'teacher' as 'role1', '0' as 'enrolstatus1' FROM User usr INNER JOIN Enrolment enr ON usr.UserId = enr.UserId WHERE usr.UserId=$idTeacher";

@@ -150,7 +150,7 @@ function cambiarpassword(idUser, codigoLicencia, correo, nombreUser){
         cancelButtonText: 'No'
     }).then((result) => {
         if (result.isConfirmed) {
-            rutaPassPass = "../changePassword.php?luu57Sp=" + nombreUser;
+            rutaPassPass = "../changePassword.php?luu57Sp=" + encodeURIComponent(nombreUser);
             window.open(rutaPassPass, "_blank");
         }
     });
