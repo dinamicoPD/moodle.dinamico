@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header("location: licenciasDocentes.php");
+    header("location: licenciasSoporte.php");
     return;
 }
 
@@ -56,7 +56,11 @@ for ($i=0;$i<count($Curso);$i++){
     $fullnamegroup = $userName.".".$total_user.".".$verificar_Sigla;
     $fullnamegroup = mb_strtolower($fullnamegroup, 'UTF-8');
 
-    array_push($column_names, array(0 => $userName, 1 => $FirstName, 2 => $LastName, 3 => $Email, 4 => $courseNameFound, 5 => $fullnamegroup, 6 => $codGrupo, 7 => '1', 8 => 'editingteacher', 9 => '0'));
+    if($verificar_Colegio === "2"){
+        array_push($column_names, array(0 => $userName, 1 => $FirstName, 2 => $LastName, 3 => $Email, 4 => $courseNameFound, 5 => $fullnamegroup, 6 => $codGrupo, 7 => '1', 8 => 'editingteacher', 9 => '0'));
+    }else{
+        array_push($column_names, array(0 => $userName, 1 => $FirstName, 2 => $LastName, 3 => $Email, 4 => $courseNameFound, 5 => $fullnamegroup, 6 => $codGrupo, 7 => '1', 8 => 'teacher', 9 => '0'));
+    }
 
     $sql_Enrolment = "INSERT INTO Enrolment (UserId,CourseId,CourseName,GroupCode,GroupFullName,GroupKey) VALUES (?,?,?,?,?,?)";
     
