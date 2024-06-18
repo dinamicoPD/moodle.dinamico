@@ -1,6 +1,11 @@
 <?php
 include("colegios.php");
-include("controllerLicenciasPrf.php");
+
+if (!isset($perfil)) {
+    $perfil = isset($_POST['perfil']) ? $_POST['perfil'] : "";
+}
+
+include("controllerLicenciasAll.php");
 include("/var/www/html/moodle/config-ext.php");
 
 

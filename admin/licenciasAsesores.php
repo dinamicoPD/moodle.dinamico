@@ -1,6 +1,6 @@
 <?php
     include("cargar_edicion.php");
-    $perfil = "Asesor";
+    $perfil = "1";
     include("constructorLicenciasAll.php");
     include("menu.php");
     session_start();
@@ -40,6 +40,7 @@
 <section id="p1">
     <div class="titulo">
         <h2>Licencias asesores</h2>
+        <input type="hidden" id="perfiles" value="1">
         <hr>
     </div>
     <div class="container popinsFont">

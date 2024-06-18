@@ -45,6 +45,7 @@ function cantidadRegistros(){
     var searchTerm = $('#searchTerm').val();
     var posicion = $('#indicador').val();
     var cantidad_registros = $('#cantidad_registros').val();
+    var perfil = $('#perfiles').val();
 
     $.ajax({
         url: 'constructorLicenciasAll.php',
@@ -53,6 +54,7 @@ function cantidadRegistros(){
                 cantidad_registros: cantidad_registros,
                 posicion: posicion,
                 searchTerm: searchTerm,
+                perfil: perfil,
             },
         success: function(data) {
             var datos = data.split("¬-|°.°|¬-");
