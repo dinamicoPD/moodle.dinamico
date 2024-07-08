@@ -22,7 +22,7 @@ $menu ='
                     </ul>
                 </li>
                 <li class="nav-item" id="m2">
-                    <a class="nav-link menuFont hover" aria-current="page" href="">Categorías</a>
+                    <a class="nav-link menuFont hover" aria-current="page" href="categorias.php">Categorías</a>
                 </li>
                 <li class="nav-item" id="m3">
                     <a class="nav-link menuFont hover" aria-current="page" href="">QR</a>

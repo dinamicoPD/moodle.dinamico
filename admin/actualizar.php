@@ -1,5 +1,5 @@
 <?php
-include("../../config-ext.php");
+require_once('/var/www/html/moodle/config-ext.php');
 mysqli_set_charset($link, "utf8");
 
 $option = $_GET["op"];
@@ -21,9 +21,9 @@ switch ($option){
         while($row=mysqli_fetch_assoc($res_course)){
 
             $foundCategories .="<tr>";
-            $foundCategories .="<td><input id=ca".$row["id_categories"]." type='text' class='form-control' value='".$row["id_categories"]."' readonly></td>";
-            $foundCategories .="<td><input id=cb".$row["id_categories"]." type='text' class='form-control' value='".$row["name_categories"]."' readonly></td>";
-            $foundCategories .="<td><button class='btn btn-secondary' data-bs-toggle='modal' data-bs-target='#Editar_categorias' onclick='categ_llenar(".$row["id_categories"].");'>Editar</button></td>";
+            $foundCategories .="<td><p>".$row["id_categories"]."</p></td>";
+            $foundCategories .="<td><p>".$row["name_categories"]."</p></td>";
+            $foundCategories .="<td><button class='btn btn-secondary' data-bs-toggle='modal' data-bs-target='#Editar_categorias' onclick='categ_llenar(\"".$row["id_categories"]."\",\"".$row["name_categories"]."\");'>Editar</button></td>";
             $foundCategories .="<td><input class='ch' value=".$row["id_categories"]." class='form-check-input' type='checkbox'></td>";
             $foundCategories .="</tr>";
 
@@ -35,12 +35,10 @@ switch ($option){
         break;
 
     case 3:
-        $categ_cambia = htmlspecialchars($_POST['cat_cam'],ENT_QUOTES,'UTF-8');
-        $categ_cambia_id = htmlspecialchars($_POST['id_cat_cam'],ENT_QUOTES,'UTF-8');
-
+        $categ_cambia = mysqli_real_escape_string($link, $_POST['cat_cam']);
+        $categ_cambia_id = mysqli_real_escape_string($link, $_POST['id_cat_cam']);
         $cambia_categoria_sql = "UPDATE categories SET name_categories='$categ_cambia' WHERE id_categories='$categ_cambia_id'";
         $resultado = mysqli_query($link, $cambia_categoria_sql);
-        mysqli_free_result($resultado);
         break;
 
     case 4:
@@ -81,9 +79,9 @@ switch ($option){
         while($row=mysqli_fetch_assoc($res_parametrizacion)){
     
             $foundParametrizacion .= "<tr>";
-            $foundParametrizacion .= "<td><input id='pa".$row["id_parametro"]."' type='text' class='form-control' value='".$row["id_parametro"]."' readonly></td>";
-            $foundParametrizacion .= "<td><input id='pb'".$row["CourseId"]."  type='text' class='form-control' value='".$row["FullName"]."' readonly></td>";
-            $foundParametrizacion .= "<td><input id='pc'".$row["id_categories"]." type='text' class='form-control' value='".$row["name_categories"]."' readonly></td>";
+            $foundParametrizacion .= "<td><p>".$row["id_parametro"]."</p></td>";
+            $foundParametrizacion .= "<td><p>".$row["FullName"]."</p></td>";
+            $foundParametrizacion .= "<td><p>".$row["name_categories"]."</p></td>";
             $foundParametrizacion .= "<td><input class='pa' value=".$row["id_parametro"]." type='checkbox'></td>";
             $foundParametrizacion .= "</tr>";
         
