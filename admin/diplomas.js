@@ -1,12 +1,13 @@
 $(document).ready(function() {
     $('#mostrar-contenido').click(function() {
+
         // Obtener el archivo seleccionado
         var evento = $('input[name="flexRadioDiploma"]:checked').val();
         var ruta = 'diplomas/img/temas/'+evento+'/';
         var colegioName = $('#listadoColegios option:selected').text();
         var colegioId = $('#listadoColegios option:selected').val();
         var festivalDia = $('#fechaFestivalDia option:selected').val();
-        var festivalMes = $('#fechaFestivalMes option:selected').val();
+        
         const fechaActual = new Date();
         const añoActual = fechaActual.getFullYear();
         var festivalCiudad = $('#inputDepartamento option:selected').text();
@@ -32,75 +33,160 @@ $(document).ready(function() {
         var btnGenerar = 0;
         
         if (archivo) {
-            var lector = new FileReader();
 
-            // Cuando se cargue el archivo
-            lector.onload = function(e) {
-                var contenido = e.target.result;
-                
-                // Dividir el contenido por saltos de línea
-                var lineas = contenido.split('\n');
-                
-                // Limpiar el contenido anterior de la tabla
-                $('#csvContent').empty();
-                
-                // Recorrer cada línea y agregar a la tabla como fila
-                $.each(lineas, function(index, linea) {
-                    a++;
-                    // Dividir la línea por comas para obtener los datos
-                    var datos = linea.split(',');
-                    var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
-                    nombre = decodeURIComponent(datos[0]);
-                    nombreMinusculas = nombre.toLowerCase();
-                    palabras = nombreMinusculas.split(' ');
-                    palabrasCapitalizadas = palabras.map(function(palabra) {
-                        return palabra.charAt(0).toUpperCase() + palabra.slice(1);
-                    });
-                    nombreFormateado = palabrasCapitalizadas.join(' ');
+            Swal.fire({
+                title: 'Seleccione idioma',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#82D5E8',
+                cancelButtonColor: '#F7746D',
+                confirmButtonText: 'Español',
+                cancelButtonText: 'Inglés'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var lector = new FileReader();
 
-                    nivel = datos[2];
-                    curso = datos[3];
+                    // Cuando se cargue el archivo
+                    lector.onload = function(e) {
+                        var contenido = e.target.result;
+                        var festivalMes = $('#fechaFestivalMes option:selected').text();
+                        // Dividir el contenido por saltos de línea
+                        var lineas = contenido.split('\n');
+                        
+                        // Limpiar el contenido anterior de la tabla
+                        $('#csvContent').empty();
+                        
+                        // Recorrer cada línea y agregar a la tabla como fila
+                        $.each(lineas, function(index, linea) {
+                            a++;
+                            // Dividir la línea por comas para obtener los datos
+                            var datos = linea.split(',');
+                            var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
+                            nombre = decodeURIComponent(datos[0]);
+                            nombreMinusculas = nombre.toLowerCase();
+                            palabras = nombreMinusculas.split(' ');
+                            palabrasCapitalizadas = palabras.map(function(palabra) {
+                                return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+                            });
+                            nombreFormateado = palabrasCapitalizadas.join(' ');
+
+                            nivel = datos[2];
+                            curso = datos[3];
+                            /*----------------------- texto -------------------*/
+                            if(datos[1] === "0"){
+                                imgPuesto = "";
+                                puesto = "participar";
+                            }
+
+                            if(datos[1] === "1"){
+                                imgPuesto = '<img src="'+ruta+'Medalla1.png" alt="">';
+                                puesto = "ocupar el PRIMER PUESTO";
+                            }
+
+                            if(datos[1] === "2"){
+                                imgPuesto = '<img src="'+ruta+'Medalla2.png" alt="">';
+                                puesto = "ocupar el SEGUNDO PUESTO";
+                            }
+
+                            if(datos[1] === "3"){
+                                imgPuesto = '<img src="'+ruta+'Medalla3.png" alt="">';
+                                puesto = "ocupar el TERCER PUESTO";
+                            }
+
+                            //fila.append(datos[0] + datos[1] + datos[2]);
+                            fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption></figure></div>');
+                            /*----------------------- fin texto -------------------*/
+
+                            $('#csvContent').append(fila);
+                        });
+                        btnGenerar = Math.ceil(a / 30);
+                        console.log(btnGenerar);
+                        var btn = "";
+
+                        for (let i = 1; i <= btnGenerar; i++) {
+                            btn += '<button class="btn btn-primary" onclick="descargarContenido('+i+')">parte_'+i+'</button>';
+                        }
+
+                        $("#btnDeDescagas").html(btn);
+
+                        $('#cantidadDiplomas').val(a);
+                    };
                     
-                    if(datos[1] === "0"){
-                        imgPuesto = "";
-                        puesto = "participar";
-                    }
+                    // Leer el archivo como texto
+                    lector.readAsText(archivo);
+                }else{
+                    var lector = new FileReader();
+                    var festivalMes = $('#fechaFestivalMes option:selected').val();
+                    // Cuando se cargue el archivo
+                    lector.onload = function(e) {
+                        var contenido = e.target.result;
+                        
+                        // Dividir el contenido por saltos de línea
+                        var lineas = contenido.split('\n');
+                        
+                        // Limpiar el contenido anterior de la tabla
+                        $('#csvContent').empty();
+                        
+                        // Recorrer cada línea y agregar a la tabla como fila
+                        $.each(lineas, function(index, linea) {
+                            a++;
+                            // Dividir la línea por comas para obtener los datos
+                            var datos = linea.split(',');
+                            var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
+                            nombre = decodeURIComponent(datos[0]);
+                            nombreMinusculas = nombre.toLowerCase();
+                            palabras = nombreMinusculas.split(' ');
+                            palabrasCapitalizadas = palabras.map(function(palabra) {
+                                return palabra.charAt(0).toUpperCase() + palabra.slice(1);
+                            });
+                            nombreFormateado = palabrasCapitalizadas.join(' ');
 
-                    if(datos[1] === "1"){
-                        imgPuesto = '<img src="'+ruta+'Medalla1.png" alt="">';
-                        puesto = "ocupar el PRIMER PUESTO";
-                    }
+                            nivel = datos[2];
+                            curso = datos[3];
+                            /*----------------------- texto -------------------*/
+                            if(datos[1] === "0"){
+                                imgPuesto = "";
+                                puesto = "Participants";
+                            }
 
-                    if(datos[1] === "2"){
-                        imgPuesto = '<img src="'+ruta+'Medalla2.png" alt="">';
-                        puesto = "ocupar el SEGUNDO PUESTO";
-                    }
+                            if(datos[1] === "1"){
+                                imgPuesto = '<img src="'+ruta+'Medalla1.png" alt="">';
+                                puesto = "First place";
+                            }
 
-                    if(datos[1] === "3"){
-                        imgPuesto = '<img src="'+ruta+'Medalla3.png" alt="">';
-                        puesto = "ocupar el TERCER PUESTO";
-                    }
+                            if(datos[1] === "2"){
+                                imgPuesto = '<img src="'+ruta+'Medalla2.png" alt="">';
+                                puesto = "Second place";
+                            }
 
-                    //fila.append(datos[0] + datos[1] + datos[2]);
-                    fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption></figure></div>');
+                            if(datos[1] === "3"){
+                                imgPuesto = '<img src="'+ruta+'Medalla3.png" alt="">';
+                                puesto = "Third place";
+                            }
 
-                    $('#csvContent').append(fila);
-                });
-                btnGenerar = Math.ceil(a / 30);
-                console.log(btnGenerar);
-                var btn = "";
+                            //fila.append(datos[0] + datos[1] + datos[2]);
+                            fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>Awards</span></p></div><div class="mencion"><p>Honorable Mention<br><span>to:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>'+curso+' grade student, in recognition of his/her outstanding academic performance, excellence, and effort during the "'+nuevoTexto+'" activity, has achieved "'+puesto+'" in the "'+nivel+'" level.</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Principal</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Teacher</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Activity carried out on the day:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">Issued in '+festivalCiudad+' - '+festivalDepartamento+' on '+festivalMes+' the '+festivalDia+' th, '+añoActual+'</cite></figcaption></figure></div>');
+                            /*----------------------- fin texto -------------------*/
 
-                for (let i = 1; i <= btnGenerar; i++) {
-                    btn += '<button class="btn btn-primary" onclick="descargarContenido('+i+')">parte_'+i+'</button>';
+                            $('#csvContent').append(fila);
+                        });
+                        btnGenerar = Math.ceil(a / 30);
+                        console.log(btnGenerar);
+                        var btn = "";
+
+                        for (let i = 1; i <= btnGenerar; i++) {
+                            btn += '<button class="btn btn-primary" onclick="descargarContenido('+i+')">parte_'+i+'</button>';
+                        }
+
+                        $("#btnDeDescagas").html(btn);
+
+                        $('#cantidadDiplomas').val(a);
+                    };
+                    
+                    // Leer el archivo como texto
+                    lector.readAsText(archivo);
                 }
-
-                $("#btnDeDescagas").html(btn);
-
-                $('#cantidadDiplomas').val(a);
-            };
-            
-            // Leer el archivo como texto
-            lector.readAsText(archivo);
+            });
         } else {
             alert('Por favor, seleccione un archivo CSV.');
         }
@@ -109,11 +195,25 @@ $(document).ready(function() {
     $("#aumentar").click(function() {
         var fontSize = parseInt($(".creditos p").css("font-size"));
         $(".creditos p").css("font-size", fontSize + 2);
+        $("#letraColegio").html(fontSize + 2);
     });
 
     $("#disminuir").click(function() {
         var fontSize = parseInt($(".creditos p").css("font-size"));
         $(".creditos p").css("font-size", fontSize - 2);
+        $("#letraColegio").html(fontSize - 2);
+    });
+
+    $("#aumentarLogo").click(function() {
+        var fontSize = parseInt($(".medalla img").css("width"));
+        $(".medalla img").css("width", fontSize + 1);
+        $("#LogoColegio").html(fontSize + 2);
+    });
+
+    $("#disminuirLogo").click(function() {
+        var fontSize = parseInt($(".medalla img").css("width"));
+        $(".medalla img").css("width", fontSize - 1);
+        $("#LogoColegio").html(fontSize - 2);
     });
 
 });

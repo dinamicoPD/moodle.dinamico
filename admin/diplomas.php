@@ -364,18 +364,18 @@ exit;
                 <div class="col">
                     <div class="mb-3">
                         <select id="fechaFestivalMes" class="form-select" aria-describedby="fechaFestivalMesHelp">
-                            <option value="enero">Enero</option>
-                            <option value="febrero">Febrero</option>
-                            <option value="marzo">Marzo</option>
-                            <option value="abril">Abril</option>
-                            <option value="mayo">Mayo</option>
-                            <option value="junio">Junio</option>
-                            <option value="julio">Julio</option>
-                            <option value="agosto">Agosto</option>
-                            <option value="septiembre">Septiembre</option>
-                            <option value="octubre">Octubre</option>
-                            <option value="noviembre">Noviembre</option>
-                            <option value="diciembre">Diciembre</option>
+                            <option value="January">Enero</option>
+                            <option value="February">Febrero</option>
+                            <option value="March">Marzo</option>
+                            <option value="April">Abril</option>
+                            <option value="May">Mayo</option>
+                            <option value="June">Junio</option>
+                            <option value="July">Julio</option>
+                            <option value="August">Agosto</option>
+                            <option value="September">Septiembre</option>
+                            <option value="October">Octubre</option>
+                            <option value="November">Noviembre</option>
+                            <option value="December">Diciembre</option>
                         </select>
                         <div id="fechaFestivalMesHelp" class="form-text">Seleccione Mes del festival</div>
                     </div>
@@ -437,6 +437,17 @@ exit;
                         <span class="input-group-text">Tamaño de Letra (Colegio)</span>
                         <button type="button" id="aumentar" class="form-control">+</button>
                         <button type="button" id="disminuir" class="form-control">-</button>
+                        <span class="input-group-text" id="letraColegio"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Tamaño del Logo (Colegio)</span>
+                        <button type="button" id="aumentarLogo" class="form-control">+</button>
+                        <button type="button" id="disminuirLogo" class="form-control">-</button>
+                        <span class="input-group-text" id="LogoColegio"></span>
                     </div>
                 </div>
             </div>
