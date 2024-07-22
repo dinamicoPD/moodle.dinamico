@@ -93,7 +93,7 @@ if(isset($asesor)) {
     }
 
     foreach ($losColegios as $colegio => $cantidadCole) {
-        $imprimirColegio = '<div class="row">
+        $imprimirColegio .= '<div class="row">
                                 <div class="col">'.$colegio.'</div>
                             </div>';
     }
