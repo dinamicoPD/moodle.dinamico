@@ -113,7 +113,7 @@ $(document).ready(function() {
                     };
                     
                     // Leer el archivo como texto
-                    lector.readAsText(archivo);
+                    lector.readAsText(archivo, 'ISO-8859-1');
                 }else{
                     var lector = new FileReader();
                     var festivalMes = $('#fechaFestivalMes option:selected').val();
@@ -184,7 +184,7 @@ $(document).ready(function() {
                     };
                     
                     // Leer el archivo como texto
-                    lector.readAsText(archivo);
+                    lector.readAsText(archivo, 'ISO-8859-1');
                 }
             });
         } else {
