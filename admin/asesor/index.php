@@ -4,8 +4,11 @@ if(!isset($_SESSION["loggedinAsesor"]) || $_SESSION["loggedinAsesor"] != true){
     header("location: ../AdminLogin.php");
     exit;
 }
+
 $asesor = $_SESSION["username"];
+$UserId = $_SESSION["loggedinUserId"];
 require('indexController.php');
+require('componentes.php');
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
@@ -59,23 +62,8 @@ require('indexController.php');
 				<hr class="sidebar-divider">
 
 				<!-- Heading -->
-				<div class="sidebar-heading">
-					Herramientas
-				</div>
-
-				<li class="nav-item">
-					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-						<i class="fas fa-fw fa-wrench"></i>
-						<span>Utilidades</span>
-					</a>
-					<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item" href="blank.php">Festivales</a>
-						</div>
-					</div>
-				</li>
-
-				<hr class="sidebar-divider">
+				
+				<?php echo $menu; ?>
 
 				<div class="text-center d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -122,9 +110,17 @@ require('indexController.php');
 							<!-- Nav Item - User Information -->
 							<li class="nav-item dropdown no-arrow">
 								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $asesor; ?></span>
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $asesor."-".$UserId; ?></span>
 									<img class="img-profile rounded-circle" src="img/undraw_profile.svg">
 								</a>
+								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+										Logout
+									</a>
+								</div>
 							</li>
 
 						</ul>
@@ -389,15 +385,17 @@ require('indexController.php');
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+						<h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
 					</div>
-					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+					<div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+						<form action="../logout.php" method="post">
+							<button class="btn btn-primary" type="submit">Logout</button>
+						</form>
 					</div>
 				</div>
 			</div>

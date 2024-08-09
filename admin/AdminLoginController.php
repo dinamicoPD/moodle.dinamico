@@ -21,7 +21,7 @@ if(empty(trim($password))){
     return;
 }
 
-$tipoUserSQL = "SELECT Rol FROM User WHERE UserName = ?";
+$tipoUserSQL = "SELECT Rol, UserId FROM User WHERE UserName = ?";
 if($stmt = mysqli_prepare($link, $tipoUserSQL)){
     mysqli_stmt_bind_param($stmt, "s", $username);
     
@@ -29,7 +29,7 @@ if($stmt = mysqli_prepare($link, $tipoUserSQL)){
         mysqli_stmt_store_result($stmt);
         
         if(mysqli_stmt_num_rows($stmt) > 0){
-            mysqli_stmt_bind_result($stmt, $rol);
+            mysqli_stmt_bind_result($stmt, $rol, $UserId);
             mysqli_stmt_fetch($stmt);
             
             if($rol === "Admin"){
@@ -48,6 +48,7 @@ if($stmt = mysqli_prepare($link, $tipoUserSQL)){
                     $_SESSION["loggedinAdmin"] = false;
                     $_SESSION["loggedinAsesor"] = true;
                     $_SESSION["username"] = $username;
+                    $_SESSION["loggedinUserId"] = $UserId;
                     header("location: asesor/index.php");
                     mysqli_close($link);
                 }

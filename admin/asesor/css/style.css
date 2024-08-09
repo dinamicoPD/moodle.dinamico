@@ -1,0 +1,25 @@
+.otraInstitucion{
+    display: none;
+}
+
+.inputValido{
+    border-bottom: 3px solid #9DD177;
+    background-color: #9dd1772f;
+}
+
+.inputIncorrecto{
+    border-bottom: 3px solid #F7746D;
+    background-color: #F7746D2f;
+}
+
+.inputCapacitacion[readonly]{
+    background-color: #9DD177;
+    color: #FFFFFF;
+    border: 1px solid #9DD177;
+}
+
+.inputEvento[readonly]{
+    background-color: #80D2E5;
+    color: #FFFFFF;
+    border: 1px solid #80D2E5;
+}

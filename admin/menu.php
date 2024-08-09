@@ -38,10 +38,11 @@ $menu ='
                     </ul>
                 </li>
                 <li class="nav-item dropdown" id="m6">
-                    <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Catalogo</label>
+                    <label class="nav-link dropdown-toggle menuFont hover" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Servicios</label>
                     <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdownMenuLink">
                         <li id="m6-a" class="dropdown-item hover"><a class="menuFont2" href="catalogoJuegos.php">Juegos</a></li>
                         <li id="m6-b" class="dropdown-item hover"><a class="menuFont2" href="">Libros</a></li>
+                        <li id="m6-c" class="dropdown-item hover"><a class="menuFont2" href="catalogoFestivales.php">Festivales</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown" id="m7">

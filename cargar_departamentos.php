@@ -1,5 +1,5 @@
 <?php
-require_once('../../config-ext.php');
+require_once('/var/www/html/moodle/config-ext.php');
 
 // departamento
 $query = "SELECT departamentoId, departamento FROM departamento";
