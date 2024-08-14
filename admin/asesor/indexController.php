@@ -59,7 +59,7 @@ if ($stmt = $link->prepare($sql)) {
     $docentesTotales = array_unique($gruposDocentesTotales);
     $total_docentes = count($docentesTotales);
     // ---- Porcentaje docentes ---- //
-    $docentes_porcentaje = ($docenteUsoTotal*100)/$total_docentes;
+    $docentes_porcentaje = number_format(($docenteUsoTotal*100)/$total_docentes, 2);
     // ---- Total estudiantes ---- //
     $estudianteTotal = array_unique($estudiantesTotales);
     $total_estudiantes = count($estudianteTotal);
@@ -70,7 +70,7 @@ if ($stmt = $link->prepare($sql)) {
     $colegioActivo = array_unique($colegiosActivos);
     $Activos_colegios = count($colegioActivo);
     // ---- Porcentaje colegios ---- //
-    $colegios_porcentaje = ($Activos_colegios*100)/$total_colegios;
+    $colegios_porcentaje = number_format(($Activos_colegios*100)/$total_colegios, 2);
     // ---- Niveles Activos ---- //
     $nivelesDefinitivos = array_count_values($nivelesActivos);
     $nivelesNoActivos_unique = array_unique($nivelesNoActivos);
