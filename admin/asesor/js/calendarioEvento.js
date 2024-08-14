@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             $("#fechaCapacitacion").val(selectedDate);
                                             $("#PersonalCapacitacionDef").val($("#personalCapacitacion").val());
                                             calendar.addEvent({
-                                                title: "PERSONAL: " + $("#personalCapacitacionDef").val(),
+                                                title: "PERSONAL: " + $("#personalCapacitacion").val(),
                                                 start: arg.start,
                                                 end: arg.end,
                                                 allDay: arg.allDay,
