@@ -132,7 +132,7 @@ require('componentes.php');
 					<div class="container-fluid">
 
 						<!-- Page Heading -->
-						<div class="d-sm-flex align-items-center justify-content-between mb-4">
+						<div class="d-sm-flex align-items-center justify-content-center mb-5">
 							<h1 class="h1 mb-0 text-gray-800">Uso de plataforma</h1>
 						</div>
 						<hr>
@@ -267,8 +267,14 @@ require('componentes.php');
 						<!-- Content Row -->
 						<hr>
 
-						<div class="d-sm-flex align-items-center justify-content-between mb-4">
+						<div class="d-sm-flex align-items-center justify-content-center mb-5">
 							<h1 class="h1 mb-0 text-gray-800">Festivales</h1>
+						</div>
+
+						<hr>
+
+						<div class="d-sm-flex align-items-center justify-content-between mb-4">
+							<h1 class="h3 mb-0 text-gray-800">Solicitudes</h1>
 						</div>
 						<!--
 						<div class="row">

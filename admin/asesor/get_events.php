@@ -2,6 +2,7 @@
 require_once('/var/www/html/moodle/config-ext.php');
 
 if($link){
+    $events = array();
     $sql = "SELECT Fecha, Cantidad FROM FestivalApoyo UNION SELECT Fecha, Cantidad FROM FestivalCapacitacion";
     $result = $link->query($sql);
     if ($result->num_rows > 0) {

@@ -50,10 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mysqli_stmt_close($stmt);
 
         if ($TotalCantidad === null) {
-            $TotalCantidad = 0;
+            echo $total;
+        }else{
+            echo $total-$TotalCantidad;
         }
         // Ahora $TotalCantidad y $total contienen los valores resultantes
-        echo $total-$TotalCantidad;
+        
     }else{
         return;
     }
