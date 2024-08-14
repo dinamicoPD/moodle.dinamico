@@ -1,102 +1,118 @@
 <?php
 require_once('/var/www/html/moodle/config-ext.php');
 
-if(isset($asesor)) {
-    $asesor = $link->real_escape_string($asesor);
+$sql = "SELECT e.UserId, e.UserGrpId, e.GroupKey, c.ClassroomId, c.UserId AS estudiantes, e.CourseName, s.colegio, SUBSTRING_INDEX(e.GroupKey, '_', -1) AS Codigo_Colegio
+FROM asesores a
+LEFT JOIN Enrolment e ON a.id_docente = e.UserId
+LEFT JOIN Classroom c ON e.UserGrpId = c.UserGrpId
+LEFT JOIN colegios s ON s.colegioId = SUBSTRING_INDEX(e.GroupKey, '_', -1)
+WHERE a.id_usuario = ?";
 
-    $sql = "
-    SELECT 
-        Enrolment.GroupKey AS Codigo_Grupo,
-        SUBSTRING_INDEX(Enrolment.GroupKey, '_', -1) AS Codigo_Colegio,
-        colegios.colegio AS Nombre_Colegio,
-        Classroom.UserId AS Id_Estudiante,
-        Enrolment.CourseId AS Id_Curso,
-        Enrolment.CourseName AS Curso,
-        Enrolment.UserId AS Docente,
-        (SELECT COUNT(*) FROM Classroom) AS Total_Classroom,
-        (SELECT COUNT(*) FROM asesores) AS Total_Asesores,
-        (SELECT COUNT(*) FROM colegios) AS Total_Colegios
-    FROM 
-        User
-    INNER JOIN 
-        asesores ON User.UserId = asesores.id_usuario
-    INNER JOIN 
-        Enrolment ON asesores.id_docente = Enrolment.UserId
-    INNER JOIN 
-        Classroom ON Enrolment.UserGrpId = Classroom.UserGrpId
-    INNER JOIN 
-        colegios ON colegios.colegioId = SUBSTRING_INDEX(Enrolment.GroupKey, '_', -1)
-    WHERE 
-        User.UserName = '$asesor';
-    ";
-    // Ejecutar la consulta y guardar los resultados en un array
-    $result = $link->query($sql);
-    $datos = array();
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $datos[] = $row;
-        }
+// Preparar la consulta
+if ($stmt = $link->prepare($sql)) {
+
+    $stmt->bind_param("i", $UserId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data = array();
+
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
     }
 
-    $total_docentes = count(array_unique(array_column($datos, 'Docente')));
-
-    $total_estudiantes = count($datos);
-
-    $total_colegios = count(array_unique(array_column($datos, 'Codigo_Colegio')));
-    
-    $docentes_porcentaje = number_format((($total_docentes / $datos[0]['Total_Asesores'])*100), 2);
-
-    $estudiantes_porcentaje = number_format((($total_estudiantes / $datos[0]['Total_Classroom'])*100), 2);
-
-    $colegios_porcentaje = number_format((($total_colegios / $datos[0]['Total_Colegios'])*100), 2);
-
-    $nivel = array();
-    $numero_nivel = array();
-    $comprobar_nivel = "";
-    $proyectos = array();
-    $libros = count($datos);
-    $proyectosHTML = "";
+    $docentesActivos = array();
+    $docentesTotales = array();
+    $estudiantesTotales = array();
+    $colegiosTotales = array();
+    $colegiosActivos = array();
+    $docenteActivo = array();
+    $docentesTotales = array();
+    $estudianteTotal = array();
+    $colegioTotal = array();
+    $colegioActivo = array();
     $colores = array('danger','warning','info','success','primary');
-    $coloresCont = count($colores) - 1;
-    $selectColor = 0;
-    $losColegios = array();
+    $nivelesActivos = array();
+    $nivelesNoActivos = array();
+    $gruposDocentesTotales = array();
+    $proyectosActivos = array();
 
-    foreach ($datos as $valor) {
-        $curso = $valor['Curso'];
-        $colegio = $valor['Nombre_Colegio'];
-        if (array_key_exists($curso, $proyectos)) {
-            $proyectos[$curso]++;
-        } else {
-            $proyectos[$curso] = 1;
+    foreach ($data as $row) {
+        
+        if($row["ClassroomId"] != Null || $row["ClassroomId"] != ""){
+            $docentesActivos[] = $row["UserId"];
+            $estudiantesTotales[] = $row["estudiantes"];
+            $colegiosActivos[] = $row["Codigo_Colegio"];
+            $nivelesActivos[] = $row["CourseName"];
+            $colegioActivos[] = $row["colegio"];
+        }else{
+            $nivelesNoActivos[] = $row["CourseName"];
+            $colegioNoActivos[] = $row["colegio"];
         }
-        if (array_key_exists($colegio, $losColegios)) {
-            $losColegios[$colegio]++;
-        } else {
-            $losColegios[$colegio] = 1;
+        $gruposDocentesTotales[] = $row["UserId"];
+        $colegiosTotales[] = $row['Codigo_Colegio'];
+    }
+
+    // ---- docentes activos ---- //
+    $docenteActivo = array_unique($docentesActivos);
+    $docenteUsoTotal = count($docenteActivo);
+    // ---- Total docentes ---- //
+    $docentesTotales = array_unique($gruposDocentesTotales);
+    $total_docentes = count($docentesTotales);
+    // ---- Porcentaje docentes ---- //
+    $docentes_porcentaje = ($docenteUsoTotal*100)/$total_docentes;
+    // ---- Total estudiantes ---- //
+    $estudianteTotal = array_unique($estudiantesTotales);
+    $total_estudiantes = count($estudianteTotal);
+    // ---- total colegios ---- //
+    $colegioTotal = array_unique($colegiosTotales);
+    $total_colegios = count($colegioTotal);
+    // ---- colegios activos ---- //
+    $colegioActivo = array_unique($colegiosActivos);
+    $Activos_colegios = count($colegioActivo);
+    // ---- Porcentaje colegios ---- //
+    $colegios_porcentaje = ($Activos_colegios*100)/$total_colegios;
+    // ---- Niveles Activos ---- //
+    $nivelesDefinitivos = array_count_values($nivelesActivos);
+    $nivelesNoActivos_unique = array_unique($nivelesNoActivos);
+    // ---- Colegios Activos ---- //
+    $colegioDefinitivos = array_count_values($colegioActivos);
+    $colegioNoActivos_unique = array_unique($colegioNoActivos);
+
+    foreach($nivelesNoActivos_unique as $value){
+        if (!array_key_exists($value, $nivelesDefinitivos)) {
+            $nivelesDefinitivos[$value] = 0;
         }
     }
 
-    foreach ($proyectos as $curso => $cantidad) {
-        $porcentaje = $cantidad/$libros;
-        $porcentaje = number_format($porcentaje*100, 2);
-
+    $sumatoria_total_niveles = array_sum($nivelesDefinitivos);
+    $selectColor = 0;
+    $proyectosHTML = "";
+    foreach ($nivelesDefinitivos as $keyniveles => $valueniveles) {
+        $porcentajeNiveles = number_format(($valueniveles / $sumatoria_total_niveles)*100, 2);
         if($selectColor>4){
             $selectColor = 0;
         }
-
-        $proyectosHTML .= '<h4 class="small font-weight-bold">'.$curso.' ('.$cantidad.') <span class="float-right">'.$porcentaje.'%</span></h4>';
-        $proyectosHTML .= '<div class="progress mb-4">';
-            $proyectosHTML .= '<div class="progress-bar bg-'.$colores[$selectColor].'" role="progressbar" style="width: '.$porcentaje.'%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>';
-        $proyectosHTML .= '</div>';
-
+        $proyectosHTML .= '<h4 class="small font-weight-bold">'.$keyniveles.' (Total: '.$valueniveles.') <span class="float-right">%'.$porcentajeNiveles.'</span></h4><div class="progress mb-4"><div class="progress-bar bg-'.$colores[$selectColor].' role="progressbar" style="width:'.$porcentajeNiveles.'%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div></div>';
         $selectColor++;
     }
 
-    foreach ($losColegios as $colegio => $cantidadCole) {
-        $imprimirColegio .= '<div class="row">
-                                <div class="col">'.$colegio.'</div>
-                            </div>';
+    foreach($colegioNoActivos_unique as $value){
+        if (!array_key_exists($value, $colegioDefinitivos)) {
+            $colegioDefinitivos[$value] = 0;
+        }
     }
-
+    $sumatoria_total_colegio = array_sum($colegioDefinitivos);
+    $selectColor = 0;
+    $imprimirColegio = "";
+    foreach ($colegioDefinitivos as $keycolegios => $valuecolegios){
+        $porcentajeColegios = number_format(($valuecolegios / $sumatoria_total_colegio)*100, 2);
+        if($selectColor>4){
+            $selectColor = 0;
+        }
+        $imprimirColegio .= '<h4 class="small font-weight-bold">'.$keycolegios.'<br> (Total: '.$valuecolegios.') <span class="float-right">%'.$porcentajeColegios.'</span></h4><div class="progress mb-4"><div class="progress-bar bg-'.$colores[$selectColor].' role="progressbar" style="width:'.$porcentajeColegios.'%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div></div>';
+        $selectColor++;
+    }
+    // Cerrar la declaración
+    $stmt->close();
 }
 ?>
