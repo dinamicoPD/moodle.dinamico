@@ -22,6 +22,7 @@ session_start();
     <link rel="stylesheet" href="../../../css/config.css">
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="styleManager.css">
+    <link rel="stylesheet" href="css/categorias.css">
 
     <!-- https://sweetalert.js.org/guides/ -->
     <script src="../js/sweetAlert/sweetalert.min.js"></script>
@@ -40,24 +41,95 @@ session_start();
         <h2>Festivales</h2>
         <hr>
     </div>
+    <br>
     <div class="container popinsFont">
         <div class="row">
-            <div class="col py-5">
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                    <div class="input-group mb-3">
-                        <label for="personalTotal" class="input-group-text">Personal disponible</label>
-                        <span class="input-group-text" id="letraColegio">(Actual <?php echo $totalDocentes; ?>)</span>
-                        <input id="personalTotal" name="personalTotal" type="number" class="form-control" placeholder="Ingrese nueva cantidad" min="0" required>
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
-                    </div>
-                </form>
+            <div class="col">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <label for="select_1" onclick="verActivo(1)"><p id="nav-link_1" class="nav-link active">Personal disponible</p></label>
+                        <label for="select_2" onclick="verActivo(2)"><p id="nav-link_2" class="nav-link">Áreas</p></label>
+                        <label for="select_3" onclick="verActivo(3)"><p id="nav-link_3" class="nav-link">Actividades</p></label>
+                    </li>
+                </ul>
+                <div class="select_main">
+                    <ul>
+                        <li>
+                            <input type="radio" name="inputRadio" class="inputRadio" id="select_1" checked>
+                            <div class="select_content">
+                                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" class="p-3">
+                                    <div class="input-group mb-3">
+                                        <label for="personalTotal" class="input-group-text">Personal disponible</label>
+                                        <span class="input-group-text" id="letraColegio">(Actual <?php echo $totalDocentes; ?>)</span>
+                                        <input id="personalTotal" name="personalTotal" type="number" class="form-control" placeholder="Ingrese nueva cantidad" min="0" required>
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li>
+                            <input type="radio" name="inputRadio" class="inputRadio" id="select_2">
+                            <div class="select_content">
+                                <div class="container p-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover align-middle">
+                                            <tr class="table-info">
+                                                <th class='text-center'>Área</th>
+                                                <th class='text-center'>Actualizar</th>
+                                                <th class='text-center'>Eliminar</th>
+                                            </tr>
+                                            <?php echo $areas ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <input type="radio" name="inputRadio" class="inputRadio" id="select_3">
+                            <div class="select_content">
+                                <div class="container p-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover align-middle">
+                                            <tr class="table-info">
+                                                <th class='text-center'>Actividad</th>
+                                                <th class='text-center'>Actualizar</th>
+                                                <th class='text-center'>Eliminar</th>
+                                            </tr>
+                                            <?php echo $tipo ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<div class="modal fade" id="actualizarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="actualizarLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="actualizarLabel">Actualizar</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="contenidoModal">
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
 <script src="indexController.js"></script>
 <script src="../../../js/menu.js"></script>
+<script src="js/categorias.js"></script>
+<script src="js/actualizarRegistro.js"></script>
 </body>
 </html>

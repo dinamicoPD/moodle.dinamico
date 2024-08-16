@@ -100,28 +100,20 @@ function generarPassword($link, $verificar_Colegio) {
     if (preg_match('/[A-Z]/', $codGrupo) && preg_match('/[a-z]/', $codGrupo) && preg_match('/[0-9]/', $codGrupo)) {
         $codGrupo_2 = $codGrupo."_".$verificar_Colegio;
         if (passwordExists($link, $codGrupo_2)) {
-            // Si existe, generamos una nueva
             return generarPassword($link, $verificar_Colegio);
         } else {
-            // Si no existe, retornamos esta contraseña
             return $codGrupo_2;
         }
     } else {
-        // Si no se cumplen las condiciones, generamos una nueva contraseña
         return generarPassword($link, $verificar_Colegio);
     }
 }
 
 function passwordExists($link, $codGrupo) {
-    // Preparamos la consulta
     if ($stmt = $link->prepare("SELECT Groupkey FROM Enrolment WHERE Groupkey = ?")) {
-        // Asociamos los parámetros
         $stmt->bind_param("s", $codGrupo);
-        // Ejecutamos la consulta
         $stmt->execute();
-        // Obtenemos los resultados
         $stmt->store_result();
-        // Verificamos si encontró alguna coincidencia
         if ($stmt->num_rows > 0) {
             return true;
         } else {
@@ -133,7 +125,7 @@ function passwordExists($link, $codGrupo) {
 }
 
 function buscarCurso($link, $verificar_Cursos) {
-    static $cache = array(); // Caché de resultados
+    static $cache = array();
      if (isset($cache[$verificar_Cursos])) {
         return $cache[$verificar_Cursos];
     }
@@ -147,7 +139,7 @@ function buscarCurso($link, $verificar_Cursos) {
     }
     $curso = $result->fetch_assoc()["FullName"];
     $stmt->close();
-     $cache[$verificar_Cursos] = $curso; // Almacenar resultado en caché
+     $cache[$verificar_Cursos] = $curso;
     return $curso;
 }
 
