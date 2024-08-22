@@ -28,7 +28,7 @@ if ($link) {
                                     </button>
                                 </td>
                                 <td class='text-center'>
-                                    <button type='button' class='btn btn-danger'>
+                                    <button type='button' class='btn btn-danger eliminar' value='".$row_2["id_festival"].",FestivalArea'>
                                         Eliminar
                                     </button>
                                 </td>
@@ -52,7 +52,7 @@ if ($link) {
                                 </button>
                             </td>
                             <td class='text-center'>
-                                <button type='button' class='btn btn-danger' onclick='eliminar(".$row_3["id_Actividad"].")'>
+                                <button type='button' class='btn btn-danger eliminar' value='".$row_3["id_Actividad"].",FestivalTipo'>
                                     Eliminar
                                 </button>
                             </td>

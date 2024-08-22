@@ -50,6 +50,7 @@ session_start();
                         <label for="select_1" onclick="verActivo(1)"><p id="nav-link_1" class="nav-link active">Personal disponible</p></label>
                         <label for="select_2" onclick="verActivo(2)"><p id="nav-link_2" class="nav-link">Áreas</p></label>
                         <label for="select_3" onclick="verActivo(3)"><p id="nav-link_3" class="nav-link">Actividades</p></label>
+                        <label for="select_4" onclick="verActivo(4)"><p id="nav-link_4" class="nav-link">Solicitudes</p></label>
                     </li>
                 </ul>
                 <div class="select_main">
@@ -71,6 +72,13 @@ session_start();
                             <input type="radio" name="inputRadio" class="inputRadio" id="select_2">
                             <div class="select_content">
                                 <div class="container p-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-outline-danger agregarRegistro" type="button" value="FestivalArea">Agregar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/></svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container p-3">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover align-middle">
                                             <tr class="table-info">
@@ -88,6 +96,13 @@ session_start();
                             <input type="radio" name="inputRadio" class="inputRadio" id="select_3">
                             <div class="select_content">
                                 <div class="container p-3">
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-outline-danger agregarRegistro" type="button" value="FestivalTipo">Agregar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/></svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container p-3">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover align-middle">
                                             <tr class="table-info">
@@ -99,6 +114,12 @@ session_start();
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                        </li>
+                        <li>
+                            <input type="radio" name="inputRadio" class="inputRadio" id="select_4">
+                            <div class="select_content">
+
                             </div>
                         </li>
                     </ul>
