@@ -25,6 +25,15 @@ eliminarBtn.forEach(boton => {
     });
 });
 
+const actualizarModificarBtn = document.querySelectorAll('.actualizarModificar');
+
+actualizarModificarBtn.forEach(boton => {
+    boton.addEventListener('click', function() {
+        const valor = this.value;
+        actualizarModificar(valor);
+    });
+});
+
 function eliminarElemento(Registro){
     arrayRegistro = Registro.split(",");
     Swal.fire({
@@ -120,6 +129,43 @@ function actualizacion(valor){
                     location.reload();
                 }
             });
+        }
+    });
+}
+
+function actualizarModificar(valor) {
+
+    const arrayValores = valor.split(",");
+    var valorInput = $("#"+arrayValores[1]).val()
+
+    /* extrae el valor del input y envialo*/
+
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¿Desea actualizar el registro por "+valorInput+"?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url:'actulizarModificar.php',
+                type: 'POST',
+                data:{
+                    valor:arrayValores[0],
+                    valorInput:valorInput
+                    },
+                success:function(valor){
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = valor;
+                    $("#accordionFlushExample").empty().append(tempDiv.childNodes);
+                }
+            });
+        }else{
+            console.log("no confirmado");
         }
     });
 }

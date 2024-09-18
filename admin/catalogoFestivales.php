@@ -51,6 +51,7 @@ session_start();
                         <label for="select_2" onclick="verActivo(2)"><p id="nav-link_2" class="nav-link">Áreas</p></label>
                         <label for="select_3" onclick="verActivo(3)"><p id="nav-link_3" class="nav-link">Actividades</p></label>
                         <label for="select_4" onclick="verActivo(4)"><p id="nav-link_4" class="nav-link">Solicitudes</p></label>
+                        <label for="select_5" onclick="verActivo(5)"><p id="nav-link_5" class="nav-link">Agregar Eventos</p></label>
                     </li>
                 </ul>
                 <div class="select_main">
@@ -118,6 +119,14 @@ session_start();
                         </li>
                         <li>
                             <input type="radio" name="inputRadio" class="inputRadio" id="select_4">
+                            <div class="select_content table-responsive">
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <?php echo $solicitud ?>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <input type="radio" name="inputRadio" class="inputRadio" id="select_5">
                             <div class="select_content">
 
                             </div>
