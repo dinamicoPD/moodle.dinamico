@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#mostrar-contenido').click(function() {
-
+        var fechaChecked = $("#fechaChecked").is(':checked');
         // Obtener el archivo seleccionado
         var evento = $('input[name="flexRadioDiploma"]:checked').val();
         var ruta = 'diplomas/img/temas/'+evento+'/';
@@ -93,14 +93,19 @@ $(document).ready(function() {
                                 puesto = "ocupar el TERCER PUESTO";
                             }
 
+                            if (fechaChecked) {
+                                fechaTexto = '<blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption>';
+                            } else {
+                                fechaTexto = '';
+                            }
+
                             //fila.append(datos[0] + datos[1] + datos[2]);
-                            fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Actividad realizada el día:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">'+festivalDia+' de '+festivalMes+' del año '+añoActual+' en '+festivalCiudad+' - '+festivalDepartamento+'</cite></figcaption></figure></div>');
+                            fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm">'+fechaTexto+'</figure></div>');
                             /*----------------------- fin texto -------------------*/
 
                             $('#csvContent').append(fila);
                         });
                         btnGenerar = Math.ceil(a / 30);
-                        console.log(btnGenerar);
                         var btn = "";
 
                         for (let i = 1; i <= btnGenerar; i++) {
@@ -171,7 +176,6 @@ $(document).ready(function() {
                             $('#csvContent').append(fila);
                         });
                         btnGenerar = Math.ceil(a / 30);
-                        console.log(btnGenerar);
                         var btn = "";
 
                         for (let i = 1; i <= btnGenerar; i++) {

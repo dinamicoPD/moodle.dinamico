@@ -25,7 +25,7 @@ $menu ='
                     <a class="nav-link menuFont hover" aria-current="page" href="categorias.php">Categorías</a>
                 </li>
                 <li class="nav-item" id="m3">
-                    <a class="nav-link menuFont hover" aria-current="page" href="">QR</a>
+                    <a class="nav-link menuFont hover" aria-current="page" href="generadorQR.php">QR</a>
                 </li>
                 <li class="nav-item" id="m4">
                     <a class="nav-link menuFont hover" aria-current="page" href="">Periódico</a>

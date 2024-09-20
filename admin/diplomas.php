@@ -381,6 +381,14 @@ exit;
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="fechaChecked" name="fechaChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">desactiva si quieres eliminar la fecha</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <section>
