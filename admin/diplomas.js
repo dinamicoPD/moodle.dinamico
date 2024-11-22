@@ -15,7 +15,7 @@ $(document).ready(function() {
         var festivalCiudad = $('#inputDepartamento option:selected').text();
 
         ubicacion = $("#inputDepartamento option:selected").val();
-        ArrayUbicacion = ubicacion.split(";");
+        ArrayUbicacion = ubicacion.split(",");
         festivalDepartamento = ArrayUbicacion[1];
 
         var nuevoTexto = evento.replace(/_/g, " ");
@@ -55,7 +55,7 @@ $(document).ready(function() {
                         $('#csvContent').empty();
                         $.each(lineas, function(index, linea) {
                             a++;
-                            var datos = linea.split(',');
+                            var datos = linea.split(';');
                             var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
                             nombre = decodeURIComponent(datos[0]);
                             nombreMinusculas = nombre.toLowerCase();
