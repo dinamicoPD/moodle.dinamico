@@ -209,7 +209,7 @@ exit;
 
     .fechaMsm{
         position: absolute;
-        bottom: 5vw;
+        bottom: 3vw;
         right: 4vw;
     }
 
@@ -452,7 +452,7 @@ exit;
             <div class="row">
                 <div class="col">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Tamaño del Logo (Colegio)</span>
+                        <span class="input-group-text">Tamaño de la medalla</span>
                         <button type="button" id="aumentarLogo" class="form-control">+</button>
                         <button type="button" id="disminuirLogo" class="form-control">-</button>
                         <span class="input-group-text" id="LogoColegio"></span>
