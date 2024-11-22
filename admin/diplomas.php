@@ -209,7 +209,7 @@ exit;
 
     .fechaMsm{
         position: absolute;
-        bottom: 3vw;
+        bottom: 5vw;
         right: 4vw;
     }
 
@@ -261,7 +261,7 @@ exit;
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-check-label" for="inputImgTitulo">Adjunte titulo del evento con formato .png</label>
-                                    <input name="inputImgTitulo" class="form-control" type="file" id="inputImgTitulo" aria-describedby="inputImgTitulo" aria-label="Upload" accept=".png" required>
+                                    <input name="inputImgTitulo" class="form-control" type="file" id="inputImgTitulo" aria-describedby="inputImgTitulo" aria-label="Upload" accept=".png">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-check-label" for="inputImgFondo">Adjunte fondo con formato .png</label>
@@ -273,11 +273,11 @@ exit;
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-check-label" for="inputImgMedalla2">medalla puesto 2 con formato .png</label>
-                                    <input name="inputImgMedalla2" class="form-control" type="file" id="inputImgMedalla2" aria-describedby="inputImgMedalla2" aria-label="Upload" accept=".png" required>
+                                    <input name="inputImgMedalla2" class="form-control" type="file" id="inputImgMedalla2" aria-describedby="inputImgMedalla2" aria-label="Upload" accept=".png">
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-check-label" for="inputImgMedalla3">medalla puesto 3 con formato .png</label>
-                                    <input name="inputImgMedalla3" class="form-control" type="file" id="inputImgMedalla3" aria-describedby="inputImgMedalla3" aria-label="Upload" accept=".png" required>
+                                    <input name="inputImgMedalla3" class="form-control" type="file" id="inputImgMedalla3" aria-describedby="inputImgMedalla3" aria-label="Upload" accept=".png">
                                 </div>
                                 <div class="d-grid gap-2 col-6 mx-auto">
                                     <button type="submit" class="btnPlataforma">Agregar</button>

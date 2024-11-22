@@ -317,7 +317,7 @@ function emailExiste(){
                         $("#asesorSelect").val(valorAsesor);
                         break;
                     }else{
-                        $("#asesorSelect").val("");
+                        $("#asesorSelect").val(valorAsesor);
                         break;
                     }
             }
@@ -585,20 +585,21 @@ function Asesor(){
 function cursosVin(){
 var proceder = true;
 
-if($("#asesorSelect").val() === "0" || $("#asesorSelect").val() === ""|| $("#asesorSelect").val() === null){
-    if($("#asesorTXT").val() === ""){
-        proceder = false;
+    if($("#asesorSelect").val() === "0" || $("#asesorSelect").val() === ""|| $("#asesorSelect").val() === null){
+        if($("#asesorTXT").val() === ""){
+            proceder = false;
+        }
     }
-}
 
     if(proceder){
         $('#btnCursosVin').css('pointer-events', 'none');
         $("#cursosVinculados").slideDown();
         centrarDiv("#cursosVinculados");
-
+        /*
         if ($("#asesorSelect option:first-child:selected").length !== 0){
             $("#asesorSelect").val(0);
         }
+        */
             var selectedValues = $('#add select.escuela').map(function() {
                 var id = this.id.slice(-1); // Extrae el último carácter del ID
                 var value = $(this).val();

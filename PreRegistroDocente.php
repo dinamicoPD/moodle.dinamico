@@ -1,8 +1,32 @@
 <?php
+    session_set_cookie_params(0);
+    session_start();
+
+    $timeout = 300;
+    
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout) {
+        session_unset();
+        session_destroy();
+        header("Location: LoginPRF.php");
+        exit;
+    }
+    $_SESSION['last_activity'] = time();
+
+
+    if(!isset($_SESSION["loggedinRegister"]) || $_SESSION["loggedinRegister"] != true){
+    header("location: LoginPRF.php");
+    exit;
+    }
+    $inputCodAsesor = $_SESSION["codAsesor"];
+    $asesoresFull = '<option selected value="' . $inputCodAsesor . '">' . $inputCodAsesor . '</option>';
     require_once('iconos.php');
     require_once(dirname(__FILE__).'/cargar_departamentos.php');
-    require_once(dirname(__FILE__).'/cargar_Asesores.php');
     require_once(dirname(__FILE__).'/cargar_edicion.php');
+
+    if (isset($_SESSION)) {
+        session_unset();
+        session_destroy();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,7 +42,7 @@
     <link rel="stylesheet" href="css/styleFormPRF.css">
 </head>
 <body class="fondoCielo" id="contenedor">
-
+    
     <img id="inicioMico" src="img/fomrLarge/micoVolador@3x.png" alt="">
     <form method="post" class="formulario" id="formulario" action="inscripcionDocente.php">
         <!-- Titulo -->
@@ -310,9 +334,7 @@
                             <label for="asesorSelect" class="form-label formLabel">Asesor</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text formIco" id="inputGroupPrepend3"><?php echo $iconoasesor ?></span>
-                                <select name="asesor" class="form-select  formInput" id="asesorSelect" aria-describedby="asesorFeedback" required>
-                                    <option selected disabled value="">Seleccionar</option>
-                                    <option value="0">No se el código</option>
+                                <select name="asesor" class="form-select  formInput" id="asesorSelect" aria-describedby="asesorFeedback" readonly required>
                                     <?php echo $asesoresFull ?>
                                 </select>
                                 <input type="text" name="asesorTXT" id="asesorTXT" class="form-control formInput" placeholder="Escriba nombre asesor">

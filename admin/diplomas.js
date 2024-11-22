@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $('#mostrar-contenido').click(function() {
+        
+        
         var fechaChecked = $("#fechaChecked").is(':checked');
         // Obtener el archivo seleccionado
         var evento = $('input[name="flexRadioDiploma"]:checked').val();
@@ -31,7 +33,7 @@ $(document).ready(function() {
         var curso = "";
         var imgPuesto = "";
         var btnGenerar = 0;
-        
+             
         if (archivo) {
 
             Swal.fire({
@@ -44,22 +46,15 @@ $(document).ready(function() {
                 cancelButtonText: 'Inglés'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    // -----------------------------------------------------
                     var lector = new FileReader();
-
-                    // Cuando se cargue el archivo
                     lector.onload = function(e) {
                         var contenido = e.target.result;
                         var festivalMes = $('#fechaFestivalMes option:selected').text();
-                        // Dividir el contenido por saltos de línea
                         var lineas = contenido.split('\n');
-                        
-                        // Limpiar el contenido anterior de la tabla
                         $('#csvContent').empty();
-                        
-                        // Recorrer cada línea y agregar a la tabla como fila
                         $.each(lineas, function(index, linea) {
                             a++;
-                            // Dividir la línea por comas para obtener los datos
                             var datos = linea.split(',');
                             var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
                             nombre = decodeURIComponent(datos[0]);
@@ -72,7 +67,7 @@ $(document).ready(function() {
 
                             nivel = datos[2];
                             curso = datos[3];
-                            /*----------------------- texto -------------------*/
+
                             if(datos[1] === "0"){
                                 imgPuesto = "";
                                 puesto = "participar";
@@ -99,9 +94,7 @@ $(document).ready(function() {
                                 fechaTexto = '';
                             }
 
-                            //fila.append(datos[0] + datos[1] + datos[2]);
                             fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>otorga</span></p></div><div class="mencion"><p>Mención De Honor<br><span>a:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>del grado '+curso+', por '+puesto+'<br> en la actividad '+nuevoTexto+' del nivel '+nivel+'</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Rector (a)</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Docente de área</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm">'+fechaTexto+'</figure></div>');
-                            /*----------------------- fin texto -------------------*/
 
                             $('#csvContent').append(fila);
                         });
@@ -117,25 +110,18 @@ $(document).ready(function() {
                         $('#cantidadDiplomas').val(a);
                     };
                     
-                    // Leer el archivo como texto
                     lector.readAsText(archivo, 'ISO-8859-1');
+                    // -----------------------------------------------------
                 }else{
+                    // -----------------------------------------------------
                     var lector = new FileReader();
                     var festivalMes = $('#fechaFestivalMes option:selected').val();
-                    // Cuando se cargue el archivo
                     lector.onload = function(e) {
                         var contenido = e.target.result;
-                        
-                        // Dividir el contenido por saltos de línea
                         var lineas = contenido.split('\n');
-                        
-                        // Limpiar el contenido anterior de la tabla
                         $('#csvContent').empty();
-                        
-                        // Recorrer cada línea y agregar a la tabla como fila
                         $.each(lineas, function(index, linea) {
                             a++;
-                            // Dividir la línea por comas para obtener los datos
                             var datos = linea.split(',');
                             var fila = $('<section class="diplomaFS" id="diploma_'+a+'"></section>');
                             nombre = decodeURIComponent(datos[0]);
@@ -148,7 +134,7 @@ $(document).ready(function() {
 
                             nivel = datos[2];
                             curso = datos[3];
-                            /*----------------------- texto -------------------*/
+
                             if(datos[1] === "0"){
                                 imgPuesto = "";
                                 puesto = "Participants";
@@ -169,9 +155,8 @@ $(document).ready(function() {
                                 puesto = "Third place";
                             }
 
-                            //fila.append(datos[0] + datos[1] + datos[2]);
+
                             fila.append('<div class="fondo" style="background-image: url('+ruta+'Fondo.png);"><div class="diploma"><div class="escudoDinamico"><div class="bordeEscudo"><img src="diplomas/img/logo@3x.png" alt=""></div></div><div class="contenidoDiploma"><div class="logoFestival"><img src="'+ruta+'Titulo.png" alt=""><hr class="lineaDecoracion logoLinea"></div><div class="creditos"><p>'+colegioName+'<br><span>Awards</span></p></div><div class="mencion"><p>Honorable Mention<br><span>to:</span></p></div><div class="nombreEstudiantes"><p>'+nombreFormateado+'</p></div><div class="puesto"><p>'+curso+' grade student, in recognition of his/her outstanding academic performance, excellence, and effort during the "'+nuevoTexto+'" activity, has achieved "'+puesto+'" in the "'+nivel+'" level.</p></div><div class="firmas"><div class="rector"><hr class="lineaDecoracion"><p>Principal</p></div><div class="medalla">'+imgPuesto+'</div><div class="docente"><hr class="lineaDecoracion"><p>Teacher</p></div></div></div><div class="escudoColegio"><div class="bordeEscudo"><img src="diplomas/img/colegios/'+colegioId+'.png" alt=""></div></div></div><figure class="fechaMsm"><blockquote class="blockquote"><p>Activity carried out on the day:</p></blockquote><figcaption class="blockquote-footer"><cite title="Source Title">Issued in '+festivalCiudad+' - '+festivalDepartamento+' on '+festivalMes+' the '+festivalDia+' th, '+añoActual+'</cite></figcaption></figure></div>');
-                            /*----------------------- fin texto -------------------*/
 
                             $('#csvContent').append(fila);
                         });
@@ -187,13 +172,15 @@ $(document).ready(function() {
                         $('#cantidadDiplomas').val(a);
                     };
                     
-                    // Leer el archivo como texto
                     lector.readAsText(archivo, 'ISO-8859-1');
+                    // -----------------------------------------------------
                 }
             });
         } else {
             alert('Por favor, seleccione un archivo CSV.');
         }
+
+
     });
 
     $("#aumentar").click(function() {

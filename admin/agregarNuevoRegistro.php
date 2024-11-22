@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$resultado) {
             echo "Error en la consulta: " . mysqli_error($link);
         }else{
-            header("Location: catalogoFestivales.php");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit(); 
         }
     }
