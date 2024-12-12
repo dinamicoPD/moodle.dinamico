@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $generado = generarQR($url, $nombreQR);
 
-    echo $generado;
+    header("Location: generadorQR.php");
 }
 
 function generado($nombreQR, $tituloQR, $aterrizaje, $proyectoQR_crear, $link){
