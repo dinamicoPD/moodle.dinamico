@@ -1,6 +1,8 @@
 <?php
     require_once('/var/www/html/moodle/config-ext.php');
 
+    $listasAterrizaje = "";
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $identificador = $_POST["valor"];
 
@@ -123,6 +125,16 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $btnProyectos .= '<button class="btn btn-outline-secondary m-1" type="button" data-bs-toggle="button" onclick="verProyecto('.$row["id"].',\''.$row["titulo"].'\')">'.$row["titulo"].'</button><br>';
+                }
+            }
+        }
+
+        $sql1 = "SELECT * FROM QR_aterrizaje";
+        $result1 = $link->query($sql1);
+        if($result1){
+            if($result1->num_rows > 0){
+                while ($row1 = $result1->fetch_assoc()){
+                    $listasAterrizaje .= '<option value="'.$row1["id"].','.$row1["enlace"].'">'.$row1["enlace"].'</option>';
                 }
             }
         }

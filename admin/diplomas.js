@@ -320,4 +320,3 @@ function vistaPrevia(){
 
     $('#diploma_vistaprevia').html(htmlDiploma);
 }
-

@@ -6,6 +6,13 @@ $(document).ready(function() {
             $('input[type="checkbox"].checkqr').prop('checked', false);
         }
     });
+
+    $('#addEnlace').click(function(){
+        var cantidad = $('.nuevosEnlaces').length;
+        cantidad += 1;
+        var contenido = '<div id="nuevosEnlaces_'+cantidad+'" class="nuevosEnlaces"><hr><div class="mb-3"><label for="nombreEnlace" class="form-label"><strong>Nombre enlace</strong></label><div class="input-group mb-3"><input name="nombreEnlace[]" type="text" class="form-control" required></div></div><div class="mb-3"><label for="Enlace" class="form-label"><strong>Enlace</strong></label><div class="input-group mb-3"><input name="Enlace[]" type="text" class="form-control" required></div></div><button type="button" class="btn btn-outline-dark m-2" onclick="eliminarenlace('+cantidad+')">Eliminar</button></div>';
+        $('.enlaces').append(contenido);
+    });
 });
 
 function buscarcheckqr(){
@@ -142,4 +149,8 @@ function downloadQR() {
 function crearQR(valor){
     $("#creacionQR").modal('show');
     $("#proyectoQR_crear").val(valor);
+}
+
+function eliminarenlace(cantidad){
+    $('#nuevosEnlaces_'+cantidad).remove();
 }

@@ -46,6 +46,7 @@
         <div class="titulo">
             <h2>Gestor QR</h2>
             <hr>
+            <p id="mensaje"></p>
         </div>
         <br>
         <div class="container-fluid popinsFont p-3">
@@ -150,23 +151,66 @@
     </div>
 
     <div class="modal fade" id="creacionQR" tabindex="-1" aria-labelledby="creacionQRLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h1 class="modal-title fs-5" id="creacionQRLabel">Creación QR</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body" id="creacionQRModal">
-            <form action="" method="post">
-                <input type="hidden" name="proyectoQR_crear" id="proyectoQR_crear">
-            </form>
-        </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="creacionQRLabel">Creación QR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-body" id="creacionQRModal">
+                    <form action="crearQr.php" method="post" id="miFormulario">
+                        <input type="hidden" name="proyectoQR_crear" id="proyectoQR_crear">
+                        <div class="mb-3">
+                            <label for="tituloQR" class="form-label">
+                                <strong>Titulo del QR</strong>
+                            </label>
+                            <div class="input-group mb-3">
+                                <input name="tituloQR" type="text" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="aterrizaje" class="form-label">
+                                <strong>Página aterrizaje</strong>
+                            </label>
+                            <div class="input-group mb-3">
+                                <select id="aterrizaje" class="form-select" name="aterrizaje" required>
+                                    <option selected disabled value="">Seleccionar</option>
+                                    <?php echo $listasAterrizaje; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="btnMas">
+                            <button id="addEnlace" type="button" class="btn btn-outline-dark m-2">Agregar enlace</button>
+                        </div>
+                        <br>
+                        <div class="enlaces">
+                            <div class="mb-3">
+                                <label for="nombreEnlace" class="form-label">
+                                    <strong>Nombre enlace</strong>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input name="nombreEnlace[]" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Enlace" class="form-label">
+                                    <strong>Enlace</strong>
+                                </label>
+                                <div class="input-group mb-3">
+                                    <input name="Enlace[]" type="text" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" value="Enviar">
+                    </form>                
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
     </div>
 
     <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
