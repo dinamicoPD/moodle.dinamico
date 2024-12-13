@@ -11,9 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $enlaces = $_POST['Enlace'];
     $nombreQR = "QR_".str_replace(' ', '_', $tituloQR).".png";
 
-    $id_generado = 1;
-    //$id_generado = generado($nombreQR, $tituloQR, $aterrizaje[0], $proyectoQR_crear, $link);
-    //$generarEnlaces = generarEnlaces($id_generado, $nombreEnlaces, $enlaces, $link);
+    $id_generado = generado($nombreQR, $tituloQR, $aterrizaje[0], $proyectoQR_crear, $link);
+    $generarEnlaces = generarEnlaces($id_generado, $nombreEnlaces, $enlaces, $link);
     $url = 'https://dinamicopd.com/codeQR/'.$aterrizaje[1].'?qr='.$id_generado;
 
     $generado = generarQR($url, $nombreQR);
