@@ -50,4 +50,6 @@ $sql = "SELECT CONCAT(FirstName,' ',LastName,' ',SecondLastName) as FullName,Cou
     } 
     mysqli_stmt_close($stmt);
 
+$camposColegio = $TeacherCompleteName.",".$CourseName.",".$GroupName.",".$nombreColegio.",".$nombreMunicipio;
+
 ?>

@@ -76,12 +76,13 @@
                             <li>
                                 <input type="radio" name="inputRadio" class="inputRadio" id="select_1" checked>
                                 <div class="select_content p-2 text-bg-light">
-
-                                    <div class="row">
-                                        <div class="col p-2">
-                                            <button type="button" class="btn btn-dark agregarRegistro" style="float: right" id="btnProyecto" value="QR_proyectos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/></svg> Crear proyecto</button>
+                                        <div class="row">
+                                            <div class="col p-2">
+                                                <button type="button" class="btn btn-dark agregarRegistro border border-white" style="float: right" id="btnProyecto" value="QR_proyectos"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/></svg> Crear proyecto</button>
+                                                
+                                                <button type="button" class="btn btn-dark border border-white" style="float: right" id="btnMasivoQR"  data-bs-toggle="modal" data-bs-target="#masivosModal"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 10a.5.5 0 0 0 .5-.5V3.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 3.707V9.5a.5.5 0 0 0 .5.5m-7 2.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5"/></svg> Crear Masivos</button>
+                                            </div>
                                         </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-auto"><?php echo $btnProyectos; ?></div>
                                         <div class="col table-responsive">
@@ -212,6 +213,45 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Masivo QR-->
+    <div class="modal fade" id="masivosModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Masivos QR</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+    <form action="" method="post">
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="" class="form-label">
+                    <strong>Proyecto</strong>
+                </label>
+                <div class="input-group mb-3">
+                    <select id="" class="form-select" name="" required>
+                        <option selected disabled value="">Seleccionar</option>
+                        <?php echo $ListadoProyectos; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="archivo_csv" class="form-label">
+                    <strong>Adjunte archivo CSV</strong>
+                </label>
+                <div class="input-group mb-3">
+                    <input name="archivo_csv" class="form-control" type="file" id="archivo_csv" aria-describedby="archivo_csv" accept=".csv" required>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Cargar</button>
+        </div>
+    </form>
+        </div>
+    </div>
+    </div>
+
 
     <script src="../js/ajax.googleapis.com_ajax_libs_jquery_1.6.2_jquery.min.js"></script>
     <script>

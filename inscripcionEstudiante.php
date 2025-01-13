@@ -12,17 +12,19 @@ $MiddleName = ucfirst(strtolower(trim($_POST["MiddleName"])));
 $LastName = ucfirst(strtolower(trim($_POST["LastName"])));
 $SecondLastName = ucfirst(strtolower(trim($_POST["SecondLastName"])));
 $Phone = trim($_POST["Phone"]);
+$camposColegio = $_POST["camposColegio"];
+$camposColegioArray = explode(",", $camposColegio);
 
 $Email = strtolower(trim($_POST["Email"]));
-$Institution = trim($_POST["Institution"]);
-$City = trim($_POST["City"]);
+$Institution = $camposColegioArray[3];
+$City = $camposColegioArray[4];
 $IdLicenceToChange = trim($_POST["licenceId"]);
 $IdLicenceColegio = trim($_POST["idColegio"]);
 $IdGroupFound = trim($_POST["IdGroupFound"]);
 
-$TeacherCompleteName = trim($_POST["TeacherCompleteName"]);
-$CourseName = trim($_POST["CourseName"]);
-$GroupName = trim($_POST["GroupName"]);
+$TeacherCompleteName = $camposColegioArray[0];
+$CourseName = $camposColegioArray[1];
+$GroupName = $camposColegioArray[2];
 
 // Validar y sanitizar las entradas
 $FirstName = filter_var($FirstName, FILTER_SANITIZE_STRING);

@@ -71,7 +71,7 @@ function generarQR($url, $nombreQR){
     require_once('/var/www/html/moodle/moodle/dinapage/phpqrcode/qrlib.php');
     $filenameQR_2 = 'qr/'.$nombreQR;
     $tamanio = 10;
-    $level = 'H';
+    $level = 'L';
     $frameSize = 2;
     $contenido = $url;
     QRcode::png($contenido, $filenameQR_2, $level, $tamanio, $frameSize);

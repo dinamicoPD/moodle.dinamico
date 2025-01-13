@@ -26,6 +26,7 @@ require_once(dirname(__FILE__).'/inscripcionEstudiante.php');
 </head>
 <body class="fondoCielo" id="contenedor">
 <form  id="inscripciondocenteForm" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <input type="hidden" name="camposColegio" value="<?php echo $camposColegio ?>">
     <div class="bg-danger text-white"><?php echo $form_err;?></div>    
     <section id="piso_1">
         <div class="titleForm">

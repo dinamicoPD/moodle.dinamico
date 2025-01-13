@@ -119,12 +119,14 @@
 
         echo $btnEditores.$registrosQR.$btnDescargas;
     }else{
+        $ListadoProyectos = "";
         $sql = "SELECT * FROM QR_proyectos ORDER BY titulo DESC";
         $result = $link->query($sql);
         if ($result) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $btnProyectos .= '<button class="btn btn-outline-secondary m-1" type="button" data-bs-toggle="button" onclick="verProyecto('.$row["id"].',\''.$row["titulo"].'\')">'.$row["titulo"].'</button><br>';
+                    $ListadoProyectos .= '<option value="'.$row["id"].'">'.$row["titulo"].'</option>';
                 }
             }
         }
