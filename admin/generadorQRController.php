@@ -59,7 +59,7 @@
                         <td><input class="form-check-input checkqr" type="checkbox" value="'.$row['qr'].'" onchange="buscarcheckqr()"></td>
                         <td>'.$row['titulo'].' <img src="qr/'.$row['qr'].'" style="width:64px; height: auto;" class="img-thumbnail"></td>
                         <td>'.$row['enlace'].'</td>
-                        <td>'.$variableUrl.'</td>
+                        <td>'.$variableUrl.' <button class="btn btn-primary" type="button" id="addEnlaceNew" value="'.$row['id'].'">+</button></td>
                         <td>'.$row['fecha'].'</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example" style="float: right">
