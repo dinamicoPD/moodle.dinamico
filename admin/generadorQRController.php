@@ -125,7 +125,7 @@
         if ($result) {
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    $btnProyectos .= '<button class="btn btn-outline-secondary m-1" type="button" data-bs-toggle="button" onclick="verProyecto('.$row["id"].',\''.$row["titulo"].'\')">'.$row["titulo"].'</button><br>';
+                    $btnProyectos .= '<button id="proyecto_'.$row["id"].'" class="btn btn-outline-secondary m-1" type="button" onclick="verProyecto('.$row["id"].',\''.$row["titulo"].'\')">'.$row["titulo"].'</button><br>';
                     $ListadoProyectos .= '<option value="'.$row["id"].'">'.$row["titulo"].'</option>';
                 }
             }

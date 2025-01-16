@@ -6,6 +6,13 @@
     }
     include("menu.php");
     include("generadorQRController.php");
+
+    if (isset($_GET['proyecto'])) {
+        $proyectoAbrir = htmlspecialchars($_GET['proyecto']);
+        $btnProyectoAbrir = '<input type="hidden" id="proyectoAbrir" value="'.$proyectoAbrir.'">';
+    } else {
+        $btnProyectoAbrir = '<input type="hidden" id="proyectoAbrir" value="">';
+    }
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -41,7 +48,7 @@
         var posicionMenu = document.getElementById('m3');
         posicionMenu.classList.add('menuActivo');
     </script>
-
+    <?php echo $btnProyectoAbrir; ?>
     <section id="p1">
         <div class="titulo">
             <h2>Gestor QR</h2>
@@ -88,8 +95,8 @@
                                         <div class="col table-responsive">
                                             
                                             <table class="table table-hover">
-                                                <caption style="caption-side: top">
-                                                    <p class="blockquote-footer p-2" id="tituloProyecto">Seleccione el proyecto que desea ver</p>
+                                                <caption style="caption-side: top" class="titulo">
+                                                    <h2 class="p-2" id="tituloProyecto">Seleccione un proyecto</h2>
                                                 </caption>
                                                 <thead>
                                                     <tr>
@@ -135,20 +142,20 @@
 
     <!-- Modal proyecto -->
     <div class="modal fade" id="actualizarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="contenidoModal">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
         </div>
-        <div class="modal-body" id="contenidoModal">
-            
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </div>
-        </div>
-    </div>
     </div>
 
     <div class="modal fade" id="creacionQR" tabindex="-1" aria-labelledby="creacionQRLabel" aria-hidden="true">
@@ -222,32 +229,32 @@
             <h1 class="modal-title fs-5" id="exampleModalLabel">Masivos QR</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    <form action="" method="post">
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="" class="form-label">
-                    <strong>Proyecto</strong>
-                </label>
-                <div class="input-group mb-3">
-                    <select id="" class="form-select" name="" required>
-                        <option selected disabled value="">Seleccionar</option>
-                        <?php echo $ListadoProyectos; ?>
-                    </select>
+        <form action="crearQrMasivos.php" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="" class="form-label">
+                        <strong>Proyecto</strong>
+                    </label>
+                    <div class="input-group mb-3">
+                        <select id="" class="form-select" name="proyectoQR_id" required>
+                            <option selected disabled value="">Seleccionar</option>
+                            <?php echo $ListadoProyectos; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="csvFile" class="form-label">
+                        <strong>Adjunte archivo CSV</strong>
+                    </label>
+                    <div class="input-group mb-3">
+                        <input name="csvFile" class="form-control" type="file" id="csvFile" aria-describedby="csvFile" accept=".csv" required>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="archivo_csv" class="form-label">
-                    <strong>Adjunte archivo CSV</strong>
-                </label>
-                <div class="input-group mb-3">
-                    <input name="archivo_csv" class="form-control" type="file" id="archivo_csv" aria-describedby="archivo_csv" accept=".csv" required>
-                </div>
+            <div class="modal-footer">
+                <button type="submit" name="submit" class="btn btn-primary">Cargar</button>
             </div>
-        </div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">Cargar</button>
-        </div>
-    </form>
+        </form>
         </div>
     </div>
     </div>

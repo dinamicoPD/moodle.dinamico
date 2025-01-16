@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    let proyectoValor = $('#proyectoAbrir').val();
+
     $('#checkqrAll').change(function() {
         if ($(this).is(':checked')) {
             $('input[type="checkbox"].checkqr').prop('checked', true);
@@ -13,7 +15,16 @@ $(document).ready(function() {
         var contenido = '<div id="nuevosEnlaces_'+cantidad+'" class="nuevosEnlaces"><hr><div class="mb-3"><label for="nombreEnlace" class="form-label"><strong>Nombre enlace</strong></label><div class="input-group mb-3"><input name="nombreEnlace[]" type="text" class="form-control" required></div></div><div class="mb-3"><label for="Enlace" class="form-label"><strong>Enlace</strong></label><div class="input-group mb-3"><input name="Enlace[]" type="text" class="form-control" required></div></div><button type="button" class="btn btn-outline-dark m-2" onclick="eliminarenlace('+cantidad+')">Eliminar</button></div>';
         $('.enlaces').append(contenido);
     });
+
+    if (proyectoValor) {
+        ejecutarProyecto(proyectoValor);
+    }
 });
+
+function ejecutarProyecto(valor) {
+    let buttonId = '#proyecto_'+valor;
+    $(buttonId).trigger('click');
+}
 
 function buscarcheckqr(){
     let allChecked = true;
