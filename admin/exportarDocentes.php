@@ -7,6 +7,7 @@ if(!isset($_SESSION["loggedinAdmin"]) || $_SESSION["loggedinAdmin"] != true){
 }
 
 header("Content-Type: application/vnd.ms-excel; charset=iso-8859-1");
+$perfil = "Profesor";
 
 include("colegios.php");
 include("controllerLicenciasPrf.php");
